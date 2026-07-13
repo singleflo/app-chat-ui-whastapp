@@ -1,0 +1,16 @@
+{
+    "$schema": "https://opencode.ai/config.json",
+    "instructions": [
+        "/Users/crotti/VSC/ODOO18/.opencode/instructions/workspace-rules.md"
+    ],
+    "mcp": {
+        "context7": {
+            "enabled": false
+        }
+    },
+    // "plugin": [
+    //     "file:/Users/crotti/.config/opencode/plugins/opencode-agent-sidebar"
+    // ]
+    // "formatter" removed - linting/formatting handled by .claude/hooks/ PostToolUse scripts
+    // "lsp" removed - handled by .opencode/lsp.json and .opencode/oh-my-openagent.jsonc
+}

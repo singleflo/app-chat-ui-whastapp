@@ -1,0 +1,892 @@
+{
+  "account": {
+    "name": "Acme Srl",
+    "phoneNumbers": [
+      { "id": "pn_1", "display": "+39 02 1234567", "unread": 4 },
+      { "id": "pn_2", "display": "+39 02 7654321", "unread": 2 }
+    ]
+  },
+  "users": [
+    { "id": "u_laura", "name": "Laura Bianchi", "email": "laura@acme.it", "color": "hsl(280 55% 45%)", "online": true, "openChatsCount": 3, "role": "operator" },
+    { "id": "u_marco", "name": "Marco Rossi", "email": "marco@acme.it", "color": "hsl(210 55% 45%)", "online": true, "openChatsCount": 2, "role": "operator" },
+    { "id": "u_sara", "name": "Sara Verdi", "email": "sara@acme.it", "color": "hsl(150 55% 45%)", "online": false, "openChatsCount": 0, "role": "manager" }
+  ],
+  "agents": [
+    { "id": "a_aria", "name": "Agente Aria", "emoji": "🤖", "color": "hsl(200 70% 50%)", "status": "running" },
+    { "id": "a_nova", "name": "Nova", "emoji": "🤖", "color": "hsl(330 60% 55%)", "status": "paused" }
+  ],
+  "labels": [
+    { "id": "l_vip", "name": "VIP", "color": "#f9a825" },
+    { "id": "l_ne", "name": "Nord-Est", "color": "#1cb1d6" },
+    { "id": "l_b2c", "name": "B2C", "color": "#7e57c2" },
+    { "id": "l_lead", "name": "Lead", "color": "#ef6c00" },
+    { "id": "l_spam", "name": "Spam", "color": "#c62828" }
+  ],
+  "conversations": [
+    {
+      "id": "c1",
+      "type": "individual",
+      "name": "Giulia Romano",
+      "phone": "+393401234567",
+      "pushName": "Giulia_85",
+      "avatarColor": "hsl(330 55% 45%)",
+      "businessVerified": false,
+      "lastMessagePreview": "Perfetto, grazie! 👍",
+      "lastMessageTs": "2026-07-13T12:35:00+02:00",
+      "lastMessageType": "text",
+      "lastMessageDirection": "in",
+      "unread": 2,
+      "typing": "text",
+      "assignedUserId": "u_marco",
+      "assignedAt": "2026-07-13T12:32:00+02:00",
+      "state": "open",
+      "isBotActive": true,
+      "botAgentName": "Agente Aria",
+      "officeHours": { "active": true },
+      "labels": [
+        { "id": "l_vip", "name": "VIP", "color": "#f9a825" },
+        { "id": "l_ne", "name": "Nord-Est", "color": "#1cb1d6" },
+        { "id": "l_b2c", "name": "B2C", "color": "#7e57c2" }
+      ],
+      "linkedRecords": [
+        { "kind": "lead", "id": "4821" },
+        { "kind": "order", "id": "S00042" }
+      ]
+    },
+    {
+      "id": "c2",
+      "type": "individual",
+      "name": "Marco Ferri",
+      "phone": "+393339876543",
+      "pushName": "Marco F",
+      "avatarColor": "hsl(15 55% 45%)",
+      "lastMessagePreview": "🎤 Nota vocale · 0:42",
+      "lastMessageTs": "2026-07-13T12:15:00+02:00",
+      "lastMessageType": "audio",
+      "lastMessageDirection": "in",
+      "unread": 0,
+      "typing": "audio",
+      "assignedUserId": "u_laura",
+      "state": "open",
+      "officeHours": { "active": true },
+      "labels": [{ "id": "l_b2c", "name": "B2C", "color": "#7e57c2" }]
+    },
+    {
+      "id": "c3",
+      "type": "individual",
+      "name": "Lead #4821 · Tiziana",
+      "phone": "+393291112233",
+      "pushName": "Tiziana M",
+      "avatarColor": "hsl(90 55% 40%)",
+      "lastMessagePreview": "📷 Foto",
+      "lastMessageTs": "2026-07-13T10:42:00+02:00",
+      "lastMessageType": "image",
+      "lastMessageDirection": "out",
+      "lastAck": "read",
+      "unread": 0,
+      "assignedUserId": "u_laura",
+      "state": "open",
+      "labels": [{ "id": "l_lead", "name": "Lead", "color": "#ef6c00" }]
+    },
+    {
+      "id": "c4",
+      "type": "individual",
+      "name": "Ufficio Commerciali",
+      "phone": "+39027654321",
+      "pushName": "Commerciali",
+      "avatarColor": "hsl(45 55% 45%)",
+      "lastMessagePreview": "ricevuto, procedo",
+      "lastMessageTs": "2026-07-13T07:42:00+02:00",
+      "lastMessageType": "text",
+      "lastMessageDirection": "out",
+      "lastAck": "delivered",
+      "unread": 0,
+      "silenced": true,
+      "unassigned": true,
+      "state": "open",
+      "windowClosed": true
+    },
+    {
+      "id": "c5",
+      "type": "individual",
+      "name": "Stefano Bianchi",
+      "phone": "+393481234567",
+      "avatarColor": "hsl(180 55% 45%)",
+      "lastMessagePreview": "Ordine #S00042 spedito ✓",
+      "lastMessageTs": "2026-07-11T10:42:00+02:00",
+      "lastMessageType": "text",
+      "lastMessageDirection": "in",
+      "unread": 0,
+      "pinned": true,
+      "assignedUserId": "u_marco",
+      "state": "open"
+    },
+    {
+      "id": "c6",
+      "type": "individual",
+      "name": "Anna Conti",
+      "phone": "+393391234567",
+      "avatarColor": "hsl(60 55% 45%)",
+      "lastMessagePreview": "☎️ Chiamata persa",
+      "lastMessageTs": "2026-07-11T14:00:00+02:00",
+      "lastMessageType": "call",
+      "lastMessageDirection": "in",
+      "unread": 0,
+      "failed": true,
+      "assignmentFailed": true,
+      "state": "open"
+    },
+    {
+      "id": "c7",
+      "type": "group",
+      "name": "Team vendite Nord",
+      "phone": "1203630@g.us",
+      "avatarColor": "hsl(120 55% 40%)",
+      "groupParticipants": 7,
+      "lastMessagePreview": "@marco chiaro, grazie!",
+      "lastMessageTs": "2026-07-13T12:20:00+02:00",
+      "lastMessageType": "text",
+      "lastMessageDirection": "in",
+      "unread": 5,
+      "mentionCount": 1,
+      "state": "open",
+      "members": [
+        { "id": "u_laura", "name": "Laura", "color": "hsl(280 55% 45%)", "role": "admin" },
+        { "id": "u_marco", "name": "Marco", "color": "hsl(210 55% 45%)", "role": "member" },
+        { "id": "ext_1", "name": "Paola Gino", "color": "hsl(45 55% 45%)", "role": "member" },
+        { "id": "ext_2", "name": "Anna De L", "color": "hsl(150 55% 45%)", "role": "member" }
+      ]
+    },
+    {
+      "id": "c8",
+      "type": "individual",
+      "name": "Promo mailing · otp-out test",
+      "phone": "+39347555888",
+      "pushName": "Luca",
+      "avatarColor": "hsl(0 55% 45%)",
+      "lastMessagePreview": "opt-out marketing",
+      "lastMessageTs": "2026-07-12T18:00:00+02:00",
+      "lastMessageType": "system",
+      "lastMessageDirection": "in",
+      "unread": 0,
+      "draft": "Ciao Luca, abbiamo una nuova offerta…",
+      "state": "open"
+    }
+  ],
+  "messages": {
+    "c1": [
+      { "kind": "system", "variant": "date_separator", "text": "OGGI" },
+      { "kind": "system", "variant": "unread_count", "text": "2 messaggi non letti" },
+      {
+        "id": "m1",
+        "conversationId": "c1",
+        "ts": "2026-07-13T14:02:00+02:00",
+        "direction": "in",
+        "content": {
+          "kind": "text",
+          "body": "Ciao! Volevo confermare l'ordine *#S00042*. È arrivato? Sarebbe possibile la consegna _domani pomeriggio_? Link: https://acme.it/track/S00042",
+          "linkPreview": {
+            "url": "https://acme.it/track/S00042",
+            "title": "Tracking ordine S00042",
+            "description": "Stato spedizione e dettagli consegna.",
+            "domain": "acme.it",
+            "image": "gradient"
+          }
+        }
+      },
+      {
+        "id": "m2",
+        "conversationId": "c1",
+        "ts": "2026-07-13T14:08:00+02:00",
+        "direction": "out",
+        "ack": "read",
+        "content": { "kind": "text", "body": "Ciao Giulia! Sì, confermato. Spedizione programmata per domani 14:00–18:00 🚚" },
+        "sender": { "kind": "user", "id": "u_laura", "name": "Laura B.", "color": "hsl(280 55% 45%)", "source": "Web" }
+      },
+      {
+        "id": "m3",
+        "conversationId": "c1",
+        "ts": "2026-07-13T14:12:00+02:00",
+        "direction": "out",
+        "ack": "delivered",
+        "content": { "kind": "text", "body": "Aggiungo: riceverai il tracking via SMS." },
+        "sender": { "kind": "user", "id": "u_marco", "name": "Marco R.", "color": "hsl(210 55% 45%)", "source": "Web" }
+      },
+      {
+        "id": "m4a",
+        "conversationId": "c1",
+        "ts": "2026-07-13T14:15:00+02:00",
+        "direction": "out",
+        "ack": "read",
+        "content": { "kind": "text", "body": "Ciao Giulia! Sono Aria, l'assistente virtuale. Come posso aiutarti?" },
+        "sender": { "kind": "bot", "id": "a_aria", "name": "Agente Aria · bot", "color": "hsl(200 70% 50%)", "agentName": "Agente Aria" }
+      },
+      {
+        "id": "m4b",
+        "conversationId": "c1",
+        "ts": "2026-07-13T14:15:05+02:00",
+        "direction": "out",
+        "ack": "read",
+        "content": { "kind": "text", "body": "Puoi chiedermi info su ordini, resi o parlare con un operatore (scrivi 'operatore')." },
+        "sender": { "kind": "bot", "id": "a_aria", "name": "Agente Aria · bot", "color": "hsl(200 70% 50%)", "agentName": "Agente Aria" }
+      },
+      {
+        "id": "m5",
+        "conversationId": "c1",
+        "ts": "2026-07-13T14:18:00+02:00",
+        "direction": "in",
+        "content": {
+          "kind": "image",
+          "url": "gradient:photo-packaging",
+          "caption": "Ecco il pacco 📦",
+          "album": { "total": 4 }
+        }
+      },
+      {
+        "id": "m6",
+        "conversationId": "c1",
+        "ts": "2026-07-13T14:20:00+02:00",
+        "direction": "in",
+        "content": {
+          "kind": "video",
+          "url": "gradient:video-unboxing",
+          "poster": "gradient:poster-unboxing",
+          "durationSec": 38,
+          "caption": "Unboxing veloce 🎬"
+        }
+      },
+      {
+        "id": "m7",
+        "conversationId": "c1",
+        "ts": "2026-07-13T14:22:00+02:00",
+        "direction": "out",
+        "ack": "read",
+        "content": {
+          "kind": "audio",
+          "url": "audio:voice-out-1",
+          "voice": true,
+          "durationSec": 12,
+          "waveform": [3, 5, 8, 12, 18, 22, 30, 25, 18, 14, 10, 7, 5, 4, 6, 9, 12, 16, 22, 28, 35, 30, 22, 15, 10, 7, 5, 4, 3, 2, 3, 5, 8, 12, 16, 12, 8, 5, 3]
+        },
+        "sender": { "kind": "user", "id": "u_laura", "name": "Laura B.", "color": "hsl(280 55% 45%)", "source": "Web" }
+      },
+      {
+        "id": "m8",
+        "conversationId": "c1",
+        "ts": "2026-07-13T14:24:00+02:00",
+        "direction": "in",
+        "content": {
+          "kind": "audio",
+          "url": "audio:voice-in-1",
+          "voice": true,
+          "durationSec": 42,
+          "waveform": [5, 8, 10, 12, 15, 20, 25, 30, 28, 22, 18, 14, 10, 8, 6, 5, 8, 12, 18, 24, 28, 32, 35, 30, 25, 20, 15, 10, 8, 5, 4, 6, 10, 15, 22, 28, 25, 18, 12, 8, 5, 3],
+          "transcript": { "state": "ready", "text": "Ciao, vi confermo che ho ricevuto il pacco. Grazie mille!" },
+          "played": true
+        }
+      },
+      {
+        "id": "m9",
+        "conversationId": "c1",
+        "ts": "2026-07-13T14:25:00+02:00",
+        "direction": "out",
+        "ack": "read",
+        "content": {
+          "kind": "document",
+          "url": "doc:guida-pdf",
+          "mime": "application/pdf",
+          "name": "Guida_installazione_v3.pdf",
+          "sizeBytes": 2516582,
+          "pages": 12
+        },
+        "sender": { "kind": "user", "id": "u_laura", "name": "Laura B.", "color": "hsl(280 55% 45%)", "source": "Web" }
+      },
+      {
+        "id": "m10",
+        "conversationId": "c1",
+        "ts": "2026-07-13T14:26:00+02:00",
+        "direction": "in",
+        "content": { "kind": "sticker", "url": "sticker:dog-animated", "animated": true },
+        "reactions": [
+          { "emoji": "❤️", "count": 2, "by": ["u_laura", "u_marco"], "mine": true },
+          { "emoji": "👍", "count": 1, "by": ["u_laura"] }
+        ]
+      },
+      {
+        "id": "m11",
+        "conversationId": "c1",
+        "ts": "2026-07-13T14:28:00+02:00",
+        "direction": "in",
+        "content": {
+          "kind": "location",
+          "lat": 45.4642,
+          "lng": 9.19,
+          "name": "Casa di Giulia",
+          "address": "Via Dante 12, Milano MI",
+          "staticMapUrl": "gradient:map-static"
+        }
+      },
+      {
+        "id": "m12",
+        "conversationId": "c1",
+        "ts": "2026-07-13T14:29:00+02:00",
+        "direction": "in",
+        "content": {
+          "kind": "contacts",
+          "cards": [
+            {
+              "name": { "formatted": "Carla Neri", "first": "Carla", "last": "Neri" },
+              "org": "Acme Srl",
+              "phones": [
+                { "type": "WORK", "number": "+39 02 7654321", "wa": true },
+                { "type": "MOBILE", "number": "+39 348 998877", "wa": true }
+              ],
+              "emails": [{ "type": "WORK", "value": "carla.neri@acme.it" }]
+            },
+            {
+              "name": { "formatted": "Mario Bossi", "first": "Mario", "last": "Bossi" },
+              "phones": [{ "type": "MOBILE", "number": "+39 335 112233" }]
+            }
+          ]
+        }
+      },
+      {
+        "id": "m13",
+        "conversationId": "c1",
+        "ts": "2026-07-13T14:30:00+02:00",
+        "direction": "out",
+        "ack": "read",
+        "content": {
+          "kind": "interactive_buttons",
+          "header": { "text": "Scegli un'opzione di consegna" },
+          "body": "Per la spedizione di domani, quale finestra preferisci?",
+          "footer": "Conferma entro 1 ora",
+          "buttons": [
+            { "id": "b1", "title": "Mattina 9–12" },
+            { "id": "b2", "title": "Pomeriggio 14–18" },
+            { "id": "b3", "title": "Sera 18–20" }
+          ]
+        },
+        "sender": { "kind": "user", "id": "u_laura", "name": "Laura B.", "color": "hsl(280 55% 45%)", "source": "Web" }
+      },
+      {
+        "id": "m14",
+        "conversationId": "c1",
+        "ts": "2026-07-13T14:31:00+02:00",
+        "direction": "in",
+        "content": {
+          "kind": "interactive_buttons",
+          "body": "Hai scelto: Pomeriggio 14–18",
+          "buttons": [{ "id": "b2", "title": "Pomeriggio 14–18" }],
+          "reply": { "id": "b2", "title": "Pomeriggio 14–18" }
+        },
+        "quoted": {
+          "id": "m13",
+          "authorName": "Tu",
+          "authorColor": "hsl(280 55% 45%)",
+          "excerpt": "Scegli un'opzione di consegna"
+        }
+      },
+      {
+        "id": "m15",
+        "conversationId": "c1",
+        "ts": "2026-07-13T14:32:00+02:00",
+        "direction": "out",
+        "ack": "read",
+        "content": {
+          "kind": "interactive_list",
+          "body": "Servizi aggiuntivi disponibili per questo ordine:",
+          "footer": "Seleziona e conferma",
+          "buttonTitle": "Vedi opzioni",
+          "sections": [
+            {
+              "title": "Installazione",
+              "rows": [
+                { "id": "s1", "title": "Installazione standard", "description": "Tecnico a casa, 60€" },
+                { "id": "s2", "title": "Installazione premium", "description": "Prioritaria + setup, 120€" }
+              ]
+            },
+            {
+              "title": "Garanzie",
+              "rows": [
+                { "id": "s3", "title": "Estensione 24 mesi", "description": "+24 mesi garanzia, 45€" }
+              ]
+            }
+          ]
+        },
+        "sender": { "kind": "user", "id": "u_laura", "name": "Laura B.", "color": "hsl(280 55% 45%)", "source": "Web" }
+      },
+      {
+        "id": "m16",
+        "conversationId": "c1",
+        "ts": "2026-07-13T14:33:00+02:00",
+        "direction": "in",
+        "content": {
+          "kind": "interactive_cta_url",
+          "body": "Pagamento sicuro online disponibile qui 👇",
+          "footer": "Riceverai conferma via email",
+          "ctaTitle": "Paga online",
+          "url": "https://pay.acme.it/order/S00042"
+        }
+      },
+      {
+        "id": "m17",
+        "conversationId": "c1",
+        "ts": "2026-07-13T14:34:00+02:00",
+        "direction": "out",
+        "ack": "read",
+        "content": {
+          "kind": "interactive_flow",
+          "body": "Compila il modulo di feedback per ricevere 10 punti fedeltà ✨",
+          "ctaTitle": "Apri modulo",
+          "flowName": "feedback_q3_2026",
+          "flowState": "published"
+        },
+        "sender": { "kind": "user", "id": "u_laura", "name": "Laura B.", "color": "hsl(280 55% 45%)", "source": "Web" }
+      },
+      {
+        "id": "m18",
+        "conversationId": "c1",
+        "ts": "2026-07-13T14:35:00+02:00",
+        "direction": "in",
+        "content": {
+          "kind": "interactive_flow",
+          "body": "Modulo completato ✓",
+          "ctaTitle": "Apri modulo",
+          "flowName": "feedback_q3_2026",
+          "reply": {
+            "flowName": "feedback_q3_2026",
+            "responseJson": {
+              "rating": 5,
+              "recommend": "sì",
+              "comment": "Ottima esperienza"
+            }
+          }
+        }
+      },
+      {
+        "id": "m19",
+        "conversationId": "c1",
+        "ts": "2026-07-13T14:36:00+02:00",
+        "direction": "in",
+        "content": {
+          "kind": "order",
+          "items": [
+            { "id": "p1", "name": "Lampada LED X1", "qty": 2, "price": "39,90", "currency": "EUR", "image": "gradient:led" },
+            { "id": "p2", "name": "Filtro HEPA", "qty": 1, "price": "19,50", "currency": "EUR", "image": "gradient:filter" }
+          ],
+          "total": "99,30",
+          "currency": "EUR",
+          "note": "Consegna sabato se possibile"
+        }
+      },
+      {
+        "id": "m20",
+        "conversationId": "c1",
+        "ts": "2026-07-13T14:37:00+02:00",
+        "direction": "out",
+        "ack": "read",
+        "content": {
+          "kind": "carousel",
+          "cards": [
+            { "id": "card1", "headerImage": "gradient:prod-a", "body": "Smart speaker · 79€", "buttons": [{ "id": "buy1", "title": "Acquista", "kind": "quick_reply" }, { "id": "info1", "title": "Info", "kind": "url" }] },
+            { "id": "card2", "headerImage": "gradient:prod-b", "body": "Presa smart · 29€", "buttons": [{ "id": "buy2", "title": "Acquista", "kind": "quick_reply" }, { "id": "info2", "title": "Info", "kind": "url" }] },
+            { "id": "card3", "headerImage": "gradient:prod-c", "body": "Bulb kit · 49€", "buttons": [{ "id": "buy3", "title": "Acquista", "kind": "quick_reply" }, { "id": "info3", "title": "Info", "kind": "url" }] }
+          ]
+        },
+        "sender": { "kind": "user", "id": "u_laura", "name": "Laura B.", "color": "hsl(280 55% 45%)", "source": "Web" }
+      },
+      {
+        "id": "m21",
+        "conversationId": "c1",
+        "ts": "2026-07-13T14:38:00+02:00",
+        "direction": "out",
+        "ack": "read",
+        "content": {
+          "kind": "product",
+          "product": {
+            "id": "p1",
+            "name": "Lampada LED X1",
+            "price": "39,90",
+            "currency": "EUR",
+            "description": "Lampada smart LED RGB 10W, compatibile con HomeKit e Google Home.",
+            "image": "gradient:led-product"
+          }
+        },
+        "sender": { "kind": "user", "id": "u_laura", "name": "Laura B.", "color": "hsl(280 55% 45%)", "source": "Web" }
+      },
+      {
+        "id": "m22",
+        "conversationId": "c1",
+        "ts": "2026-07-13T14:39:00+02:00",
+        "direction": "out",
+        "ack": "read",
+        "content": {
+          "kind": "catalog",
+          "title": "Catalogo Smart Home 2026",
+          "body": "Scopri la nostra collezione completa.",
+          "ctaTitle": "Vedi catalogo"
+        },
+        "sender": { "kind": "user", "id": "u_laura", "name": "Laura B.", "color": "hsl(280 55% 45%)", "source": "Web" }
+      },
+      {
+        "id": "m23",
+        "conversationId": "c1",
+        "ts": "2026-07-13T14:40:00+02:00",
+        "direction": "out",
+        "ack": "read",
+        "templateBadge": { "name": "promo_luglio", "language": "it" },
+        "content": {
+          "kind": "template",
+          "name": "promo_luglio",
+          "language": "it",
+          "category": "MARKETING",
+          "header": { "image": "gradient:promo-banner" },
+          "body": "Ciao {{1}}! Solo fino al 31 luglio -30% su tutta la linea Smart Home. Usa il codice ESTATE30.",
+          "footer": "Acme Srl · Opt-out: rispondi STOP",
+          "buttons": [
+            { "kind": "url", "title": "Scopri di più", "url": "https://acme.it/saldi" },
+            { "kind": "copy_code", "title": "Copia codice ESTATE30", "code": "ESTATE30" }
+          ]
+        },
+        "sender": { "kind": "automation", "id": "r_promo", "name": "Campagna promo_luglio", "color": "hsl(40 70% 50%)" }
+      },
+      {
+        "id": "m24",
+        "conversationId": "c1",
+        "ts": "2026-07-13T14:41:00+02:00",
+        "direction": "out",
+        "ack": "read",
+        "templateBadge": { "name": "auth_otp_v2", "language": "it" },
+        "content": {
+          "kind": "template",
+          "name": "auth_otp_v2",
+          "language": "it",
+          "category": "AUTHENTICATION",
+          "body": "Il tuo codice di verifica è:",
+          "buttons": [
+            { "kind": "otp_one_tap", "title": "Autocompila codice", "code": "483-291", "autofill": true },
+            { "kind": "otp_copy", "title": "Copia codice", "code": "483-291" }
+          ],
+          "otp": { "code": "483-291", "autofill": true }
+        },
+        "sender": { "kind": "user", "id": "u_laura", "name": "Laura B.", "color": "hsl(280 55% 45%)", "source": "Web" }
+      },
+      {
+        "id": "m25",
+        "conversationId": "c1",
+        "ts": "2026-07-13T14:42:00+02:00",
+        "direction": "out",
+        "ack": "read",
+        "templateBadge": { "name": "lto_flash", "language": "it" },
+        "content": {
+          "kind": "template",
+          "name": "lto_flash",
+          "language": "it",
+          "category": "MARKETING",
+          "header": { "text": "🎁 Offerta lampo!" },
+          "body": "-50% solo per 24 ore. Affrettati!",
+          "buttons": [
+            { "kind": "copy_code", "title": "Copia FLASH50", "code": "FLASH50" },
+            { "kind": "url", "title": "Acquista ora", "url": "https://acme.it/flash" }
+          ],
+          "limitedTimeOffer": { "code": "FLASH50", "expiresAt": "2026-07-14T14:42:00+02:00" }
+        },
+        "sender": { "kind": "automation", "id": "r_lto", "name": "Offerta lampo", "color": "hsl(40 70% 50%)" }
+      },
+      {
+        "id": "m26",
+        "conversationId": "c1",
+        "ts": "2026-07-13T14:43:00+02:00",
+        "direction": "out",
+        "ack": "read",
+        "content": { "kind": "location_request" },
+        "sender": { "kind": "user", "id": "u_laura", "name": "Laura B.", "color": "hsl(280 55% 45%)", "source": "Web" }
+      },
+      {
+        "id": "m27",
+        "conversationId": "c1",
+        "ts": "2026-07-13T14:44:00+02:00",
+        "direction": "out",
+        "ack": "read",
+        "content": { "kind": "address_request" },
+        "sender": { "kind": "user", "id": "u_laura", "name": "Laura B.", "color": "hsl(280 55% 45%)", "source": "Web" }
+      },
+      {
+        "id": "m28",
+        "conversationId": "c1",
+        "ts": "2026-07-13T14:45:00+02:00",
+        "direction": "out",
+        "ack": "read",
+        "content": { "kind": "call_permission_request", "state": "pending" },
+        "sender": { "kind": "user", "id": "u_laura", "name": "Laura B.", "color": "hsl(280 55% 45%)", "source": "Web" }
+      },
+      { "kind": "system", "variant": "call_permission_accepted", "text": "Giulia ha accettato la richiesta di chiamata" },
+      { "kind": "system", "variant": "call_completed", "text": "📞 Chiamata vocale · 5 min" },
+      {
+        "id": "m29",
+        "conversationId": "c1",
+        "ts": "2026-07-13T14:46:00+02:00",
+        "direction": "in",
+        "content": {
+          "kind": "system",
+          "variant": "referral_ctwa",
+          "text": "Conversazione avviata da un annuncio Click-to-WhatsApp",
+          "referralAd": { "name": "Smart Home Set 2026 — Facebook Ads", "image": "gradient:fb-ad" }
+        }
+      },
+      {
+        "id": "m30",
+        "conversationId": "c1",
+        "ts": "2026-07-13T14:47:00+02:00",
+        "direction": "in",
+        "content": { "kind": "system", "variant": "optout_marketing", "text": "L'utente ha disattivato i messaggi promozionali" }
+      },
+      { "kind": "system", "variant": "date_separator", "text": "IERI" },
+      { "kind": "system", "variant": "assignment", "text": "Laura ha assegnato la chat a Marco · 14:32", "icon": "👤" },
+      { "kind": "system", "variant": "bot_takeover", "text": "Laura è subentrata all'agente" },
+      { "kind": "system", "variant": "state_reopened_auto", "text": "Riaperta automaticamente (nuovo inbound)" },
+      {
+        "id": "m31",
+        "conversationId": "c1",
+        "ts": "2026-07-12T15:00:00+02:00",
+        "direction": "out",
+        "ack": "read",
+        "forwarded": true,
+        "content": { "kind": "text", "body": "Inoltrato dal team vendite: le specifiche del nuovo prodotto sono allegate." },
+        "sender": { "kind": "user", "id": "u_marco", "name": "Marco R.", "color": "hsl(210 55% 45%)", "source": "Web" }
+      },
+      {
+        "id": "m32",
+        "conversationId": "c1",
+        "ts": "2026-07-12T15:05:00+02:00",
+        "direction": "out",
+        "ack": "read",
+        "echo": true,
+        "content": { "kind": "text", "body": "Inviato da altro dispositivo (API)" },
+        "sender": { "kind": "api", "id": "echo_api", "name": "📱 da API", "color": "hsl(0 0% 50%)", "source": "API" }
+      },
+      {
+        "id": "m33r",
+        "conversationId": "c1",
+        "ts": "2026-07-12T15:06:00+02:00",
+        "direction": "out",
+        "content": { "kind": "deleted" },
+        "sender": { "kind": "user", "id": "u_laura", "name": "Laura B.", "color": "hsl(280 55% 45%)" }
+      },
+      {
+        "id": "m34",
+        "conversationId": "c1",
+        "ts": "2026-07-12T15:10:00+02:00",
+        "direction": "out",
+        "ack": "read",
+        "edited": true,
+        "content": { "kind": "text", "body": "Testo corretto con typo fix" },
+        "sender": { "kind": "user", "id": "u_laura", "name": "Laura B.", "color": "hsl(280 55% 45%)" }
+      },
+      {
+        "id": "m35",
+        "conversationId": "c1",
+        "ts": "2026-07-12T15:15:00+02:00",
+        "direction": "out",
+        "ack": "pending",
+        "content": { "kind": "text", "body": "In attesa di connessione… ⏱" },
+        "sender": { "kind": "user", "id": "u_laura", "name": "Laura B.", "color": "hsl(280 55% 45%)" }
+      },
+      {
+        "id": "m36e",
+        "conversationId": "c1",
+        "ts": "2026-07-12T15:16:00+02:00",
+        "direction": "out",
+        "content": {
+          "kind": "error",
+          "code": 131047,
+          "title": "Finestra di servizio 24h chiusa",
+          "details": "È possibile inviare solo messaggi template fino al prossimo messaggio inbound.",
+          "actions": [
+            { "id": "retry", "label": "Riprova", "variant": "secondary" },
+            { "id": "template", "label": "Invia come template", "variant": "primary" }
+          ]
+        },
+        "sender": { "kind": "user", "id": "u_laura", "name": "Laura B.", "color": "hsl(280 55% 45%)" }
+      },
+      {
+        "id": "m37",
+        "conversationId": "c1",
+        "ts": "2026-07-12T15:20:00+02:00",
+        "direction": "in",
+        "content": { "kind": "fallback", "rawType": "view_once_message", "payload": { "note": "Type not supported by this UI mockup." } }
+      },
+      {
+        "id": "m38",
+        "conversationId": "c1",
+        "ts": "2026-07-13T14:50:00+02:00",
+        "direction": "out",
+        "content": { "kind": "internal_note", "body": "@marco il cliente ha chiesto tracking, gli invio io. Tu resta su lead #4821.", "mentions": ["u_marco"] },
+        "sender": { "kind": "user", "id": "u_laura", "name": "📝 Laura · nota interna", "color": "hsl(45 70% 40%)" }
+      }
+    ],
+    "c7": [
+      { "kind": "system", "variant": "date_separator", "text": "OGGI" },
+      { "kind": "system", "variant": "group_user_added", "text": "Paola Gino aggiunta da Laura" },
+      {
+        "id": "g1",
+        "conversationId": "c7",
+        "ts": "2026-07-13T12:10:00+02:00",
+        "direction": "in",
+        "groupSender": { "name": "Paola Gino", "color": "hsl(45 55% 45%)" },
+        "content": { "kind": "text", "body": "@marco riesci a mandare il report Q2?" },
+        "mentions": ["u_marco"]
+      },
+      {
+        "id": "g2",
+        "conversationId": "c7",
+        "ts": "2026-07-13T12:15:00+02:00",
+        "direction": "in",
+        "groupSender": { "name": "Anna De L", "color": "hsl(150 55% 45%)" },
+        "content": { "kind": "image", "url": "gradient:report-chart", "caption": "Ecco il grafico 📊" }
+      },
+      {
+        "id": "g3",
+        "conversationId": "c7",
+        "ts": "2026-07-13T12:20:00+02:00",
+        "direction": "in",
+        "groupSender": { "name": "Paola Gino", "color": "hsl(45 55% 45%)" },
+        "content": { "kind": "text", "body": "@marco chiaro, grazie!" },
+        "mentions": ["u_marco"]
+      }
+    ]
+  },
+  "activity": {
+    "c1": [
+      { "id": "ev1", "ts": "2026-07-13T14:32:00+02:00", "type": "assigned", "userId": "u_laura", "userName": "Laura B.", "targetUserId": "u_marco", "targetUserName": "Marco R.", "reason": "Trasferimento per specializzazione lead" },
+      { "id": "ev2", "ts": "2026-07-13T13:45:00+02:00", "type": "outbound_sent", "userId": "r_promo", "userName": "Campagna promo_luglio", "auto": true },
+      { "id": "ev3", "ts": "2026-07-13T11:00:00+02:00", "type": "state_reopened_auto", "auto": true },
+      { "id": "ev4", "ts": "2026-07-12T18:00:00+02:00", "type": "state_closed", "userId": "u_marco", "userName": "Marco R." },
+      { "id": "ev5", "ts": "2026-07-12T17:30:00+02:00", "type": "offhours_reply", "userId": "u_laura", "userName": "Laura B.", "auto": true },
+      { "id": "ev6", "ts": "2026-07-12T16:00:00+02:00", "type": "queued_sent", "auto": true },
+      { "id": "ev7", "ts": "2026-07-13T14:15:00+02:00", "type": "bot_takeover", "userId": "u_laura", "userName": "Laura B." }
+    ]
+  },
+  "calls": [
+    { "id": "call1", "conversationId": "c1", "direction": "out", "outcome": "completed", "startedAt": "2026-07-13T14:46:00+02:00", "durationSec": 305 },
+    { "id": "call2", "conversationId": "c6", "direction": "in", "outcome": "missed", "startedAt": "2026-07-11T14:00:00+02:00", "durationSec": 0 },
+    { "id": "call3", "conversationId": "c5", "direction": "in", "outcome": "completed", "startedAt": "2026-07-10T09:30:00+02:00", "durationSec": 132 }
+  ],
+  "templates": [
+    {
+      "id": "t1",
+      "name": "promo_luglio",
+      "language": "it",
+      "category": "MARKETING",
+      "status": "approved",
+      "header": { "kind": "image", "text": "gradient:promo-banner" },
+      "body": "Ciao {{1}}! Solo fino al 31 luglio -30% su tutta la linea Smart Home. Usa il codice ESTATE30.",
+      "footer": "Acme Srl · Opt-out: rispondi STOP",
+      "buttons": [
+        { "kind": "url", "title": "Scopri di più", "url": "https://acme.it/saldi" },
+        { "kind": "copy_code", "title": "Copia codice", "code": "ESTATE30" }
+      ]
+    },
+    {
+      "id": "t2",
+      "name": "auth_otp_v2",
+      "language": "it",
+      "category": "AUTHENTICATION",
+      "status": "approved",
+      "body": "Il tuo codice di verifica è:",
+      "buttons": [
+        { "kind": "otp_one_tap", "title": "Autocompila codice", "code": "{{1}}", "autofill": true },
+        { "kind": "otp_copy", "title": "Copia codice", "code": "{{1}}" }
+      ]
+    },
+    {
+      "id": "t3",
+      "name": "lto_flash",
+      "language": "it",
+      "category": "MARKETING",
+      "status": "approved",
+      "header": { "kind": "text", "text": "🎁 Offerta lampo!" },
+      "body": "-50% solo per 24 ore. Affrettati!",
+      "buttons": [
+        { "kind": "copy_code", "title": "Copia FLASH50", "code": "FLASH50" },
+        { "kind": "url", "title": "Acquista ora", "url": "https://acme.it/flash" }
+      ],
+      "limitedTimeOffer": { "code": "FLASH50", "hours": 24 }
+    },
+    {
+      "id": "t4",
+      "name": "order_shipped",
+      "language": "it",
+      "category": "UTILITY",
+      "status": "approved",
+      "body": "Il tuo ordine {{1}} è stato spedito. Tracking: {{2}}.",
+      "buttons": [{ "kind": "url", "title": "Tracking", "url": "{{2}}" }]
+    },
+    {
+      "id": "t5",
+      "name": "appointment_reminder",
+      "language": "it",
+      "category": "UTILITY",
+      "status": "pending",
+      "body": "Promemoria: appuntamento {{1}} alle {{2}}."
+    },
+    {
+      "id": "t6",
+      "name": "carousel_showcase",
+      "language": "it",
+      "category": "MARKETING",
+      "status": "approved",
+      "body": "La nostra nuova collezione"
+    }
+  ],
+  "contactsProfiles": [
+    {
+      "contactId": "c1",
+      "name": "Giulia Romano",
+      "pushName": "Giulia_85",
+      "avatarColor": "hsl(330 55% 45%)",
+      "phones": [
+        { "number": "+39 340 1234567", "label": "WHATSAPP", "verified": true },
+        { "number": "+39 02 7654321", "label": "WORK" }
+      ],
+      "emails": ["giulia.romano@email.it"],
+      "company": "Freelance",
+      "language": "it-IT",
+      "timezone": "Europe/Rome",
+      "labels": [
+        { "id": "l_vip", "name": "VIP", "color": "#f9a825" },
+        { "id": "l_ne", "name": "Nord-Est", "color": "#1cb1d6" },
+        { "id": "l_b2c", "name": "B2C", "color": "#7e57c2" }
+      ]
+    }
+  ],
+  "attributesSchema": [
+    { "key": "cliente_dal", "label": "Cliente dal", "type": "date", "required": false },
+    { "key": "sconto_fedelta", "label": "Sconto fedeltà", "type": "text" },
+    { "key": "categoria", "label": "Categoria", "type": "select", "options": ["Bronzo", "Argento", "Oro", "Platino"] },
+    { "key": "tag_preferiti", "label": "Tag preferiti", "type": "multi_select", "options": ["tech", "casa", "libri", "outdoor", "cucina"] },
+    { "key": "consenso_marketing", "label": "Consenso marketing", "type": "checkbox" },
+    { "key": "sito_web", "label": "Sito web", "type": "url" },
+    { "key": "rating", "label": "Rating CSAT", "type": "number" },
+    { "key": "note_libere", "label": "Note libere", "type": "text" }
+  ],
+  "attributesValues": {
+    "c1": {
+      "cliente_dal": "2023-03-12",
+      "sconto_fedelta": "15%",
+      "categoria": "Oro",
+      "tag_preferiti": ["tech", "casa", "libri"],
+      "consenso_marketing": true,
+      "rating": 5,
+      "sito_web": "https://giulia.example.it"
+    }
+  },
+  "automationRuns": {
+    "c1": [
+      { "id": "ar1", "ts": "2026-07-13T13:45:00+02:00", "kind": "campaign", "icon": "⚡", "name": "Campagna promo_luglio", "state": "done", "details": "Inviato a 432 contatti" },
+      { "id": "ar2", "ts": "2026-07-13T14:15:00+02:00", "kind": "bot", "icon": "🤖", "name": "Agente Aria · handoff", "state": "running", "details": "In attesa di risposta cliente" },
+      { "id": "ar3", "ts": "2026-07-12T18:02:00+02:00", "kind": "rule", "icon": "⚡", "name": "Regola: lead → responsabile", "state": "failed", "details": "Nessun responsabile assegnato al record" }
+    ]
+  }
+}

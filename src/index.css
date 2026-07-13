@@ -1,0 +1,295 @@
+/**
+ * Design system — WhatsApp Business clone
+ * Tailwind v4 CSS-first. All tokens are CSS custom properties on :root,
+ * overridden under [data-theme="dark"]. White-label = override these vars.
+ *
+ * Spec ref: R7 (palette) + S (token-first rule).
+ */
+@import "tailwindcss";
+
+@theme {
+    /* Font families (bundle-local, MV3-safe) */
+    --font-sans: "Segoe UI", "Helvetica Neue", "Inter", system-ui, -apple-system, sans-serif;
+    --font-mono: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+
+    /* Radii (WhatsApp asymmetric) */
+    --radius-bubble: 10px;
+    --radius-bubble-tail: 10px 10px 10px 2px;
+
+    /* Spacing scale extensions */
+    --spacing-px: 1px;
+
+    /* ACK blue */
+    --color-ack-blue: #53bdeb;
+
+    /* Reactions pill */
+    --color-reaction-bg: #1cb1d6;
+    --color-reaction-fg: #ffffff;
+}
+
+/* ============ THEME TOKENS (light default) ============ */
+:root {
+    /* App chrome */
+    --bg-app: #eae6df;
+    --bg-panel: #ffffff;
+    --bg-panel-2: #f0f2f5;
+    --bg-header: #f0f2f5;
+    --bg-hover: #f5f6f6;
+    --bg-active: #efeae3;
+    --bg-selected: #f0f2f5;
+
+    /* Conversation panel: doodle pattern over tint */
+    --bg-chat: #efeae2;
+    --bg-chat-overlay: rgba(239, 234, 226, 0.95);
+
+    /* Bubbles */
+    --bg-bubble-in: #ffffff;
+    --bg-bubble-out: #d9fdd3;
+    --bg-bubble-system: #fef8c7cc;
+    --bg-bubble-bot: #e7f3ff;
+    --bg-bubble-automation: #fff3e0;
+    --bg-bubble-internal-note: #fef08a;
+    --bg-bubble-error: #ffebee;
+    --bg-bubble-fallback: #f5f5f5;
+    --bg-bubble-deleted: #f5f6f6;
+
+    /* Chat bubble borders */
+    --border-bubble: rgba(0, 0, 0, 0.08);
+
+    /* Text */
+    --fg-primary: #111b21;
+    --fg-secondary: #667781;
+    --fg-tertiary: #8696a0;
+    --fg-on-accent: #ffffff;
+    --fg-on-bubble-out: #111b21;
+    --fg-link: #027eb5;
+    --fg-error: #d93025;
+    --fg-success: #00a884;
+    --fg-warning: #f9a825;
+
+    /* Accent (WhatsApp teal) */
+    --accent: #00a884;
+    --accent-hover: #008f72;
+    --accent-fg: #ffffff;
+    --accent-soft: #d9fdd3;
+
+    /* Status colors */
+    --status-pending: #8696a0;
+    --status-sent: #8696a0;
+    --status-delivered: #8696a0;
+    --status-read: var(--color-ack-blue);
+    --status-failed: #f15c6d;
+
+    /* Window badge */
+    --window-open: #00a884;
+    --window-warning: #f9a825;
+    --window-closed: #f15c6d;
+
+    /* Assignment */
+    --assigned-me: #00a884;
+    --assigned-other: #53bdeb;
+    --unassigned: #f9a825;
+
+    /* Outlined borders */
+    --border-strong: #e9edef;
+    --border-soft: #f0f2f5;
+    --border-divider: #e9edef;
+
+    /* Scrim / overlay */
+    --scrim: rgba(11, 20, 26, 0.5);
+    --scrim-light: rgba(255, 255, 255, 0.7);
+
+    /* Shadows */
+    --shadow-bubble: 0 1px 0.5px rgba(11, 20, 26, 0.13);
+    --shadow-panel: 0 1px 1px rgba(11, 20, 26, 0.1);
+    --shadow-overlay: 0 4px 16px rgba(11, 20, 26, 0.2);
+
+    color-scheme: light;
+}
+
+/* ============ DARK THEME ============ */
+[data-theme="dark"] {
+    --bg-app: #0b141a;
+    --bg-panel: #111b21;
+    --bg-panel-2: #202c33;
+    --bg-header: #202c33;
+    --bg-hover: #202c33;
+    --bg-active: #2a3942;
+    --bg-selected: #2a3942;
+
+    --bg-chat: #0b141a;
+    --bg-chat-overlay: rgba(11, 20, 26, 0.92);
+
+    --bg-bubble-in: #202c33;
+    --bg-bubble-out: #005c4b;
+    --bg-bubble-system: #1f2c34cc;
+    --bg-bubble-bot: #0b2030;
+    --bg-bubble-automation: #2a2410;
+    --bg-bubble-internal-note: #5b4e16;
+    --bg-bubble-error: #3b1116;
+    --bg-bubble-fallback: #1a242c;
+    --bg-bubble-deleted: #1a242c;
+
+    --border-bubble: rgba(255, 255, 255, 0.08);
+
+    --fg-primary: #e9edef;
+    --fg-secondary: #8696a0;
+    --fg-tertiary: #667781;
+    --fg-on-accent: #ffffff;
+    --fg-on-bubble-out: #e9edef;
+    --fg-link: #53bdeb;
+    --fg-error: #ff6b78;
+    --fg-success: #00a884;
+    --fg-warning: #fbc02d;
+
+    --accent: #00a884;
+    --accent-hover: #25d366;
+    --accent-fg: #111b21;
+    --accent-soft: #005c4b;
+
+    --status-pending: #8696a0;
+    --status-sent: #8696a0;
+    --status-delivered: #8696a0;
+    --status-read: #53bdeb;
+    --status-failed: #ff6b78;
+
+    --window-open: #00a884;
+    --window-warning: #fbc02d;
+    --window-closed: #ff6b78;
+
+    --assigned-me: #00a884;
+    --assigned-other: #53bdeb;
+    --unassigned: #fbc02d;
+
+    --border-strong: #222e35;
+    --border-soft: #202c33;
+    --border-divider: #222e35;
+
+    --scrim: rgba(0, 0, 0, 0.7);
+    --scrim-light: rgba(11, 20, 26, 0.7);
+
+    --shadow-bubble: 0 1px 0.5px rgba(0, 0, 0, 0.3);
+    --shadow-panel: 0 1px 1px rgba(0, 0, 0, 0.3);
+    --shadow-overlay: 0 4px 16px rgba(0, 0, 0, 0.5);
+
+    color-scheme: dark;
+}
+
+/* ============ BASE ============ */
+* {
+    box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: var(--font-sans);
+    background: var(--bg-app);
+    color: var(--fg-primary);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow: hidden;
+}
+
+/* Scrollbar (WhatsApp-style slim) */
+::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+}
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+::-webkit-scrollbar-thumb {
+    background: var(--fg-tertiary);
+    border-radius: 3px;
+    opacity: 0.3;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: var(--fg-secondary);
+}
+
+/* ============ WHATSAPP DOODLE BACKGROUND (CSS-only, no CDN) ============ */
+.chat-doodle-bg {
+    background-color: var(--bg-chat);
+    background-image:
+        radial-gradient(circle at 20% 30%, var(--fg-tertiary) 0.5px, transparent 1px),
+        radial-gradient(circle at 60% 60%, var(--fg-tertiary) 0.5px, transparent 1px),
+        radial-gradient(circle at 80% 20%, var(--fg-tertiary) 0.5px, transparent 1px),
+        radial-gradient(circle at 40% 80%, var(--fg-tertiary) 0.5px, transparent 1px),
+        radial-gradient(circle at 90% 50%, var(--fg-tertiary) 0.4px, transparent 1px);
+    background-size:
+        80px 80px,
+        120px 120px,
+        100px 100px,
+        90px 90px,
+        70px 70px;
+    opacity: 0.95;
+    position: relative;
+}
+.chat-doodle-bg::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: var(--bg-chat-overlay);
+    pointer-events: none;
+}
+
+/* ============ UTILITIES ============ */
+@layer utilities {
+    .bg-bubble-in {
+        background-color: var(--bg-bubble-in);
+    }
+    .bg-bubble-out {
+        background-color: var(--bg-bubble-out);
+    }
+    .text-fg-primary {
+        color: var(--fg-primary);
+    }
+    .text-fg-secondary {
+        color: var(--fg-secondary);
+    }
+    .text-fg-tertiary {
+        color: var(--fg-tertiary);
+    }
+    .text-ack-blue {
+        color: var(--color-ack-blue);
+    }
+    .border-bubble {
+        border-color: var(--border-bubble);
+    }
+    .bot-bubble-pattern {
+        background-image: repeating-linear-gradient(
+            135deg,
+            transparent,
+            transparent 8px,
+            rgba(83, 189, 235, 0.07) 8px,
+            rgba(83, 189, 235, 0.07) 9px
+        );
+    }
+    .bot-bubble-pattern[data-theme="dark"] {
+        background-image: repeating-linear-gradient(
+            135deg,
+            transparent,
+            transparent 8px,
+            rgba(83, 189, 235, 0.04) 8px,
+            rgba(83, 189, 235, 0.04) 9px
+        );
+    }
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}

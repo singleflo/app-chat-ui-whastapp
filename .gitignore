@@ -1,0 +1,54 @@
+# Dependencies
+node_modules/
+.pnp
+.pnp.js
+
+# Build output
+dist/
+build/
+out/
+.next/
+.turbo/
+.cache/
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Editor / OS
+.DS_Store
+.idea/
+.vscode/
+*.swp
+*.swo
+Thumbs.db
+
+# TS build cache
+*.tsbuildinfo
+
+# Playwright verification screenshots (root)
+/.playwright-mcp/
+/*.png
+/*.jpg
+
+# Env / secrets
+.env
+.env.*
+!.env.example
+secrets.json
+
+# Opencode runtime (config va committato, runtime no)
+.opencode/node_modules/
+.opencode/package-lock.json
+.opencode/tui.json
+
+# Omo / codegraph locali (symlink a stato di sistema)
+.codegraph
+.omo/
+
+# Skills lock (rigenerabile da skills.sh)
+skills-lock.json
