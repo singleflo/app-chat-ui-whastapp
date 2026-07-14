@@ -4,7 +4,7 @@ import { MessageSquare, RefreshCw, CheckCheck, Lock } from "lucide-react";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { cn, fmtRelativeDay, initials } from "@/lib/utils";
-import { dataset } from "@/data/dataset";
+import { useConversations } from "@/data/chat-data";
 import { useState } from "react";
 
 export function DesktopSurface() {
@@ -73,8 +73,9 @@ function QuickChatTrigger() {
 
 function QuickChatPanel() {
     const [tab, setTab] = useState<"assigned" | "unassigned">("assigned");
-    const assigned = dataset.conversations.filter((c) => c.assignedUserId);
-    const unassigned = dataset.conversations.filter((c) => c.unassigned);
+    const { items: conversations } = useConversations();
+    const assigned = conversations.filter((c) => c.assignedUserId);
+    const unassigned = conversations.filter((c) => c.unassigned);
 
     return (
         <div className="flex h-full flex-col">

@@ -14,7 +14,7 @@ import {
 } from "lucide-react";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { cn, colorFromString, fmtDuration, initials } from "@/lib/utils";
-import { dataset } from "@/data/dataset";
+import { useCalls, useConversations } from "@/data/chat-data";
 import { useState } from "react";
 
 export function CallsShowcase() {
@@ -118,7 +118,7 @@ function Section({
 }
 
 function IncomingCallBanner() {
-    const conv = dataset.conversations[0];
+    const conv = useConversations().items[0];
     return (
         <div className="absolute inset-x-0 top-0 z-30 flex items-center justify-between gap-3 bg-(--bg-panel) px-4 py-3 shadow-(--shadow-overlay)">
             <div className="flex items-center gap-2.5">
@@ -156,7 +156,7 @@ function ActiveCallScreen() {
     const [muted, setMuted] = useState(false);
     const [speaker, setSpeaker] = useState(true);
     const [showDtmf, setShowDtmf] = useState(false);
-    const conv = dataset.conversations[0];
+    const conv = useConversations().items[0];
 
     return (
         <div className="flex flex-col items-center gap-4 rounded-xl bg-gradient-to-b from-(--bg-panel) to-(--bg-app) p-6">
@@ -255,7 +255,7 @@ function CallControl({
 }
 
 function MinimizedPill() {
-    const conv = dataset.conversations[0];
+    const conv = useConversations().items[0];
     return (
         <div className="absolute right-3 bottom-3 flex items-center gap-2 rounded-full bg-(--accent) py-1.5 pr-3 pl-1.5 text-(--accent-fg) shadow-(--shadow-overlay)">
             <Avatar className="h-7 w-7 border-2 border-(--accent-fg)/30">
@@ -270,6 +270,8 @@ function MinimizedPill() {
 }
 
 function CallLog() {
+    const calls = useCalls();
+    const { items: conversations } = useConversations();
     return (
         <div className="rounded-lg border border-(--border-strong) bg-(--bg-panel)">
             <div className="flex gap-2 border-b border-(--border-soft) px-3 py-2 text-[11px]">
@@ -278,7 +280,7 @@ function CallLog() {
                     aria-pressed="true"
                     className="cursor-pointer rounded font-semibold text-(--accent) transition-all duration-200 ease-out focus-visible:ring-2 focus-visible:ring-(--ring) focus-visible:ring-offset-2 focus-visible:ring-offset-(--bg-panel) focus-visible:outline-none active:scale-95"
                 >
-                    Tutte ({dataset.calls.length})
+                    Tutte ({calls.length})
                 </button>
                 <button
                     type="button"
@@ -288,8 +290,8 @@ function CallLog() {
                     Perse (1)
                 </button>
             </div>
-            {dataset.calls.map((call) => {
-                const conv = dataset.conversations.find((c) => c.id === call.conversationId);
+            {calls.map((call) => {
+                const conv = conversations.find((c) => c.id === call.conversationId);
                 const name = conv?.name ?? "Sconosciuto";
                 const Icon =
                     call.outcome === "missed"

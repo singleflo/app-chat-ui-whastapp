@@ -22,14 +22,19 @@ import { ScrollArea } from "@/components/ui/scroll-area";
 import { Badge } from "@/components/ui/badge";
 import { cn, initials } from "@/lib/utils";
 import {
-    dataset,
-    profileFor,
-    attributesFor,
-    automationRunsFor,
-    activityFor,
-    conversationById,
-} from "@/data/dataset";
-import type { ActivityEvent, AutomationRun } from "@/types/chat";
+    useActivity,
+    useAttributes,
+    useAttributesSchema,
+    useAutomationRuns,
+    useContactProfile,
+    useConversation,
+} from "@/data/chat-data";
+import type {
+    ActivityEvent,
+    AutomationRun,
+    ContactProfile,
+    Conversation,
+} from "@/types/chat";
 import { useId, useState } from "react";
 
 const focusRing =
@@ -46,11 +51,11 @@ export function ContextPanelShell({
     onBack?: () => void;
     onCollapse?: () => void;
 }) {
-    const profile = profileFor(conversationId);
-    const conv = conversationById(conversationId);
-    const attrs = attributesFor(conversationId);
-    const runs = automationRunsFor(conversationId);
-    const activity = activityFor(conversationId);
+    const profile = useContactProfile(conversationId);
+    const conv = useConversation(conversationId);
+    const attrs = useAttributes(conversationId);
+    const runs = useAutomationRuns(conversationId);
+    const activity = useActivity(conversationId);
 
     return (
         <div className="flex h-full flex-col overflow-hidden">
@@ -150,7 +155,7 @@ function Section({
     );
 }
 
-function ProfileSection({ profile }: { profile: NonNullable<ReturnType<typeof profileFor>> }) {
+function ProfileSection({ profile }: { profile: ContactProfile }) {
     return (
         <Section title="Profilo" icon={Tag}>
             <div className="flex items-center gap-3">
@@ -229,7 +234,7 @@ function CustomFieldsSection({
 }: {
     attrs: Record<string, string | number | boolean | string[]>;
 }) {
-    const schema = dataset.attributesSchema;
+    const schema = useAttributesSchema();
     const entries = schema.filter((s) => s.key in attrs);
     const hidden = schema.filter((s) => !(s.key in attrs));
 
@@ -284,7 +289,7 @@ function FieldRow({ label, value, type }: { label: string; value: string; type: 
     );
 }
 
-function AutomationSection({ runs }: { runs: AutomationRun[] }) {
+function AutomationSection({ runs }: { runs: readonly AutomationRun[] }) {
     return (
         <Section title="Ultime automazioni" icon={Zap}>
             {runs.length === 0 ? (
@@ -323,7 +328,7 @@ function RunRow({ run }: { run: AutomationRun }) {
 function LinkedRecordsSection({
     conv,
 }: {
-    conv: NonNullable<ReturnType<typeof conversationById>>;
+    conv: Conversation;
 }) {
     return (
         <Section title="Record collegati" icon={Tag} defaultOpen={false}>
@@ -347,7 +352,7 @@ function LinkedRecordsSection({
     );
 }
 
-function ActivitySection({ activity }: { activity: ActivityEvent[] }) {
+function ActivitySection({ activity }: { activity: readonly ActivityEvent[] }) {
     return (
         <Section title={`Attività (${activity.length})`} icon={History} defaultOpen={false}>
             <ul className="space-y-1.5 text-xs">

@@ -15,7 +15,7 @@ import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { cn, colorFromString, fmtRelativeDay, initials } from "@/lib/utils";
-import { dataset } from "@/data/dataset";
+import { useAccount, useConversations } from "@/data/chat-data";
 import type { AckStatus, Conversation } from "@/types/chat";
 
 const TYPE_ICONS: Record<string, string> = {
@@ -41,14 +41,16 @@ export function ConversationListShell({
     activeId?: string;
     onNewChat?: () => void;
 }) {
-    const totalUnread = dataset.conversations.reduce((sum, c) => sum + c.unread, 0);
-    const myAssigned = dataset.conversations.filter((c) => c.assignedUserId === "u_laura").length;
-    const unassigned = dataset.conversations.filter((c) => c.unassigned).length;
-    const groups = dataset.conversations.filter((c) => c.type === "group").length;
-    const closed = dataset.conversations.filter((c) => c.state === "done").length;
+    const { items: conversations } = useConversations();
+    const account = useAccount();
+    const totalUnread = conversations.reduce((sum, c) => sum + c.unread, 0);
+    const myAssigned = conversations.filter((c) => c.assignedUserId === "u_laura").length;
+    const unassigned = conversations.filter((c) => c.unassigned).length;
+    const groups = conversations.filter((c) => c.type === "group").length;
+    const closed = conversations.filter((c) => c.state === "done").length;
 
     const FILTERS = [
-        { label: "Tutte", count: dataset.conversations.length, active: true },
+        { label: "Tutte", count: conversations.length, active: true },
         { label: "Non lette", count: totalUnread },
         { label: "Mie", count: myAssigned },
         { label: "Non assegnate", count: unassigned },
@@ -62,16 +64,16 @@ export function ConversationListShell({
                 <div className="flex items-center gap-2">
                     <Avatar className="h-8 w-8">
                         <AvatarFallback
-                            style={{ backgroundColor: colorFromString(dataset.account.name) }}
+                            style={{ backgroundColor: colorFromString(account.name) }}
                         >
-                            {initials(dataset.account.name)}
+                            {initials(account.name)}
                         </AvatarFallback>
                     </Avatar>
                     <div className="leading-tight">
-                        <div className="text-xs font-semibold">{dataset.account.name}</div>
+                        <div className="text-xs font-semibold">{account.name}</div>
                         <div className="text-[10px] text-(--fg-tertiary)">
-                            {dataset.account.phoneNumbers[0].display} ·{" "}
-                            {dataset.account.phoneNumbers.length} numeri
+                            {account.phoneNumbers[0].display} ·{" "}
+                            {account.phoneNumbers.length} numeri
                         </div>
                     </div>
                 </div>
@@ -127,7 +129,7 @@ export function ConversationListShell({
 
             <ScrollArea className="flex-1">
                 <div className="flex flex-col">
-                    {dataset.conversations.map((conv) => (
+                    {conversations.map((conv) => (
                         <ConversationRow
                             key={conv.id}
                             conv={conv}

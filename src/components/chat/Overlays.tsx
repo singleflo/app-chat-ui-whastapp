@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { X, Search, UserPlus, Trash2, Forward, Check, AlertTriangle } from "lucide-react";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { cn, colorFromString, initials } from "@/lib/utils";
-import { dataset } from "@/data/dataset";
+import { useConversations } from "@/data/chat-data";
 
 const TITLE_ID = "overlay-dialog-title";
 const focusRing =
@@ -333,9 +333,10 @@ function ForwardModal({
     onConfirm: (targetIds: string[]) => void;
 }) {
     const MAX = 5;
+    const { items: conversations } = useConversations();
     const [selected, setSelected] = useState<Set<string>>(new Set());
     const [query, setQuery] = useState("");
-    const filtered = dataset.conversations.filter(
+    const filtered = conversations.filter(
         (c) => c.name.toLowerCase().includes(query.toLowerCase()) || c.phone.includes(query)
     );
 

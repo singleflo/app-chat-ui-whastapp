@@ -20,11 +20,9 @@ import {
 } from "lucide-react";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
-import { ScrollArea } from "@/components/ui/scroll-area";
 import { cn, colorFromString, initials } from "@/lib/utils";
-import { ChatEntryRenderer } from "@/components/bubbles/MessageRenderer";
-import { conversationById, messagesFor } from "@/data/dataset";
-import { useState, useRef, useEffect } from "react";
+import { useConversation } from "@/data/chat-data";
+import { MessageList } from "./MessageList";
 
 const focusRing =
     "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-(--ring) focus-visible:ring-offset-2 focus-visible:ring-offset-(--bg-panel)";
@@ -48,40 +46,7 @@ export function ChatColumnShell({
     onOpenContext,
     contextCollapsed,
 }: Props) {
-    const conv = conversationById(conversationId);
-    const messages = messagesFor(conversationId);
-    const scrollRef = useRef<HTMLDivElement>(null);
-    const [showFab, setShowFab] = useState(false);
-
-    useEffect(() => {
-        void conversationId;
-        const viewport = scrollRef.current?.querySelector(
-            "[data-radix-scroll-area-viewport]"
-        ) as HTMLElement | null;
-        if (viewport) {
-            viewport.scrollTop = viewport.scrollHeight;
-            setShowFab(false);
-        }
-    }, [conversationId]);
-
-    const handleScroll = () => {
-        const viewport = scrollRef.current?.querySelector(
-            "[data-radix-scroll-area-viewport]"
-        ) as HTMLElement | null;
-        if (!viewport) return;
-        const atBottom = viewport.scrollHeight - viewport.scrollTop - viewport.clientHeight < 60;
-        setShowFab(!atBottom);
-    };
-
-    const scrollToBottom = () => {
-        const viewport = scrollRef.current?.querySelector(
-            "[data-radix-scroll-area-viewport]"
-        ) as HTMLElement | null;
-        if (viewport) {
-            viewport.scrollTo({ top: viewport.scrollHeight, behavior: "smooth" });
-            setShowFab(false);
-        }
-    };
+    const conv = useConversation(conversationId);
 
     return (
         <div className="flex h-full flex-col">
@@ -97,23 +62,7 @@ export function ChatColumnShell({
             {conv?.linkedRecords && conv.linkedRecords.length > 0 && <RecordChipsBar conv={conv} />}
             <TeamPresenceBar />
 
-            <div
-                className="chat-doodle-bg relative flex-1 overflow-hidden"
-                ref={scrollRef}
-                onScroll={handleScroll}
-            >
-                <ScrollArea className="relative h-full">
-                    <div className="flex w-full min-w-0 flex-col gap-1 px-4 py-4">
-                        {messages.map((entry, idx) => (
-                            <ChatEntryRenderer
-                                key={"id" in entry ? entry.id : `pill-${idx}-${entry.variant}`}
-                                entry={entry}
-                            />
-                        ))}
-                    </div>
-                </ScrollArea>
-                {showFab && <ScrollToBottomFab onClick={scrollToBottom} />}
-            </div>
+            <MessageList conversationId={conversationId} />
 
             {!readonly && <ComposerShell conv={conv} />}
             {readonly && <ReadonlyComposerHint />}
@@ -128,7 +77,7 @@ function ChatHeader({
     onOpenContext,
     showContextBtn,
 }: {
-    conv: ReturnType<typeof conversationById>;
+    conv: ReturnType<typeof useConversation>;
     onBack?: () => void;
     onOpenContext?: () => void;
     showContextBtn?: boolean;
@@ -228,7 +177,7 @@ function HeaderIcon({ children, label }: { children: React.ReactNode; label?: st
 }
 
 /* ---------------- WINDOW BADGE BAR (D5) ---------------- */
-function WindowBadgeBar({ conv }: { conv: ReturnType<typeof conversationById> }) {
+function WindowBadgeBar({ conv }: { conv: ReturnType<typeof useConversation> }) {
     return (
         <div className="flex shrink-0 flex-wrap items-center justify-center gap-2 border-b border-(--border-soft) bg-(--bg-panel) px-3 py-1.5">
             {conv?.windowClosed ? (
@@ -259,7 +208,7 @@ function WindowBadgeBar({ conv }: { conv: ReturnType<typeof conversationById> })
     );
 }
 
-function AssignmentWidget({ conv }: { conv: ReturnType<typeof conversationById> }) {
+function AssignmentWidget({ conv }: { conv: ReturnType<typeof useConversation> }) {
     if (!conv) return null;
     if (conv.unassigned) {
         return (
@@ -331,7 +280,7 @@ function PinnedMessagesBar() {
 }
 
 /* ---------------- RECORD CHIPS (Q7) ---------------- */
-function RecordChipsBar({ conv }: { conv: NonNullable<ReturnType<typeof conversationById>> }) {
+function RecordChipsBar({ conv }: { conv: NonNullable<ReturnType<typeof useConversation>> }) {
     return (
         <div className="flex shrink-0 items-center gap-1.5 px-3 py-1 text-[10px] text-(--fg-secondary)">
             <span className="opacity-60">Collegata:</span>
@@ -374,39 +323,8 @@ function TeamPresenceBar() {
     );
 }
 
-/* ---------------- FAB ---------------- */
-function ScrollToBottomFab({ onClick }: { onClick: () => void }) {
-    return (
-        <button
-            type="button"
-            onClick={onClick}
-            className={cn(
-                "absolute right-4 bottom-4 z-20 flex h-9 w-9 items-center justify-center rounded-full bg-(--bg-panel) shadow-(--shadow-overlay) hover:bg-(--bg-hover)",
-                iconBtn
-            )}
-            aria-label="Vai in fondo"
-        >
-            <svg
-                viewBox="0 0 24 24"
-                className="h-4 w-4 text-(--fg-secondary)"
-                fill="none"
-                role="presentation"
-            >
-                <title>Vai in fondo</title>
-                <path
-                    d="M12 5v14M5 12l7 7 7-7"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                />
-            </svg>
-        </button>
-    );
-}
-
 /* ---------------- COMPOSER (R5/E1-E11) ---------------- */
-function ComposerShell({ conv }: { conv: ReturnType<typeof conversationById> }) {
+function ComposerShell({ conv }: { conv: ReturnType<typeof useConversation> }) {
     const isWindowClosed = conv?.windowClosed;
     return (
         <div className="shrink-0 bg-(--bg-panel-2) px-3 py-2">

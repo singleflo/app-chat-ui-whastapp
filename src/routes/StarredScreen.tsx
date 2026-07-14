@@ -2,17 +2,17 @@ import { Star, ArrowLeft, Filter } from "lucide-react";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { cn, colorFromString, fmtTime, initials } from "@/lib/utils";
-import { dataset } from "@/data/dataset";
+import { useAllMessages, useConversations } from "@/data/chat-data";
 
 export function StarredScreen() {
-    const starredMsgs = Object.values(dataset.messages)
-        .flat()
+    const allMessages = useAllMessages();
+    const { items: conversations } = useConversations();
+    const starredMsgs = allMessages
         .filter((m) => "id" in m && (m as { starred?: boolean }).starred)
         .slice(0, 8);
 
-    const demoStarred = Object.values(dataset.messages)
-        .flat()
-        .filter((m) => "id" in m && "body" in (m.content ?? {}))
+    const demoStarred = allMessages
+        .filter((m) => "content" in m && "body" in (m.content ?? {}))
         .slice(0, 6);
 
     const items = starredMsgs.length > 0 ? starredMsgs : demoStarred;
@@ -51,7 +51,7 @@ export function StarredScreen() {
                             direction: string;
                             content: { kind: string; body?: string };
                         };
-                        const conv = dataset.conversations.find((c) => c.id === msg.conversationId);
+                        const conv = conversations.find((c) => c.id === msg.conversationId);
                         return (
                             <div
                                 key={msg.id}

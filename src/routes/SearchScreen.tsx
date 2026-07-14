@@ -2,12 +2,15 @@ import { Search, ArrowLeft, MessageSquare, User, Filter } from "lucide-react";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { cn, fmtRelativeDay, initials } from "@/lib/utils";
-import { dataset } from "@/data/dataset";
+import { useAllMessages, useContactProfiles, useConversations } from "@/data/chat-data";
 import { isMessage } from "@/types/chat";
 import { useState } from "react";
 
 export function SearchScreen() {
     const [query, setQuery] = useState("ordine");
+    const { items: conversations } = useConversations();
+    const allMessages = useAllMessages();
+    const contactsProfiles = useContactProfiles();
     const highlight = (text: string) => {
         if (!query) return text;
         const idx = text.toLowerCase().indexOf(query.toLowerCase());
@@ -23,13 +26,12 @@ export function SearchScreen() {
         );
     };
 
-    const matchedConvs = dataset.conversations.filter(
+    const matchedConvs = conversations.filter(
         (c) =>
             c.name.toLowerCase().includes(query.toLowerCase()) ||
             c.lastMessagePreview.toLowerCase().includes(query.toLowerCase())
     );
-    const matchedMsgs = Object.values(dataset.messages)
-        .flat()
+    const matchedMsgs = allMessages
         .filter(isMessage)
         .filter(
             (m) =>
@@ -37,7 +39,7 @@ export function SearchScreen() {
                 m.content.body.toLowerCase().includes(query.toLowerCase())
         )
         .slice(0, 5);
-    const matchedContacts = dataset.contactsProfiles.filter((p) =>
+    const matchedContacts = contactsProfiles.filter((p) =>
         p.name.toLowerCase().includes(query.toLowerCase())
     );
 
@@ -114,7 +116,7 @@ export function SearchScreen() {
                     {matchedMsgs.length > 0 && (
                         <ResultGroup icon={Search} title={`Messaggi (${matchedMsgs.length})`}>
                             {matchedMsgs.map((m) => {
-                                const conv = dataset.conversations.find(
+                                const conv = conversations.find(
                                     (c) => c.id === m.conversationId
                                 );
                                 return (
