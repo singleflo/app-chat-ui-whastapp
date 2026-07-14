@@ -487,6 +487,7 @@ export type SystemVariant = Extract<MessageContent, { kind: "system" }>["variant
  * stream as Message so the renderer can interleave them naturally.
  */
 export interface SystemPill {
+    id: string;
     kind: "system";
     variant: SystemVariant;
     text: string;
@@ -496,7 +497,7 @@ export interface SystemPill {
 
 export type ChatEntry = Message | SystemPill;
 
-/** Type guard — narrows a ChatEntry to Message. */
+/** Narrows a ChatEntry to Message. Discriminate on `content`, not `id`: both members now carry `id`. */
 export function isMessage(entry: ChatEntry): entry is Message {
-    return "id" in entry && typeof entry.id === "string";
+    return "content" in entry;
 }

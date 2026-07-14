@@ -221,8 +221,8 @@
     ],
     "messages": {
         "c1": [
-            { "kind": "system", "variant": "date_separator", "text": "OGGI" },
-            { "kind": "system", "variant": "unread_count", "text": "2 messaggi non letti" },
+            { "id": "pill-c1-date-today", "kind": "system", "variant": "date_separator", "text": "OGGI" },
+            { "id": "pill-c1-unread-2", "kind": "system", "variant": "unread_count", "text": "2 messaggi non letti" },
             {
                 "id": "m1",
                 "conversationId": "c1",
@@ -859,11 +859,12 @@
                 }
             },
             {
+                "id": "pill-c1-call-permission-accepted",
                 "kind": "system",
                 "variant": "call_permission_accepted",
                 "text": "Giulia ha accettato la richiesta di chiamata"
             },
-            { "kind": "system", "variant": "call_completed", "text": "📞 Chiamata vocale · 5 min" },
+            { "id": "pill-c1-call-completed", "kind": "system", "variant": "call_completed", "text": "📞 Chiamata vocale · 5 min" },
             {
                 "id": "m29",
                 "conversationId": "c1",
@@ -890,19 +891,22 @@
                     "text": "L'utente ha disattivato i messaggi promozionali"
                 }
             },
-            { "kind": "system", "variant": "date_separator", "text": "IERI" },
+            { "id": "pill-c1-date-yesterday", "kind": "system", "variant": "date_separator", "text": "IERI" },
             {
+                "id": "pill-c1-assignment",
                 "kind": "system",
                 "variant": "assignment",
                 "text": "Laura ha assegnato la chat a Marco · 14:32",
                 "icon": "👤"
             },
             {
+                "id": "pill-c1-bot-takeover",
                 "kind": "system",
                 "variant": "bot_takeover",
                 "text": "Laura è subentrata all'agente"
             },
             {
+                "id": "pill-c1-state-reopened-auto",
                 "kind": "system",
                 "variant": "state_reopened_auto",
                 "text": "Riaperta automaticamente (nuovo inbound)"
@@ -1036,8 +1040,9 @@
             }
         ],
         "c7": [
-            { "kind": "system", "variant": "date_separator", "text": "OGGI" },
+            { "id": "pill-c7-date-today", "kind": "system", "variant": "date_separator", "text": "OGGI" },
             {
+                "id": "pill-c7-group-user-added",
                 "kind": "system",
                 "variant": "group_user_added",
                 "text": "Paola Gino aggiunta da Laura"
