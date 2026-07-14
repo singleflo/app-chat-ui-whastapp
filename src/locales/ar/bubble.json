@@ -1,0 +1,79 @@
+{
+    "bubble": {
+        "meta": {
+            "forwarded": "معاد توجيهه",
+            "forwardedMany": "معاد توجيهه عدة مرات",
+            "edited": "تم التعديل",
+            "unsupported": "غير مدعوم"
+        },
+        "menu": {
+            "actions": "إجراءات الرسالة",
+            "reply": "رد",
+            "react": "تفاعل",
+            "forward": "إعادة توجيه",
+            "copy": "نسخ",
+            "star": "إضافة إلى المميزة",
+            "info": "معلومات الرسالة",
+            "delete": "حذف"
+        },
+        "sender": {
+            "system": "النظام"
+        },
+        "template": {
+            "seeAllOptions": "عرض كل الخيارات ({{count}})",
+            "offerExpired": "انتهى العرض",
+            "expiresIn": "ينتهي خلال"
+        },
+        "contacts": {
+            "count": "{{count}} جهات اتصال",
+            "startChat": "بدء محادثة"
+        },
+        "media": {
+            "openImage": "فتح الصورة",
+            "play": "تشغيل",
+            "documentOptions": "خيارات المستند",
+            "pages": "{{count}} صفحة"
+        },
+        "special": {
+            "deleted": "تم حذف هذه الرسالة",
+            "unsupportedType": "نوع غير مدعوم",
+            "copyPayload": "نسخ الحمولة"
+        },
+        "error": {
+            "title": "خطأ {{code}}",
+            "detailsTitle": "تفاصيل تقنية"
+        },
+        "location": {
+            "requestPrompt": "يرجى مشاركة موقعك حتى نتمكن من ترتيب التوصيل.",
+            "send": "إرسال الموقع",
+            "addressPrompt": "لإتمام الطلب نحتاج إلى عنوان الشحن الخاص بك.",
+            "provideAddress": "إدخال العنوان"
+        },
+        "audio": {
+            "play": "تشغيل",
+            "pause": "إيقاف مؤقت",
+            "speed": "سرعة التشغيل",
+            "transcription": "النسخ النصي"
+        },
+        "interactive": {
+            "reply": "رد",
+            "choice": "اختيار",
+            "flowCompleted": "تم إكمال النموذج",
+            "showDetails": "عرض التفاصيل",
+            "hideDetails": "إخفاء التفاصيل",
+            "callRequest": "طلب مكالمة",
+            "callPending": "في انتظار الإذن (1/24س، 2/7أيام)",
+            "callAccepted": "مصرّح بها",
+            "callRejected": "مرفوضة"
+        },
+        "internalNote": {
+            "title": "ملاحظة داخلية",
+            "hint": "مرئية للفريق فقط · لا تُرسل أبدًا إلى WhatsApp"
+        },
+        "order": {
+            "header": "طلب · {{count}} عناصر",
+            "total": "الإجمالي",
+            "view": "عرض الطلب"
+        }
+    }
+}

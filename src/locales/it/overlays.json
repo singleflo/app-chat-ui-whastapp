@@ -1,0 +1,43 @@
+{
+    "overlays": {
+        "common": {
+            "close": "Chiudi",
+            "closeModal": "Chiudi modale"
+        },
+        "newChat": {
+            "title": "Nuova chat",
+            "searchPlaceholder": "Cerca contatto o numero",
+            "newNumber": "Nuovo numero",
+            "e164Label": "Numero E.164",
+            "valid": "Valido",
+            "invalidFormat": "Formato non valido",
+            "internationalFormat": "Formato internazionale",
+            "start": "Avvia"
+        },
+        "delete": {
+            "title": "Elimina conversazione",
+            "confirm": "Eliminare la chat con {{name}}?",
+            "warning": "Solo eliminazione locale. WhatsApp non supporta la cancellazione remota delle conversazioni.",
+            "cancel": "Annulla",
+            "confirmButton": "Elimina"
+        },
+        "forward": {
+            "title": "Inoltra ({{selected}}/{{max}})",
+            "searchPlaceholder": "Cerca chat o contatto",
+            "send_one": "Inoltra a {{count}} chat",
+            "send_other": "Inoltra a {{count}} chat",
+            "sendEmpty": "Inoltra a … chat"
+        },
+        "lightbox": {
+            "image": "Immagine",
+            "close": "Chiudi",
+            "counter": "{{current}} di {{total}}",
+            "zoomIn": "Ingrandisci",
+            "zoomOut": "Riduci zoom",
+            "download": "Scarica",
+            "share": "Condividi",
+            "previous": "Precedente",
+            "next": "Successiva"
+        }
+    }
+}

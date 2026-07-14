@@ -6,6 +6,7 @@ import { ContextPanelShell } from "./ContextPanelShell";
 import { ChatOverlays, type OverlayState } from "./Overlays";
 import { Lightbox, type LightboxState } from "./Lightbox";
 import { useState, useCallback, useEffect } from "react";
+import { useTranslation } from "react-i18next";
 import { PanelRightOpen } from "lucide-react";
 
 const focusRing =
@@ -121,6 +122,7 @@ function DesktopChatApp({
     onSelect: (id: string) => void;
     onNewChat: () => void;
 }) {
+    const { t } = useTranslation();
     const [listWidth, setListWidth] = useState(380);
     const [contextWidth, setContextWidth] = useState(340);
     const [contextOpen, setContextOpen] = useState(true);
@@ -196,7 +198,7 @@ function DesktopChatApp({
                 aria-valuemin={LIST_MIN}
                 aria-valuemax={LIST_MAX}
                 className={resizeHandle}
-                aria-label="Ridimensiona lista"
+                aria-label={t("chat.resize.list")}
             />
 
             <section className="flex min-w-0 flex-1 flex-col overflow-hidden">
@@ -220,7 +222,7 @@ function DesktopChatApp({
                         aria-valuemin={CTX_MIN}
                         aria-valuemax={CTX_MAX}
                         className={resizeHandle}
-                        aria-label="Ridimensiona pannello contesto"
+                        aria-label={t("chat.resize.context")}
                     />
                     <aside
                         className="flex shrink-0 flex-col overflow-hidden border-l border-(--border-strong) bg-(--bg-panel)"
@@ -239,7 +241,7 @@ function DesktopChatApp({
                     type="button"
                     onClick={() => setContextOpen(true)}
                     className={`absolute top-16 right-3 z-20 flex h-9 w-9 items-center justify-center rounded-full bg-(--bg-panel) text-(--fg-secondary) shadow-(--shadow-overlay) hover:text-(--accent) ${iconBtn}`}
-                    aria-label="Apri pannello contesto"
+                    aria-label={t("chat.context.open")}
                 >
                     <PanelRightOpen className="h-4 w-4" />
                 </button>

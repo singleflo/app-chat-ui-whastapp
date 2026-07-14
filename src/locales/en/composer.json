@@ -1,0 +1,88 @@
+{
+    "composer": {
+        "title": "Composer · all states",
+        "subtitle": "Spec R5 / section E (E1–E11). Each card shows a composer state.",
+        "placeholder": "Type a message",
+        "states": {
+            "defaultLabel": "E1 · Default",
+            "defaultSpec": "Auto-expanding textarea, Enter=send, Shift+Enter=newline",
+            "replyLabel": "E6 · Reply banner",
+            "replySpec": "Quote preview + X to close",
+            "blockedLabel": "E10 · 24h window blocked",
+            "blockedSpec": "Input disabled + Send template CTA",
+            "recordingLabel": "E5 · Voice recording",
+            "recordingSpec": "Timer + live waveform + slide-cancel + hands-free lock",
+            "noteLabel": "E9 · Internal note tab (Q9)",
+            "noteSpec": "Message/Note toggle, yellow background",
+            "attachmentsLabel": "E3 · Attachments menu open",
+            "attachmentsSpec": "Bottom-sheet grid: photo/video, camera, document, contact, location",
+            "emojiLabel": "E2 · Emoji picker",
+            "emojiSpec": "Search, categories, skin tone selector, recents",
+            "cannedLabel": "E7 · Quick replies (/)",
+            "cannedSpec": "Popover with fuzzy search on title/content + variables",
+            "offlineLabel": "E10 · Offline",
+            "offlineSpec": "Visible queue: messages waiting for connection",
+            "iceBreakersLabel": "E10 · Ice breakers",
+            "iceBreakersSpec": "Chips on a new/empty conversation"
+        },
+        "actions": {
+            "emoji": "Emoji",
+            "attach": "Attach",
+            "camera": "Camera",
+            "recordAudio": "Record audio",
+            "send": "Send",
+            "closeReply": "Close reply",
+            "cancel": "Cancel",
+            "closeAttachments": "Close attachments",
+            "commands": "Commands"
+        },
+        "blocked": {
+            "status": "24h window closed · templates only",
+            "sendTemplate": "Send template",
+            "locked": "Composer locked"
+        },
+        "recording": {
+            "slideToCancel": "← slide to cancel",
+            "lock": "Lock"
+        },
+        "note": {
+            "tabMessage": "Message",
+            "tabNote": "📝 Internal note",
+            "placeholder": "Write an internal note (visible to the team only)…",
+            "disclaimer": "Never sent to WhatsApp · visible to the team only"
+        },
+        "attachments": {
+            "photoVideo": "Photo & Video",
+            "camera": "Camera",
+            "document": "Document",
+            "contact": "Contact",
+            "location": "Location",
+            "locationRequest": "Location request"
+        },
+        "emoji": {
+            "searchPlaceholder": "Search emoji",
+            "recent": "😀 Recent",
+            "ariaRecent": "Recent emoji",
+            "categorySmileys": "Smileys",
+            "categoryAnimals": "Animals",
+            "categoryFood": "Food",
+            "categorySport": "Sport",
+            "categoryObjects": "Objects",
+            "ariaEmoji": "Emoji {{emoji}}"
+        },
+        "canned": {
+            "title": "Quick replies"
+        },
+        "offline": {
+            "queued_one": "{{count}} message queued · waiting for connection ⏱",
+            "queued_other": "{{count}} messages queued · waiting for connection ⏱"
+        },
+        "iceBreakers": {
+            "catalog": "🛒 View catalog",
+            "appointment": "📅 Book an appointment",
+            "operator": "💬 Talk to an agent",
+            "location": "📍 Where we are",
+            "faq": "❓ FAQ"
+        }
+    }
+}

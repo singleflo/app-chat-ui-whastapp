@@ -1,0 +1,43 @@
+{
+    "overlays": {
+        "common": {
+            "close": "إغلاق",
+            "closeModal": "إغلاق النافذة"
+        },
+        "newChat": {
+            "title": "محادثة جديدة",
+            "searchPlaceholder": "ابحث عن جهة اتصال أو رقم",
+            "newNumber": "رقم جديد",
+            "e164Label": "رقم E.164",
+            "valid": "صالح",
+            "invalidFormat": "تنسيق غير صالح",
+            "internationalFormat": "تنسيق دولي",
+            "start": "بدء"
+        },
+        "delete": {
+            "title": "حذف المحادثة",
+            "confirm": "حذف المحادثة مع {{name}}؟",
+            "warning": "حذف محلي فقط. لا يدعم WhatsApp الحذف عن بُعد للمحادثات.",
+            "cancel": "إلغاء",
+            "confirmButton": "حذف"
+        },
+        "forward": {
+            "title": "إعادة توجيه ({{selected}}/{{max}})",
+            "searchPlaceholder": "ابحث عن محادثة أو جهة اتصال",
+            "send_one": "إعادة توجيه إلى {{count}} محادثة",
+            "send_other": "إعادة توجيه إلى {{count}} محادثة",
+            "sendEmpty": "إعادة توجيه إلى … محادثة"
+        },
+        "lightbox": {
+            "image": "صورة",
+            "close": "إغلاق",
+            "counter": "{{current}} من {{total}}",
+            "zoomIn": "تكبير",
+            "zoomOut": "تصغير",
+            "download": "تنزيل",
+            "share": "مشاركة",
+            "previous": "السابق",
+            "next": "التالي"
+        }
+    }
+}

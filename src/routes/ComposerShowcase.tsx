@@ -18,6 +18,7 @@ import {
     Sparkles,
 } from "lucide-react";
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 import { cn } from "@/lib/utils";
 
 const WAVEFORM_BARS = [40, 60, 80, 50, 70, 90, 40, 60, 30, 50, 70, 80, 40, 60, 50, 70, 40, 30].map(
@@ -48,67 +49,72 @@ const ICON_BTN =
     "cursor-pointer transition-all duration-200 ease-out active:scale-[0.97] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-(--ring) focus-visible:ring-offset-2 focus-visible:ring-offset-(--bg-panel)";
 
 export function ComposerShowcase() {
+    const { t } = useTranslation();
     return (
         <div className="h-full overflow-y-auto bg-(--bg-app) p-4 sm:p-8">
             <div className="mx-auto max-w-2xl space-y-6">
                 <header>
-                    <h1 className="text-2xl font-bold">Composer · tutti gli stati</h1>
-                    <p className="mt-1 text-sm text-(--fg-secondary)">
-                        Specifica R5 / sezione E (E1–E11). Ogni card mostra uno stato del composer.
-                    </p>
+                    <h1 className="text-2xl font-bold">{t("composer.title")}</h1>
+                    <p className="mt-1 text-sm text-(--fg-secondary)">{t("composer.subtitle")}</p>
                 </header>
                 <StateCard
-                    label="E1 · Default"
-                    spec="Textarea auto-espandibile, Invio=invia, Shift+Invio=a capo"
+                    label={t("composer.states.defaultLabel")}
+                    spec={t("composer.states.defaultSpec")}
                 >
                     <DefaultComposer />
                 </StateCard>
-                <StateCard label="E6 · Reply banner" spec="Quote preview + X per chiudere">
+                <StateCard
+                    label={t("composer.states.replyLabel")}
+                    spec={t("composer.states.replySpec")}
+                >
                     <ReplyComposer />
                 </StateCard>
                 <StateCard
-                    label="E10 · Bloccato finestra 24h"
-                    spec="Input disabilitato + CTA Invia template"
+                    label={t("composer.states.blockedLabel")}
+                    spec={t("composer.states.blockedSpec")}
                 >
                     <BlockedComposer />
                 </StateCard>
                 <StateCard
-                    label="E5 · Registrazione vocale"
-                    spec="Timer + waveform live + slide-cancel + lock mani libere"
+                    label={t("composer.states.recordingLabel")}
+                    spec={t("composer.states.recordingSpec")}
                 >
                     <RecordingComposer />
                 </StateCard>
                 <StateCard
-                    label="E9 · Tab Nota interna (Q9)"
-                    spec="Toggle Messaggio/Nota, sfondo giallo"
+                    label={t("composer.states.noteLabel")}
+                    spec={t("composer.states.noteSpec")}
                 >
                     <InternalNoteComposer />
                 </StateCard>
                 <StateCard
-                    label="E3 · Menu allegati aperto"
-                    spec="Bottom-sheet griglia: foto/video, fotocamera, documento, contatto, posizione"
+                    label={t("composer.states.attachmentsLabel")}
+                    spec={t("composer.states.attachmentsSpec")}
                 >
                     <AttachmentsComposer />
                 </StateCard>
                 <StateCard
-                    label="E2 · Emoji picker"
-                    spec="Ricerca, categorie, skin tone selector, recenti"
+                    label={t("composer.states.emojiLabel")}
+                    spec={t("composer.states.emojiSpec")}
                 >
                     <EmojiPickerComposer />
                 </StateCard>
                 <StateCard
-                    label="E7 · Risposte rapide (/)"
-                    spec="Popover con ricerca fuzzy su titolo/contenuto + variabili"
+                    label={t("composer.states.cannedLabel")}
+                    spec={t("composer.states.cannedSpec")}
                 >
                     <CannedComposer />
                 </StateCard>
                 <StateCard
-                    label="E10 · Offline"
-                    spec="Coda visibile: messaggi in attesa della connessione"
+                    label={t("composer.states.offlineLabel")}
+                    spec={t("composer.states.offlineSpec")}
                 >
                     <OfflineComposer />
                 </StateCard>
-                <StateCard label="E10 · Ice breakers" spec="Chip su conversazione nuova/vuota">
+                <StateCard
+                    label={t("composer.states.iceBreakersLabel")}
+                    spec={t("composer.states.iceBreakersSpec")}
+                >
                     <IceBreakersComposer />
                 </StateCard>
             </div>
@@ -150,27 +156,28 @@ function ComposerShell({ children, note }: { children: React.ReactNode; note?: b
 }
 
 function DefaultComposer() {
+    const { t } = useTranslation();
     return (
         <ComposerShell>
             <div className="flex items-end gap-2">
-                <IconBtn aria-label="Emoji">
+                <IconBtn aria-label={t("composer.actions.emoji")}>
                     <Smile className="h-5 w-5" />
                 </IconBtn>
-                <IconBtn aria-label="Allega">
+                <IconBtn aria-label={t("composer.actions.attach")}>
                     <Plus className="h-5 w-5" />
                 </IconBtn>
                 <textarea
                     rows={1}
-                    placeholder="Scrivi un messaggio"
+                    placeholder={t("composer.placeholder")}
                     defaultValue=""
                     className="max-h-24 min-w-0 flex-1 resize-none bg-transparent px-2 py-1 text-sm text-(--fg-primary) placeholder:text-(--fg-tertiary) focus:outline-none"
                 />
-                <IconBtn aria-label="Fotocamera">
+                <IconBtn aria-label={t("composer.actions.camera")}>
                     <Camera className="h-5 w-5" />
                 </IconBtn>
                 <button
                     type="button"
-                    aria-label="Registra audio"
+                    aria-label={t("composer.actions.recordAudio")}
                     className="flex h-9 w-9 shrink-0 cursor-pointer items-center justify-center rounded-full bg-(--accent) text-(--accent-fg) transition-all duration-200 ease-out hover:bg-(--bg-hover) hover:text-(--fg-primary) focus-visible:ring-2 focus-visible:ring-(--ring) focus-visible:ring-offset-2 focus-visible:ring-offset-(--bg-panel) focus-visible:outline-none active:scale-[0.97]"
                 >
                     <Mic className="h-5 w-5" />
@@ -181,6 +188,7 @@ function DefaultComposer() {
 }
 
 function ReplyComposer() {
+    const { t } = useTranslation();
     return (
         <ComposerShell>
             <div className="mb-1 flex items-center gap-2 rounded-l border-l-[3px] border-(--accent) bg-(--bg-panel-2) px-2 py-1 text-[12px]">
@@ -192,27 +200,27 @@ function ReplyComposer() {
                 </div>
                 <button
                     type="button"
-                    aria-label="Chiudi risposta"
+                    aria-label={t("composer.actions.closeReply")}
                     className="cursor-pointer text-(--fg-tertiary) transition-all duration-200 ease-out hover:text-(--fg-primary) focus-visible:ring-2 focus-visible:ring-(--ring) focus-visible:ring-offset-2 focus-visible:ring-offset-(--bg-panel) focus-visible:outline-none active:scale-[0.97]"
                 >
                     <X className="h-4 w-4" />
                 </button>
             </div>
             <div className="flex items-end gap-2">
-                <IconBtn aria-label="Emoji">
+                <IconBtn aria-label={t("composer.actions.emoji")}>
                     <Smile className="h-5 w-5" />
                 </IconBtn>
-                <IconBtn aria-label="Allega">
+                <IconBtn aria-label={t("composer.actions.attach")}>
                     <Plus className="h-5 w-5" />
                 </IconBtn>
                 <textarea
                     rows={1}
-                    placeholder="Scrivi un messaggio"
+                    placeholder={t("composer.placeholder")}
                     className="max-h-24 min-w-0 flex-1 resize-none bg-transparent px-2 py-1 text-sm focus:outline-none"
                 />
                 <button
                     type="button"
-                    aria-label="Invia"
+                    aria-label={t("composer.actions.send")}
                     className="flex h-9 w-9 shrink-0 cursor-pointer items-center justify-center rounded-full bg-(--accent) text-(--accent-fg) transition-all duration-200 ease-out hover:bg-(--bg-hover) hover:text-(--fg-primary) focus-visible:ring-2 focus-visible:ring-(--ring) focus-visible:ring-offset-2 focus-visible:ring-offset-(--bg-panel) focus-visible:outline-none active:scale-[0.97]"
                 >
                     <Send className="h-4 w-4" />
@@ -223,11 +231,12 @@ function ReplyComposer() {
 }
 
 function BlockedComposer() {
+    const { t } = useTranslation();
     return (
         <div className="space-y-2">
             <div className="flex items-center justify-between rounded-md bg-(--bg-bubble-error) px-3 py-2 text-xs text-(--status-failed)">
                 <span className="flex items-center gap-1.5">
-                    <Lock className="h-3.5 w-3.5" /> Finestra 24h chiusa · solo template
+                    <Lock className="h-3.5 w-3.5" /> {t("composer.blocked.status")}
                 </span>
                 <button
                     type="button"
@@ -236,18 +245,19 @@ function BlockedComposer() {
                         BTN
                     )}
                 >
-                    <FileText className="h-3 w-3" /> Invia template
+                    <FileText className="h-3 w-3" /> {t("composer.blocked.sendTemplate")}
                 </button>
             </div>
             <div className="flex items-center gap-2 rounded-lg bg-(--bg-panel) px-3 py-2.5 opacity-50">
                 <Lock className="h-4 w-4 text-(--fg-tertiary)" />
-                <span className="text-sm text-(--fg-tertiary)">Composer bloccato</span>
+                <span className="text-sm text-(--fg-tertiary)">{t("composer.blocked.locked")}</span>
             </div>
         </div>
     );
 }
 
 function RecordingComposer() {
+    const { t } = useTranslation();
     return (
         <div className="flex items-center gap-3 rounded-lg bg-(--bg-panel) px-3 py-2.5">
             <span className="text-(--status-failed)">●</span>
@@ -261,14 +271,16 @@ function RecordingComposer() {
                     />
                 ))}
             </div>
-            <span className="text-[11px] text-(--fg-tertiary)">← slide per annullare</span>
+            <span className="text-[11px] text-(--fg-tertiary)">
+                {t("composer.recording.slideToCancel")}
+            </span>
             <button
                 type="button"
                 className={cn(
                     "flex h-8 w-8 items-center justify-center rounded-full bg-(--status-failed)/10 text-(--status-failed) hover:bg-(--status-failed)/20",
                     ICON_BTN
                 )}
-                aria-label="Annulla"
+                aria-label={t("composer.actions.cancel")}
             >
                 <Trash2 className="h-4 w-4" />
             </button>
@@ -279,7 +291,7 @@ function RecordingComposer() {
                     BTN
                 )}
             >
-                <Pin className="h-3 w-3" /> Lock
+                <Pin className="h-3 w-3" /> {t("composer.recording.lock")}
             </button>
             <button
                 type="button"
@@ -287,7 +299,7 @@ function RecordingComposer() {
                     "flex h-8 w-8 items-center justify-center rounded-full bg-(--accent) text-(--accent-fg) hover:bg-(--accent-hover)",
                     ICON_BTN
                 )}
-                aria-label="Invia"
+                aria-label={t("composer.actions.send")}
             >
                 <Send className="h-4 w-4" />
             </button>
@@ -296,6 +308,7 @@ function RecordingComposer() {
 }
 
 function InternalNoteComposer() {
+    const { t } = useTranslation();
     const [tab, setTab] = useState<"message" | "note">("note");
     return (
         <ComposerShell note={tab === "note"}>
@@ -312,7 +325,7 @@ function InternalNoteComposer() {
                             : "text-(--fg-tertiary) hover:bg-(--bg-hover)"
                     )}
                 >
-                    Messaggio
+                    {t("composer.note.tabMessage")}
                 </button>
                 <button
                     type="button"
@@ -326,7 +339,7 @@ function InternalNoteComposer() {
                             : "text-(--fg-tertiary) hover:bg-(--bg-hover)"
                     )}
                 >
-                    📝 Nota interna
+                    {t("composer.note.tabNote")}
                 </button>
             </div>
             <div className="flex items-end gap-2">
@@ -336,15 +349,13 @@ function InternalNoteComposer() {
                 <textarea
                     rows={1}
                     placeholder={
-                        tab === "note"
-                            ? "Scrivi una nota interna (visibile solo al team)…"
-                            : "Scrivi un messaggio"
+                        tab === "note" ? t("composer.note.placeholder") : t("composer.placeholder")
                     }
                     className="max-h-24 min-w-0 flex-1 resize-none bg-transparent px-2 py-1 text-sm focus:outline-none"
                 />
                 <button
                     type="button"
-                    aria-label="Invia"
+                    aria-label={t("composer.actions.send")}
                     className={cn(
                         "flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-(--accent) text-(--accent-fg) hover:bg-(--accent-hover)",
                         ICON_BTN
@@ -355,7 +366,7 @@ function InternalNoteComposer() {
             </div>
             {tab === "note" && (
                 <div className="mt-1 text-[11px] text-(--fg-warning) italic">
-                    Mai inviata a WhatsApp · visibile solo al team
+                    {t("composer.note.disclaimer")}
                 </div>
             )}
         </ComposerShell>
@@ -363,19 +374,20 @@ function InternalNoteComposer() {
 }
 
 function AttachmentsComposer() {
+    const { t } = useTranslation();
     return (
         <div className="space-y-2">
             <div className="grid grid-cols-3 gap-2 rounded-lg bg-(--bg-panel) p-3">
                 {[
-                    { icon: ImageIcon, label: "Foto & Video", color: "var(--accent)" },
-                    { icon: Camera, label: "Fotocamera", color: "var(--fg-link)" },
-                    { icon: FileText, label: "Documento", color: "var(--fg-warning)" },
-                    { icon: User, label: "Contatto", color: "var(--accent)" },
-                    { icon: MapPin, label: "Posizione", color: "var(--fg-link)" },
-                    { icon: Pin, label: "Richiesta posizione", color: "var(--fg-warning)" },
+                    { icon: ImageIcon, key: "photoVideo", color: "var(--accent)" },
+                    { icon: Camera, key: "camera", color: "var(--fg-link)" },
+                    { icon: FileText, key: "document", color: "var(--fg-warning)" },
+                    { icon: User, key: "contact", color: "var(--accent)" },
+                    { icon: MapPin, key: "location", color: "var(--fg-link)" },
+                    { icon: Pin, key: "locationRequest", color: "var(--fg-warning)" },
                 ].map((item) => (
                     <button
-                        key={item.label}
+                        key={item.key}
                         type="button"
                         className={cn(
                             "flex flex-col items-center gap-1.5 rounded-lg p-2 hover:bg-(--bg-hover)",
@@ -391,23 +403,25 @@ function AttachmentsComposer() {
                         >
                             <item.icon className="h-5 w-5" />
                         </div>
-                        <span className="text-[11px] text-(--fg-secondary)">{item.label}</span>
+                        <span className="text-[11px] text-(--fg-secondary)">
+                            {t(`composer.attachments.${item.key}`)}
+                        </span>
                     </button>
                 ))}
             </div>
             <ComposerShell>
                 <div className="flex items-end gap-2">
-                    <IconBtn aria-label="Chiudi allegati">
+                    <IconBtn aria-label={t("composer.actions.closeAttachments")}>
                         <ChevronDown className="h-5 w-5 rotate-45" />
                     </IconBtn>
                     <textarea
                         rows={1}
-                        placeholder="Scrivi un messaggio"
+                        placeholder={t("composer.placeholder")}
                         className="min-w-0 flex-1 resize-none bg-transparent px-2 py-1 text-sm focus:outline-none"
                     />
                     <button
                         type="button"
-                        aria-label="Registra audio"
+                        aria-label={t("composer.actions.recordAudio")}
                         className={cn(
                             "flex h-9 w-9 items-center justify-center rounded-full bg-(--accent) text-(--accent-fg) hover:bg-(--accent-hover)",
                             ICON_BTN
@@ -422,6 +436,7 @@ function AttachmentsComposer() {
 }
 
 function EmojiPickerComposer() {
+    const { t } = useTranslation();
     return (
         <div className="space-y-2">
             <div className="rounded-lg bg-(--bg-panel) p-2 shadow-(--shadow-bubble)">
@@ -429,7 +444,7 @@ function EmojiPickerComposer() {
                     <Smile className="h-3.5 w-3.5 text-(--fg-tertiary)" />
                     <input
                         type="text"
-                        placeholder="Cerca emoji"
+                        placeholder={t("composer.emoji.searchPlaceholder")}
                         className="flex-1 bg-transparent text-xs focus:outline-none"
                     />
                     <span className="text-[11px] text-(--fg-tertiary)">🖐️</span>
@@ -437,14 +452,14 @@ function EmojiPickerComposer() {
                 <div className="flex gap-1 border-b border-(--border-soft) pb-1 text-[11px]">
                     <button
                         type="button"
-                        aria-label="Emoji recenti"
+                        aria-label={t("composer.emoji.ariaRecent")}
                         className={cn("rounded bg-(--bg-hover) px-1.5 py-0.5 text-(--accent)", BTN)}
                     >
-                        😀 Recenti
+                        {t("composer.emoji.recent")}
                     </button>
                     <button
                         type="button"
-                        aria-label="Smileys"
+                        aria-label={t("composer.emoji.categorySmileys")}
                         className={cn(
                             "rounded px-1.5 py-0.5 text-(--fg-tertiary) hover:bg-(--bg-hover)",
                             BTN
@@ -454,7 +469,7 @@ function EmojiPickerComposer() {
                     </button>
                     <button
                         type="button"
-                        aria-label="Animali"
+                        aria-label={t("composer.emoji.categoryAnimals")}
                         className={cn(
                             "rounded px-1.5 py-0.5 text-(--fg-tertiary) hover:bg-(--bg-hover)",
                             BTN
@@ -464,7 +479,7 @@ function EmojiPickerComposer() {
                     </button>
                     <button
                         type="button"
-                        aria-label="Cibo"
+                        aria-label={t("composer.emoji.categoryFood")}
                         className={cn(
                             "rounded px-1.5 py-0.5 text-(--fg-tertiary) hover:bg-(--bg-hover)",
                             BTN
@@ -474,7 +489,7 @@ function EmojiPickerComposer() {
                     </button>
                     <button
                         type="button"
-                        aria-label="Sport"
+                        aria-label={t("composer.emoji.categorySport")}
                         className={cn(
                             "rounded px-1.5 py-0.5 text-(--fg-tertiary) hover:bg-(--bg-hover)",
                             BTN
@@ -484,7 +499,7 @@ function EmojiPickerComposer() {
                     </button>
                     <button
                         type="button"
-                        aria-label="Oggetti"
+                        aria-label={t("composer.emoji.categoryObjects")}
                         className={cn(
                             "rounded px-1.5 py-0.5 text-(--fg-tertiary) hover:bg-(--bg-hover)",
                             BTN
@@ -498,7 +513,7 @@ function EmojiPickerComposer() {
                         <button
                             key={e}
                             type="button"
-                            aria-label={`Emoji ${e}`}
+                            aria-label={t("composer.emoji.ariaEmoji", { emoji: e })}
                             className={cn("rounded p-1 hover:bg-(--bg-hover)", ICON_BTN)}
                         >
                             {e}
@@ -508,17 +523,17 @@ function EmojiPickerComposer() {
             </div>
             <ComposerShell>
                 <div className="flex items-end gap-2">
-                    <IconBtn aria-label="Comandi">
+                    <IconBtn aria-label={t("composer.actions.commands")}>
                         <Slash className="h-5 w-5" />
                     </IconBtn>
                     <textarea
                         rows={1}
-                        placeholder="Scrivi un messaggio"
+                        placeholder={t("composer.placeholder")}
                         className="min-w-0 flex-1 resize-none bg-transparent px-2 py-1 text-sm focus:outline-none"
                     />
                     <button
                         type="button"
-                        aria-label="Registra audio"
+                        aria-label={t("composer.actions.recordAudio")}
                         className={cn(
                             "flex h-9 w-9 items-center justify-center rounded-full bg-(--accent) text-(--accent-fg) hover:bg-(--accent-hover)",
                             ICON_BTN
@@ -533,11 +548,12 @@ function EmojiPickerComposer() {
 }
 
 function CannedComposer() {
+    const { t } = useTranslation();
     return (
         <div className="space-y-2">
             <div className="rounded-lg bg-(--bg-panel) p-2 shadow-(--shadow-bubble)">
                 <div className="mb-1.5 text-[11px] tracking-wide text-(--fg-tertiary) uppercase">
-                    Risposte rapide
+                    {t("composer.canned.title")}
                 </div>
                 {[
                     { title: "/saluto", body: "Ciao {{nome}}! Come posso aiutarti?" },
@@ -562,7 +578,7 @@ function CannedComposer() {
             </div>
             <ComposerShell>
                 <div className="flex items-end gap-2">
-                    <IconBtn aria-label="Comandi">
+                    <IconBtn aria-label={t("composer.actions.commands")}>
                         <Slash className="h-5 w-5 text-(--accent)" />
                     </IconBtn>
                     <textarea
@@ -572,7 +588,7 @@ function CannedComposer() {
                     />
                     <button
                         type="button"
-                        aria-label="Registra audio"
+                        aria-label={t("composer.actions.recordAudio")}
                         className={cn(
                             "flex h-9 w-9 items-center justify-center rounded-full bg-(--accent) text-(--accent-fg) hover:bg-(--accent-hover)",
                             ICON_BTN
@@ -587,11 +603,11 @@ function CannedComposer() {
 }
 
 function OfflineComposer() {
+    const { t } = useTranslation();
     return (
         <div className="space-y-2">
             <div className="flex items-center gap-2 rounded-md bg-(--bg-bubble-system) px-3 py-1.5 text-xs text-(--fg-secondary)">
-                <WifiOff className="h-3.5 w-3.5" /> 1 messaggio in coda · in attesa della
-                connessione ⏱
+                <WifiOff className="h-3.5 w-3.5" /> {t("composer.offline.queued", { count: 1 })}
             </div>
             <ComposerShell>
                 <div className="flex items-end gap-2">
@@ -603,12 +619,12 @@ function OfflineComposer() {
                     </IconBtn>
                     <textarea
                         rows={1}
-                        placeholder="Scrivi un messaggio"
+                        placeholder={t("composer.placeholder")}
                         className="min-w-0 flex-1 resize-none bg-transparent px-2 py-1 text-sm focus:outline-none"
                     />
                     <button
                         type="button"
-                        aria-label="Invia"
+                        aria-label={t("composer.actions.send")}
                         className={cn(
                             "flex h-9 w-9 items-center justify-center rounded-full bg-(--accent) text-(--accent-fg) hover:bg-(--accent-hover)",
                             ICON_BTN
@@ -623,24 +639,19 @@ function OfflineComposer() {
 }
 
 function IceBreakersComposer() {
+    const { t } = useTranslation();
     return (
         <div className="flex flex-wrap gap-2">
-            {[
-                "🛒 Visualizza catalogo",
-                "📅 Prenota un appuntamento",
-                "💬 Parla con un operatore",
-                "📍 Dove siamo",
-                "❓ Domande frequenti",
-            ].map((label) => (
+            {["catalog", "appointment", "operator", "location", "faq"].map((key) => (
                 <button
-                    key={label}
+                    key={key}
                     type="button"
                     className={cn(
                         "flex items-center gap-1.5 rounded-full border border-(--accent) bg-(--accent-soft) px-3 py-1.5 text-xs font-medium text-(--accent) hover:bg-(--accent) hover:text-(--accent-fg)",
                         BTN
                     )}
                 >
-                    <Sparkles className="h-3 w-3" /> {label}
+                    <Sparkles className="h-3 w-3" /> {t(`composer.iceBreakers.${key}`)}
                 </button>
             ))}
         </div>

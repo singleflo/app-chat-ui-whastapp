@@ -1,4 +1,5 @@
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { ChevronDown } from "lucide-react";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Skeleton } from "@/components/ui/skeleton";
@@ -15,6 +16,7 @@ interface MessageListProps {
 }
 
 export function MessageList({ conversationId }: MessageListProps) {
+    const { t } = useTranslation();
     const { items, loadingMore, hasMore, loadMore } = useMessages(conversationId);
     const scrollRef = useRef<HTMLDivElement>(null);
     const prevScrollHeightRef = useRef<number>(0);
@@ -117,7 +119,7 @@ export function MessageList({ conversationId }: MessageListProps) {
                         <div className="flex flex-col items-center justify-center gap-2 py-2">
                             <Skeleton className="h-6 w-32 rounded-full bg-(--bg-panel-2)/50" />
                             <span className="text-xs text-(--fg-tertiary)">
-                                Carica messaggi precedenti…
+                                {t("chat.list.loadingMore")}
                             </span>
                         </div>
                     )}
@@ -136,7 +138,8 @@ export function MessageList({ conversationId }: MessageListProps) {
 }
 
 function NewMessagesPill({ count, onClick }: { count: number; onClick: () => void }) {
-    const text = count === 1 ? "1 nuovo messaggio" : `${count} nuovi messaggi`;
+    const { t } = useTranslation();
+    const text = t("chat.newMessages", { count });
     return (
         <button
             type="button"
@@ -148,7 +151,7 @@ function NewMessagesPill({ count, onClick }: { count: number; onClick: () => voi
             aria-label={text}
         >
             <span>{text}</span>
-            <span title="Vai in fondo">
+            <span title={t("chat.scroll.toBottom")}>
                 <ChevronDown className="h-4 w-4" />
             </span>
         </button>
@@ -156,6 +159,7 @@ function NewMessagesPill({ count, onClick }: { count: number; onClick: () => voi
 }
 
 function ScrollToBottomFab({ onClick }: { onClick: () => void }) {
+    const { t } = useTranslation();
     return (
         <button
             type="button"
@@ -164,9 +168,9 @@ function ScrollToBottomFab({ onClick }: { onClick: () => void }) {
                 "absolute right-4 bottom-4 z-20 flex h-9 w-9 items-center justify-center rounded-full bg-(--bg-panel) shadow-(--shadow-overlay) hover:bg-(--bg-hover)",
                 iconBtn
             )}
-            aria-label="Vai in fondo"
+            aria-label={t("chat.scroll.toBottom")}
         >
-            <span title="Vai in fondo">
+            <span title={t("chat.scroll.toBottom")}>
                 <ChevronDown className="h-4 w-4 text-(--fg-secondary)" />
             </span>
         </button>

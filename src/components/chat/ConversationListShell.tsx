@@ -11,6 +11,7 @@ import {
     AlertCircle,
     Bot,
 } from "lucide-react";
+import { useTranslation } from "react-i18next";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
 import { ScrollArea } from "@/components/ui/scroll-area";
@@ -41,6 +42,7 @@ export function ConversationListShell({
     activeId?: string;
     onNewChat?: () => void;
 }) {
+    const { t } = useTranslation();
     const { items: conversations } = useConversations();
     const account = useAccount();
     const totalUnread = conversations.reduce((sum, c) => sum + c.unread, 0);
@@ -50,12 +52,12 @@ export function ConversationListShell({
     const closed = conversations.filter((c) => c.state === "done").length;
 
     const FILTERS = [
-        { label: "Tutte", count: conversations.length, active: true },
-        { label: "Non lette", count: totalUnread },
-        { label: "Mie", count: myAssigned },
-        { label: "Non assegnate", count: unassigned },
-        { label: "Gruppi", count: groups },
-        { label: "Chiuse", count: closed },
+        { label: t("chat.filters.all"), count: conversations.length, active: true },
+        { label: t("chat.filters.unread"), count: totalUnread },
+        { label: t("chat.filters.mine"), count: myAssigned },
+        { label: t("chat.filters.unassigned"), count: unassigned },
+        { label: t("chat.filters.groups"), count: groups },
+        { label: t("chat.filters.closed"), count: closed },
     ];
 
     return (
@@ -73,7 +75,7 @@ export function ConversationListShell({
                         <div className="text-xs font-semibold">{account.name}</div>
                         <div className="text-[10px] text-(--fg-tertiary)">
                             {account.phoneNumbers[0].display} ·{" "}
-                            {account.phoneNumbers.length} numeri
+                            {t("chat.list.numbers", { n: account.phoneNumbers.length })}
                         </div>
                     </div>
                 </div>
@@ -82,14 +84,14 @@ export function ConversationListShell({
                         type="button"
                         onClick={onNewChat}
                         className="flex h-8 w-8 cursor-pointer items-center justify-center rounded-full text-(--fg-secondary) transition-colors duration-200 ease-out hover:bg-(--bg-hover) hover:text-(--fg-primary) focus-visible:ring-2 focus-visible:ring-(--ring) focus-visible:ring-offset-2 focus-visible:ring-offset-(--bg-header) focus-visible:outline-none active:scale-95"
-                        aria-label="Nuova chat"
+                        aria-label={t("chat.list.newChat")}
                     >
                         <MessageSquare className="h-4 w-4" />
                     </button>
                     <button
                         type="button"
                         className="flex h-8 w-8 cursor-pointer items-center justify-center rounded-full text-(--fg-secondary) transition-colors duration-200 ease-out hover:bg-(--bg-hover) hover:text-(--fg-primary) focus-visible:ring-2 focus-visible:ring-(--ring) focus-visible:ring-offset-2 focus-visible:ring-offset-(--bg-header) focus-visible:outline-none active:scale-95"
-                        aria-label="Menu"
+                        aria-label={t("chat.list.menu")}
                     >
                         <MoreVertical className="h-4 w-4" />
                     </button>
@@ -101,7 +103,7 @@ export function ConversationListShell({
                     <Search className="h-3.5 w-3.5 text-(--fg-tertiary)" />
                     <input
                         type="text"
-                        placeholder="Cerca o inizia una nuova chat"
+                        placeholder={t("chat.list.searchPlaceholder")}
                         className="flex-1 bg-transparent text-xs text-(--fg-primary) placeholder:text-(--fg-tertiary) focus:outline-none"
                     />
                 </div>
@@ -142,7 +144,7 @@ export function ConversationListShell({
                         className="flex cursor-pointer items-center gap-3 px-3 py-2.5 text-left text-xs text-(--fg-secondary) transition-colors duration-200 hover:bg-(--bg-hover) hover:text-(--fg-primary)"
                     >
                         <Archive className="h-4 w-4" />
-                        Archiviate (12)
+                        {t("chat.list.archived", { count: 12 })}
                     </button>
                 </div>
             </ScrollArea>
@@ -159,6 +161,7 @@ function ConversationRow({
     active?: boolean;
     onClick?: () => void;
 }) {
+    const { t } = useTranslation();
     const isTyping = conv.typing === "text" || conv.typing === "audio";
     const typeIcon = TYPE_ICONS[conv.lastMessageType] ?? "";
     const isOutbound = conv.lastMessageDirection === "out";
@@ -181,7 +184,7 @@ function ConversationRow({
                 {conv.isBotActive && (
                     <span
                         className="absolute -right-0.5 -bottom-0.5 flex h-4 w-4 items-center justify-center rounded-full bg-(--fg-link) text-[8px]"
-                        title="Bot attivo"
+                        title={t("chat.list.botActive")}
                     >
                         <Bot className="h-2.5 w-2.5 text-white" />
                     </span>
@@ -193,7 +196,7 @@ function ConversationRow({
                     <span className="truncate text-sm font-medium text-(--fg-primary)">
                         {conv.name}
                         {conv.businessVerified && (
-                            <span className="ml-1 text-(--accent)" title="Business verificato">
+                            <span className="ml-1 text-(--accent)" title={t("chat.list.businessVerified")}>
                                 ✓
                             </span>
                         )}
@@ -217,17 +220,19 @@ function ConversationRow({
                         {isOutbound && !isTyping && <OutboundAck ack={conv.lastAck} />}
                         {isTyping ? (
                             conv.typing === "audio" ? (
-                                "sta registrando un audio…"
+                                t("chat.status.recordingAudio")
                             ) : (
-                                "sta scrivendo…"
+                                t("chat.status.typing")
                             )
                         ) : (
                             <>
-                                {isOutbound && <span className="text-(--fg-tertiary)">Tu: </span>}
+                                {isOutbound && (
+                                    <span className="text-(--fg-tertiary)">{t("chat.list.you")}</span>
+                                )}
                                 {typeIcon && <span className="mr-0.5">{typeIcon}</span>}
                                 {conv.draft ? (
                                     <span className="text-(--status-failed)">
-                                        Bozza: {conv.draft}
+                                        {t("chat.list.draft")} {conv.draft}
                                     </span>
                                 ) : (
                                     conv.lastMessagePreview
@@ -243,18 +248,18 @@ function ConversationRow({
                         {conv.unassigned && !conv.assignmentFailed && (
                             <span
                                 className="h-2 w-2 rounded-full bg-(--unassigned)"
-                                title="Non assegnata"
+                                title={t("chat.assignment.unassigned")}
                             />
                         )}
                         {conv.assignmentFailed && (
-                            <span title="Assegnazione fallita">
+                            <span title={t("chat.list.assignmentFailed")}>
                                 <AlertCircle className="h-3 w-3 text-(--fg-warning)" />
                             </span>
                         )}
                         {conv.mentionCount && conv.mentionCount > 0 && (
                             <span
                                 className="rounded-full bg-(--accent) px-1 text-[9px] font-bold text-(--accent-fg)"
-                                title="@menzione"
+                                title={t("chat.list.mention")}
                             >
                                 @{conv.mentionCount}
                             </span>

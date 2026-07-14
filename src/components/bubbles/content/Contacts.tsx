@@ -1,14 +1,16 @@
 import { Phone, Mail, MessageSquare, Building2, Calendar } from "lucide-react";
+import { useTranslation } from "react-i18next";
 import type { ContactCard } from "@/types/chat";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { colorFromString, initials } from "@/lib/utils";
 
 export function ContactsContent({ cards }: { cards: ContactCard[] }) {
+    const { t } = useTranslation();
     if (cards.length === 1) return <ContactCardView card={cards[0]} />;
     return (
         <div className="flex w-[220px] max-w-full flex-col gap-1.5">
             <div className="text-[12px] font-medium text-(--fg-secondary)">
-                {cards.length} contatti
+                {t("bubble.contacts.count", { count: cards.length })}
             </div>
             {cards.map((c) => (
                 <ContactCardView key={c.name.formatted} card={c} compact />
@@ -18,6 +20,7 @@ export function ContactsContent({ cards }: { cards: ContactCard[] }) {
 }
 
 function ContactCardView({ card, compact }: { card: ContactCard; compact?: boolean }) {
+    const { t } = useTranslation();
     return (
         <div className="flex w-[220px] max-w-full flex-col gap-1.5 rounded-md bg-(--bg-panel-2) p-2">
             <div className="flex items-center gap-2">
@@ -79,7 +82,7 @@ function ContactCardView({ card, compact }: { card: ContactCard; compact?: boole
                     type="button"
                     className="flex cursor-pointer items-center justify-center gap-1 rounded-md bg-(--accent-soft) py-1 text-[11px] font-medium text-(--accent) transition-all duration-200 ease-out hover:bg-(--accent-hover) hover:text-(--accent-fg) focus-visible:ring-2 focus-visible:ring-(--ring) focus-visible:ring-offset-2 focus-visible:ring-offset-(--bg-panel) focus-visible:outline-none active:scale-95"
                 >
-                    <MessageSquare className="h-3 w-3" /> Avvia chat
+                    <MessageSquare className="h-3 w-3" /> {t("bubble.contacts.startChat")}
                 </button>
             )}
         </div>

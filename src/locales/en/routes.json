@@ -1,0 +1,111 @@
+{
+    "calls": {
+        "title": "Calls · section G / R8",
+        "sections": {
+            "incomingSpec": "Top overlay everywhere: avatar, name, Accept/Decline",
+            "activeSpec": "Timer, mute, speaker, DTMF, minimize, hang up",
+            "minimizedSpec": "Floating pill persistent while navigating between chats",
+            "logSpec": "List with filters: all/missed, direction+outcome+duration, call back",
+            "buttonSpec": "Enabled · disabled with tooltip"
+        },
+        "appBehind": "... app behind ...",
+        "chatBehind": "... chat behind ...",
+        "enabled": "Enabled:",
+        "startCall": "Start call",
+        "disabled": "Disabled:",
+        "callUnavailable": "Call unavailable",
+        "permissionNotGrantedTooltip": "Call permission not granted",
+        "permissionNotGranted": "Permission not granted",
+        "incomingCallLabel": "Incoming call · WhatsApp Voice",
+        "decline": "Decline",
+        "accept": "Accept",
+        "voiceCall": "Voice call",
+        "key": "Key {{key}}",
+        "mute": "Mute",
+        "unmute": "Unmute",
+        "speaker": "Speaker",
+        "keypad": "Keypad",
+        "minimize": "Minimize",
+        "hangUp": "Hang up",
+        "all": "All ({{count}})",
+        "missed": "Missed ({{count}})",
+        "unknown": "Unknown",
+        "outcomeMissed": "Missed",
+        "directionIn": "Incoming",
+        "directionOut": "Outgoing",
+        "callBack": "Call back {{name}}"
+    },
+    "search": {
+        "back": "Back",
+        "placeholder": "Search...",
+        "filters": {
+            "all": "All",
+            "media": "📷 Media",
+            "documents": "📄 Documents",
+            "links": "🔗 Links",
+            "audio": "🎤 Audio"
+        },
+        "conversations": "Conversations ({{count}})",
+        "messages": "Messages ({{count}})",
+        "contacts": "Contacts ({{count}})",
+        "noResults": "No results for \"{{query}}\""
+    },
+    "newChat": {
+        "back": "Back",
+        "title": "New chat",
+        "searchContact": "Search a contact",
+        "newNumber": "New number",
+        "phoneLabel": "Phone number (E.164)",
+        "intlFormat": "International format +XX...",
+        "valid": "Valid",
+        "invalidFormat": "Invalid format",
+        "start": "Start",
+        "outsideWindow": "Outside 24h window → start requires template"
+    },
+    "starred": {
+        "back": "Back",
+        "title": "Important messages",
+        "count": "{{count}} messages",
+        "filter": "Filter"
+    },
+    "home": {
+        "heading": "WhatsApp Chat UI · Navigable mockup",
+        "subtitleBefore": "Complete implementation of the specification",
+        "subtitleAfter": "(v1.3). Sections covered: 0, A–T. 4 surfaces, 27 bubble types, multi-state composer, info drawer, CRM Context panel, Team inbox, calls, secondary screens, light/dark, RTL.",
+        "cards": {
+            "desktop": {
+                "title": "Desktop · 3 panels",
+                "desc": "Conversation list (380px) + Active chat + Drawer/Context panel (340px collapsible). Complete layout with all bubble types R4 1–27."
+            },
+            "mobile": {
+                "title": "Mobile · stack",
+                "desc": "Stack navigation List → Chat → Drawer. Gestures, safe areas, bottom-sheet, haptics. 1:1 with WhatsApp mobile."
+            },
+            "sidePanel": {
+                "title": "Side panel · 380px",
+                "desc": "Single column identical to mobile. Simulates the MV3 side panel of the Chrome extension (~360–400px)."
+            },
+            "quickPopover": {
+                "title": "Quick Popover · 380×580",
+                "desc": "Mini-chat in a popover with double-badge trigger (green/amber), Assigned/Unassigned tabs, self-contained ChatWindow."
+            }
+        },
+        "footerBefore": "Data from",
+        "footerAfter": "(section T). All bundle-local, zero CDN."
+    },
+    "surfaces": {
+        "quickChat": "Quick chat",
+        "assigned": "Assigned ({{count}})",
+        "unassigned": "Unassigned ({{count}})",
+        "refresh": "Refresh",
+        "showMore": "Show more ({{count}})",
+        "seeAll": "See all conversations →"
+    },
+    "app": {
+        "switchToLight": "Switch to light theme",
+        "switchToDark": "Switch to dark theme",
+        "toggleTheme": "Toggle theme",
+        "light": "Light",
+        "dark": "Dark"
+    }
+}

@@ -3,8 +3,10 @@ import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { cn, colorFromString, fmtTime, initials } from "@/lib/utils";
 import { useAllMessages, useConversations } from "@/data/chat-data";
+import { useTranslation } from "react-i18next";
 
 export function StarredScreen() {
+    const { t } = useTranslation();
     const allMessages = useAllMessages();
     const { items: conversations } = useConversations();
     const starredMsgs = allMessages
@@ -22,20 +24,20 @@ export function StarredScreen() {
             <header className="flex h-14 shrink-0 items-center gap-2 border-b border-(--border-strong) bg-(--bg-header) px-3">
                 <button
                     type="button"
-                    aria-label="Indietro"
+                    aria-label={t("starred.back")}
                     className="flex h-8 w-8 cursor-pointer items-center justify-center rounded-full text-(--fg-secondary) transition-all duration-200 ease-out hover:bg-(--bg-hover) hover:text-(--fg-primary) focus-visible:ring-2 focus-visible:ring-(--ring) focus-visible:ring-offset-2 focus-visible:ring-offset-(--bg-panel) focus-visible:outline-none active:scale-[0.97]"
                 >
                     <ArrowLeft className="h-4 w-4" />
                 </button>
                 <div className="flex-1">
-                    <h2 className="text-sm font-semibold">Messaggi importanti</h2>
+                    <h2 className="text-sm font-semibold">{t("starred.title")}</h2>
                     <div className="text-[11px] text-(--fg-tertiary) tabular-nums">
-                        {items.length} messaggi
+                        {t("starred.count", { count: items.length })}
                     </div>
                 </div>
                 <button
                     type="button"
-                    aria-label="Filtra"
+                    aria-label={t("starred.filter")}
                     className="flex h-8 w-8 cursor-pointer items-center justify-center rounded-full text-(--fg-secondary) transition-all duration-200 ease-out hover:bg-(--bg-hover) hover:text-(--fg-primary) focus-visible:ring-2 focus-visible:ring-(--ring) focus-visible:ring-offset-2 focus-visible:ring-offset-(--bg-panel) focus-visible:outline-none active:scale-[0.97]"
                 >
                     <Filter className="h-4 w-4" />

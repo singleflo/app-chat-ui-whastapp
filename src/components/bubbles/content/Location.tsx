@@ -1,4 +1,5 @@
 import { MapPin, Navigation, Send } from "lucide-react";
+import { useTranslation } from "react-i18next";
 import { MediaPlaceholder } from "./Media";
 
 export function LocationContent({
@@ -18,18 +19,16 @@ export function LocationContent({
     locationRequest?: boolean;
     addressRequest?: boolean;
 }) {
+    const { t } = useTranslation();
     if (locationRequest) {
         return (
             <div className="flex w-[220px] max-w-full flex-col gap-2">
-                <div className="text-sm">
-                    Per favore condividi la tua posizione per consentirci di organizzare la
-                    consegna.
-                </div>
+                <div className="text-sm">{t("bubble.location.requestPrompt")}</div>
                 <button
                     type="button"
                     className="flex cursor-pointer items-center justify-center gap-1.5 rounded-md bg-(--accent) px-3 py-1.5 text-[12px] font-medium text-(--accent-fg) transition-all duration-200 ease-out hover:bg-(--accent-hover) focus-visible:ring-2 focus-visible:ring-(--ring) focus-visible:ring-offset-2 focus-visible:ring-offset-(--bg-panel) focus-visible:outline-none active:scale-95"
                 >
-                    <Send className="h-3.5 w-3.5" /> Invia posizione
+                    <Send className="h-3.5 w-3.5" /> {t("bubble.location.send")}
                 </button>
             </div>
         );
@@ -37,14 +36,12 @@ export function LocationContent({
     if (addressRequest) {
         return (
             <div className="flex w-[220px] max-w-full flex-col gap-2">
-                <div className="text-sm">
-                    Per completare l'ordine abbiamo bisogno del tuo indirizzo di spedizione.
-                </div>
+                <div className="text-sm">{t("bubble.location.addressPrompt")}</div>
                 <button
                     type="button"
                     className="flex cursor-pointer items-center justify-center gap-1.5 rounded-md border border-(--accent) px-3 py-1.5 text-[12px] font-medium text-(--accent) transition-all duration-200 ease-out hover:bg-(--bg-hover) focus-visible:ring-2 focus-visible:ring-(--ring) focus-visible:ring-offset-2 focus-visible:ring-offset-(--bg-panel) focus-visible:outline-none active:scale-95"
                 >
-                    <Navigation className="h-3.5 w-3.5" /> Fornisci indirizzo
+                    <Navigation className="h-3.5 w-3.5" /> {t("bubble.location.provideAddress")}
                 </button>
             </div>
         );

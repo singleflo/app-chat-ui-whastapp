@@ -1,0 +1,49 @@
+{
+    "context": {
+        "header": {
+            "title": "Contesto cliente",
+            "back": "Indietro",
+            "editContact": "Modifica contatto",
+            "collapse": "Collassa pannello"
+        },
+        "profile": {
+            "title": "Profilo",
+            "whatsappVerified": "✓ WhatsApp verificato"
+        },
+        "customFields": {
+            "title": "Campi personalizzati",
+            "showMore": "Mostra altri ({{n}})"
+        },
+        "automations": {
+            "title": "Ultime automazioni",
+            "empty": "Nessuna automazione eseguita"
+        },
+        "linkedRecords": {
+            "title": "Record collegati"
+        },
+        "activity": {
+            "title": "Attività ({{n}})",
+            "system": "Sistema",
+            "assigned": "ha assegnato a {{target}}",
+            "unassigned": "ha rilasciato la chat",
+            "autoAssigned": "ha auto-assegnato la chat",
+            "autoUnassigned": "ha auto-rilasciato la chat",
+            "reassignedTimeout": "riassegnata per timeout",
+            "stateClosed": "ha chiuso la conversazione",
+            "stateReopened": "ha riaperto la conversazione",
+            "stateReopenedAuto": "riaperta automaticamente (nuovo inbound)",
+            "offhoursReply": "ha risposto fuori orario",
+            "queuedSent": "messaggio in coda inviato",
+            "outboundSent": "ha inviato un messaggio",
+            "botTakeover": "è subentrata all'agente",
+            "botHandoff": "l'agente ha trasferito a un operatore"
+        },
+        "gallery": {
+            "title": "Galleria condivisa",
+            "media": "Media ({{n}})",
+            "links": "Link ({{n}})",
+            "documents": "Documenti ({{n}})",
+            "seeStarred": "Vedi importanti"
+        }
+    }
+}

@@ -36,6 +36,8 @@ import type {
     Conversation,
 } from "@/types/chat";
 import { useId, useState } from "react";
+import { useTranslation } from "react-i18next";
+import type { TFunction } from "i18next";
 
 const focusRing =
     "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-(--ring) focus-visible:ring-offset-2 focus-visible:ring-offset-(--bg-panel)";
@@ -51,6 +53,7 @@ export function ContextPanelShell({
     onBack?: () => void;
     onCollapse?: () => void;
 }) {
+    const { t } = useTranslation();
     const profile = useContactProfile(conversationId);
     const conv = useConversation(conversationId);
     const attrs = useAttributes(conversationId);
@@ -68,13 +71,13 @@ export function ContextPanelShell({
                             "flex h-7 w-7 items-center justify-center rounded-full text-(--fg-secondary) hover:bg-(--bg-hover)",
                             iconBtn
                         )}
-                        aria-label="Indietro"
+                        aria-label={t("context.header.back")}
                     >
                         <ArrowLeft className="h-4 w-4" />
                     </button>
                 )}
                 <h2 className="flex-1 truncate text-xs font-semibold text-(--fg-primary)">
-                    Contesto cliente
+                    {t("context.header.title")}
                 </h2>
                 <button
                     type="button"
@@ -82,7 +85,7 @@ export function ContextPanelShell({
                         "flex h-7 w-7 items-center justify-center rounded-full text-(--fg-secondary) hover:bg-(--bg-hover)",
                         iconBtn
                     )}
-                    aria-label="Modifica contatto"
+                    aria-label={t("context.header.editContact")}
                 >
                     <Pencil className="h-3.5 w-3.5" />
                 </button>
@@ -94,7 +97,7 @@ export function ContextPanelShell({
                             "flex h-7 w-7 items-center justify-center rounded-full text-(--fg-secondary) hover:bg-(--bg-hover)",
                             iconBtn
                         )}
-                        aria-label="Collassa pannello"
+                        aria-label={t("context.header.collapse")}
                     >
                         <PanelRightClose className="h-3.5 w-3.5" />
                     </button>
@@ -156,8 +159,9 @@ function Section({
 }
 
 function ProfileSection({ profile }: { profile: ContactProfile }) {
+    const { t } = useTranslation();
     return (
-        <Section title="Profilo" icon={Tag}>
+        <Section title={t("context.profile.title")} icon={Tag}>
             <div className="flex items-center gap-3">
                 <Avatar className="h-14 w-14">
                     <AvatarFallback style={{ backgroundColor: profile.avatarColor, fontSize: 18 }}>
@@ -197,7 +201,7 @@ function ProfileSection({ profile }: { profile: ContactProfile }) {
                                 {ph.label}
                                 {ph.verified && (
                                     <span className="ml-1 text-(--accent)">
-                                        ✓ WhatsApp verificato
+                                        {t("context.profile.whatsappVerified")}
                                     </span>
                                 )}
                             </div>
@@ -234,12 +238,13 @@ function CustomFieldsSection({
 }: {
     attrs: Record<string, string | number | boolean | string[]>;
 }) {
+    const { t } = useTranslation();
     const schema = useAttributesSchema();
     const entries = schema.filter((s) => s.key in attrs);
     const hidden = schema.filter((s) => !(s.key in attrs));
 
     return (
-        <Section title="Campi personalizzati" icon={Pencil}>
+        <Section title={t("context.customFields.title")} icon={Pencil}>
             <div className="space-y-1.5 text-xs">
                 {entries.map((field) => {
                     const val = attrs[field.key];
@@ -260,7 +265,7 @@ function CustomFieldsSection({
                             actionBtn
                         )}
                     >
-                        Mostra altri ({hidden.length})
+                        {t("context.customFields.showMore", { n: hidden.length })}
                     </button>
                 )}
             </div>
@@ -290,10 +295,13 @@ function FieldRow({ label, value, type }: { label: string; value: string; type: 
 }
 
 function AutomationSection({ runs }: { runs: readonly AutomationRun[] }) {
+    const { t } = useTranslation();
     return (
-        <Section title="Ultime automazioni" icon={Zap}>
+        <Section title={t("context.automations.title")} icon={Zap}>
             {runs.length === 0 ? (
-                <div className="text-[11px] text-(--fg-tertiary)">Nessuna automazione eseguita</div>
+                <div className="text-[11px] text-(--fg-tertiary)">
+                    {t("context.automations.empty")}
+                </div>
             ) : (
                 <ul className="space-y-1.5 text-xs">
                     {runs.map((run) => (
@@ -330,8 +338,9 @@ function LinkedRecordsSection({
 }: {
     conv: Conversation;
 }) {
+    const { t } = useTranslation();
     return (
-        <Section title="Record collegati" icon={Tag} defaultOpen={false}>
+        <Section title={t("context.linkedRecords.title")} icon={Tag} defaultOpen={false}>
             <div className="flex flex-wrap gap-1.5 text-xs">
                 {conv.linkedRecords?.map((r) => (
                     <button
@@ -353,16 +362,21 @@ function LinkedRecordsSection({
 }
 
 function ActivitySection({ activity }: { activity: readonly ActivityEvent[] }) {
+    const { t } = useTranslation();
     return (
-        <Section title={`Attività (${activity.length})`} icon={History} defaultOpen={false}>
+        <Section
+            title={t("context.activity.title", { n: activity.length })}
+            icon={History}
+            defaultOpen={false}
+        >
             <ul className="space-y-1.5 text-xs">
                 {activity.map((ev) => (
                     <li key={ev.id} className="flex gap-2 border-l-2 border-(--border-strong) pl-2">
                         <div className="min-w-0 flex-1">
                             <span className="font-medium text-(--fg-primary)">
-                                {ev.userName ?? "Sistema"}
+                                {ev.userName ?? t("context.activity.system")}
                             </span>{" "}
-                            <span className="text-(--fg-secondary)">{activityText(ev)}</span>
+                            <span className="text-(--fg-secondary)">{activityText(ev, t)}</span>
                             <div className="text-[10px] text-(--fg-tertiary)">
                                 {ev.ts.replace("T", " · ").replace(/\+.*$/, "")}
                             </div>
@@ -374,34 +388,37 @@ function ActivitySection({ activity }: { activity: readonly ActivityEvent[] }) {
     );
 }
 
-function activityText(ev: ActivityEvent): string {
+function activityText(ev: ActivityEvent, t: TFunction): string {
     switch (ev.type) {
         case "assigned":
-            return `ha assegnato a ${ev.targetUserName ?? "?"}${ev.reason ? ` (${ev.reason})` : ""}`;
+            return (
+                t("context.activity.assigned", { target: ev.targetUserName ?? "?" }) +
+                (ev.reason ? ` (${ev.reason})` : "")
+            );
         case "unassigned":
-            return "ha rilasciato la chat";
+            return t("context.activity.unassigned");
         case "auto_assigned":
-            return "ha auto-assegnato la chat";
+            return t("context.activity.autoAssigned");
         case "auto_unassigned":
-            return "ha auto-rilasciato la chat";
+            return t("context.activity.autoUnassigned");
         case "reassigned_timeout":
-            return "riassegnata per timeout";
+            return t("context.activity.reassignedTimeout");
         case "state_closed":
-            return "ha chiuso la conversazione";
+            return t("context.activity.stateClosed");
         case "state_reopened":
-            return "ha riaperto la conversazione";
+            return t("context.activity.stateReopened");
         case "state_reopened_auto":
-            return "riaperta automaticamente (nuovo inbound)";
+            return t("context.activity.stateReopenedAuto");
         case "offhours_reply":
-            return "ha risposto fuori orario";
+            return t("context.activity.offhoursReply");
         case "queued_sent":
-            return "messaggio in coda inviato";
+            return t("context.activity.queuedSent");
         case "outbound_sent":
-            return "ha inviato un messaggio";
+            return t("context.activity.outboundSent");
         case "bot_takeover":
-            return "è subentrata all'agente";
+            return t("context.activity.botTakeover");
         case "bot_handoff":
-            return "l'agente ha trasferito a un operatore";
+            return t("context.activity.botHandoff");
         default:
             return ev.type;
     }
@@ -417,26 +434,27 @@ const GALLERY_TILES = [
 ] as const;
 
 function GallerySection() {
+    const { t } = useTranslation();
     return (
-        <Section title="Galleria condivisa" icon={ImageIcon} defaultOpen={false}>
+        <Section title={t("context.gallery.title")} icon={ImageIcon} defaultOpen={false}>
             <div className="mb-2 flex gap-2 text-[10px]">
                 <button
                     type="button"
                     className={cn("rounded px-1 font-semibold text-(--accent)", actionBtn)}
                 >
-                    Media (8)
+                    {t("context.gallery.media", { n: 8 })}
                 </button>
                 <button
                     type="button"
                     className={cn("rounded px-1 text-(--fg-tertiary)", actionBtn)}
                 >
-                    Link (3)
+                    {t("context.gallery.links", { n: 3 })}
                 </button>
                 <button
                     type="button"
                     className={cn("rounded px-1 text-(--fg-tertiary)", actionBtn)}
                 >
-                    Documenti (2)
+                    {t("context.gallery.documents", { n: 2 })}
                 </button>
             </div>
             <div className="grid grid-cols-3 gap-1">
@@ -457,7 +475,7 @@ function GallerySection() {
                     actionBtn
                 )}
             >
-                <Star className="h-3 w-3" /> Vedi importanti
+                <Star className="h-3 w-3" /> {t("context.gallery.seeStarred")}
             </button>
         </Section>
     );

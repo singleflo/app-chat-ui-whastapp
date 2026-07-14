@@ -1,0 +1,90 @@
+{
+    "chat": {
+        "header": {
+            "back": "Back",
+            "openContext": "Open context for {{name}}",
+            "participants": "· {{n}} members",
+            "videoCall": "Video call",
+            "call": "Call",
+            "searchInChat": "Search in chat",
+            "moreOptions": "More options",
+            "showContext": "Show context panel"
+        },
+        "status": {
+            "typing": "typing…",
+            "recordingAudio": "recording audio…",
+            "online": "online · {{phone}}"
+        },
+        "window": {
+            "closedTemplateOnly": "Window closed · templates only",
+            "open": "Window · 5h 12m",
+            "outsideHours": "Outside hours"
+        },
+        "assignment": {
+            "unassigned": "Unassigned"
+        },
+        "bot": {
+            "defaultAgent": "Agent",
+            "managing": "is handling this conversation",
+            "takeOver": "Take over"
+        },
+        "pinned": {
+            "sample": "1/2 — Appointment reminder tomorrow 16:00",
+            "next": "Next pinned message"
+        },
+        "records": {
+            "linked": "Linked:"
+        },
+        "team": {
+            "typing": "{{name}} is typing…"
+        },
+        "composer": {
+            "windowClosed": "24h window closed · templates only",
+            "sendTemplate": "Send template",
+            "emoji": "Emoji",
+            "attachments": "Attachments",
+            "template": "Template (E8)",
+            "placeholder": "Type a message",
+            "camera": "Camera",
+            "send": "Send message"
+        },
+        "readonly": {
+            "hint": "Read-only preview · Quick Popover readonly"
+        },
+        "list": {
+            "numbers": "{{n}} numbers",
+            "newChat": "New chat",
+            "menu": "Menu",
+            "searchPlaceholder": "Search or start a new chat",
+            "archived_one": "Archived ({{count}})",
+            "archived_other": "Archived ({{count}})",
+            "botActive": "Bot active",
+            "businessVerified": "Verified business",
+            "you": "You: ",
+            "draft": "Draft:",
+            "assignmentFailed": "Assignment failed",
+            "mention": "@mention",
+            "loadingMore": "Load previous messages…"
+        },
+        "filters": {
+            "all": "All",
+            "unread": "Unread",
+            "mine": "Mine",
+            "unassigned": "Unassigned",
+            "groups": "Groups",
+            "closed": "Closed"
+        },
+        "newMessages_one": "1 new message",
+        "newMessages_other": "{{count}} new messages",
+        "scroll": {
+            "toBottom": "Go to bottom"
+        },
+        "resize": {
+            "list": "Resize list",
+            "context": "Resize context panel"
+        },
+        "context": {
+            "open": "Open context panel"
+        }
+    }
+}

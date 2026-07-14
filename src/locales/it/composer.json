@@ -1,0 +1,88 @@
+{
+    "composer": {
+        "title": "Composer · tutti gli stati",
+        "subtitle": "Specifica R5 / sezione E (E1–E11). Ogni card mostra uno stato del composer.",
+        "placeholder": "Scrivi un messaggio",
+        "states": {
+            "defaultLabel": "E1 · Default",
+            "defaultSpec": "Textarea auto-espandibile, Invio=invia, Shift+Invio=a capo",
+            "replyLabel": "E6 · Reply banner",
+            "replySpec": "Quote preview + X per chiudere",
+            "blockedLabel": "E10 · Bloccato finestra 24h",
+            "blockedSpec": "Input disabilitato + CTA Invia template",
+            "recordingLabel": "E5 · Registrazione vocale",
+            "recordingSpec": "Timer + waveform live + slide-cancel + lock mani libere",
+            "noteLabel": "E9 · Tab Nota interna (Q9)",
+            "noteSpec": "Toggle Messaggio/Nota, sfondo giallo",
+            "attachmentsLabel": "E3 · Menu allegati aperto",
+            "attachmentsSpec": "Bottom-sheet griglia: foto/video, fotocamera, documento, contatto, posizione",
+            "emojiLabel": "E2 · Emoji picker",
+            "emojiSpec": "Ricerca, categorie, skin tone selector, recenti",
+            "cannedLabel": "E7 · Risposte rapide (/)",
+            "cannedSpec": "Popover con ricerca fuzzy su titolo/contenuto + variabili",
+            "offlineLabel": "E10 · Offline",
+            "offlineSpec": "Coda visibile: messaggi in attesa della connessione",
+            "iceBreakersLabel": "E10 · Ice breakers",
+            "iceBreakersSpec": "Chip su conversazione nuova/vuota"
+        },
+        "actions": {
+            "emoji": "Emoji",
+            "attach": "Allega",
+            "camera": "Fotocamera",
+            "recordAudio": "Registra audio",
+            "send": "Invia",
+            "closeReply": "Chiudi risposta",
+            "cancel": "Annulla",
+            "closeAttachments": "Chiudi allegati",
+            "commands": "Comandi"
+        },
+        "blocked": {
+            "status": "Finestra 24h chiusa · solo template",
+            "sendTemplate": "Invia template",
+            "locked": "Composer bloccato"
+        },
+        "recording": {
+            "slideToCancel": "← slide per annullare",
+            "lock": "Lock"
+        },
+        "note": {
+            "tabMessage": "Messaggio",
+            "tabNote": "📝 Nota interna",
+            "placeholder": "Scrivi una nota interna (visibile solo al team)…",
+            "disclaimer": "Mai inviata a WhatsApp · visibile solo al team"
+        },
+        "attachments": {
+            "photoVideo": "Foto & Video",
+            "camera": "Fotocamera",
+            "document": "Documento",
+            "contact": "Contatto",
+            "location": "Posizione",
+            "locationRequest": "Richiesta posizione"
+        },
+        "emoji": {
+            "searchPlaceholder": "Cerca emoji",
+            "recent": "😀 Recenti",
+            "ariaRecent": "Emoji recenti",
+            "categorySmileys": "Smileys",
+            "categoryAnimals": "Animali",
+            "categoryFood": "Cibo",
+            "categorySport": "Sport",
+            "categoryObjects": "Oggetti",
+            "ariaEmoji": "Emoji {{emoji}}"
+        },
+        "canned": {
+            "title": "Risposte rapide"
+        },
+        "offline": {
+            "queued_one": "{{count}} messaggio in coda · in attesa della connessione ⏱",
+            "queued_other": "{{count}} messaggi in coda · in attesa della connessione ⏱"
+        },
+        "iceBreakers": {
+            "catalog": "🛒 Visualizza catalogo",
+            "appointment": "📅 Prenota un appuntamento",
+            "operator": "💬 Parla con un operatore",
+            "location": "📍 Dove siamo",
+            "faq": "❓ Domande frequenti"
+        }
+    }
+}

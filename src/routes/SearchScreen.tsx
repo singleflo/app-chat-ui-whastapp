@@ -5,8 +5,10 @@ import { cn, fmtRelativeDay, initials } from "@/lib/utils";
 import { useAllMessages, useContactProfiles, useConversations } from "@/data/chat-data";
 import { isMessage } from "@/types/chat";
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 
 export function SearchScreen() {
+    const { t } = useTranslation();
     const [query, setQuery] = useState("ordine");
     const { items: conversations } = useConversations();
     const allMessages = useAllMessages();
@@ -48,7 +50,7 @@ export function SearchScreen() {
             <header className="flex h-14 shrink-0 items-center gap-2 border-b border-(--border-strong) bg-(--bg-header) px-3">
                 <button
                     type="button"
-                    aria-label="Indietro"
+                    aria-label={t("search.back")}
                     className="flex h-8 w-8 cursor-pointer items-center justify-center rounded-full text-(--fg-secondary) transition-all duration-200 ease-out hover:bg-(--bg-hover) hover:text-(--fg-primary) focus-visible:ring-2 focus-visible:ring-(--ring) focus-visible:ring-offset-2 focus-visible:ring-offset-(--bg-panel) focus-visible:outline-none active:scale-[0.97]"
                 >
                     <ArrowLeft className="h-4 w-4" />
@@ -59,13 +61,13 @@ export function SearchScreen() {
                         type="text"
                         value={query}
                         onChange={(e) => setQuery(e.target.value)}
-                        placeholder="Cerca..."
+                        placeholder={t("search.placeholder")}
                         className="flex-1 bg-transparent text-sm focus:outline-none"
                     />
                 </div>
             </header>
             <div className="flex shrink-0 items-center gap-1.5 px-3 py-2">
-                {["Tutti", "📷 Media", "📄 Documenti", "🔗 Link", "🎤 Audio"].map((f, i) => (
+                {(["all", "media", "documents", "links", "audio"] as const).map((f, i) => (
                     <button
                         key={f}
                         type="button"
@@ -77,7 +79,7 @@ export function SearchScreen() {
                                 : "border-(--border-strong) text-(--fg-secondary) hover:bg-(--bg-hover) hover:text-(--fg-primary)"
                         )}
                     >
-                        {f}
+                        {t(`search.filters.${f}`)}
                     </button>
                 ))}
             </div>
@@ -86,7 +88,7 @@ export function SearchScreen() {
                     {matchedConvs.length > 0 && (
                         <ResultGroup
                             icon={MessageSquare}
-                            title={`Conversazioni (${matchedConvs.length})`}
+                            title={t("search.conversations", { count: matchedConvs.length })}
                         >
                             {matchedConvs.map((c) => (
                                 <div
@@ -114,7 +116,10 @@ export function SearchScreen() {
                         </ResultGroup>
                     )}
                     {matchedMsgs.length > 0 && (
-                        <ResultGroup icon={Search} title={`Messaggi (${matchedMsgs.length})`}>
+                        <ResultGroup
+                            icon={Search}
+                            title={t("search.messages", { count: matchedMsgs.length })}
+                        >
                             {matchedMsgs.map((m) => {
                                 const conv = conversations.find(
                                     (c) => c.id === m.conversationId
@@ -138,7 +143,10 @@ export function SearchScreen() {
                         </ResultGroup>
                     )}
                     {matchedContacts.length > 0 && (
-                        <ResultGroup icon={User} title={`Contatti (${matchedContacts.length})`}>
+                        <ResultGroup
+                            icon={User}
+                            title={t("search.contacts", { count: matchedContacts.length })}
+                        >
                             {matchedContacts.map((p) => (
                                 <div
                                     key={p.contactId}
@@ -166,7 +174,7 @@ export function SearchScreen() {
                         matchedContacts.length === 0 && (
                             <div className="flex flex-col items-center justify-center py-12 text-sm text-(--fg-tertiary)">
                                 <Filter className="mb-2 h-8 w-8 opacity-40" />
-                                Nessun risultato per "{query}"
+                                {t("search.noResults", { query })}
                             </div>
                         )}
                 </div>

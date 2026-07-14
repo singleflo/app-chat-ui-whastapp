@@ -6,6 +6,7 @@ import { ScrollArea } from "@/components/ui/scroll-area";
 import { cn, fmtRelativeDay, initials } from "@/lib/utils";
 import { useConversations } from "@/data/chat-data";
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 
 export function DesktopSurface() {
     return (
@@ -54,11 +55,12 @@ export function QuickPopoverSurface() {
 }
 
 function QuickChatTrigger() {
+    const { t } = useTranslation();
     return (
         <button
             type="button"
             className="relative flex h-14 w-14 cursor-pointer items-center justify-center rounded-full bg-(--accent) text-(--accent-fg) shadow-(--shadow-overlay) transition-all duration-200 ease-out hover:scale-105 hover:bg-(--accent-hover) focus-visible:ring-2 focus-visible:ring-(--ring) focus-visible:ring-offset-2 focus-visible:ring-offset-(--bg-app) focus-visible:outline-none active:scale-[0.97]"
-            aria-label="Quick chat"
+            aria-label={t("surfaces.quickChat")}
         >
             <MessageSquare className="h-6 w-6" />
             <span className="absolute -top-1 -right-1 flex h-5 min-w-5 items-center justify-center rounded-full border-2 border-(--bg-panel) bg-(--accent) px-1 text-[11px] font-bold text-(--accent-fg) tabular-nums">
@@ -72,6 +74,7 @@ function QuickChatTrigger() {
 }
 
 function QuickChatPanel() {
+    const { t } = useTranslation();
     const [tab, setTab] = useState<"assigned" | "unassigned">("assigned");
     const { items: conversations } = useConversations();
     const assigned = conversations.filter((c) => c.assignedUserId);
@@ -92,7 +95,7 @@ function QuickChatPanel() {
                                 : "text-(--fg-secondary) hover:bg-(--bg-hover) hover:text-(--fg-primary)"
                         )}
                     >
-                        Assegnate ({assigned.length})
+                        {t("surfaces.assigned", { count: assigned.length })}
                     </button>
                     <button
                         type="button"
@@ -105,13 +108,13 @@ function QuickChatPanel() {
                                 : "text-(--fg-secondary) hover:bg-(--bg-hover) hover:text-(--fg-primary)"
                         )}
                     >
-                        Non assegnate ({unassigned.length})
+                        {t("surfaces.unassigned", { count: unassigned.length })}
                     </button>
                 </div>
                 <div className="flex items-center gap-1">
                     <button
                         type="button"
-                        aria-label="Aggiorna"
+                        aria-label={t("surfaces.refresh")}
                         className="flex h-7 w-7 cursor-pointer items-center justify-center rounded-full text-(--fg-secondary) transition-all duration-200 ease-out hover:bg-(--bg-hover) hover:text-(--fg-primary) focus-visible:ring-2 focus-visible:ring-(--ring) focus-visible:ring-offset-2 focus-visible:ring-offset-(--bg-header) focus-visible:outline-none active:scale-[0.97]"
                     >
                         <RefreshCw className="h-3.5 w-3.5" />
@@ -174,16 +177,17 @@ function QuickChatPanel() {
                         type="button"
                         className="cursor-pointer px-3 py-2 text-center text-[11px] text-(--fg-link) transition-colors duration-200 ease-out hover:bg-(--bg-hover) focus-visible:ring-2 focus-visible:ring-(--ring) focus-visible:outline-none focus-visible:ring-inset"
                     >
-                        Mostra altre (
-                        {(tab === "assigned" ? assigned : unassigned).length - 5 > 0
-                            ? (tab === "assigned" ? assigned : unassigned).length - 5
-                            : 0}
-                        )
+                        {t("surfaces.showMore", {
+                            count:
+                                (tab === "assigned" ? assigned : unassigned).length - 5 > 0
+                                    ? (tab === "assigned" ? assigned : unassigned).length - 5
+                                    : 0,
+                        })}
                     </button>
                 </div>
             </ScrollArea>
             <footer className="shrink-0 border-t border-(--border-strong) bg-(--bg-panel-2) px-3 py-1.5 text-center text-[11px] text-(--fg-link)">
-                Vedi tutte le conversazioni →
+                {t("surfaces.seeAll")}
             </footer>
         </div>
     );

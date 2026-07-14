@@ -1,5 +1,6 @@
 import { Check, CheckCheck, AlertTriangle, Bot, Smartphone, Zap, Settings } from "lucide-react";
 import type { ReactNode } from "react";
+import { useTranslation } from "react-i18next";
 import type { AckStatus, Message, SenderAttribution } from "@/types/chat";
 import { cn, fmtTime, initials } from "@/lib/utils";
 
@@ -109,9 +110,11 @@ export function SenderAvatar({ sender, size = 28 }: { sender: SenderAttribution;
 }
 
 export function ForwardedLabel({ frequently }: { frequently?: boolean }) {
+    const { t } = useTranslation();
     return (
         <div className="mb-1 flex items-center gap-1 text-[10px] text-(--fg-secondary) italic">
-            <span>↪</span> {frequently ? "Inoltrato molte volte" : "Inoltrato"}
+            <span>↪</span>{" "}
+            {frequently ? t("bubble.meta.forwardedMany") : t("bubble.meta.forwarded")}
         </div>
     );
 }
@@ -165,9 +168,10 @@ export function BubbleMeta({
     ack?: AckStatus;
     edited?: boolean;
 }) {
+    const { t } = useTranslation();
     return (
         <div className="float-right clear-both mt-1 ml-2 flex items-center gap-1 text-[10px] text-(--fg-tertiary)">
-            {edited && <span className="italic">modificato</span>}
+            {edited && <span className="italic">{t("bubble.meta.edited")}</span>}
             {ts && <span>{fmtTime(ts)}</span>}
             <AckIcon status={ack} />
         </div>
@@ -234,9 +238,10 @@ export function QuotedBlock({
 }
 
 export function UnsupportedWarning() {
+    const { t } = useTranslation();
     return (
         <div className="flex items-center gap-1 text-[11px] text-(--fg-warning)">
-            <AlertTriangle className="h-3 w-3" /> Non supportato
+            <AlertTriangle className="h-3 w-3" /> {t("bubble.meta.unsupported")}
         </div>
     );
 }

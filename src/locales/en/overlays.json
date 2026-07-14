@@ -1,0 +1,43 @@
+{
+    "overlays": {
+        "common": {
+            "close": "Close",
+            "closeModal": "Close modal"
+        },
+        "newChat": {
+            "title": "New chat",
+            "searchPlaceholder": "Search contact or number",
+            "newNumber": "New number",
+            "e164Label": "E.164 number",
+            "valid": "Valid",
+            "invalidFormat": "Invalid format",
+            "internationalFormat": "International format",
+            "start": "Start"
+        },
+        "delete": {
+            "title": "Delete conversation",
+            "confirm": "Delete the chat with {{name}}?",
+            "warning": "Local deletion only. WhatsApp does not support remote deletion of conversations.",
+            "cancel": "Cancel",
+            "confirmButton": "Delete"
+        },
+        "forward": {
+            "title": "Forward ({{selected}}/{{max}})",
+            "searchPlaceholder": "Search chat or contact",
+            "send_one": "Forward to {{count}} chat",
+            "send_other": "Forward to {{count}} chats",
+            "sendEmpty": "Forward to … chats"
+        },
+        "lightbox": {
+            "image": "Image",
+            "close": "Close",
+            "counter": "{{current}} of {{total}}",
+            "zoomIn": "Zoom in",
+            "zoomOut": "Zoom out",
+            "download": "Download",
+            "share": "Share",
+            "previous": "Previous",
+            "next": "Next"
+        }
+    }
+}

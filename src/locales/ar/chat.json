@@ -1,0 +1,90 @@
+{
+    "chat": {
+        "header": {
+            "back": "رجوع",
+            "openContext": "فتح سياق {{name}}",
+            "participants": "· {{n}} مشارك",
+            "videoCall": "مكالمة فيديو",
+            "call": "مكالمة",
+            "searchInChat": "بحث في المحادثة",
+            "moreOptions": "خيارات أخرى",
+            "showContext": "إظهار لوحة السياق"
+        },
+        "status": {
+            "typing": "يكتب…",
+            "recordingAudio": "يسجّل مقطعًا صوتيًا…",
+            "online": "متصل · {{phone}}"
+        },
+        "window": {
+            "closedTemplateOnly": "النافذة مغلقة · القوالب فقط",
+            "open": "النافذة · 5h 12m",
+            "outsideHours": "خارج ساعات العمل"
+        },
+        "assignment": {
+            "unassigned": "غير معيَّنة"
+        },
+        "bot": {
+            "defaultAgent": "وكيل",
+            "managing": "يدير هذه المحادثة",
+            "takeOver": "التدخّل"
+        },
+        "pinned": {
+            "sample": "1/2 — تذكير بموعد غدًا 16:00",
+            "next": "الرسالة المثبَّتة التالية"
+        },
+        "records": {
+            "linked": "مرتبطة:"
+        },
+        "team": {
+            "typing": "{{name}} يكتب…"
+        },
+        "composer": {
+            "windowClosed": "نافذة 24 ساعة مغلقة · القوالب فقط",
+            "sendTemplate": "إرسال قالب",
+            "emoji": "الرموز التعبيرية",
+            "attachments": "المرفقات",
+            "template": "قالب (E8)",
+            "placeholder": "اكتب رسالة",
+            "camera": "الكاميرا",
+            "send": "إرسال الرسالة"
+        },
+        "readonly": {
+            "hint": "معاينة للقراءة فقط · Quick Popover للقراءة فقط"
+        },
+        "list": {
+            "numbers": "{{n}} أرقام",
+            "newChat": "محادثة جديدة",
+            "menu": "القائمة",
+            "searchPlaceholder": "ابحث أو ابدأ محادثة جديدة",
+            "archived_one": "مؤرشفة ({{count}})",
+            "archived_other": "مؤرشفة ({{count}})",
+            "botActive": "البوت نشط",
+            "businessVerified": "نشاط تجاري موثَّق",
+            "you": "أنت: ",
+            "draft": "مسودة:",
+            "assignmentFailed": "فشل التعيين",
+            "mention": "@إشارة",
+            "loadingMore": "تحميل الرسائل السابقة…"
+        },
+        "filters": {
+            "all": "الكل",
+            "unread": "غير المقروءة",
+            "mine": "الخاصة بي",
+            "unassigned": "غير المعيَّنة",
+            "groups": "المجموعات",
+            "closed": "المغلقة"
+        },
+        "newMessages_one": "رسالة جديدة واحدة",
+        "newMessages_other": "{{count}} رسائل جديدة",
+        "scroll": {
+            "toBottom": "الذهاب إلى الأسفل"
+        },
+        "resize": {
+            "list": "تغيير حجم القائمة",
+            "context": "تغيير حجم لوحة السياق"
+        },
+        "context": {
+            "open": "فتح لوحة السياق"
+        }
+    }
+}

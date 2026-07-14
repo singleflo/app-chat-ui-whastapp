@@ -1,0 +1,111 @@
+{
+    "calls": {
+        "title": "Chiamate · sezione G / R8",
+        "sections": {
+            "incomingSpec": "Overlay top ovunque: avatar, nome, Accetta/Rifiuta",
+            "activeSpec": "Timer, mute, vivavoce, DTMF, minimizza, riaggancia",
+            "minimizedSpec": "Pill flottante persistente durante navigazione tra chat",
+            "logSpec": "Lista con filtri: tutte/perse, direzione+esito+durata, richiama",
+            "buttonSpec": "Abilitato · disabilitato con tooltip"
+        },
+        "appBehind": "... app dietro ...",
+        "chatBehind": "... chat dietro ...",
+        "enabled": "Abilitato:",
+        "startCall": "Avvia chiamata",
+        "disabled": "Disabilitato:",
+        "callUnavailable": "Chiamata non disponibile",
+        "permissionNotGrantedTooltip": "Permesso di chiamata non accordato",
+        "permissionNotGranted": "Permesso non accordato",
+        "incomingCallLabel": "Chiamata in arrivo · WhatsApp Voice",
+        "decline": "Rifiuta",
+        "accept": "Accetta",
+        "voiceCall": "Chiamata vocale",
+        "key": "Tasto {{key}}",
+        "mute": "Mute",
+        "unmute": "Unmute",
+        "speaker": "Vivavoce",
+        "keypad": "Tastierino",
+        "minimize": "Minimizza",
+        "hangUp": "Riaggancia",
+        "all": "Tutte ({{count}})",
+        "missed": "Perse ({{count}})",
+        "unknown": "Sconosciuto",
+        "outcomeMissed": "Persa",
+        "directionIn": "In arrivo",
+        "directionOut": "In uscita",
+        "callBack": "Richiama {{name}}"
+    },
+    "search": {
+        "back": "Indietro",
+        "placeholder": "Cerca...",
+        "filters": {
+            "all": "Tutti",
+            "media": "📷 Media",
+            "documents": "📄 Documenti",
+            "links": "🔗 Link",
+            "audio": "🎤 Audio"
+        },
+        "conversations": "Conversazioni ({{count}})",
+        "messages": "Messaggi ({{count}})",
+        "contacts": "Contatti ({{count}})",
+        "noResults": "Nessun risultato per \"{{query}}\""
+    },
+    "newChat": {
+        "back": "Indietro",
+        "title": "Nuova chat",
+        "searchContact": "Cerca un contatto",
+        "newNumber": "Nuovo numero",
+        "phoneLabel": "Numero di telefono (E.164)",
+        "intlFormat": "Formato internazionale +XX...",
+        "valid": "Valido",
+        "invalidFormat": "Formato non valido",
+        "start": "Avvia",
+        "outsideWindow": "Fuori finestra 24h → avvio con template richiesto"
+    },
+    "starred": {
+        "back": "Indietro",
+        "title": "Messaggi importanti",
+        "count": "{{count}} messaggi",
+        "filter": "Filtra"
+    },
+    "home": {
+        "heading": "WhatsApp Chat UI · Mockup navigabile",
+        "subtitleBefore": "Implementazione completa della specifica",
+        "subtitleAfter": "(v1.3). Sezioni coperte: 0, A–T. 4 superfici, 27 tipi di bolle, composer multi-stato, drawer info, Context panel CRM, Team inbox, chiamate, schermate secondarie, light/dark, RTL.",
+        "cards": {
+            "desktop": {
+                "title": "Desktop · 3 pannelli",
+                "desc": "Lista conversazioni (380px) + Chat attiva + Drawer/Context panel (340px a comparsa). Layout completo con tutti i tipi di bolle R4 1–27."
+            },
+            "mobile": {
+                "title": "Mobile · stack",
+                "desc": "Stack navigation Lista → Chat → Drawer. Gesture, safe areas, bottom-sheet, haptics. 1:1 con WhatsApp mobile."
+            },
+            "sidePanel": {
+                "title": "Side panel · 380px",
+                "desc": "Colonna singola identica al mobile. Simula il side panel MV3 dell'estensione Chrome (~360–400px)."
+            },
+            "quickPopover": {
+                "title": "Quick Popover · 380×580",
+                "desc": "Mini-chat in popover con trigger doppio badge (verde/ambra), tab Assegnate/Non assegnate, ChatWindow auto-contenuto."
+            }
+        },
+        "footerBefore": "Dati da",
+        "footerAfter": "(sezione T). Tutto bundle-local, zero CDN."
+    },
+    "surfaces": {
+        "quickChat": "Quick chat",
+        "assigned": "Assegnate ({{count}})",
+        "unassigned": "Non assegnate ({{count}})",
+        "refresh": "Aggiorna",
+        "showMore": "Mostra altre ({{count}})",
+        "seeAll": "Vedi tutte le conversazioni →"
+    },
+    "app": {
+        "switchToLight": "Passa al tema chiaro",
+        "switchToDark": "Passa al tema scuro",
+        "toggleTheme": "Cambia tema",
+        "light": "Light",
+        "dark": "Dark"
+    }
+}

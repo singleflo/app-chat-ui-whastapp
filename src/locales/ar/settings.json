@@ -1,0 +1,56 @@
+{
+    "settings": {
+        "title": "الإعدادات",
+        "back": "رجوع",
+        "edit": "تعديل",
+        "groups": {
+            "appearance": "المظهر",
+            "notifications": "الإشعارات",
+            "privacy": "الخصوصية",
+            "language": "اللغة",
+            "cannedReplies": "الردود السريعة",
+            "labels": "التسميات",
+            "advanced": "متقدّم"
+        },
+        "appearance": {
+            "chatWallpaper": "خلفية الدردشة",
+            "chatWallpaperValue": "نمط الرسوم"
+        },
+        "theme": {
+            "label": "السمة",
+            "light": "فاتح",
+            "dark": "داكن",
+            "auto": "تلقائي"
+        },
+        "density": {
+            "label": "الكثافة",
+            "comfortable": "مريحة",
+            "compact": "مضغوطة"
+        },
+        "fontSize": {
+            "label": "حجم خط الرسائل",
+            "small": "ص",
+            "medium": "م",
+            "large": "ك"
+        },
+        "notifications": {
+            "desktop": "إشعارات سطح المكتب",
+            "sound": "صوت رسالة جديدة",
+            "previews": "معاينات المحتوى",
+            "dnd": "وضع عدم الإزعاج"
+        },
+        "privacy": {
+            "readReceipts": "إرسال إيصالات القراءة",
+            "enterToSend": "الإرسال بمفتاح Enter"
+        },
+        "language": {
+            "label": "لغة الواجهة"
+        },
+        "advanced": {
+            "debugMode": "وضع التصحيح (الحمولة الخام)",
+            "autoDownload": "تنزيل الوسائط تلقائيًا",
+            "exportChat": "تصدير المحادثة",
+            "exportChatValue": "فقط إذا سمح المضيف"
+        }
+    }
+}

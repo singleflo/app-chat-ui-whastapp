@@ -1,0 +1,49 @@
+{
+    "context": {
+        "header": {
+            "title": "سياق العميل",
+            "back": "رجوع",
+            "editContact": "تعديل جهة الاتصال",
+            "collapse": "طيّ اللوحة"
+        },
+        "profile": {
+            "title": "الملف الشخصي",
+            "whatsappVerified": "✓ تم التحقق من WhatsApp"
+        },
+        "customFields": {
+            "title": "الحقول المخصصة",
+            "showMore": "عرض المزيد ({{n}})"
+        },
+        "automations": {
+            "title": "أحدث الأتمتة",
+            "empty": "لم يتم تنفيذ أي أتمتة"
+        },
+        "linkedRecords": {
+            "title": "السجلات المرتبطة"
+        },
+        "activity": {
+            "title": "النشاط ({{n}})",
+            "system": "النظام",
+            "assigned": "عيّن إلى {{target}}",
+            "unassigned": "حرّر المحادثة",
+            "autoAssigned": "عيّن المحادثة تلقائيًا",
+            "autoUnassigned": "حرّر المحادثة تلقائيًا",
+            "reassignedTimeout": "أُعيد التعيين بسبب انتهاء المهلة",
+            "stateClosed": "أغلق المحادثة",
+            "stateReopened": "أعاد فتح المحادثة",
+            "stateReopenedAuto": "أُعيد الفتح تلقائيًا (وارد جديد)",
+            "offhoursReply": "ردّ خارج ساعات العمل",
+            "queuedSent": "تم إرسال الرسالة المُدرجة في قائمة الانتظار",
+            "outboundSent": "أرسل رسالة",
+            "botTakeover": "تولّى المهمة من الوكيل",
+            "botHandoff": "حوّل الوكيل المحادثة إلى مشغّل"
+        },
+        "gallery": {
+            "title": "المعرض المشترك",
+            "media": "الوسائط ({{n}})",
+            "links": "الروابط ({{n}})",
+            "documents": "المستندات ({{n}})",
+            "seeStarred": "عرض المميزة بنجمة"
+        }
+    }
+}

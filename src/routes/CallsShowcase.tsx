@@ -16,13 +16,15 @@ import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { cn, colorFromString, fmtDuration, initials } from "@/lib/utils";
 import { useCalls, useConversations } from "@/data/chat-data";
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 
 export function CallsShowcase() {
+    const { t } = useTranslation();
     return (
         <div className="h-full overflow-y-auto bg-(--bg-app) p-4 sm:p-8">
             <div className="mx-auto max-w-2xl space-y-6">
                 <header>
-                    <h1 className="text-2xl font-bold">Chiamate · sezione G / R8</h1>
+                    <h1 className="text-2xl font-bold">{t("calls.title")}</h1>
                     <p className="mt-1 text-sm text-(--fg-secondary)">
                         IncomingBanner, ActiveCallScreen (fullscreen + minimized), CallLog,
                         CallButton header.
@@ -31,11 +33,11 @@ export function CallsShowcase() {
 
                 <Section
                     title="R8 · IncomingCallBanner"
-                    spec="Overlay top ovunque: avatar, nome, Accetta/Rifiuta"
+                    spec={t("calls.sections.incomingSpec")}
                 >
                     <div className="relative h-48 overflow-hidden rounded-lg bg-(--bg-panel-2)">
                         <div className="absolute inset-0 flex items-center justify-center text-xs text-(--fg-tertiary)">
-                            ... app dietro ...
+                            {t("calls.appBehind")}
                         </div>
                         <IncomingCallBanner />
                     </div>
@@ -43,18 +45,18 @@ export function CallsShowcase() {
 
                 <Section
                     title="R8 · ActiveCallScreen"
-                    spec="Timer, mute, vivavoce, DTMF, minimizza, riaggancia"
+                    spec={t("calls.sections.activeSpec")}
                 >
                     <ActiveCallScreen />
                 </Section>
 
                 <Section
                     title="R8 · Minimized pill"
-                    spec="Pill flottante persistente durante navigazione tra chat"
+                    spec={t("calls.sections.minimizedSpec")}
                 >
                     <div className="relative h-20 rounded-lg bg-(--bg-panel-2)">
                         <div className="absolute inset-0 flex items-center justify-center text-xs text-(--fg-tertiary)">
-                            ... chat dietro ...
+                            {t("calls.chatBehind")}
                         </div>
                         <MinimizedPill />
                     </div>
@@ -62,33 +64,33 @@ export function CallsShowcase() {
 
                 <Section
                     title="R8 · CallLog"
-                    spec="Lista con filtri: tutte/perse, direzione+esito+durata, richiama"
+                    spec={t("calls.sections.logSpec")}
                 >
                     <CallLog />
                 </Section>
 
-                <Section title="R8 · CallButton header" spec="Abilitato · disabilitato con tooltip">
+                <Section title="R8 · CallButton header" spec={t("calls.sections.buttonSpec")}>
                     <div className="flex items-center gap-4 rounded-lg bg-(--bg-panel) px-4 py-3">
-                        <div className="text-xs text-(--fg-secondary)">Abilitato:</div>
+                        <div className="text-xs text-(--fg-secondary)">{t("calls.enabled")}</div>
                         <button
                             type="button"
-                            aria-label="Avvia chiamata"
+                            aria-label={t("calls.startCall")}
                             className="flex h-9 w-9 cursor-pointer items-center justify-center rounded-full bg-(--accent) text-(--accent-fg) transition-all duration-200 ease-out hover:bg-(--accent-hover) focus-visible:ring-2 focus-visible:ring-(--ring) focus-visible:ring-offset-2 focus-visible:ring-offset-(--bg-panel) focus-visible:outline-none active:scale-[0.97]"
                         >
                             <Phone className="h-4 w-4" />
                         </button>
-                        <div className="text-xs text-(--fg-secondary)">Disabilitato:</div>
+                        <div className="text-xs text-(--fg-secondary)">{t("calls.disabled")}</div>
                         <button
                             type="button"
                             disabled
-                            aria-label="Chiamata non disponibile"
+                            aria-label={t("calls.callUnavailable")}
                             className="flex h-9 w-9 cursor-not-allowed items-center justify-center rounded-full bg-(--bg-panel-2) text-(--fg-tertiary)"
-                            title="Permesso di chiamata non accordato"
+                            title={t("calls.permissionNotGrantedTooltip")}
                         >
                             <PhoneOff className="h-4 w-4" />
                         </button>
                         <div className="text-[11px] text-(--fg-tertiary)">
-                            Permesso non accordato
+                            {t("calls.permissionNotGranted")}
                         </div>
                     </div>
                 </Section>
@@ -118,6 +120,7 @@ function Section({
 }
 
 function IncomingCallBanner() {
+    const { t } = useTranslation();
     const conv = useConversations().items[0];
     return (
         <div className="absolute inset-x-0 top-0 z-30 flex items-center justify-between gap-3 bg-(--bg-panel) px-4 py-3 shadow-(--shadow-overlay)">
@@ -130,7 +133,7 @@ function IncomingCallBanner() {
                 <div>
                     <div className="text-sm font-semibold">{conv.name}</div>
                     <div className="text-[11px] text-(--fg-tertiary)">
-                        Chiamata in arrivo · WhatsApp Voice
+                        {t("calls.incomingCallLabel")}
                     </div>
                 </div>
             </div>
@@ -139,13 +142,13 @@ function IncomingCallBanner() {
                     type="button"
                     className="flex cursor-pointer items-center gap-1.5 rounded-full bg-(--status-failed) px-3 py-1.5 text-xs font-medium text-(--fg-on-accent) transition-all duration-200 ease-out focus-visible:ring-2 focus-visible:ring-(--ring) focus-visible:ring-offset-2 focus-visible:ring-offset-(--bg-panel) focus-visible:outline-none active:scale-95"
                 >
-                    <PhoneOff className="h-3.5 w-3.5" /> Rifiuta
+                    <PhoneOff className="h-3.5 w-3.5" /> {t("calls.decline")}
                 </button>
                 <button
                     type="button"
                     className="flex animate-pulse cursor-pointer items-center gap-1.5 rounded-full bg-(--accent) px-3 py-1.5 text-xs font-medium text-(--accent-fg) transition-all duration-200 ease-out hover:bg-(--accent-hover) focus-visible:ring-2 focus-visible:ring-(--ring) focus-visible:ring-offset-2 focus-visible:ring-offset-(--bg-panel) focus-visible:outline-none active:scale-95"
                 >
-                    <Phone className="h-3.5 w-3.5" /> Accetta
+                    <Phone className="h-3.5 w-3.5" /> {t("calls.accept")}
                 </button>
             </div>
         </div>
@@ -153,6 +156,7 @@ function IncomingCallBanner() {
 }
 
 function ActiveCallScreen() {
+    const { t } = useTranslation();
     const [muted, setMuted] = useState(false);
     const [speaker, setSpeaker] = useState(true);
     const [showDtmf, setShowDtmf] = useState(false);
@@ -168,7 +172,7 @@ function ActiveCallScreen() {
             <div className="text-center">
                 <div className="text-lg font-semibold">{conv.name}</div>
                 <div className="text-sm text-(--fg-tertiary)">
-                    Chiamata vocale ·{" "}
+                    {t("calls.voiceCall")} ·{" "}
                     <span className="font-mono tabular-nums">{fmtDuration(154)}</span>
                 </div>
             </div>
@@ -179,7 +183,7 @@ function ActiveCallScreen() {
                         <button
                             key={k}
                             type="button"
-                            aria-label={`Tasto ${k}`}
+                            aria-label={t("calls.key", { key: k })}
                             className="flex h-10 w-10 cursor-pointer items-center justify-center rounded-full bg-(--bg-panel-2) text-sm font-medium transition-all duration-200 ease-out hover:bg-(--bg-hover) focus-visible:ring-2 focus-visible:ring-(--ring) focus-visible:ring-offset-2 focus-visible:ring-offset-(--bg-panel) focus-visible:outline-none active:scale-95"
                         >
                             {k}
@@ -193,25 +197,30 @@ function ActiveCallScreen() {
                     active={muted}
                     onClick={() => setMuted(!muted)}
                     icon={muted ? MicOff : Mic}
-                    label={muted ? "Unmute" : "Mute"}
+                    label={muted ? t("calls.unmute") : t("calls.mute")}
                 />
                 <CallControl
                     active={speaker}
                     onClick={() => setSpeaker(!speaker)}
                     icon={Volume2}
-                    label="Vivavoce"
+                    label={t("calls.speaker")}
                 />
                 <CallControl
                     active={showDtmf}
                     onClick={() => setShowDtmf(!showDtmf)}
                     icon={Grid3x3}
-                    label="Tastierino"
+                    label={t("calls.keypad")}
                 />
-                <CallControl active={false} onClick={() => {}} icon={Minimize2} label="Minimizza" />
+                <CallControl
+                    active={false}
+                    onClick={() => {}}
+                    icon={Minimize2}
+                    label={t("calls.minimize")}
+                />
                 <button
                     type="button"
                     className="flex h-14 w-14 cursor-pointer items-center justify-center rounded-full bg-(--status-failed) text-(--fg-on-accent) transition-all duration-200 ease-out focus-visible:ring-2 focus-visible:ring-(--ring) focus-visible:ring-offset-2 focus-visible:ring-offset-(--bg-panel) focus-visible:outline-none active:scale-[0.97]"
-                    aria-label="Riaggancia"
+                    aria-label={t("calls.hangUp")}
                 >
                     <PhoneOff className="h-6 w-6" />
                 </button>
@@ -270,6 +279,7 @@ function MinimizedPill() {
 }
 
 function CallLog() {
+    const { t } = useTranslation();
     const calls = useCalls();
     const { items: conversations } = useConversations();
     return (
@@ -280,19 +290,19 @@ function CallLog() {
                     aria-pressed="true"
                     className="cursor-pointer rounded font-semibold text-(--accent) transition-all duration-200 ease-out focus-visible:ring-2 focus-visible:ring-(--ring) focus-visible:ring-offset-2 focus-visible:ring-offset-(--bg-panel) focus-visible:outline-none active:scale-95"
                 >
-                    Tutte ({calls.length})
+                    {t("calls.all", { count: calls.length })}
                 </button>
                 <button
                     type="button"
                     aria-pressed="false"
                     className="cursor-pointer rounded text-(--fg-tertiary) transition-all duration-200 ease-out hover:text-(--fg-primary) focus-visible:ring-2 focus-visible:ring-(--ring) focus-visible:ring-offset-2 focus-visible:ring-offset-(--bg-panel) focus-visible:outline-none active:scale-95"
                 >
-                    Perse (1)
+                    {t("calls.missed", { count: 1 })}
                 </button>
             </div>
             {calls.map((call) => {
                 const conv = conversations.find((c) => c.id === call.conversationId);
-                const name = conv?.name ?? "Sconosciuto";
+                const name = conv?.name ?? t("calls.unknown");
                 const Icon =
                     call.outcome === "missed"
                         ? PhoneMissed
@@ -335,10 +345,10 @@ function CallLog() {
                             <div className="flex items-center gap-1 text-[11px] text-(--fg-tertiary)">
                                 <Icon className="h-3 w-3" style={{ color }} />
                                 {call.outcome === "missed"
-                                    ? "Persa"
+                                    ? t("calls.outcomeMissed")
                                     : call.direction === "in"
-                                      ? "In arrivo"
-                                      : "In uscita"}
+                                      ? t("calls.directionIn")
+                                      : t("calls.directionOut")}
                                 {call.durationSec > 0 && (
                                     <>
                                         <Clock className="ml-1 h-3 w-3" />{" "}
@@ -352,7 +362,7 @@ function CallLog() {
                         </div>
                         <button
                             type="button"
-                            aria-label={`Richiama ${name}`}
+                            aria-label={t("calls.callBack", { name })}
                             className="flex h-8 w-8 cursor-pointer items-center justify-center rounded-full text-(--accent) transition-all duration-200 ease-out hover:bg-(--bg-hover) focus-visible:ring-2 focus-visible:ring-(--ring) focus-visible:ring-offset-2 focus-visible:ring-offset-(--bg-panel) focus-visible:outline-none active:scale-[0.97]"
                         >
                             <PhoneCall className="h-4 w-4" />

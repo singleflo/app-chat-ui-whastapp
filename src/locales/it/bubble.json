@@ -1,0 +1,79 @@
+{
+    "bubble": {
+        "meta": {
+            "forwarded": "Inoltrato",
+            "forwardedMany": "Inoltrato molte volte",
+            "edited": "modificato",
+            "unsupported": "Non supportato"
+        },
+        "menu": {
+            "actions": "Azioni messaggio",
+            "reply": "Rispondi",
+            "react": "Reagisci",
+            "forward": "Inoltra",
+            "copy": "Copia",
+            "star": "Aggiungi a Importanti",
+            "info": "Info messaggio",
+            "delete": "Elimina"
+        },
+        "sender": {
+            "system": "Sistema"
+        },
+        "template": {
+            "seeAllOptions": "Vedi tutte le opzioni ({{count}})",
+            "offerExpired": "Offerta scaduta",
+            "expiresIn": "Scade tra"
+        },
+        "contacts": {
+            "count": "{{count}} contatti",
+            "startChat": "Avvia chat"
+        },
+        "media": {
+            "openImage": "Apri immagine",
+            "play": "Riproduci",
+            "documentOptions": "Opzioni documento",
+            "pages": "{{count}} pag"
+        },
+        "special": {
+            "deleted": "Questo messaggio è stato eliminato",
+            "unsupportedType": "Tipo non supportato",
+            "copyPayload": "Copia payload"
+        },
+        "error": {
+            "title": "Errore {{code}}",
+            "detailsTitle": "Dettagli tecnici"
+        },
+        "location": {
+            "requestPrompt": "Per favore condividi la tua posizione per consentirci di organizzare la consegna.",
+            "send": "Invia posizione",
+            "addressPrompt": "Per completare l'ordine abbiamo bisogno del tuo indirizzo di spedizione.",
+            "provideAddress": "Fornisci indirizzo"
+        },
+        "audio": {
+            "play": "Riproduci",
+            "pause": "Pausa",
+            "speed": "Velocità riproduzione",
+            "transcription": "Trascrizione"
+        },
+        "interactive": {
+            "reply": "Risposta",
+            "choice": "Scelta",
+            "flowCompleted": "Modulo completato",
+            "showDetails": "Vedi dettagli",
+            "hideDetails": "Nascondi dettagli",
+            "callRequest": "Richiesta di chiamata",
+            "callPending": "In attesa di autorizzazione (1/24h, 2/7gg)",
+            "callAccepted": "Autorizzata",
+            "callRejected": "Rifiutata"
+        },
+        "internalNote": {
+            "title": "Nota interna",
+            "hint": "Visibile solo al team · mai inviata a WhatsApp"
+        },
+        "order": {
+            "header": "Ordine · {{count}} articoli",
+            "total": "Totale",
+            "view": "Vedi ordine"
+        }
+    }
+}

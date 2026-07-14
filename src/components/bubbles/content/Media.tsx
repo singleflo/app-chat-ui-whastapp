@@ -1,4 +1,5 @@
 import { FileText, FileSpreadsheet, FileCode, FileArchive, File, Layers } from "lucide-react";
+import { useTranslation } from "react-i18next";
 import { cn, fmtBytes } from "@/lib/utils";
 import { Markdown } from "../Markdown";
 import { Play, MoreVertical } from "lucide-react";
@@ -12,6 +13,7 @@ export function ImageContent({
     caption?: string;
     album?: { total: number };
 }) {
+    const { t } = useTranslation();
     const openLightbox = () => {
         window.dispatchEvent(new CustomEvent("wa-lightbox-open", { detail: { url, caption } }));
     };
@@ -22,7 +24,7 @@ export function ImageContent({
                     type="button"
                     onClick={openLightbox}
                     className="block cursor-zoom-in rounded-lg transition-all duration-200 ease-out focus-visible:ring-2 focus-visible:ring-(--ring) focus-visible:ring-offset-2 focus-visible:ring-offset-(--bg-panel) focus-visible:outline-none active:scale-95"
-                    aria-label="Apri immagine"
+                    aria-label={t("bubble.media.openImage")}
                 >
                     <MediaPlaceholder
                         url={url}
@@ -53,6 +55,7 @@ export function VideoContent({
     caption?: string;
     gif?: boolean;
 }) {
+    const { t } = useTranslation();
     const mm = String(Math.floor(durationSec / 60)).padStart(1, "0");
     const ss = String(durationSec % 60).padStart(2, "0");
     return (
@@ -65,7 +68,7 @@ export function VideoContent({
                 <button
                     type="button"
                     className="absolute inset-0 flex cursor-pointer items-center justify-center transition-all duration-200 ease-out focus-visible:ring-2 focus-visible:ring-(--ring) focus-visible:ring-offset-2 focus-visible:ring-offset-(--bg-panel) focus-visible:outline-none active:scale-95"
-                    aria-label="Riproduci"
+                    aria-label={t("bubble.media.play")}
                 >
                     <span className="flex h-12 w-12 items-center justify-center rounded-full bg-black/60 text-white">
                         <Play className="h-5 w-5" />
@@ -91,6 +94,7 @@ export function DocumentContent({
     sizeBytes: number;
     pages?: number;
 }) {
+    const { t } = useTranslation();
     const Icon = pickDocIcon(mime);
     return (
         <div className="flex w-[220px] max-w-full items-center gap-2 rounded-md bg-(--bg-panel-2) p-2">
@@ -101,13 +105,13 @@ export function DocumentContent({
                 <div className="truncate text-[13px] font-medium">{truncateMiddle(name, 28)}</div>
                 <div className="text-[10px] text-(--fg-tertiary)">
                     {fmtBytes(sizeBytes)}
-                    {pages ? ` · ${pages} pag` : ""}
+                    {pages ? ` · ${t("bubble.media.pages", { count: pages })}` : ""}
                 </div>
             </div>
             <button
                 type="button"
                 className="shrink-0 cursor-pointer rounded text-(--fg-tertiary) transition-all duration-200 ease-out hover:text-(--fg-secondary) focus-visible:ring-2 focus-visible:ring-(--ring) focus-visible:ring-offset-2 focus-visible:ring-offset-(--bg-panel) focus-visible:outline-none active:scale-95"
-                aria-label="Opzioni documento"
+                aria-label={t("bubble.media.documentOptions")}
             >
                 <MoreVertical className="h-4 w-4" />
             </button>

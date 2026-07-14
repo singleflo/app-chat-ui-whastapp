@@ -1,0 +1,79 @@
+{
+    "bubble": {
+        "meta": {
+            "forwarded": "Forwarded",
+            "forwardedMany": "Forwarded many times",
+            "edited": "edited",
+            "unsupported": "Not supported"
+        },
+        "menu": {
+            "actions": "Message actions",
+            "reply": "Reply",
+            "react": "React",
+            "forward": "Forward",
+            "copy": "Copy",
+            "star": "Add to Starred",
+            "info": "Message info",
+            "delete": "Delete"
+        },
+        "sender": {
+            "system": "System"
+        },
+        "template": {
+            "seeAllOptions": "See all options ({{count}})",
+            "offerExpired": "Offer expired",
+            "expiresIn": "Expires in"
+        },
+        "contacts": {
+            "count": "{{count}} contacts",
+            "startChat": "Start chat"
+        },
+        "media": {
+            "openImage": "Open image",
+            "play": "Play",
+            "documentOptions": "Document options",
+            "pages": "{{count}} pg"
+        },
+        "special": {
+            "deleted": "This message was deleted",
+            "unsupportedType": "Unsupported type",
+            "copyPayload": "Copy payload"
+        },
+        "error": {
+            "title": "Error {{code}}",
+            "detailsTitle": "Technical details"
+        },
+        "location": {
+            "requestPrompt": "Please share your location so we can arrange delivery.",
+            "send": "Send location",
+            "addressPrompt": "To complete the order we need your shipping address.",
+            "provideAddress": "Provide address"
+        },
+        "audio": {
+            "play": "Play",
+            "pause": "Pause",
+            "speed": "Playback speed",
+            "transcription": "Transcription"
+        },
+        "interactive": {
+            "reply": "Reply",
+            "choice": "Choice",
+            "flowCompleted": "Form completed",
+            "showDetails": "Show details",
+            "hideDetails": "Hide details",
+            "callRequest": "Call request",
+            "callPending": "Awaiting authorization (1/24h, 2/7d)",
+            "callAccepted": "Authorized",
+            "callRejected": "Rejected"
+        },
+        "internalNote": {
+            "title": "Internal note",
+            "hint": "Visible only to the team · never sent to WhatsApp"
+        },
+        "order": {
+            "header": "Order · {{count}} items",
+            "total": "Total",
+            "view": "View order"
+        }
+    }
+}

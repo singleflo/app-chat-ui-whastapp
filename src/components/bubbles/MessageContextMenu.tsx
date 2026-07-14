@@ -1,4 +1,5 @@
 import { useState, useRef, useEffect } from "react";
+import { useTranslation } from "react-i18next";
 import { Reply, Smile, Forward, Copy, Star, Trash2, Info, ChevronDown } from "lucide-react";
 import type { Message } from "@/types/chat";
 import { cn } from "@/lib/utils";
@@ -6,6 +7,7 @@ import { cn } from "@/lib/utils";
 const QUICK_REACTIONS = ["👍", "❤️", "😂", "😮", "😢", "🙏"];
 
 export function MessageContextMenu({ message }: { message: Message }) {
+    const { t } = useTranslation();
     const [open, setOpen] = useState(false);
     const [showReactionBar, setShowReactionBar] = useState(false);
     const ref = useRef<HTMLDivElement>(null);
@@ -41,7 +43,7 @@ export function MessageContextMenu({ message }: { message: Message }) {
                     setOpen(true);
                 }}
                 className="absolute top-1 right-1 hidden h-5 w-5 items-center justify-center rounded-full bg-(--bg-panel) opacity-0 shadow transition-opacity group-hover:flex group-hover:opacity-100"
-                aria-label="Azioni messaggio"
+                aria-label={t("bubble.menu.actions")}
             >
                 <ChevronDown className="h-3 w-3 text-(--fg-secondary)" />
             </button>
@@ -75,30 +77,30 @@ export function MessageContextMenu({ message }: { message: Message }) {
                 </div>
             ) : (
                 <div className="w-44 overflow-hidden rounded-lg border border-(--border-strong) bg-(--bg-panel) py-0.5 shadow-(--shadow-overlay)">
-                    <MenuItem icon={Reply} label="Rispondi" onClick={() => setOpen(false)} />
+                    <MenuItem icon={Reply} label={t("bubble.menu.reply")} onClick={() => setOpen(false)} />
                     <MenuItem
                         icon={Smile}
-                        label="Reagisci"
+                        label={t("bubble.menu.react")}
                         onClick={() => setShowReactionBar(true)}
                     />
-                    <MenuItem icon={Forward} label="Inoltra" onClick={() => setOpen(false)} />
-                    <MenuItem icon={Copy} label="Copia" onClick={() => setOpen(false)} />
+                    <MenuItem icon={Forward} label={t("bubble.menu.forward")} onClick={() => setOpen(false)} />
+                    <MenuItem icon={Copy} label={t("bubble.menu.copy")} onClick={() => setOpen(false)} />
                     <MenuItem
                         icon={Star}
-                        label="Aggiungi a Importanti"
+                        label={t("bubble.menu.star")}
                         onClick={() => setOpen(false)}
                     />
                     {message.direction === "out" && (
                         <MenuItem
                             icon={Info}
-                            label="Info messaggio"
+                            label={t("bubble.menu.info")}
                             onClick={() => setOpen(false)}
                         />
                     )}
                     <div className="my-0.5 border-t border-(--border-soft)" />
                     <MenuItem
                         icon={Trash2}
-                        label="Elimina"
+                        label={t("bubble.menu.delete")}
                         variant="danger"
                         onClick={() => setOpen(false)}
                     />

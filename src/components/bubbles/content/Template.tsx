@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { Gift, Copy, Check } from "lucide-react";
 import type { MessageContent } from "@/types/chat";
 import { Markdown } from "../Markdown";
@@ -8,6 +9,7 @@ import { TemplateButtonRow } from "./Interactive";
 type TemplateContentPayload = Extract<MessageContent, { kind: "template" }>;
 
 export function TemplateContent({ template }: { template: TemplateContentPayload }) {
+    const { t } = useTranslation();
     const [copied, setCopied] = useState(false);
     const lto = template.limitedTimeOffer;
     const otp = template.otp;
@@ -74,7 +76,9 @@ export function TemplateContent({ template }: { template: TemplateContentPayload
                             type="button"
                             className="cursor-pointer rounded-md py-1.5 text-[12px] font-medium text-(--accent) transition-all duration-200 ease-out hover:bg-(--bg-hover) focus-visible:ring-2 focus-visible:ring-(--ring) focus-visible:ring-offset-2 focus-visible:ring-offset-(--bg-panel) focus-visible:outline-none active:scale-95"
                         >
-                            Vedi tutte le opzioni ({template.buttons.length})
+                            {t("bubble.template.seeAllOptions", {
+                                count: template.buttons.length,
+                            })}
                         </button>
                     )}
                 </div>
@@ -106,18 +110,21 @@ function LtoBanner({
     onCopy: (c: string) => void;
     copied: boolean;
 }) {
+    const { t } = useTranslation();
     const remaining = useCountdown(expiresAt);
     if (expired) {
         return (
             <div className="rounded-md bg-(--bg-bubble-error) px-2 py-1 text-[11px] text-(--status-failed)">
-                Offerta scaduta
+                {t("bubble.template.offerExpired")}
             </div>
         );
     }
     return (
         <div className="flex items-center justify-between gap-2 rounded-md bg-(--bg-bubble-automation) px-2 py-1">
             <div className="text-[11px]">
-                <div className="font-semibold text-(--fg-warning)">⏰ Scade tra</div>
+                <div className="font-semibold text-(--fg-warning)">
+                    ⏰ {t("bubble.template.expiresIn")}
+                </div>
                 <div className="font-mono tabular-nums">{formatRemaining(remaining)}</div>
             </div>
             <button

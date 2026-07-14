@@ -1,4 +1,5 @@
 import { useState, useCallback, useEffect, useRef } from "react";
+import { useTranslation } from "react-i18next";
 import { X, ChevronLeft, ChevronRight, Download, Share2, ZoomIn, ZoomOut } from "lucide-react";
 import { MediaPlaceholder } from "@/components/bubbles/content/Media";
 
@@ -25,6 +26,7 @@ export function Lightbox({
     onPrev: () => void;
     onNext: () => void;
 }) {
+    const { t } = useTranslation();
     const [zoomed, setZoomed] = useState(false);
     const dialogRef = useRef<HTMLDivElement>(null);
     const [prevIndex, setPrevIndex] = useState(state.index);
@@ -85,12 +87,15 @@ export function Lightbox({
     const handleShare = useCallback(async () => {
         try {
             if (navigator.share) {
-                await navigator.share({ title: state.caption ?? "Immagine", url: state.url });
+                await navigator.share({
+                    title: state.caption ?? t("overlays.lightbox.image"),
+                    url: state.url,
+                });
             }
         } catch {
             // user cancelled or not available
         }
-    }, [state.url, state.caption]);
+    }, [state.url, state.caption, t]);
 
     if (!state.open) return null;
 
@@ -99,20 +104,20 @@ export function Lightbox({
             ref={dialogRef}
             role="dialog"
             aria-modal="true"
-            aria-label={state.caption ?? "Immagine"}
+            aria-label={state.caption ?? t("overlays.lightbox.image")}
             className="fixed inset-0 z-[100] flex items-center justify-center bg-(--scrim)"
         >
             <button
                 type="button"
                 onClick={onClose}
                 className={`absolute top-4 right-4 z-10 flex h-10 w-10 items-center justify-center rounded-full bg-(--bg-hover) text-(--fg-on-accent) hover:bg-(--bg-active) ${iconBtn}`}
-                aria-label="Chiudi"
+                aria-label={t("overlays.lightbox.close")}
             >
                 <X className="h-5 w-5" />
             </button>
 
             <div className="absolute top-4 left-4 z-10 rounded-full bg-(--bg-hover) px-3 py-1 text-sm font-medium text-(--fg-on-accent)">
-                {state.index + 1} di {state.total}
+                {t("overlays.lightbox.counter", { current: state.index + 1, total: state.total })}
             </div>
 
             <div className="absolute bottom-4 left-1/2 z-10 flex -translate-x-1/2 items-center gap-2">
@@ -120,7 +125,7 @@ export function Lightbox({
                     type="button"
                     onClick={() => setZoomed(!zoomed)}
                     className={`flex h-10 w-10 items-center justify-center rounded-full bg-(--bg-hover) text-(--fg-on-accent) hover:bg-(--bg-active) ${iconBtn}`}
-                    aria-label={zoomed ? "Riduci zoom" : "Ingrandisci"}
+                    aria-label={zoomed ? t("overlays.lightbox.zoomOut") : t("overlays.lightbox.zoomIn")}
                 >
                     {zoomed ? <ZoomOut className="h-5 w-5" /> : <ZoomIn className="h-5 w-5" />}
                 </button>
@@ -128,7 +133,7 @@ export function Lightbox({
                     type="button"
                     onClick={handleDownload}
                     className={`flex h-10 w-10 items-center justify-center rounded-full bg-(--bg-hover) text-(--fg-on-accent) hover:bg-(--bg-active) ${iconBtn}`}
-                    aria-label="Scarica"
+                    aria-label={t("overlays.lightbox.download")}
                 >
                     <Download className="h-5 w-5" />
                 </button>
@@ -136,7 +141,7 @@ export function Lightbox({
                     type="button"
                     onClick={handleShare}
                     className={`flex h-10 w-10 items-center justify-center rounded-full bg-(--bg-hover) text-(--fg-on-accent) hover:bg-(--bg-active) ${iconBtn}`}
-                    aria-label="Condividi"
+                    aria-label={t("overlays.lightbox.share")}
                 >
                     <Share2 className="h-5 w-5" />
                 </button>
@@ -147,7 +152,7 @@ export function Lightbox({
                     type="button"
                     onClick={onPrev}
                     className={`absolute top-1/2 left-4 z-10 flex h-12 w-12 -translate-y-1/2 items-center justify-center rounded-full bg-(--bg-hover) text-(--fg-on-accent) hover:bg-(--bg-active) ${iconBtn}`}
-                    aria-label="Precedente"
+                    aria-label={t("overlays.lightbox.previous")}
                 >
                     <ChevronLeft className="h-6 w-6" />
                 </button>
@@ -158,7 +163,7 @@ export function Lightbox({
                     type="button"
                     onClick={onNext}
                     className={`absolute top-1/2 right-4 z-10 flex h-12 w-12 -translate-y-1/2 items-center justify-center rounded-full bg-(--bg-hover) text-(--fg-on-accent) hover:bg-(--bg-active) ${iconBtn}`}
-                    aria-label="Successiva"
+                    aria-label={t("overlays.lightbox.next")}
                 >
                     <ChevronRight className="h-6 w-6" />
                 </button>

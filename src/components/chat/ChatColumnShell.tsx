@@ -18,6 +18,7 @@ import {
     ChevronUp,
     Info,
 } from "lucide-react";
+import { useTranslation } from "react-i18next";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
 import { cn, colorFromString, initials } from "@/lib/utils";
@@ -46,6 +47,7 @@ export function ChatColumnShell({
     onOpenContext,
     contextCollapsed,
 }: Props) {
+    const { t } = useTranslation();
     const conv = useConversation(conversationId);
 
     return (
@@ -57,7 +59,9 @@ export function ChatColumnShell({
                 showContextBtn={contextCollapsed}
             />
             <WindowBadgeBar conv={conv} />
-            {conv?.isBotActive && <BotBanner agentName={conv.botAgentName ?? "Agente"} />}
+            {conv?.isBotActive && (
+                <BotBanner agentName={conv.botAgentName ?? t("chat.bot.defaultAgent")} />
+            )}
             <PinnedMessagesBar />
             {conv?.linkedRecords && conv.linkedRecords.length > 0 && <RecordChipsBar conv={conv} />}
             <TeamPresenceBar />
@@ -82,6 +86,7 @@ function ChatHeader({
     onOpenContext?: () => void;
     showContextBtn?: boolean;
 }) {
+    const { t } = useTranslation();
     const name = conv?.name ?? "—";
     const phone = conv?.phone ?? "";
     return (
@@ -94,7 +99,7 @@ function ChatHeader({
                         "flex h-8 w-8 shrink-0 items-center justify-center rounded-full text-(--fg-secondary) hover:bg-(--bg-hover)",
                         iconBtn
                     )}
-                    aria-label="Indietro"
+                    aria-label={t("chat.header.back")}
                 >
                     <ArrowLeft className="h-4 w-4" />
                 </button>
@@ -106,7 +111,7 @@ function ChatHeader({
                     "flex min-w-0 flex-1 items-center gap-2.5 overflow-hidden rounded-lg text-left",
                     actionBtn
                 )}
-                aria-label={`Apri contesto di ${name}`}
+                aria-label={t("chat.header.openContext", { name })}
             >
                 <Avatar className="h-9 w-9 shrink-0">
                     <AvatarFallback
@@ -120,30 +125,30 @@ function ChatHeader({
                         {name}
                         {conv?.type === "group" && (
                             <span className="ml-1 text-[11px] font-normal text-(--fg-tertiary)">
-                                · {conv.groupParticipants} part.
+                                {t("chat.header.participants", { n: conv.groupParticipants })}
                             </span>
                         )}
                     </div>
                     <div className="truncate text-[11px] text-(--fg-tertiary)">
                         {conv?.typing === "text"
-                            ? "sta scrivendo…"
+                            ? t("chat.status.typing")
                             : conv?.typing === "audio"
-                              ? "sta registrando un audio…"
-                              : `online · ${phone}`}
+                              ? t("chat.status.recordingAudio")
+                              : t("chat.status.online", { phone })}
                     </div>
                 </div>
             </button>
             <div className="flex shrink-0 items-center gap-0.5">
-                <HeaderIcon label="Videochiamata">
+                <HeaderIcon label={t("chat.header.videoCall")}>
                     <Video className="h-4 w-4" />
                 </HeaderIcon>
-                <HeaderIcon label="Chiamata">
+                <HeaderIcon label={t("chat.header.call")}>
                     <Phone className="h-4 w-4" />
                 </HeaderIcon>
-                <HeaderIcon label="Cerca nella chat">
+                <HeaderIcon label={t("chat.header.searchInChat")}>
                     <Search className="h-4 w-4" />
                 </HeaderIcon>
-                <HeaderIcon label="Altre opzioni">
+                <HeaderIcon label={t("chat.header.moreOptions")}>
                     <MoreVertical className="h-4 w-4" />
                 </HeaderIcon>
                 {showContextBtn && (
@@ -154,7 +159,7 @@ function ChatHeader({
                             "flex h-8 w-8 items-center justify-center rounded-full text-(--accent) hover:bg-(--bg-hover)",
                             iconBtn
                         )}
-                        aria-label="Mostra pannello contesto"
+                        aria-label={t("chat.header.showContext")}
                     >
                         <Info className="h-4 w-4" />
                     </button>
@@ -178,6 +183,7 @@ function HeaderIcon({ children, label }: { children: React.ReactNode; label?: st
 
 /* ---------------- WINDOW BADGE BAR (D5) ---------------- */
 function WindowBadgeBar({ conv }: { conv: ReturnType<typeof useConversation> }) {
+    const { t } = useTranslation();
     return (
         <div className="flex shrink-0 flex-wrap items-center justify-center gap-2 border-b border-(--border-soft) bg-(--bg-panel) px-3 py-1.5">
             {conv?.windowClosed ? (
@@ -185,14 +191,14 @@ function WindowBadgeBar({ conv }: { conv: ReturnType<typeof useConversation> }) 
                     variant="outline"
                     className="gap-1 border-(--window-closed) text-(--window-closed)"
                 >
-                    <Clock className="h-3 w-3" /> Finestra chiusa · solo template
+                    <Clock className="h-3 w-3" /> {t("chat.window.closedTemplateOnly")}
                 </Badge>
             ) : (
                 <Badge
                     variant="outline"
                     className="gap-1 border-(--window-open) text-(--window-open)"
                 >
-                    <Clock className="h-3 w-3" /> Finestra · 5h 12m
+                    <Clock className="h-3 w-3" /> {t("chat.window.open")}
                 </Badge>
             )}
             <AssignmentWidget conv={conv} />
@@ -201,7 +207,7 @@ function WindowBadgeBar({ conv }: { conv: ReturnType<typeof useConversation> }) 
                     variant="outline"
                     className="gap-1 border-(--window-warning) text-(--window-warning)"
                 >
-                    Fuori orario
+                    {t("chat.window.outsideHours")}
                 </Badge>
             )}
         </div>
@@ -209,11 +215,13 @@ function WindowBadgeBar({ conv }: { conv: ReturnType<typeof useConversation> }) 
 }
 
 function AssignmentWidget({ conv }: { conv: ReturnType<typeof useConversation> }) {
+    const { t } = useTranslation();
     if (!conv) return null;
     if (conv.unassigned) {
         return (
             <Badge variant="outline" className="gap-1 border-(--unassigned) text-(--unassigned)">
-                <span className="h-1.5 w-1.5 rounded-full bg-(--unassigned)" /> Non assegnata
+                <span className="h-1.5 w-1.5 rounded-full bg-(--unassigned)" />{" "}
+                {t("chat.assignment.unassigned")}
             </Badge>
         );
     }
@@ -243,11 +251,12 @@ function AssignmentWidget({ conv }: { conv: ReturnType<typeof useConversation> }
 
 /* ---------------- BOT BANNER (Q5) ---------------- */
 function BotBanner({ agentName }: { agentName: string }) {
+    const { t } = useTranslation();
     return (
         <div className="flex shrink-0 items-center justify-between gap-2 bg-(--bg-bubble-bot) px-3 py-1.5 text-xs text-(--fg-primary)">
             <span className="flex items-center gap-1.5">
                 <Bot className="h-3.5 w-3.5 text-(--fg-link)" />
-                <strong>{agentName}</strong> sta gestendo questa conversazione
+                <strong>{agentName}</strong> {t("chat.bot.managing")}
             </span>
             <button
                 type="button"
@@ -256,7 +265,7 @@ function BotBanner({ agentName }: { agentName: string }) {
                     actionBtn
                 )}
             >
-                Intervieni
+                {t("chat.bot.takeOver")}
             </button>
         </div>
     );
@@ -264,14 +273,15 @@ function BotBanner({ agentName }: { agentName: string }) {
 
 /* ---------------- PINNED BAR (C) ---------------- */
 function PinnedMessagesBar() {
+    const { t } = useTranslation();
     return (
         <div className="flex shrink-0 items-center gap-2 border-b border-(--border-soft) bg-(--bg-panel) px-3 py-1.5 text-[11px] text-(--fg-secondary)">
             <Pin className="h-3 w-3 text-(--fg-tertiary)" />
-            <span className="truncate">1/2 — Promemoria appuntamento domani 16:00</span>
+            <span className="truncate">{t("chat.pinned.sample")}</span>
             <button
                 type="button"
                 className={cn("ml-auto flex items-center justify-center rounded-full", iconBtn)}
-                aria-label="Messaggio fissato successivo"
+                aria-label={t("chat.pinned.next")}
             >
                 <ChevronUp className="h-3 w-3" />
             </button>
@@ -281,9 +291,10 @@ function PinnedMessagesBar() {
 
 /* ---------------- RECORD CHIPS (Q7) ---------------- */
 function RecordChipsBar({ conv }: { conv: NonNullable<ReturnType<typeof useConversation>> }) {
+    const { t } = useTranslation();
     return (
         <div className="flex shrink-0 items-center gap-1.5 px-3 py-1 text-[10px] text-(--fg-secondary)">
-            <span className="opacity-60">Collegata:</span>
+            <span className="opacity-60">{t("chat.records.linked")}</span>
             {conv.linkedRecords?.map((r) => (
                 <span
                     key={`${r.kind}-${r.id}`}
@@ -300,6 +311,7 @@ function RecordChipsBar({ conv }: { conv: NonNullable<ReturnType<typeof useConve
 
 /* ---------------- TEAM PRESENCE (Q10) ---------------- */
 function TeamPresenceBar() {
+    const { t } = useTranslation();
     return (
         <div className="flex shrink-0 items-center gap-1.5 px-3 py-0.5 text-[10px] text-(--fg-tertiary)">
             <div className="flex -space-x-1">
@@ -318,19 +330,20 @@ function TeamPresenceBar() {
                     </AvatarFallback>
                 </Avatar>
             </div>
-            Laura sta scrivendo…
+            {t("chat.team.typing", { name: "Laura" })}
         </div>
     );
 }
 
 /* ---------------- COMPOSER (R5/E1-E11) ---------------- */
 function ComposerShell({ conv }: { conv: ReturnType<typeof useConversation> }) {
+    const { t } = useTranslation();
     const isWindowClosed = conv?.windowClosed;
     return (
         <div className="shrink-0 bg-(--bg-panel-2) px-3 py-2">
             {isWindowClosed && (
                 <div className="mb-1.5 flex items-center justify-between rounded-md bg-(--bg-bubble-error) px-2 py-1 text-[11px] text-(--status-failed)">
-                    <span>Finestra 24h chiusa · solo template</span>
+                    <span>{t("chat.composer.windowClosed")}</span>
                     <button
                         type="button"
                         className={cn(
@@ -338,29 +351,29 @@ function ComposerShell({ conv }: { conv: ReturnType<typeof useConversation> }) {
                             actionBtn
                         )}
                     >
-                        Invia template
+                        {t("chat.composer.sendTemplate")}
                     </button>
                 </div>
             )}
             <div className="flex items-end gap-1.5 rounded-lg bg-(--bg-panel) px-2 py-1.5 shadow-(--shadow-bubble)">
-                <ComposerIcon label="Emoji">
+                <ComposerIcon label={t("chat.composer.emoji")}>
                     <Smile className="h-5 w-5" />
                 </ComposerIcon>
-                <ComposerIcon label="Allegati">
+                <ComposerIcon label={t("chat.composer.attachments")}>
                     <Plus className="h-5 w-5" />
                 </ComposerIcon>
-                <ComposerIcon label="Template (E8)" highlight>
+                <ComposerIcon label={t("chat.composer.template")} highlight>
                     <FileText className="h-5 w-5" />
                 </ComposerIcon>
                 <textarea
                     rows={1}
-                    placeholder="Scrivi un messaggio"
+                    placeholder={t("chat.composer.placeholder")}
                     className={cn(
                         "max-h-24 min-w-0 flex-1 resize-none rounded-md bg-transparent px-1 py-1 text-sm text-(--fg-primary) placeholder:text-(--fg-tertiary) focus:outline-none",
                         focusRing
                     )}
                 />
-                <ComposerIcon label="Fotocamera">
+                <ComposerIcon label={t("chat.composer.camera")}>
                     <Camera className="h-5 w-5" />
                 </ComposerIcon>
                 <button
@@ -369,7 +382,7 @@ function ComposerShell({ conv }: { conv: ReturnType<typeof useConversation> }) {
                         "flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-(--accent) text-(--accent-fg) hover:scale-105",
                         actionBtn
                     )}
-                    aria-label="Invia messaggio"
+                    aria-label={t("chat.composer.send")}
                 >
                     <Send className="h-4 w-4" />
                 </button>
@@ -406,9 +419,10 @@ function ComposerIcon({
 }
 
 function ReadonlyComposerHint() {
+    const { t } = useTranslation();
     return (
         <div className="flex shrink-0 items-center justify-center gap-2 border-t border-(--border-strong) bg-(--bg-panel-2) px-3 py-2 text-xs text-(--fg-tertiary)">
-            <X className="h-3 w-3" /> Anteprima sola lettura · Quick Popover readonly
+            <X className="h-3 w-3" /> {t("chat.readonly.hint")}
         </div>
     );
 }

@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { X, Search, UserPlus, Trash2, Forward, Check, AlertTriangle } from "lucide-react";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { cn, colorFromString, initials } from "@/lib/utils";
@@ -29,6 +30,7 @@ export function ChatOverlays({
     onConfirmNewChat: (phoneOrContactId: string) => void;
     onConfirmForward: (messageId: string, targetIds: string[]) => void;
 }) {
+    const { t } = useTranslation();
     const dialogRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
@@ -69,7 +71,7 @@ export function ChatOverlays({
             <button
                 type="button"
                 onClick={onClose}
-                aria-label="Chiudi modale"
+                aria-label={t("overlays.common.closeModal")}
                 className="absolute inset-0 cursor-pointer border-0 bg-(--scrim) p-0"
             />
             <div
@@ -108,6 +110,7 @@ export function ChatOverlays({
 }
 
 function ModalHeader({ title, onClose }: { title: string; onClose: () => void }) {
+    const { t } = useTranslation();
     return (
         <header className="flex items-center justify-between border-b border-(--border-strong) px-4 py-3">
             <h3 id={TITLE_ID} className="text-sm font-semibold text-(--fg-primary)">
@@ -116,7 +119,7 @@ function ModalHeader({ title, onClose }: { title: string; onClose: () => void })
             <button
                 type="button"
                 onClick={onClose}
-                aria-label="Chiudi"
+                aria-label={t("overlays.common.close")}
                 className={cn(
                     "flex h-7 w-7 items-center justify-center rounded-full text-(--fg-secondary) hover:bg-(--bg-hover)",
                     iconBtn
@@ -143,6 +146,7 @@ function NewChatModal({
     onClose: () => void;
     onConfirm: (id: string) => void;
 }) {
+    const { t } = useTranslation();
     const [query, setQuery] = useState("");
     const [phone, setPhone] = useState("");
     const [showPhone, setShowPhone] = useState(false);
@@ -153,7 +157,7 @@ function NewChatModal({
 
     return (
         <>
-            <ModalHeader title="Nuova chat" onClose={onClose} />
+            <ModalHeader title={t("overlays.newChat.title")} onClose={onClose} />
             <div className="p-4">
                 <div className="mb-3 flex items-center gap-2 rounded-lg bg-(--bg-panel-2) px-3 py-2">
                     <Search className="h-3.5 w-3.5 text-(--fg-tertiary)" />
@@ -161,7 +165,7 @@ function NewChatModal({
                         type="text"
                         value={query}
                         onChange={(e) => setQuery(e.target.value)}
-                        placeholder="Cerca contatto o numero"
+                        placeholder={t("overlays.newChat.searchPlaceholder")}
                         className={cn("flex-1 rounded bg-transparent text-sm", focusRing)}
                     />
                 </div>
@@ -177,7 +181,9 @@ function NewChatModal({
                     <div className="flex h-10 w-10 items-center justify-center rounded-full bg-(--accent-soft) text-(--accent)">
                         <UserPlus className="h-5 w-5" />
                     </div>
-                    <span className="text-sm font-medium text-(--accent)">Nuovo numero</span>
+                    <span className="text-sm font-medium text-(--accent)">
+                        {t("overlays.newChat.newNumber")}
+                    </span>
                 </button>
 
                 {showPhone && (
@@ -186,7 +192,7 @@ function NewChatModal({
                             htmlFor="new-chat-phone"
                             className="mb-1 block text-[10px] tracking-wide text-(--fg-tertiary) uppercase"
                         >
-                            Numero E.164
+                            {t("overlays.newChat.e164Label")}
                         </label>
                         <input
                             id="new-chat-phone"
@@ -212,12 +218,12 @@ function NewChatModal({
                             >
                                 {isValid ? (
                                     <span className="flex items-center gap-1">
-                                        <Check className="h-3 w-3" /> Valido
+                                        <Check className="h-3 w-3" /> {t("overlays.newChat.valid")}
                                     </span>
                                 ) : phone ? (
-                                    "Formato non valido"
+                                    t("overlays.newChat.invalidFormat")
                                 ) : (
-                                    "Formato internazionale"
+                                    t("overlays.newChat.internationalFormat")
                                 )}
                             </span>
                             <button
@@ -232,7 +238,7 @@ function NewChatModal({
                                         : "cursor-not-allowed bg-(--bg-panel-2) text-(--fg-tertiary)"
                                 )}
                             >
-                                Avvia
+                                {t("overlays.newChat.start")}
                             </button>
                         </div>
                     </div>
@@ -279,22 +285,20 @@ function DeleteChatModal({
     onClose: () => void;
     onConfirm: () => void;
 }) {
+    const { t } = useTranslation();
     return (
         <>
-            <ModalHeader title="Elimina conversazione" onClose={onClose} />
+            <ModalHeader title={t("overlays.delete.title")} onClose={onClose} />
             <div className="p-6 text-center">
                 <div className="mx-auto mb-3 flex h-12 w-12 items-center justify-center rounded-full bg-(--bg-bubble-error)">
                     <Trash2 className="h-6 w-6 text-(--status-failed)" />
                 </div>
                 <p className="mb-1 text-sm font-medium text-(--fg-primary)">
-                    Eliminare la chat con {convName}?
+                    {t("overlays.delete.confirm", { name: convName })}
                 </p>
                 <div className="mb-4 flex items-start gap-1.5 rounded-md bg-(--bg-bubble-system) px-3 py-2 text-left text-[11px] text-(--fg-secondary)">
                     <AlertTriangle className="mt-0.5 h-3 w-3 shrink-0 text-(--fg-warning)" />
-                    <span>
-                        Solo eliminazione locale. WhatsApp non supporta la cancellazione remota
-                        delle conversazioni.
-                    </span>
+                    <span>{t("overlays.delete.warning")}</span>
                 </div>
                 <div className="flex gap-2">
                     <button
@@ -305,7 +309,7 @@ function DeleteChatModal({
                             actionBtn
                         )}
                     >
-                        Annulla
+                        {t("overlays.delete.cancel")}
                     </button>
                     <button
                         type="button"
@@ -315,7 +319,7 @@ function DeleteChatModal({
                             actionBtn
                         )}
                     >
-                        Elimina
+                        {t("overlays.delete.confirmButton")}
                     </button>
                 </div>
             </div>
@@ -332,6 +336,7 @@ function ForwardModal({
     onClose: () => void;
     onConfirm: (targetIds: string[]) => void;
 }) {
+    const { t } = useTranslation();
     const MAX = 5;
     const { items: conversations } = useConversations();
     const [selected, setSelected] = useState<Set<string>>(new Set());
@@ -352,7 +357,10 @@ function ForwardModal({
 
     return (
         <>
-            <ModalHeader title={`Inoltra (${selected.size}/${MAX})`} onClose={onClose} />
+            <ModalHeader
+                title={t("overlays.forward.title", { selected: selected.size, max: MAX })}
+                onClose={onClose}
+            />
             <div className="p-4">
                 <div className="mb-2 rounded-md bg-(--bg-panel-2) px-2 py-1.5 text-[11px] text-(--fg-secondary) italic">
                     <Forward className="mr-1 inline h-3 w-3" /> "{excerpt.slice(0, 60)}
@@ -364,7 +372,7 @@ function ForwardModal({
                         type="text"
                         value={query}
                         onChange={(e) => setQuery(e.target.value)}
-                        placeholder="Cerca chat o contatto"
+                        placeholder={t("overlays.forward.searchPlaceholder")}
                         className={cn("flex-1 rounded bg-transparent text-sm", focusRing)}
                     />
                 </div>
@@ -422,8 +430,9 @@ function ForwardModal({
                     )}
                 >
                     <Forward className="h-4 w-4" />
-                    Inoltra a {selected.size > 0 ? selected.size : "…"}{" "}
-                    {selected.size === 1 ? "chat" : "chat"}
+                    {selected.size > 0
+                        ? t("overlays.forward.send", { count: selected.size })
+                        : t("overlays.forward.sendEmpty")}
                 </button>
             </div>
         </>

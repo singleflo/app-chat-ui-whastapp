@@ -13,6 +13,7 @@ import {
     Star,
 } from "lucide-react";
 import { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 import {
     DesktopSurface,
     MobileSurface,
@@ -29,25 +30,28 @@ import { SettingsScreen } from "./routes/SettingsScreen";
 import { RtlScreen } from "./routes/RtlScreen";
 import { cn } from "./lib/utils";
 
+import { LanguageSwitcher } from "./components/LanguageSwitcher";
+
 const SURFACES = [
-    { to: "/", label: "Indice", icon: MessageSquare, end: true },
-    { to: "/desktop", label: "Desktop", icon: Monitor, end: false },
-    { to: "/mobile", label: "Mobile", icon: Smartphone, end: false },
-    { to: "/side-panel", label: "Side", icon: PanelRight, end: false },
-    { to: "/quick-popover", label: "Popover", icon: MessageSquare, end: false },
+    { to: "/", label: "nav.index", icon: MessageSquare, end: true },
+    { to: "/desktop", label: "nav.desktop", icon: Monitor, end: false },
+    { to: "/mobile", label: "nav.mobile", icon: Smartphone, end: false },
+    { to: "/side-panel", label: "nav.side", icon: PanelRight, end: false },
+    { to: "/quick-popover", label: "nav.popover", icon: MessageSquare, end: false },
 ] as const;
 
 const SCREENS = [
-    { to: "/composer-states", label: "Composer", icon: Edit3 },
-    { to: "/calls", label: "Chiamate", icon: Phone },
-    { to: "/search", label: "Ricerca", icon: Search },
-    { to: "/new-chat", label: "Nuova", icon: MessageSquare },
-    { to: "/starred", label: "Importanti", icon: Star },
-    { to: "/settings", label: "Impostazioni", icon: Settings },
-    { to: "/rtl", label: "RTL", icon: Languages },
+    { to: "/composer-states", label: "nav.composer", icon: Edit3 },
+    { to: "/calls", label: "nav.calls", icon: Phone },
+    { to: "/search", label: "nav.search", icon: Search },
+    { to: "/new-chat", label: "nav.newChat", icon: MessageSquare },
+    { to: "/starred", label: "nav.starred", icon: Star },
+    { to: "/settings", label: "nav.settings", icon: Settings },
+    { to: "/rtl", label: "nav.rtl", icon: Languages },
 ] as const;
 
 export function App() {
+    const { t } = useTranslation();
     const [theme, setTheme] = useState<"light" | "dark">(() => {
         const stored = localStorage.getItem("wa-theme");
         if (stored === "light" || stored === "dark") return stored;
@@ -87,7 +91,7 @@ export function App() {
                             }
                         >
                             <s.icon className="h-3.5 w-3.5" />
-                            <span className="hidden md:inline">{s.label}</span>
+                            <span className="hidden md:inline">{t(s.label)}</span>
                         </NavLink>
                     ))}
                     <span className="mx-1 h-4 w-px bg-(--border-strong)" />
@@ -105,19 +109,22 @@ export function App() {
                             }
                         >
                             <s.icon className="h-3.5 w-3.5" />
-                            <span className="hidden lg:inline">{s.label}</span>
+                            <span className="hidden lg:inline">{t(s.label)}</span>
                         </NavLink>
                     ))}
                 </nav>
+                <LanguageSwitcher />
                 <button
                     type="button"
                     onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-                    title={`Passa al tema ${theme === "dark" ? "chiaro" : "scuro"}`}
+                    title={theme === "dark" ? t("app.switchToLight") : t("app.switchToDark")}
                     className="flex cursor-pointer items-center gap-1.5 rounded-md px-2.5 py-1.5 text-xs font-medium text-(--fg-secondary) transition-all duration-200 ease-out hover:bg-(--bg-hover) hover:text-(--fg-primary) focus-visible:ring-2 focus-visible:ring-(--ring) focus-visible:ring-offset-2 focus-visible:ring-offset-(--bg-panel) focus-visible:outline-none active:scale-95"
-                    aria-label="Cambia tema"
+                    aria-label={t("app.toggleTheme")}
                 >
                     <Palette className="h-3.5 w-3.5" />
-                    <span className="hidden sm:inline">{theme === "dark" ? "Light" : "Dark"}</span>
+                    <span className="hidden sm:inline">
+                        {theme === "dark" ? t("app.light") : t("app.dark")}
+                    </span>
                 </button>
             </header>
 

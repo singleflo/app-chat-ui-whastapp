@@ -1,0 +1,88 @@
+{
+    "composer": {
+        "title": "المحرر · جميع الحالات",
+        "subtitle": "المواصفة R5 / القسم E (E1–E11). تعرض كل بطاقة حالة من حالات المحرر.",
+        "placeholder": "اكتب رسالة",
+        "states": {
+            "defaultLabel": "E1 · افتراضي",
+            "defaultSpec": "منطقة نص تتوسع تلقائيًا، Enter=إرسال، Shift+Enter=سطر جديد",
+            "replyLabel": "E6 · شريط الرد",
+            "replySpec": "معاينة الاقتباس + X للإغلاق",
+            "blockedLabel": "E10 · نافذة 24 ساعة محظورة",
+            "blockedSpec": "الإدخال معطّل + زر إرسال قالب",
+            "recordingLabel": "E5 · تسجيل صوتي",
+            "recordingSpec": "مؤقّت + موجة صوتية مباشرة + سحب للإلغاء + قفل بدون استخدام اليدين",
+            "noteLabel": "E9 · تبويب الملاحظة الداخلية (Q9)",
+            "noteSpec": "تبديل رسالة/ملاحظة، خلفية صفراء",
+            "attachmentsLabel": "E3 · قائمة المرفقات مفتوحة",
+            "attachmentsSpec": "شبكة ورقة سفلية: صورة/فيديو، كاميرا، مستند، جهة اتصال، موقع",
+            "emojiLabel": "E2 · منتقي الرموز التعبيرية",
+            "emojiSpec": "بحث، فئات، منتقي لون البشرة، الأخيرة",
+            "cannedLabel": "E7 · الردود السريعة (/)",
+            "cannedSpec": "نافذة منبثقة مع بحث تقريبي في العنوان/المحتوى + متغيّرات",
+            "offlineLabel": "E10 · غير متصل",
+            "offlineSpec": "قائمة انتظار مرئية: رسائل بانتظار الاتصال",
+            "iceBreakersLabel": "E10 · كاسرات الجمود",
+            "iceBreakersSpec": "رقائق على محادثة جديدة/فارغة"
+        },
+        "actions": {
+            "emoji": "رموز تعبيرية",
+            "attach": "إرفاق",
+            "camera": "كاميرا",
+            "recordAudio": "تسجيل صوت",
+            "send": "إرسال",
+            "closeReply": "إغلاق الرد",
+            "cancel": "إلغاء",
+            "closeAttachments": "إغلاق المرفقات",
+            "commands": "أوامر"
+        },
+        "blocked": {
+            "status": "نافذة الـ24 ساعة مغلقة · القوالب فقط",
+            "sendTemplate": "إرسال قالب",
+            "locked": "المحرر مقفل"
+        },
+        "recording": {
+            "slideToCancel": "← اسحب للإلغاء",
+            "lock": "قفل"
+        },
+        "note": {
+            "tabMessage": "رسالة",
+            "tabNote": "📝 ملاحظة داخلية",
+            "placeholder": "اكتب ملاحظة داخلية (مرئية للفريق فقط)…",
+            "disclaimer": "لا تُرسل أبدًا إلى واتساب · مرئية للفريق فقط"
+        },
+        "attachments": {
+            "photoVideo": "صورة وفيديو",
+            "camera": "كاميرا",
+            "document": "مستند",
+            "contact": "جهة اتصال",
+            "location": "موقع",
+            "locationRequest": "طلب موقع"
+        },
+        "emoji": {
+            "searchPlaceholder": "ابحث عن رمز تعبيري",
+            "recent": "😀 الأخيرة",
+            "ariaRecent": "الرموز التعبيرية الأخيرة",
+            "categorySmileys": "الوجوه",
+            "categoryAnimals": "الحيوانات",
+            "categoryFood": "الطعام",
+            "categorySport": "الرياضة",
+            "categoryObjects": "الأشياء",
+            "ariaEmoji": "رمز تعبيري {{emoji}}"
+        },
+        "canned": {
+            "title": "الردود السريعة"
+        },
+        "offline": {
+            "queued_one": "{{count}} رسالة في قائمة الانتظار · بانتظار الاتصال ⏱",
+            "queued_other": "{{count}} رسائل في قائمة الانتظار · بانتظار الاتصال ⏱"
+        },
+        "iceBreakers": {
+            "catalog": "🛒 عرض الكتالوج",
+            "appointment": "📅 حجز موعد",
+            "operator": "💬 التحدث إلى موظف",
+            "location": "📍 أين نحن",
+            "faq": "❓ الأسئلة الشائعة"
+        }
+    }
+}

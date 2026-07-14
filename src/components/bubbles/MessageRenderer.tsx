@@ -1,3 +1,4 @@
+import { useTranslation } from "react-i18next";
 import type { ChatEntry, Message } from "@/types/chat";
 import { isMessage } from "@/types/chat";
 import { cn } from "@/lib/utils";
@@ -52,6 +53,7 @@ export function ChatEntryRenderer({ entry }: { entry: ChatEntry }) {
 }
 
 export function MessageRenderer({ message }: { message: Message }) {
+    const { t } = useTranslation();
     const { content, direction, quoted, forwarded, frequentlyForwarded, reactions, ts, ack } =
         message;
     const hasReactions = !!reactions && reactions.length > 0;
@@ -60,7 +62,12 @@ export function MessageRenderer({ message }: { message: Message }) {
     let sender = message.sender;
     if (!sender) {
         if (content.kind === "fallback" || content.kind === "error") {
-            sender = { kind: "system", id: "system", name: "Sistema", color: "var(--fg-tertiary)" };
+            sender = {
+                kind: "system",
+                id: "system",
+                name: t("bubble.sender.system"),
+                color: "var(--fg-tertiary)",
+            };
         } else if (message.echo) {
             sender = { kind: "api", id: "api", name: "API", color: "var(--fg-tertiary)" };
         }

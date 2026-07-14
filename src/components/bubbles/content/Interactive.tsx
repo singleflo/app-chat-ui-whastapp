@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 import {
     List,
     ChevronDown,
@@ -30,11 +31,12 @@ export function ButtonsContent({
     buttons: { id: string; title: string }[];
     reply?: { id: string; title: string };
 }) {
+    const { t } = useTranslation();
     if (reply) {
         return (
             <div className="flex w-[220px] max-w-full flex-col gap-1">
                 <div className="text-[10px] tracking-wide text-(--fg-tertiary) uppercase">
-                    Risposta
+                    {t("bubble.interactive.reply")}
                 </div>
                 <div className="text-[14px] font-medium">{reply.title}</div>
             </div>
@@ -79,12 +81,13 @@ export function ListContent({
     sections: { title: string; rows: { id: string; title: string; description?: string }[] }[];
     reply?: { id: string; title: string; description?: string };
 }) {
+    const { t } = useTranslation();
     const [open, setOpen] = useState(false);
     if (reply) {
         return (
             <div className="flex w-[220px] max-w-full flex-col gap-0.5">
                 <div className="text-[10px] tracking-wide text-(--fg-tertiary) uppercase">
-                    Scelta
+                    {t("bubble.interactive.choice")}
                 </div>
                 <div className="text-[14px] font-medium">{reply.title}</div>
                 {reply.description && (
@@ -183,12 +186,13 @@ export function FlowContent({
     flowName: string;
     reply?: { flowName: string; responseJson: Record<string, unknown> };
 }) {
+    const { t } = useTranslation();
     const [showJson, setShowJson] = useState(false);
     if (reply) {
         return (
             <div className="flex w-[240px] max-w-full flex-col gap-1.5">
                 <div className="flex items-center gap-1.5 text-[13px] font-semibold text-(--accent)">
-                    <CheckCheck className="h-4 w-4" /> Modulo completato
+                    <CheckCheck className="h-4 w-4" /> {t("bubble.interactive.flowCompleted")}
                 </div>
                 <div className="text-[11px] text-(--fg-tertiary)">Flow: {reply.flowName}</div>
                 <dl className="grid grid-cols-2 gap-x-2 gap-y-0.5 text-[11px]">
@@ -204,7 +208,7 @@ export function FlowContent({
                     onClick={() => setShowJson(!showJson)}
                     className="cursor-pointer rounded text-left text-[10px] text-(--fg-link) transition-all duration-200 ease-out focus-visible:ring-2 focus-visible:ring-(--ring) focus-visible:ring-offset-2 focus-visible:ring-offset-(--bg-panel) focus-visible:outline-none active:scale-95"
                 >
-                    {showJson ? "Nascondi dettagli" : "Vedi dettagli"}
+                    {showJson ? t("bubble.interactive.hideDetails") : t("bubble.interactive.showDetails")}
                 </button>
                 {showJson && (
                     <pre className="overflow-x-auto rounded bg-black/10 p-1.5 font-mono text-[10px]">
@@ -232,22 +236,27 @@ export function FlowContent({
 
 /* ============ B11 — Call permission request ============ */
 export function CallPermissionContent({ state }: { state: "pending" | "accepted" | "rejected" }) {
+    const { t } = useTranslation();
     return (
         <div className="flex w-[220px] max-w-full flex-col gap-1.5">
             <div className="flex items-center gap-1.5 text-[13px]">
                 <PhoneCall className="h-4 w-4 text-(--accent)" />
-                Richiesta di chiamata
+                {t("bubble.interactive.callRequest")}
             </div>
             {state === "pending" && (
                 <div className="text-[11px] text-(--fg-tertiary)">
-                    In attesa di autorizzazione (1/24h, 2/7gg)
+                    {t("bubble.interactive.callPending")}
                 </div>
             )}
             {state === "accepted" && (
-                <div className="text-[11px] text-(--accent)">✓ Autorizzata</div>
+                <div className="text-[11px] text-(--accent)">
+                    ✓ {t("bubble.interactive.callAccepted")}
+                </div>
             )}
             {state === "rejected" && (
-                <div className="text-[11px] text-(--status-failed)">✗ Rifiutata</div>
+                <div className="text-[11px] text-(--status-failed)">
+                    ✗ {t("bubble.interactive.callRejected")}
+                </div>
             )}
         </div>
     );

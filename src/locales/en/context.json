@@ -1,0 +1,49 @@
+{
+    "context": {
+        "header": {
+            "title": "Customer context",
+            "back": "Back",
+            "editContact": "Edit contact",
+            "collapse": "Collapse panel"
+        },
+        "profile": {
+            "title": "Profile",
+            "whatsappVerified": "✓ WhatsApp verified"
+        },
+        "customFields": {
+            "title": "Custom fields",
+            "showMore": "Show more ({{n}})"
+        },
+        "automations": {
+            "title": "Latest automations",
+            "empty": "No automation executed"
+        },
+        "linkedRecords": {
+            "title": "Linked records"
+        },
+        "activity": {
+            "title": "Activity ({{n}})",
+            "system": "System",
+            "assigned": "assigned to {{target}}",
+            "unassigned": "released the chat",
+            "autoAssigned": "auto-assigned the chat",
+            "autoUnassigned": "auto-released the chat",
+            "reassignedTimeout": "reassigned due to timeout",
+            "stateClosed": "closed the conversation",
+            "stateReopened": "reopened the conversation",
+            "stateReopenedAuto": "reopened automatically (new inbound)",
+            "offhoursReply": "replied off-hours",
+            "queuedSent": "queued message sent",
+            "outboundSent": "sent a message",
+            "botTakeover": "took over from the agent",
+            "botHandoff": "the agent handed off to an operator"
+        },
+        "gallery": {
+            "title": "Shared gallery",
+            "media": "Media ({{n}})",
+            "links": "Links ({{n}})",
+            "documents": "Documents ({{n}})",
+            "seeStarred": "See starred"
+        }
+    }
+}

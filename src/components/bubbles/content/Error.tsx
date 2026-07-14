@@ -1,18 +1,22 @@
 import { AlertTriangle, RefreshCw, FileText } from "lucide-react";
+import { useTranslation } from "react-i18next";
 import type { Message } from "@/types/chat";
 
 export function ErrorContent({ message }: { message: Message }) {
+    const { t } = useTranslation();
     const content = message.content;
     if (content.kind !== "error") return null;
     return (
         <div className="flex w-[240px] max-w-full flex-col gap-1.5 rounded-md bg-(--bg-bubble-error) p-2">
             <div className="flex items-center gap-1.5 text-[12px] font-semibold text-(--status-failed)">
-                <AlertTriangle className="h-4 w-4" /> Errore {content.code}
+                <AlertTriangle className="h-4 w-4" /> {t("bubble.error.title", {
+                    code: content.code,
+                })}
             </div>
             <div className="text-[12px] text-(--fg-primary)">{content.title}</div>
             {content.details && (
                 <details className="text-[11px] text-(--fg-secondary)">
-                    <summary className="cursor-pointer">Dettagli tecnici</summary>
+                    <summary className="cursor-pointer">{t("bubble.error.detailsTitle")}</summary>
                     <pre className="mt-1 rounded bg-black/10 p-1.5 font-mono text-[10px] whitespace-pre-wrap">
                         {content.details}
                     </pre>

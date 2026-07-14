@@ -1,0 +1,56 @@
+{
+    "settings": {
+        "title": "Settings",
+        "back": "Back",
+        "edit": "Edit",
+        "groups": {
+            "appearance": "Appearance",
+            "notifications": "Notifications",
+            "privacy": "Privacy",
+            "language": "Language",
+            "cannedReplies": "Quick replies",
+            "labels": "Labels",
+            "advanced": "Advanced"
+        },
+        "appearance": {
+            "chatWallpaper": "Chat wallpaper",
+            "chatWallpaperValue": "Doodle pattern"
+        },
+        "theme": {
+            "label": "Theme",
+            "light": "Light",
+            "dark": "Dark",
+            "auto": "Auto"
+        },
+        "density": {
+            "label": "Density",
+            "comfortable": "Comfortable",
+            "compact": "Compact"
+        },
+        "fontSize": {
+            "label": "Message font size",
+            "small": "S",
+            "medium": "M",
+            "large": "L"
+        },
+        "notifications": {
+            "desktop": "Desktop notifications",
+            "sound": "New message sound",
+            "previews": "Content previews",
+            "dnd": "Do not disturb mode"
+        },
+        "privacy": {
+            "readReceipts": "Send read receipts",
+            "enterToSend": "Send with Enter key"
+        },
+        "language": {
+            "label": "Interface language"
+        },
+        "advanced": {
+            "debugMode": "Debug mode (raw payload)",
+            "autoDownload": "Auto-download media",
+            "exportChat": "Export conversation",
+            "exportChatValue": "Only if host enables"
+        }
+    }
+}
