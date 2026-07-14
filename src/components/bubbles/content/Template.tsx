@@ -23,21 +23,24 @@ export function TemplateContent({ template }: { template: TemplateContentPayload
     };
 
     return (
-        <div className="relative flex w-[280px] max-w-full max-w-[340px] flex-col gap-1.5">
+        <div className="relative flex w-[280px] max-w-[340px] max-w-full flex-col gap-1.5">
             <TemplateBadge name={template.name} language={template.language} />
 
             {template.header?.image && (
-                <MediaPlaceholder url={template.header.image} className="aspect-video w-full rounded-md" />
+                <MediaPlaceholder
+                    url={template.header.image}
+                    className="aspect-video w-full rounded-md"
+                />
             )}
             {template.header?.text && (
                 <div className="flex items-center gap-1.5 text-[14px] font-semibold">
-                    {lto && <Gift className="h-4 w-4 text-[var(--fg-warning)]" />}
+                    {lto && <Gift className="h-4 w-4 text-(--fg-warning)" />}
                     {template.header.text}
                 </div>
             )}
 
             {otp && (
-                <div className="rounded-md bg-[var(--bg-panel-2)] py-1.5 text-center font-mono text-2xl tracking-widest text-[var(--accent)]">
+                <div className="rounded-md bg-(--bg-panel-2) py-1.5 text-center font-mono text-2xl tracking-widest text-(--accent)">
                     {otp.code}
                 </div>
             )}
@@ -48,22 +51,28 @@ export function TemplateContent({ template }: { template: TemplateContentPayload
             )}
 
             {template.footer && (
-                <div className="text-[10px] text-[var(--fg-tertiary)]">{template.footer}</div>
+                <div className="text-[10px] text-(--fg-tertiary)">{template.footer}</div>
             )}
 
             {lto && (
-                <LtoBanner code={lto.code} expiresAt={lto.expiresAt} expired={lto.expired} onCopy={handleCopyCode} copied={copied} />
+                <LtoBanner
+                    code={lto.code}
+                    expiresAt={lto.expiresAt}
+                    expired={lto.expired}
+                    onCopy={handleCopyCode}
+                    copied={copied}
+                />
             )}
 
             {template.buttons && template.buttons.length > 0 && (
-                <div className="mt-1 flex flex-col divide-y divide-[var(--border-strong)] border-t border-[var(--border-strong)]">
+                <div className="mt-1 flex flex-col divide-y divide-(--border-strong) border-t border-(--border-strong)">
                     {template.buttons.slice(0, 3).map((b) => (
                         <TemplateButtonRow key={`tb-${b.kind}-${b.title}`} button={b} />
                     ))}
                     {template.buttons.length > 3 && (
                         <button
                             type="button"
-                            className="cursor-pointer rounded-md py-1.5 text-[12px] font-medium text-[var(--accent)] transition-all duration-200 ease-[cubic-bezier(0.16,1,0.3,1)] hover:bg-[var(--bg-hover)] active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ring)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--bg-panel)]"
+                            className="cursor-pointer rounded-md py-1.5 text-[12px] font-medium text-(--accent) transition-all duration-200 ease-[cubic-bezier(0.16,1,0.3,1)] hover:bg-(--bg-hover) focus-visible:ring-2 focus-visible:ring-(--ring) focus-visible:ring-offset-2 focus-visible:ring-offset-(--bg-panel) focus-visible:outline-none active:scale-95"
                         >
                             Vedi tutte le opzioni ({template.buttons.length})
                         </button>
@@ -76,8 +85,8 @@ export function TemplateContent({ template }: { template: TemplateContentPayload
 
 function TemplateBadge({ name, language }: { name: string; language: string }) {
     return (
-        <div className="flex items-center gap-1 text-[10px] text-[var(--fg-tertiary)]">
-            <span className="rounded bg-[var(--bg-panel-2)] px-1 py-0.5">
+        <div className="flex items-center gap-1 text-[10px] text-(--fg-tertiary)">
+            <span className="rounded bg-(--bg-panel-2) px-1 py-0.5">
                 Template · {name} · {language}
             </span>
         </div>
@@ -99,18 +108,22 @@ function LtoBanner({
 }) {
     const remaining = useCountdown(expiresAt);
     if (expired) {
-        return <div className="rounded-md bg-[var(--bg-bubble-error)] px-2 py-1 text-[11px] text-[var(--status-failed)]">Offerta scaduta</div>;
+        return (
+            <div className="rounded-md bg-(--bg-bubble-error) px-2 py-1 text-[11px] text-(--status-failed)">
+                Offerta scaduta
+            </div>
+        );
     }
     return (
-        <div className="flex items-center justify-between gap-2 rounded-md bg-[var(--bg-bubble-automation)] px-2 py-1">
+        <div className="flex items-center justify-between gap-2 rounded-md bg-(--bg-bubble-automation) px-2 py-1">
             <div className="text-[11px]">
-                <div className="font-semibold text-[var(--fg-warning)]">⏰ Scade tra</div>
+                <div className="font-semibold text-(--fg-warning)">⏰ Scade tra</div>
                 <div className="font-mono tabular-nums">{formatRemaining(remaining)}</div>
             </div>
             <button
                 type="button"
                 onClick={() => onCopy(code)}
-                className="flex cursor-pointer items-center gap-1 rounded border border-[var(--border-strong)] px-2 py-0.5 text-[11px] font-medium transition-all duration-200 ease-[cubic-bezier(0.16,1,0.3,1)] hover:bg-[var(--bg-hover)] active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ring)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--bg-panel)]"
+                className="flex cursor-pointer items-center gap-1 rounded border border-(--border-strong) px-2 py-0.5 text-[11px] font-medium transition-all duration-200 ease-[cubic-bezier(0.16,1,0.3,1)] hover:bg-(--bg-hover) focus-visible:ring-2 focus-visible:ring-(--ring) focus-visible:ring-offset-2 focus-visible:ring-offset-(--bg-panel) focus-visible:outline-none active:scale-95"
             >
                 {copied ? <Check className="h-3 w-3" /> : <Copy className="h-3 w-3" />}
                 {code}

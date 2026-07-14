@@ -1,7 +1,5 @@
 import { useState, useRef, useEffect } from "react";
-import {
-    Reply, Smile, Forward, Copy, Star, Trash2, Info, ChevronDown,
-} from "lucide-react";
+import { Reply, Smile, Forward, Copy, Star, Trash2, Info, ChevronDown } from "lucide-react";
 import type { Message } from "@/types/chat";
 import { cn } from "@/lib/utils";
 
@@ -42,18 +40,18 @@ export function MessageContextMenu({ message }: { message: Message }) {
                     e.stopPropagation();
                     setOpen(true);
                 }}
-                className="absolute right-1 top-1 hidden h-5 w-5 items-center justify-center rounded-full bg-[var(--bg-panel)] opacity-0 shadow group-hover:flex group-hover:opacity-100 transition-opacity"
+                className="absolute top-1 right-1 hidden h-5 w-5 items-center justify-center rounded-full bg-(--bg-panel) opacity-0 shadow transition-opacity group-hover:flex group-hover:opacity-100"
                 aria-label="Azioni messaggio"
             >
-                <ChevronDown className="h-3 w-3 text-[var(--fg-secondary)]" />
+                <ChevronDown className="h-3 w-3 text-(--fg-secondary)" />
             </button>
         );
     }
 
     return (
-        <div ref={ref} className="absolute right-1 top-1 z-30">
+        <div ref={ref} className="absolute top-1 right-1 z-30">
             {showReactionBar ? (
-                <div className="flex items-center gap-0.5 rounded-full border border-[var(--border-strong)] bg-[var(--bg-panel)] px-1.5 py-1 shadow-[var(--shadow-overlay)]">
+                <div className="flex items-center gap-0.5 rounded-full border border-(--border-strong) bg-(--bg-panel) px-1.5 py-1 shadow-(--shadow-overlay)">
                     {QUICK_REACTIONS.map((emoji) => (
                         <button
                             key={emoji}
@@ -62,7 +60,7 @@ export function MessageContextMenu({ message }: { message: Message }) {
                                 setShowReactionBar(false);
                                 setOpen(false);
                             }}
-                            className="rounded-full p-1 text-lg hover:scale-125 hover:bg-[var(--bg-hover)] transition-transform"
+                            className="rounded-full p-1 text-lg transition-transform hover:scale-125 hover:bg-(--bg-hover)"
                         >
                             {emoji}
                         </button>
@@ -70,13 +68,13 @@ export function MessageContextMenu({ message }: { message: Message }) {
                     <button
                         type="button"
                         onClick={() => setShowReactionBar(false)}
-                        className="ml-1 rounded-full p-1 text-[var(--fg-tertiary)] hover:bg-[var(--bg-hover)]"
+                        className="ml-1 rounded-full p-1 text-(--fg-tertiary) hover:bg-(--bg-hover)"
                     >
                         +
                     </button>
                 </div>
             ) : (
-                <div className="w-44 overflow-hidden rounded-lg border border-[var(--border-strong)] bg-[var(--bg-panel)] py-0.5 shadow-[var(--shadow-overlay)]">
+                <div className="w-44 overflow-hidden rounded-lg border border-(--border-strong) bg-(--bg-panel) py-0.5 shadow-(--shadow-overlay)">
                     <MenuItem icon={Reply} label="Rispondi" onClick={() => setOpen(false)} />
                     <MenuItem
                         icon={Smile}
@@ -85,11 +83,19 @@ export function MessageContextMenu({ message }: { message: Message }) {
                     />
                     <MenuItem icon={Forward} label="Inoltra" onClick={() => setOpen(false)} />
                     <MenuItem icon={Copy} label="Copia" onClick={() => setOpen(false)} />
-                    <MenuItem icon={Star} label="Aggiungi a Importanti" onClick={() => setOpen(false)} />
+                    <MenuItem
+                        icon={Star}
+                        label="Aggiungi a Importanti"
+                        onClick={() => setOpen(false)}
+                    />
                     {message.direction === "out" && (
-                        <MenuItem icon={Info} label="Info messaggio" onClick={() => setOpen(false)} />
+                        <MenuItem
+                            icon={Info}
+                            label="Info messaggio"
+                            onClick={() => setOpen(false)}
+                        />
                     )}
-                    <div className="my-0.5 border-t border-[var(--border-soft)]" />
+                    <div className="my-0.5 border-t border-(--border-soft)" />
                     <MenuItem
                         icon={Trash2}
                         label="Elimina"
@@ -118,8 +124,8 @@ function MenuItem({
             type="button"
             onClick={onClick}
             className={cn(
-                "flex w-full items-center gap-2.5 px-3 py-1.5 text-left text-xs hover:bg-[var(--bg-hover)]",
-                variant === "danger" ? "text-[var(--status-failed)]" : "text-[var(--fg-primary)]"
+                "flex w-full items-center gap-2.5 px-3 py-1.5 text-left text-xs hover:bg-(--bg-hover)",
+                variant === "danger" ? "text-(--status-failed)" : "text-(--fg-primary)"
             )}
         >
             <Icon className="h-3.5 w-3.5 shrink-0" />

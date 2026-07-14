@@ -3,7 +3,7 @@ import { X, ChevronLeft, ChevronRight, Download, Share2, ZoomIn, ZoomOut } from 
 import { MediaPlaceholder } from "@/components/bubbles/content/Media";
 
 const focusRing =
-    "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ring)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--scrim)]";
+    "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-(--ring) focus-visible:ring-offset-2 focus-visible:ring-offset-(--scrim)";
 const iconBtn = `cursor-pointer transition-all duration-200 ease-[cubic-bezier(0.16,1,0.3,1)] active:scale-[0.97] ${focusRing}`;
 
 export interface LightboxState {
@@ -100,18 +100,18 @@ export function Lightbox({
             role="dialog"
             aria-modal="true"
             aria-label={state.caption ?? "Immagine"}
-            className="fixed inset-0 z-[100] flex items-center justify-center bg-[var(--scrim)]"
+            className="fixed inset-0 z-[100] flex items-center justify-center bg-(--scrim)"
         >
             <button
                 type="button"
                 onClick={onClose}
-                className={`absolute right-4 top-4 z-10 flex h-10 w-10 items-center justify-center rounded-full bg-[var(--bg-hover)] text-[var(--fg-on-accent)] hover:bg-[var(--bg-active)] ${iconBtn}`}
+                className={`absolute top-4 right-4 z-10 flex h-10 w-10 items-center justify-center rounded-full bg-(--bg-hover) text-(--fg-on-accent) hover:bg-(--bg-active) ${iconBtn}`}
                 aria-label="Chiudi"
             >
                 <X className="h-5 w-5" />
             </button>
 
-            <div className="absolute left-4 top-4 z-10 rounded-full bg-[var(--bg-hover)] px-3 py-1 text-sm font-medium text-[var(--fg-on-accent)]">
+            <div className="absolute top-4 left-4 z-10 rounded-full bg-(--bg-hover) px-3 py-1 text-sm font-medium text-(--fg-on-accent)">
                 {state.index + 1} di {state.total}
             </div>
 
@@ -119,7 +119,7 @@ export function Lightbox({
                 <button
                     type="button"
                     onClick={() => setZoomed(!zoomed)}
-                    className={`flex h-10 w-10 items-center justify-center rounded-full bg-[var(--bg-hover)] text-[var(--fg-on-accent)] hover:bg-[var(--bg-active)] ${iconBtn}`}
+                    className={`flex h-10 w-10 items-center justify-center rounded-full bg-(--bg-hover) text-(--fg-on-accent) hover:bg-(--bg-active) ${iconBtn}`}
                     aria-label={zoomed ? "Riduci zoom" : "Ingrandisci"}
                 >
                     {zoomed ? <ZoomOut className="h-5 w-5" /> : <ZoomIn className="h-5 w-5" />}
@@ -127,7 +127,7 @@ export function Lightbox({
                 <button
                     type="button"
                     onClick={handleDownload}
-                    className={`flex h-10 w-10 items-center justify-center rounded-full bg-[var(--bg-hover)] text-[var(--fg-on-accent)] hover:bg-[var(--bg-active)] ${iconBtn}`}
+                    className={`flex h-10 w-10 items-center justify-center rounded-full bg-(--bg-hover) text-(--fg-on-accent) hover:bg-(--bg-active) ${iconBtn}`}
                     aria-label="Scarica"
                 >
                     <Download className="h-5 w-5" />
@@ -135,7 +135,7 @@ export function Lightbox({
                 <button
                     type="button"
                     onClick={handleShare}
-                    className={`flex h-10 w-10 items-center justify-center rounded-full bg-[var(--bg-hover)] text-[var(--fg-on-accent)] hover:bg-[var(--bg-active)] ${iconBtn}`}
+                    className={`flex h-10 w-10 items-center justify-center rounded-full bg-(--bg-hover) text-(--fg-on-accent) hover:bg-(--bg-active) ${iconBtn}`}
                     aria-label="Condividi"
                 >
                     <Share2 className="h-5 w-5" />
@@ -146,7 +146,7 @@ export function Lightbox({
                 <button
                     type="button"
                     onClick={onPrev}
-                    className={`absolute left-4 top-1/2 z-10 flex h-12 w-12 -translate-y-1/2 items-center justify-center rounded-full bg-[var(--bg-hover)] text-[var(--fg-on-accent)] hover:bg-[var(--bg-active)] ${iconBtn}`}
+                    className={`absolute top-1/2 left-4 z-10 flex h-12 w-12 -translate-y-1/2 items-center justify-center rounded-full bg-(--bg-hover) text-(--fg-on-accent) hover:bg-(--bg-active) ${iconBtn}`}
                     aria-label="Precedente"
                 >
                     <ChevronLeft className="h-6 w-6" />
@@ -157,7 +157,7 @@ export function Lightbox({
                 <button
                     type="button"
                     onClick={onNext}
-                    className={`absolute right-4 top-1/2 z-10 flex h-12 w-12 -translate-y-1/2 items-center justify-center rounded-full bg-[var(--bg-hover)] text-[var(--fg-on-accent)] hover:bg-[var(--bg-active)] ${iconBtn}`}
+                    className={`absolute top-1/2 right-4 z-10 flex h-12 w-12 -translate-y-1/2 items-center justify-center rounded-full bg-(--bg-hover) text-(--fg-on-accent) hover:bg-(--bg-active) ${iconBtn}`}
                     aria-label="Successiva"
                 >
                     <ChevronRight className="h-6 w-6" />
@@ -166,14 +166,16 @@ export function Lightbox({
 
             <div
                 className="max-h-[85vh] max-w-[90vw] overflow-auto"
-                style={{ transform: zoomed ? "scale(1.5)" : "scale(1)", transition: "transform 0.2s" }}
+                style={{
+                    transform: zoomed ? "scale(1.5)" : "scale(1)",
+                    transition: "transform 0.2s",
+                }}
             >
-                <MediaPlaceholder
-                    url={state.url}
-                    className="max-h-[85vh] w-auto rounded-lg"
-                />
+                <MediaPlaceholder url={state.url} className="max-h-[85vh] w-auto rounded-lg" />
                 {state.caption && (
-                    <p className="mt-2 text-center text-sm text-[var(--fg-secondary)]">{state.caption}</p>
+                    <p className="mt-2 text-center text-sm text-(--fg-secondary)">
+                        {state.caption}
+                    </p>
                 )}
             </div>
         </div>

@@ -1,7 +1,16 @@
 import type { ChatEntry, Message } from "@/types/chat";
 import { isMessage } from "@/types/chat";
 import { cn } from "@/lib/utils";
-import { Bubble, BubbleMeta, ForwardedLabel, QuotedBlock, Reactions, SenderTag, SenderAvatar } from "./Bubble";
+import {
+    Bubble,
+    BubbleMeta,
+    ForwardedLabel,
+    QuotedBlock,
+    Reactions,
+    SenderTag,
+    SenderAvatar,
+    type BubbleTone,
+} from "./Bubble";
 import { TextContent } from "./content/Text";
 import { ImageContent, VideoContent, DocumentContent, StickerContent } from "./content/Media";
 import { AudioContent } from "./content/Audio";
@@ -28,13 +37,23 @@ import { MessageContextMenu } from "./MessageContextMenu";
 
 export function ChatEntryRenderer({ entry }: { entry: ChatEntry }) {
     if (!isMessage(entry)) {
-        return <SystemPillRow view={{ variant: entry.variant, text: entry.text, icon: entry.icon, referralAd: entry.referralAd }} />;
+        return (
+            <SystemPillRow
+                view={{
+                    variant: entry.variant,
+                    text: entry.text,
+                    icon: entry.icon,
+                    referralAd: entry.referralAd,
+                }}
+            />
+        );
     }
     return <MessageRenderer message={entry} />;
 }
 
 export function MessageRenderer({ message }: { message: Message }) {
-    const { content, direction, quoted, forwarded, frequentlyForwarded, reactions, ts, ack } = message;
+    const { content, direction, quoted, forwarded, frequentlyForwarded, reactions, ts, ack } =
+        message;
     const hasReactions = !!reactions && reactions.length > 0;
     const isEdited = !!(message as { edited?: boolean }).edited;
 
@@ -47,15 +66,36 @@ export function MessageRenderer({ message }: { message: Message }) {
         }
     }
 
-    const renderWrapped = (innerContent: React.ReactNode, side: "in" | "out", toneType: any, overrideClass?: string) => {
+    const renderWrapped = (
+        innerContent: React.ReactNode,
+        side: "in" | "out",
+        toneType: BubbleTone,
+        overrideClass?: string
+    ) => {
         if (!sender) {
-            return <Bubble side={side} tone={toneType} hasReactions={hasReactions} className={overrideClass}>{innerContent}</Bubble>;
+            return (
+                <Bubble
+                    side={side}
+                    tone={toneType}
+                    hasReactions={hasReactions}
+                    className={overrideClass}
+                >
+                    {innerContent}
+                </Bubble>
+            );
         }
-        
+
         if (side === "out") {
             return (
                 <div className="flex max-w-[78%] items-end justify-end gap-1.5 self-end">
-                    <Bubble side="out" tone={toneType} hasReactions={hasReactions} className={cn("max-w-full min-w-0", overrideClass)}>{innerContent}</Bubble>
+                    <Bubble
+                        side="out"
+                        tone={toneType}
+                        hasReactions={hasReactions}
+                        className={cn("max-w-full min-w-0", overrideClass)}
+                    >
+                        {innerContent}
+                    </Bubble>
                     <SenderAvatar sender={sender} size={28} />
                 </div>
             );
@@ -63,7 +103,14 @@ export function MessageRenderer({ message }: { message: Message }) {
             return (
                 <div className="flex max-w-[78%] items-end justify-start gap-1.5 self-start">
                     <SenderAvatar sender={sender} size={28} />
-                    <Bubble side="in" tone={toneType} hasReactions={hasReactions} className={cn("max-w-full min-w-0", overrideClass)}>{innerContent}</Bubble>
+                    <Bubble
+                        side="in"
+                        tone={toneType}
+                        hasReactions={hasReactions}
+                        className={cn("max-w-full min-w-0", overrideClass)}
+                    >
+                        {innerContent}
+                    </Bubble>
                 </div>
             );
         }
@@ -77,7 +124,12 @@ export function MessageRenderer({ message }: { message: Message }) {
                 <MessageContextMenu message={message} />
             </>
         );
-        return renderWrapped(deletedInner, direction, "deleted", direction === "out" ? "self-end" : undefined);
+        return renderWrapped(
+            deletedInner,
+            direction,
+            "deleted",
+            direction === "out" ? "self-end" : undefined
+        );
     }
 
     if (content.kind === "error") {
@@ -100,7 +152,12 @@ export function MessageRenderer({ message }: { message: Message }) {
                 <MessageContextMenu message={message} />
             </>
         );
-        return renderWrapped(fallbackInner, direction, "fallback", direction === "out" ? "self-end" : undefined);
+        return renderWrapped(
+            fallbackInner,
+            direction,
+            "fallback",
+            direction === "out" ? "self-end" : undefined
+        );
     }
 
     if (content.kind === "edited_marker") return null;
@@ -118,7 +175,16 @@ export function MessageRenderer({ message }: { message: Message }) {
 
     if (content.kind === "system") {
         const sys = content;
-        return <SystemPillRow view={{ variant: sys.variant, text: sys.text, icon: sys.icon, referralAd: sys.referralAd }} />;
+        return (
+            <SystemPillRow
+                view={{
+                    variant: sys.variant,
+                    text: sys.text,
+                    icon: sys.icon,
+                    referralAd: sys.referralAd,
+                }}
+            />
+        );
     }
 
     const tone = sender?.kind === "bot" ? "bot" : "default";
@@ -147,27 +213,131 @@ export function MessageRenderer({ message }: { message: Message }) {
 
 function renderContent(content: Message["content"]) {
     switch (content.kind) {
-        case "text": return <TextContent body={content.body} linkPreview={content.linkPreview} />;
-        case "image": return <ImageContent url={content.url} caption={content.caption} album={content.album} />;
-        case "video": return <VideoContent url={content.url} poster={content.poster} durationSec={content.durationSec} caption={content.caption} gif={content.gif} />;
-        case "audio": return <AudioContent voice={content.voice} durationSec={content.durationSec} waveform={content.waveform} transcript={content.transcript} played={content.played} />;
-        case "document": return <DocumentContent name={content.name} mime={content.mime} sizeBytes={content.sizeBytes} pages={content.pages} />;
-        case "sticker": return <StickerContent url={content.url} animated={content.animated} />;
-        case "location": return <LocationContent lat={content.lat} lng={content.lng} name={content.name} address={content.address} staticMapUrl={content.staticMapUrl} />;
-        case "location_request": return <LocationContent locationRequest />;
-        case "address_request": return <LocationContent addressRequest />;
-        case "contacts": return <ContactsContent cards={content.cards} />;
-        case "interactive_buttons": return <ButtonsContent header={content.header} body={content.body} footer={content.footer} buttons={content.buttons} reply={content.reply} />;
-        case "interactive_list": return <ListContent body={content.body} footer={content.footer} buttonTitle={content.buttonTitle} sections={content.sections} reply={content.reply} />;
-        case "interactive_cta_url": return <CtaUrlContent body={content.body} footer={content.footer} ctaTitle={content.ctaTitle} url={content.url} />;
-        case "interactive_flow": return <FlowContent body={content.body} ctaTitle={content.ctaTitle} flowName={content.flowName} reply={content.reply} />;
-        case "call_permission_request": return <CallPermissionContent state={content.state} />;
-        case "carousel": return <CarouselContent cards={content.cards} />;
-        case "product": return <ProductContent product={content.product} />;
-        case "product_list": return <ProductListContent sections={content.sections} headerImage={content.headerImage} title={content.title} />;
-        case "catalog": return <CatalogContent title={content.title} body={content.body} ctaTitle={content.ctaTitle} />;
-        case "order": return <OrderContent items={content.items} total={content.total} currency={content.currency} note={content.note} />;
-        case "template": return <TemplateContent template={content} />;
-        default: return null;
+        case "text":
+            return <TextContent body={content.body} linkPreview={content.linkPreview} />;
+        case "image":
+            return (
+                <ImageContent url={content.url} caption={content.caption} album={content.album} />
+            );
+        case "video":
+            return (
+                <VideoContent
+                    url={content.url}
+                    poster={content.poster}
+                    durationSec={content.durationSec}
+                    caption={content.caption}
+                    gif={content.gif}
+                />
+            );
+        case "audio":
+            return (
+                <AudioContent
+                    voice={content.voice}
+                    durationSec={content.durationSec}
+                    waveform={content.waveform}
+                    transcript={content.transcript}
+                    played={content.played}
+                />
+            );
+        case "document":
+            return (
+                <DocumentContent
+                    name={content.name}
+                    mime={content.mime}
+                    sizeBytes={content.sizeBytes}
+                    pages={content.pages}
+                />
+            );
+        case "sticker":
+            return <StickerContent url={content.url} animated={content.animated} />;
+        case "location":
+            return (
+                <LocationContent
+                    lat={content.lat}
+                    lng={content.lng}
+                    name={content.name}
+                    address={content.address}
+                    staticMapUrl={content.staticMapUrl}
+                />
+            );
+        case "location_request":
+            return <LocationContent locationRequest />;
+        case "address_request":
+            return <LocationContent addressRequest />;
+        case "contacts":
+            return <ContactsContent cards={content.cards} />;
+        case "interactive_buttons":
+            return (
+                <ButtonsContent
+                    header={content.header}
+                    body={content.body}
+                    footer={content.footer}
+                    buttons={content.buttons}
+                    reply={content.reply}
+                />
+            );
+        case "interactive_list":
+            return (
+                <ListContent
+                    body={content.body}
+                    footer={content.footer}
+                    buttonTitle={content.buttonTitle}
+                    sections={content.sections}
+                    reply={content.reply}
+                />
+            );
+        case "interactive_cta_url":
+            return (
+                <CtaUrlContent
+                    body={content.body}
+                    footer={content.footer}
+                    ctaTitle={content.ctaTitle}
+                    url={content.url}
+                />
+            );
+        case "interactive_flow":
+            return (
+                <FlowContent
+                    body={content.body}
+                    ctaTitle={content.ctaTitle}
+                    flowName={content.flowName}
+                    reply={content.reply}
+                />
+            );
+        case "call_permission_request":
+            return <CallPermissionContent state={content.state} />;
+        case "carousel":
+            return <CarouselContent cards={content.cards} />;
+        case "product":
+            return <ProductContent product={content.product} />;
+        case "product_list":
+            return (
+                <ProductListContent
+                    sections={content.sections}
+                    headerImage={content.headerImage}
+                    title={content.title}
+                />
+            );
+        case "catalog":
+            return (
+                <CatalogContent
+                    title={content.title}
+                    body={content.body}
+                    ctaTitle={content.ctaTitle}
+                />
+            );
+        case "order":
+            return (
+                <OrderContent
+                    items={content.items}
+                    total={content.total}
+                    currency={content.currency}
+                    note={content.note}
+                />
+            );
+        case "template":
+            return <TemplateContent template={content} />;
+        default:
+            return null;
     }
 }

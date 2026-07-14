@@ -1,14 +1,12 @@
 import { useEffect, useRef, useState } from "react";
-import {
-    X, Search, UserPlus, Trash2, Forward, Check, AlertTriangle,
-} from "lucide-react";
+import { X, Search, UserPlus, Trash2, Forward, Check, AlertTriangle } from "lucide-react";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { cn, colorFromString, initials } from "@/lib/utils";
 import { dataset } from "@/data/dataset";
 
 const TITLE_ID = "overlay-dialog-title";
 const focusRing =
-    "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ring)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--bg-panel)]";
+    "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-(--ring) focus-visible:ring-offset-2 focus-visible:ring-offset-(--bg-panel)";
 const iconBtn = `cursor-pointer transition-all duration-200 ease-[cubic-bezier(0.16,1,0.3,1)] active:scale-[0.97] ${focusRing}`;
 const actionBtn = `cursor-pointer transition-all duration-200 ease-[cubic-bezier(0.16,1,0.3,1)] active:scale-95 ${focusRing}`;
 
@@ -72,14 +70,14 @@ export function ChatOverlays({
                 type="button"
                 onClick={onClose}
                 aria-label="Chiudi modale"
-                className="absolute inset-0 cursor-pointer border-0 bg-[var(--scrim)] p-0"
+                className="absolute inset-0 cursor-pointer border-0 bg-(--scrim) p-0"
             />
             <div
                 ref={dialogRef}
                 role="dialog"
                 aria-modal="true"
                 aria-labelledby={TITLE_ID}
-                className="relative z-10 mx-4 w-full max-w-md overflow-hidden rounded-xl border border-[var(--border-strong)] bg-[var(--bg-panel)] shadow-[var(--shadow-overlay)]"
+                className="relative z-10 mx-4 w-full max-w-md overflow-hidden rounded-xl border border-(--border-strong) bg-(--bg-panel) shadow-(--shadow-overlay)"
             >
                 {state.type === "new-chat" && (
                     <NewChatModal onClose={onClose} onConfirm={onConfirmNewChat} />
@@ -111,14 +109,16 @@ export function ChatOverlays({
 
 function ModalHeader({ title, onClose }: { title: string; onClose: () => void }) {
     return (
-        <header className="flex items-center justify-between border-b border-[var(--border-strong)] px-4 py-3">
-            <h3 id={TITLE_ID} className="text-sm font-semibold text-[var(--fg-primary)]">{title}</h3>
+        <header className="flex items-center justify-between border-b border-(--border-strong) px-4 py-3">
+            <h3 id={TITLE_ID} className="text-sm font-semibold text-(--fg-primary)">
+                {title}
+            </h3>
             <button
                 type="button"
                 onClick={onClose}
                 aria-label="Chiudi"
                 className={cn(
-                    "flex h-7 w-7 items-center justify-center rounded-full text-[var(--fg-secondary)] hover:bg-[var(--bg-hover)]",
+                    "flex h-7 w-7 items-center justify-center rounded-full text-(--fg-secondary) hover:bg-(--bg-hover)",
                     iconBtn
                 )}
             >
@@ -136,7 +136,13 @@ const MOCK_CONTACTS = [
     { id: "nc5", name: "Luca Greco", phone: "+39 320 5558899" },
 ];
 
-function NewChatModal({ onClose, onConfirm }: { onClose: () => void; onConfirm: (id: string) => void }) {
+function NewChatModal({
+    onClose,
+    onConfirm,
+}: {
+    onClose: () => void;
+    onConfirm: (id: string) => void;
+}) {
     const [query, setQuery] = useState("");
     const [phone, setPhone] = useState("");
     const [showPhone, setShowPhone] = useState(false);
@@ -149,8 +155,8 @@ function NewChatModal({ onClose, onConfirm }: { onClose: () => void; onConfirm: 
         <>
             <ModalHeader title="Nuova chat" onClose={onClose} />
             <div className="p-4">
-                <div className="mb-3 flex items-center gap-2 rounded-lg bg-[var(--bg-panel-2)] px-3 py-2">
-                    <Search className="h-3.5 w-3.5 text-[var(--fg-tertiary)]" />
+                <div className="mb-3 flex items-center gap-2 rounded-lg bg-(--bg-panel-2) px-3 py-2">
+                    <Search className="h-3.5 w-3.5 text-(--fg-tertiary)" />
                     <input
                         type="text"
                         value={query}
@@ -164,19 +170,22 @@ function NewChatModal({ onClose, onConfirm }: { onClose: () => void; onConfirm: 
                     type="button"
                     onClick={() => setShowPhone(!showPhone)}
                     className={cn(
-                        "mb-2 flex w-full items-center gap-3 rounded-lg px-2 py-2 hover:bg-[var(--bg-hover)]",
+                        "mb-2 flex w-full items-center gap-3 rounded-lg px-2 py-2 hover:bg-(--bg-hover)",
                         actionBtn
                     )}
                 >
-                    <div className="flex h-10 w-10 items-center justify-center rounded-full bg-[var(--accent-soft)] text-[var(--accent)]">
+                    <div className="flex h-10 w-10 items-center justify-center rounded-full bg-(--accent-soft) text-(--accent)">
                         <UserPlus className="h-5 w-5" />
                     </div>
-                    <span className="text-sm font-medium text-[var(--accent)]">Nuovo numero</span>
+                    <span className="text-sm font-medium text-(--accent)">Nuovo numero</span>
                 </button>
 
                 {showPhone && (
-                    <div className="mb-3 rounded-lg border border-[var(--border-strong)] bg-[var(--bg-panel-2)] p-3">
-                        <label htmlFor="new-chat-phone" className="mb-1 block text-[10px] uppercase tracking-wide text-[var(--fg-tertiary)]">
+                    <div className="mb-3 rounded-lg border border-(--border-strong) bg-(--bg-panel-2) p-3">
+                        <label
+                            htmlFor="new-chat-phone"
+                            className="mb-1 block text-[10px] tracking-wide text-(--fg-tertiary) uppercase"
+                        >
                             Numero E.164
                         </label>
                         <input
@@ -186,15 +195,30 @@ function NewChatModal({ onClose, onConfirm }: { onClose: () => void; onConfirm: 
                             onChange={(e) => setPhone(e.target.value)}
                             placeholder="+39 340 1234567"
                             className={cn(
-                                "mb-2 w-full rounded-md border border-[var(--border-strong)] bg-[var(--bg-panel)] px-2 py-1.5 text-sm focus:border-[var(--accent)]",
+                                "mb-2 w-full rounded-md border border-(--border-strong) bg-(--bg-panel) px-2 py-1.5 text-sm focus:border-(--accent)",
                                 focusRing
                             )}
                         />
                         <div className="flex items-center justify-between">
-                            <span className={cn("text-[10px]", isValid ? "text-[var(--accent)]" : phone ? "text-[var(--status-failed)]" : "text-[var(--fg-tertiary)]")}>
+                            <span
+                                className={cn(
+                                    "text-[10px]",
+                                    isValid
+                                        ? "text-(--accent)"
+                                        : phone
+                                          ? "text-(--status-failed)"
+                                          : "text-(--fg-tertiary)"
+                                )}
+                            >
                                 {isValid ? (
-                                    <span className="flex items-center gap-1"><Check className="h-3 w-3" /> Valido</span>
-                                ) : phone ? "Formato non valido" : "Formato internazionale"}
+                                    <span className="flex items-center gap-1">
+                                        <Check className="h-3 w-3" /> Valido
+                                    </span>
+                                ) : phone ? (
+                                    "Formato non valido"
+                                ) : (
+                                    "Formato internazionale"
+                                )}
                             </span>
                             <button
                                 type="button"
@@ -203,7 +227,9 @@ function NewChatModal({ onClose, onConfirm }: { onClose: () => void; onConfirm: 
                                 className={cn(
                                     "rounded-md px-3 py-1 text-xs font-medium",
                                     actionBtn,
-                                    isValid ? "bg-[var(--accent)] text-[var(--accent-fg)]" : "cursor-not-allowed bg-[var(--bg-panel-2)] text-[var(--fg-tertiary)]"
+                                    isValid
+                                        ? "bg-(--accent) text-(--accent-fg)"
+                                        : "cursor-not-allowed bg-(--bg-panel-2) text-(--fg-tertiary)"
                                 )}
                             >
                                 Avvia
@@ -219,18 +245,22 @@ function NewChatModal({ onClose, onConfirm }: { onClose: () => void; onConfirm: 
                             type="button"
                             onClick={() => onConfirm(c.id)}
                             className={cn(
-                                "flex w-full items-center gap-3 rounded-lg px-2 py-2 text-left hover:bg-[var(--bg-hover)]",
+                                "flex w-full items-center gap-3 rounded-lg px-2 py-2 text-left hover:bg-(--bg-hover)",
                                 actionBtn
                             )}
                         >
                             <Avatar className="h-10 w-10 shrink-0">
-                                <AvatarFallback style={{ backgroundColor: colorFromString(c.name) }}>
+                                <AvatarFallback
+                                    style={{ backgroundColor: colorFromString(c.name) }}
+                                >
                                     {initials(c.name)}
                                 </AvatarFallback>
                             </Avatar>
                             <div className="min-w-0 flex-1">
                                 <div className="truncate text-sm font-medium">{c.name}</div>
-                                <div className="truncate text-[11px] text-[var(--fg-tertiary)]">{c.phone}</div>
+                                <div className="truncate text-[11px] text-(--fg-tertiary)">
+                                    {c.phone}
+                                </div>
                             </div>
                         </button>
                     ))}
@@ -253,22 +283,25 @@ function DeleteChatModal({
         <>
             <ModalHeader title="Elimina conversazione" onClose={onClose} />
             <div className="p-6 text-center">
-                <div className="mx-auto mb-3 flex h-12 w-12 items-center justify-center rounded-full bg-[var(--bg-bubble-error)]">
-                    <Trash2 className="h-6 w-6 text-[var(--status-failed)]" />
+                <div className="mx-auto mb-3 flex h-12 w-12 items-center justify-center rounded-full bg-(--bg-bubble-error)">
+                    <Trash2 className="h-6 w-6 text-(--status-failed)" />
                 </div>
-                <p className="mb-1 text-sm font-medium text-[var(--fg-primary)]">
+                <p className="mb-1 text-sm font-medium text-(--fg-primary)">
                     Eliminare la chat con {convName}?
                 </p>
-                <div className="mb-4 flex items-start gap-1.5 rounded-md bg-[var(--bg-bubble-system)] px-3 py-2 text-left text-[11px] text-[var(--fg-secondary)]">
-                    <AlertTriangle className="mt-0.5 h-3 w-3 shrink-0 text-[var(--fg-warning)]" />
-                    <span>Solo eliminazione locale. WhatsApp non supporta la cancellazione remota delle conversazioni.</span>
+                <div className="mb-4 flex items-start gap-1.5 rounded-md bg-(--bg-bubble-system) px-3 py-2 text-left text-[11px] text-(--fg-secondary)">
+                    <AlertTriangle className="mt-0.5 h-3 w-3 shrink-0 text-(--fg-warning)" />
+                    <span>
+                        Solo eliminazione locale. WhatsApp non supporta la cancellazione remota
+                        delle conversazioni.
+                    </span>
                 </div>
                 <div className="flex gap-2">
                     <button
                         type="button"
                         onClick={onClose}
                         className={cn(
-                            "flex-1 rounded-lg border border-[var(--border-strong)] py-2 text-sm font-medium text-[var(--fg-primary)] hover:bg-[var(--bg-hover)]",
+                            "flex-1 rounded-lg border border-(--border-strong) py-2 text-sm font-medium text-(--fg-primary) hover:bg-(--bg-hover)",
                             actionBtn
                         )}
                     >
@@ -278,7 +311,7 @@ function DeleteChatModal({
                         type="button"
                         onClick={onConfirm}
                         className={cn(
-                            "flex-1 rounded-lg bg-[var(--status-failed)] py-2 text-sm font-medium text-white hover:opacity-90",
+                            "flex-1 rounded-lg bg-(--status-failed) py-2 text-sm font-medium text-white hover:opacity-90",
                             actionBtn
                         )}
                     >
@@ -320,11 +353,12 @@ function ForwardModal({
         <>
             <ModalHeader title={`Inoltra (${selected.size}/${MAX})`} onClose={onClose} />
             <div className="p-4">
-                <div className="mb-2 rounded-md bg-[var(--bg-panel-2)] px-2 py-1.5 text-[11px] italic text-[var(--fg-secondary)]">
-                    <Forward className="mr-1 inline h-3 w-3" /> "{excerpt.slice(0, 60)}{excerpt.length > 60 ? "…" : ""}"
+                <div className="mb-2 rounded-md bg-(--bg-panel-2) px-2 py-1.5 text-[11px] text-(--fg-secondary) italic">
+                    <Forward className="mr-1 inline h-3 w-3" /> "{excerpt.slice(0, 60)}
+                    {excerpt.length > 60 ? "…" : ""}"
                 </div>
-                <div className="mb-3 flex items-center gap-2 rounded-lg bg-[var(--bg-panel-2)] px-3 py-1.5">
-                    <Search className="h-3.5 w-3.5 text-[var(--fg-tertiary)]" />
+                <div className="mb-3 flex items-center gap-2 rounded-lg bg-(--bg-panel-2) px-3 py-1.5">
+                    <Search className="h-3.5 w-3.5 text-(--fg-tertiary)" />
                     <input
                         type="text"
                         value={query}
@@ -342,26 +376,30 @@ function ForwardModal({
                                 type="button"
                                 onClick={() => toggle(c.id)}
                                 className={cn(
-                                    "flex w-full items-center gap-3 rounded-lg px-2 py-2 text-left hover:bg-[var(--bg-hover)]",
+                                    "flex w-full items-center gap-3 rounded-lg px-2 py-2 text-left hover:bg-(--bg-hover)",
                                     actionBtn,
-                                    isSelected && "bg-[var(--accent-soft)]"
+                                    isSelected && "bg-(--accent-soft)"
                                 )}
                             >
                                 <Avatar className="h-9 w-9 shrink-0">
-                                    <AvatarFallback style={{ backgroundColor: c.avatarColor, fontSize: 11 }}>
+                                    <AvatarFallback
+                                        style={{ backgroundColor: c.avatarColor, fontSize: 11 }}
+                                    >
                                         {initials(c.name)}
                                     </AvatarFallback>
                                 </Avatar>
                                 <div className="min-w-0 flex-1">
                                     <div className="truncate text-sm font-medium">{c.name}</div>
-                                    <div className="truncate text-[11px] text-[var(--fg-tertiary)]">{c.phone}</div>
+                                    <div className="truncate text-[11px] text-(--fg-tertiary)">
+                                        {c.phone}
+                                    </div>
                                 </div>
                                 <span
                                     className={cn(
                                         "flex h-5 w-5 shrink-0 items-center justify-center rounded-full border-2",
                                         isSelected
-                                            ? "border-[var(--accent)] bg-[var(--accent)] text-[var(--accent-fg)]"
-                                            : "border-[var(--border-strong)]"
+                                            ? "border-(--accent) bg-(--accent) text-(--accent-fg)"
+                                            : "border-(--border-strong)"
                                     )}
                                 >
                                     {isSelected && <Check className="h-3 w-3" />}
@@ -378,12 +416,13 @@ function ForwardModal({
                         "mt-3 flex w-full items-center justify-center gap-2 rounded-lg py-2.5 text-sm font-medium",
                         actionBtn,
                         selected.size > 0
-                            ? "bg-[var(--accent)] text-[var(--accent-fg)]"
-                            : "cursor-not-allowed bg-[var(--bg-panel-2)] text-[var(--fg-tertiary)]"
+                            ? "bg-(--accent) text-(--accent-fg)"
+                            : "cursor-not-allowed bg-(--bg-panel-2) text-(--fg-tertiary)"
                     )}
                 >
                     <Forward className="h-4 w-4" />
-                    Inoltra a {selected.size > 0 ? selected.size : "…"} {selected.size === 1 ? "chat" : "chat"}
+                    Inoltra a {selected.size > 0 ? selected.size : "…"}{" "}
+                    {selected.size === 1 ? "chat" : "chat"}
                 </button>
             </div>
         </>

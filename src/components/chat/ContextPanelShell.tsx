@@ -33,7 +33,7 @@ import type { ActivityEvent, AutomationRun } from "@/types/chat";
 import { useId, useState } from "react";
 
 const focusRing =
-    "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ring)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--bg-panel)]";
+    "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-(--ring) focus-visible:ring-offset-2 focus-visible:ring-offset-(--bg-panel)";
 const iconBtn = `cursor-pointer transition-all duration-200 ease-[cubic-bezier(0.16,1,0.3,1)] active:scale-[0.97] ${focusRing}`;
 const actionBtn = `cursor-pointer transition-all duration-200 ease-[cubic-bezier(0.16,1,0.3,1)] active:scale-95 ${focusRing}`;
 
@@ -54,13 +54,13 @@ export function ContextPanelShell({
 
     return (
         <div className="flex h-full flex-col overflow-hidden">
-            <header className="flex h-12 shrink-0 items-center gap-2 border-b border-[var(--border-strong)] bg-[var(--bg-header)] px-3">
+            <header className="flex h-12 shrink-0 items-center gap-2 border-b border-(--border-strong) bg-(--bg-header) px-3">
                 {onBack && (
                     <button
                         type="button"
                         onClick={onBack}
                         className={cn(
-                            "flex h-7 w-7 items-center justify-center rounded-full text-[var(--fg-secondary)] hover:bg-[var(--bg-hover)]",
+                            "flex h-7 w-7 items-center justify-center rounded-full text-(--fg-secondary) hover:bg-(--bg-hover)",
                             iconBtn
                         )}
                         aria-label="Indietro"
@@ -68,11 +68,13 @@ export function ContextPanelShell({
                         <ArrowLeft className="h-4 w-4" />
                     </button>
                 )}
-                <h2 className="flex-1 truncate text-xs font-semibold text-[var(--fg-primary)]">Contesto cliente</h2>
+                <h2 className="flex-1 truncate text-xs font-semibold text-(--fg-primary)">
+                    Contesto cliente
+                </h2>
                 <button
                     type="button"
                     className={cn(
-                        "flex h-7 w-7 items-center justify-center rounded-full text-[var(--fg-secondary)] hover:bg-[var(--bg-hover)]",
+                        "flex h-7 w-7 items-center justify-center rounded-full text-(--fg-secondary) hover:bg-(--bg-hover)",
                         iconBtn
                     )}
                     aria-label="Modifica contatto"
@@ -84,7 +86,7 @@ export function ContextPanelShell({
                         type="button"
                         onClick={onCollapse}
                         className={cn(
-                            "flex h-7 w-7 items-center justify-center rounded-full text-[var(--fg-secondary)] hover:bg-[var(--bg-hover)]",
+                            "flex h-7 w-7 items-center justify-center rounded-full text-(--fg-secondary) hover:bg-(--bg-hover)",
                             iconBtn
                         )}
                         aria-label="Collassa pannello"
@@ -99,7 +101,9 @@ export function ContextPanelShell({
                     {profile && <ProfileSection profile={profile} />}
                     <CustomFieldsSection attrs={attrs} />
                     <AutomationSection runs={runs} />
-                    {conv?.linkedRecords && conv.linkedRecords.length > 0 && <LinkedRecordsSection conv={conv} />}
+                    {conv?.linkedRecords && conv.linkedRecords.length > 0 && (
+                        <LinkedRecordsSection conv={conv} />
+                    )}
                     <ActivitySection activity={activity} />
                     <GallerySection />
                 </div>
@@ -122,14 +126,14 @@ function Section({
     const [open, setOpen] = useState(defaultOpen);
     const panelId = useId();
     return (
-        <div className="border-b border-[var(--border-soft)]">
+        <div className="border-b border-(--border-soft)">
             <button
                 type="button"
                 onClick={() => setOpen(!open)}
                 aria-expanded={open}
                 aria-controls={panelId}
                 className={cn(
-                    "flex w-full list-none items-center gap-2 px-3 py-2 text-[11px] font-semibold uppercase tracking-wide text-[var(--fg-secondary)] hover:bg-[var(--bg-hover)]",
+                    "flex w-full list-none items-center gap-2 px-3 py-2 text-[11px] font-semibold tracking-wide text-(--fg-secondary) uppercase hover:bg-(--bg-hover)",
                     actionBtn
                 )}
             >
@@ -158,11 +162,18 @@ function ProfileSection({ profile }: { profile: NonNullable<ReturnType<typeof pr
                 <div className="min-w-0">
                     <div className="text-sm font-semibold">{profile.name}</div>
                     {profile.pushName && profile.pushName !== profile.name && (
-                        <div className="text-[11px] text-[var(--fg-tertiary)]">push_name: {profile.pushName}</div>
+                        <div className="text-[11px] text-(--fg-tertiary)">
+                            push_name: {profile.pushName}
+                        </div>
                     )}
                     <div className="mt-1 flex flex-wrap gap-1">
                         {profile.labels.map((l) => (
-                            <Badge key={l.id} variant="outline" className="text-[10px]" style={{ borderColor: l.color, color: l.color }}>
+                            <Badge
+                                key={l.id}
+                                variant="outline"
+                                className="text-[10px]"
+                                style={{ borderColor: l.color, color: l.color }}
+                            >
                                 {l.name}
                             </Badge>
                         ))}
@@ -172,32 +183,40 @@ function ProfileSection({ profile }: { profile: NonNullable<ReturnType<typeof pr
             <div className="mt-3 space-y-1.5 text-xs">
                 {profile.phones.map((ph) => (
                     <div key={`${ph.label}-${ph.number}`} className="flex items-start gap-2">
-                        <Phone className="mt-0.5 h-3.5 w-3.5 shrink-0 text-[var(--fg-tertiary)]" />
+                        <Phone className="mt-0.5 h-3.5 w-3.5 shrink-0 text-(--fg-tertiary)" />
                         <div className="min-w-0">
-                            <div className={cn("truncate", ph.verified && "font-medium")}>{ph.number}</div>
-                            <div className="text-[10px] text-[var(--fg-tertiary)]">
+                            <div className={cn("truncate", ph.verified && "font-medium")}>
+                                {ph.number}
+                            </div>
+                            <div className="text-[10px] text-(--fg-tertiary)">
                                 {ph.label}
-                                {ph.verified && <span className="ml-1 text-[var(--accent)]">✓ WhatsApp verificato</span>}
+                                {ph.verified && (
+                                    <span className="ml-1 text-(--accent)">
+                                        ✓ WhatsApp verificato
+                                    </span>
+                                )}
                             </div>
                         </div>
                     </div>
                 ))}
                 {profile.emails.map((e) => (
                     <div key={e} className="flex items-center gap-2">
-                        <Mail className="h-3.5 w-3.5 shrink-0 text-[var(--fg-tertiary)]" />
+                        <Mail className="h-3.5 w-3.5 shrink-0 text-(--fg-tertiary)" />
                         <span className="truncate">{e}</span>
                     </div>
                 ))}
                 {profile.company && (
                     <div className="flex items-center gap-2">
-                        <Tag className="h-3.5 w-3.5 shrink-0 text-[var(--fg-tertiary)]" />
+                        <Tag className="h-3.5 w-3.5 shrink-0 text-(--fg-tertiary)" />
                         <span>{profile.company}</span>
                     </div>
                 )}
                 {profile.language && (
                     <div className="flex items-center gap-2">
-                        <Globe className="h-3.5 w-3.5 shrink-0 text-[var(--fg-tertiary)]" />
-                        <span>{profile.language} · {profile.timezone}</span>
+                        <Globe className="h-3.5 w-3.5 shrink-0 text-(--fg-tertiary)" />
+                        <span>
+                            {profile.language} · {profile.timezone}
+                        </span>
                     </div>
                 )}
             </div>
@@ -205,7 +224,11 @@ function ProfileSection({ profile }: { profile: NonNullable<ReturnType<typeof pr
     );
 }
 
-function CustomFieldsSection({ attrs }: { attrs: Record<string, string | number | boolean | string[]> }) {
+function CustomFieldsSection({
+    attrs,
+}: {
+    attrs: Record<string, string | number | boolean | string[]>;
+}) {
     const schema = dataset.attributesSchema;
     const entries = schema.filter((s) => s.key in attrs);
     const hidden = schema.filter((s) => !(s.key in attrs));
@@ -227,7 +250,10 @@ function CustomFieldsSection({ attrs }: { attrs: Record<string, string | number 
                 {hidden.length > 0 && (
                     <button
                         type="button"
-                        className={cn("mt-1 rounded text-[10px] text-[var(--fg-link)] hover:underline", actionBtn)}
+                        className={cn(
+                            "mt-1 rounded text-[10px] text-(--fg-link) hover:underline",
+                            actionBtn
+                        )}
                     >
                         Mostra altri ({hidden.length})
                     </button>
@@ -239,14 +265,21 @@ function CustomFieldsSection({ attrs }: { attrs: Record<string, string | number 
 
 function FieldRow({ label, value, type }: { label: string; value: string; type: string }) {
     return (
-        <div className="flex items-center justify-between gap-2 rounded-md border border-[var(--border-soft)] bg-[var(--bg-panel-2)] px-2 py-1">
+        <div className="flex items-center justify-between gap-2 rounded-md border border-(--border-soft) bg-(--bg-panel-2) px-2 py-1">
             <div className="min-w-0">
-                <div className="truncate text-[10px] uppercase text-[var(--fg-tertiary)]">{label}</div>
-                <div className={cn("truncate", (value === "true" || value === "false") && "font-medium")}>
+                <div className="truncate text-[10px] text-(--fg-tertiary) uppercase">{label}</div>
+                <div
+                    className={cn(
+                        "truncate",
+                        (value === "true" || value === "false") && "font-medium"
+                    )}
+                >
                     {value === "true" ? "✓" : value === "false" ? "✗" : value}
                 </div>
             </div>
-            <span className="shrink-0 rounded bg-[var(--bg-panel)] px-1 py-0.5 text-[9px] text-[var(--fg-tertiary)]">{type}</span>
+            <span className="shrink-0 rounded bg-(--bg-panel) px-1 py-0.5 text-[9px] text-(--fg-tertiary)">
+                {type}
+            </span>
         </div>
     );
 }
@@ -255,7 +288,7 @@ function AutomationSection({ runs }: { runs: AutomationRun[] }) {
     return (
         <Section title="Ultime automazioni" icon={Zap}>
             {runs.length === 0 ? (
-                <div className="text-[11px] text-[var(--fg-tertiary)]">Nessuna automazione eseguita</div>
+                <div className="text-[11px] text-(--fg-tertiary)">Nessuna automazione eseguita</div>
             ) : (
                 <ul className="space-y-1.5 text-xs">
                     {runs.map((run) => (
@@ -270,20 +303,28 @@ function AutomationSection({ runs }: { runs: AutomationRun[] }) {
 function RunRow({ run }: { run: AutomationRun }) {
     const Icon = run.icon === "🤖" ? Bot : Zap;
     return (
-        <li className="flex items-center gap-2 rounded-md border border-[var(--border-soft)] bg-[var(--bg-panel-2)] px-2 py-1">
-            <Icon className="h-3.5 w-3.5 shrink-0 text-[var(--fg-tertiary)]" />
+        <li className="flex items-center gap-2 rounded-md border border-(--border-soft) bg-(--bg-panel-2) px-2 py-1">
+            <Icon className="h-3.5 w-3.5 shrink-0 text-(--fg-tertiary)" />
             <div className="min-w-0 flex-1">
-                <div className="truncate text-[var(--fg-primary)]">{run.name}</div>
-                <div className="text-[10px] text-[var(--fg-tertiary)]">{run.ts.replace("T", " · ").replace(/\+.*$/, "")}</div>
+                <div className="truncate text-(--fg-primary)">{run.name}</div>
+                <div className="text-[10px] text-(--fg-tertiary)">
+                    {run.ts.replace("T", " · ").replace(/\+.*$/, "")}
+                </div>
             </div>
-            {run.state === "done" && <CheckCircle2 className="h-3.5 w-3.5 text-[var(--fg-success)]" />}
-            {run.state === "running" && <Loader2 className="h-3.5 w-3.5 animate-spin text-[var(--fg-link)]" />}
-            {run.state === "failed" && <XCircle className="h-3.5 w-3.5 text-[var(--status-failed)]" />}
+            {run.state === "done" && <CheckCircle2 className="h-3.5 w-3.5 text-(--fg-success)" />}
+            {run.state === "running" && (
+                <Loader2 className="h-3.5 w-3.5 animate-spin text-(--fg-link)" />
+            )}
+            {run.state === "failed" && <XCircle className="h-3.5 w-3.5 text-(--status-failed)" />}
         </li>
     );
 }
 
-function LinkedRecordsSection({ conv }: { conv: NonNullable<ReturnType<typeof conversationById>> }) {
+function LinkedRecordsSection({
+    conv,
+}: {
+    conv: NonNullable<ReturnType<typeof conversationById>>;
+}) {
     return (
         <Section title="Record collegati" icon={Tag} defaultOpen={false}>
             <div className="flex flex-wrap gap-1.5 text-xs">
@@ -292,7 +333,7 @@ function LinkedRecordsSection({ conv }: { conv: NonNullable<ReturnType<typeof co
                         type="button"
                         key={`${r.kind}-${r.id}`}
                         className={cn(
-                            "rounded-full border border-[var(--border-strong)] px-2 py-0.5 hover:bg-[var(--bg-hover)]",
+                            "rounded-full border border-(--border-strong) px-2 py-0.5 hover:bg-(--bg-hover)",
                             actionBtn
                         )}
                     >
@@ -311,11 +352,15 @@ function ActivitySection({ activity }: { activity: ActivityEvent[] }) {
         <Section title={`Attività (${activity.length})`} icon={History} defaultOpen={false}>
             <ul className="space-y-1.5 text-xs">
                 {activity.map((ev) => (
-                    <li key={ev.id} className="flex gap-2 border-l-2 border-[var(--border-strong)] pl-2">
+                    <li key={ev.id} className="flex gap-2 border-l-2 border-(--border-strong) pl-2">
                         <div className="min-w-0 flex-1">
-                            <span className="font-medium text-[var(--fg-primary)]">{ev.userName ?? "Sistema"}</span>{" "}
-                            <span className="text-[var(--fg-secondary)]">{activityText(ev)}</span>
-                            <div className="text-[10px] text-[var(--fg-tertiary)]">{ev.ts.replace("T", " · ").replace(/\+.*$/, "")}</div>
+                            <span className="font-medium text-(--fg-primary)">
+                                {ev.userName ?? "Sistema"}
+                            </span>{" "}
+                            <span className="text-(--fg-secondary)">{activityText(ev)}</span>
+                            <div className="text-[10px] text-(--fg-tertiary)">
+                                {ev.ts.replace("T", " · ").replace(/\+.*$/, "")}
+                            </div>
                         </div>
                     </li>
                 ))}
@@ -326,20 +371,34 @@ function ActivitySection({ activity }: { activity: ActivityEvent[] }) {
 
 function activityText(ev: ActivityEvent): string {
     switch (ev.type) {
-        case "assigned": return `ha assegnato a ${ev.targetUserName ?? "?"}${ev.reason ? ` (${ev.reason})` : ""}`;
-        case "unassigned": return "ha rilasciato la chat";
-        case "auto_assigned": return "ha auto-assegnato la chat";
-        case "auto_unassigned": return "ha auto-rilasciato la chat";
-        case "reassigned_timeout": return "riassegnata per timeout";
-        case "state_closed": return "ha chiuso la conversazione";
-        case "state_reopened": return "ha riaperto la conversazione";
-        case "state_reopened_auto": return "riaperta automaticamente (nuovo inbound)";
-        case "offhours_reply": return "ha risposto fuori orario";
-        case "queued_sent": return "messaggio in coda inviato";
-        case "outbound_sent": return "ha inviato un messaggio";
-        case "bot_takeover": return "è subentrata all'agente";
-        case "bot_handoff": return "l'agente ha trasferito a un operatore";
-        default: return ev.type;
+        case "assigned":
+            return `ha assegnato a ${ev.targetUserName ?? "?"}${ev.reason ? ` (${ev.reason})` : ""}`;
+        case "unassigned":
+            return "ha rilasciato la chat";
+        case "auto_assigned":
+            return "ha auto-assegnato la chat";
+        case "auto_unassigned":
+            return "ha auto-rilasciato la chat";
+        case "reassigned_timeout":
+            return "riassegnata per timeout";
+        case "state_closed":
+            return "ha chiuso la conversazione";
+        case "state_reopened":
+            return "ha riaperto la conversazione";
+        case "state_reopened_auto":
+            return "riaperta automaticamente (nuovo inbound)";
+        case "offhours_reply":
+            return "ha risposto fuori orario";
+        case "queued_sent":
+            return "messaggio in coda inviato";
+        case "outbound_sent":
+            return "ha inviato un messaggio";
+        case "bot_takeover":
+            return "è subentrata all'agente";
+        case "bot_handoff":
+            return "l'agente ha trasferito a un operatore";
+        default:
+            return ev.type;
     }
 }
 
@@ -356,23 +415,40 @@ function GallerySection() {
     return (
         <Section title="Galleria condivisa" icon={ImageIcon} defaultOpen={false}>
             <div className="mb-2 flex gap-2 text-[10px]">
-                <button type="button" className={cn("rounded px-1 font-semibold text-[var(--accent)]", actionBtn)}>Media (8)</button>
-                <button type="button" className={cn("rounded px-1 text-[var(--fg-tertiary)]", actionBtn)}>Link (3)</button>
-                <button type="button" className={cn("rounded px-1 text-[var(--fg-tertiary)]", actionBtn)}>Documenti (2)</button>
+                <button
+                    type="button"
+                    className={cn("rounded px-1 font-semibold text-(--accent)", actionBtn)}
+                >
+                    Media (8)
+                </button>
+                <button
+                    type="button"
+                    className={cn("rounded px-1 text-(--fg-tertiary)", actionBtn)}
+                >
+                    Link (3)
+                </button>
+                <button
+                    type="button"
+                    className={cn("rounded px-1 text-(--fg-tertiary)", actionBtn)}
+                >
+                    Documenti (2)
+                </button>
             </div>
             <div className="grid grid-cols-3 gap-1">
                 {GALLERY_TILES.map((tile) => (
                     <div
                         key={tile.id}
-                        className="aspect-square rounded bg-[var(--bg-panel-2)]"
-                        style={{ backgroundImage: `linear-gradient(${tile.angle}deg, var(--bg-hover), var(--bg-active))` }}
+                        className="aspect-square rounded bg-(--bg-panel-2)"
+                        style={{
+                            backgroundImage: `linear-gradient(${tile.angle}deg, var(--bg-hover), var(--bg-active))`,
+                        }}
                     />
                 ))}
             </div>
             <button
                 type="button"
                 className={cn(
-                    "mt-2 flex w-full items-center justify-center gap-1 rounded-md border border-[var(--border-strong)] py-1 text-[10px] text-[var(--fg-secondary)] hover:bg-[var(--bg-hover)]",
+                    "mt-2 flex w-full items-center justify-center gap-1 rounded-md border border-(--border-strong) py-1 text-[10px] text-(--fg-secondary) hover:bg-(--bg-hover)",
                     actionBtn
                 )}
             >

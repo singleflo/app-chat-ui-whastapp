@@ -55,14 +55,14 @@ const ICONS = {
 export function SystemPillRow({ view }: { view: SystemView }) {
     if (view.variant === "date_separator")
         return (
-            <div className="mx-auto my-2 rounded-md bg-[var(--bg-bubble-system)] px-3 py-0.5 text-[11px] font-semibold uppercase tracking-wide text-[var(--fg-secondary)] shadow-[var(--shadow-bubble)]">
+            <div className="mx-auto my-2 rounded-md bg-(--bg-bubble-system) px-3 py-0.5 text-[11px] font-semibold tracking-wide text-(--fg-secondary) uppercase shadow-(--shadow-bubble)">
                 {view.text}
             </div>
         );
 
     if (view.variant === "unread_count")
         return (
-            <div className="mx-auto my-1 rounded-full bg-[var(--accent-soft)] px-3 py-0.5 text-[11px] font-medium text-[var(--accent)]">
+            <div className="mx-auto my-1 rounded-full bg-(--accent-soft) px-3 py-0.5 text-[11px] font-medium text-(--accent)">
                 {view.text}
             </div>
         );
@@ -71,7 +71,7 @@ export function SystemPillRow({ view }: { view: SystemView }) {
 
     const Icon = ICONS[view.variant] ?? MessageSquareOff;
     return (
-        <div className="mx-auto my-1 flex max-w-[85%] items-center gap-1.5 rounded-md bg-[var(--bg-bubble-system)] px-2.5 py-1 text-[11px] text-[var(--fg-secondary)] shadow-[var(--shadow-bubble)]">
+        <div className="mx-auto my-1 flex max-w-[85%] items-center gap-1.5 rounded-md bg-(--bg-bubble-system) px-2.5 py-1 text-[11px] text-(--fg-secondary) shadow-(--shadow-bubble)">
             <Icon className="h-3 w-3 shrink-0" />
             <span>{view.text}</span>
         </div>
@@ -80,19 +80,22 @@ export function SystemPillRow({ view }: { view: SystemView }) {
 
 function ReferralCtwaRow({ view }: { view: SystemView }) {
     return (
-        <div className="mx-auto my-1 flex max-w-[85%] items-center gap-2 rounded-md bg-[var(--bg-bubble-system)] px-2 py-1 text-[11px] shadow-[var(--shadow-bubble)]">
+        <div className="mx-auto my-1 flex max-w-[85%] items-center gap-2 rounded-md bg-(--bg-bubble-system) px-2 py-1 text-[11px] shadow-(--shadow-bubble)">
             {view.referralAd?.image && (
-                <MediaPlaceholder url={view.referralAd.image} className="h-8 w-8 shrink-0 rounded" />
+                <MediaPlaceholder
+                    url={view.referralAd.image}
+                    className="h-8 w-8 shrink-0 rounded"
+                />
             )}
             <div className="min-w-0 flex-1">
-                <div className="flex items-center gap-1 text-[var(--fg-secondary)]">
+                <div className="flex items-center gap-1 text-(--fg-secondary)">
                     <Megaphone className="h-3 w-3" /> {view.text}
                 </div>
                 {view.referralAd?.name && (
-                    <div className="truncate text-[var(--fg-tertiary)]">{view.referralAd.name}</div>
+                    <div className="truncate text-(--fg-tertiary)">{view.referralAd.name}</div>
                 )}
             </div>
-            <span className="shrink-0 rounded bg-[var(--accent-soft)] px-1 text-[9px] text-[var(--accent)]">
+            <span className="shrink-0 rounded bg-(--accent-soft) px-1 text-[9px] text-(--accent)">
                 CTWA · 72h
             </span>
         </div>

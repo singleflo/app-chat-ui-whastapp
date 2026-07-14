@@ -4,15 +4,15 @@ Assembles the surfaces (desktop 3-pane / mobile stack / side-panel / quick-popov
 
 ## FILES
 
-| File | Role |
-|------|------|
-| `types.ts` | `SurfaceVariant` + `SURFACE_CAPS` (panels count, showInput, contextPanelCollapsible per variant) |
-| `ChatApp.tsx` | top orchestrator. `ChatApp` routes by variant; `DesktopChatApp` = 3-pane + drag-resize + overlay/lightbox state |
-| `ConversationListShell.tsx` | left column: header, filter chips, 13 conversation-item states, `onNewChat` trigger |
-| `ChatColumnShell.tsx` | center: `ChatHeader`, window/bot/pinned/record/team bars, message list, smart scroll-FAB, `ComposerShell` |
-| `ContextPanelShell.tsx` | right CRM panel: profile / custom fields / automations / records / activity / gallery accordions |
-| `Overlays.tsx` | transient modals: new-chat, delete-chat confirm, forward (multi-select ≤5) |
-| `Lightbox.tsx` | fullscreen media viewer: zoom/prev/next/download/share, keyboard nav |
+| File                        | Role                                                                                                            |
+| --------------------------- | --------------------------------------------------------------------------------------------------------------- |
+| `types.ts`                  | `SurfaceVariant` + `SURFACE_CAPS` (panels count, showInput, contextPanelCollapsible per variant)                |
+| `ChatApp.tsx`               | top orchestrator. `ChatApp` routes by variant; `DesktopChatApp` = 3-pane + drag-resize + overlay/lightbox state |
+| `ConversationListShell.tsx` | left column: header, filter chips, 13 conversation-item states, `onNewChat` trigger                             |
+| `ChatColumnShell.tsx`       | center: `ChatHeader`, window/bot/pinned/record/team bars, message list, smart scroll-FAB, `ComposerShell`       |
+| `ContextPanelShell.tsx`     | right CRM panel: profile / custom fields / automations / records / activity / gallery accordions                |
+| `Overlays.tsx`              | transient modals: new-chat, delete-chat confirm, forward (multi-select ≤5)                                      |
+| `Lightbox.tsx`              | fullscreen media viewer: zoom/prev/next/download/share, keyboard nav                                            |
 
 ## STATE OWNERSHIP
 

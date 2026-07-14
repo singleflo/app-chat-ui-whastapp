@@ -11,10 +11,7 @@ import {
     Check,
     PhoneCall,
 } from "lucide-react";
-import type {
-    CarouselCard,
-    TemplateButton,
-} from "@/types/chat";
+import type { CarouselCard, TemplateButton } from "@/types/chat";
 import { cn } from "@/lib/utils";
 import { Markdown } from "../Markdown";
 import { MediaPlaceholder } from "./Media";
@@ -36,7 +33,9 @@ export function ButtonsContent({
     if (reply) {
         return (
             <div className="flex w-[220px] max-w-full flex-col gap-1">
-                <div className="text-[10px] uppercase tracking-wide text-[var(--fg-tertiary)]">Risposta</div>
+                <div className="text-[10px] tracking-wide text-(--fg-tertiary) uppercase">
+                    Risposta
+                </div>
                 <div className="text-[14px] font-medium">{reply.title}</div>
             </div>
         );
@@ -50,13 +49,13 @@ export function ButtonsContent({
             <div className="text-[13px]">
                 <Markdown text={body} />
             </div>
-            {footer && <div className="text-[11px] text-[var(--fg-tertiary)]">{footer}</div>}
-            <div className="mt-1 flex flex-col divide-y divide-[var(--border-strong)] border-t border-[var(--border-strong)]">
+            {footer && <div className="text-[11px] text-(--fg-tertiary)">{footer}</div>}
+            <div className="mt-1 flex flex-col divide-y divide-(--border-strong) border-t border-(--border-strong)">
                 {buttons.map((b) => (
                     <button
                         type="button"
                         key={b.id}
-                        className="flex cursor-pointer items-center justify-center py-1.5 text-[13px] font-medium text-[var(--accent)] transition-all duration-200 ease-[cubic-bezier(0.16,1,0.3,1)] hover:bg-[var(--bg-hover)] active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ring)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--bg-panel)]"
+                        className="flex cursor-pointer items-center justify-center py-1.5 text-[13px] font-medium text-(--accent) transition-all duration-200 ease-[cubic-bezier(0.16,1,0.3,1)] hover:bg-(--bg-hover) focus-visible:ring-2 focus-visible:ring-(--ring) focus-visible:ring-offset-2 focus-visible:ring-offset-(--bg-panel) focus-visible:outline-none active:scale-95"
                     >
                         {b.title}
                     </button>
@@ -84,10 +83,12 @@ export function ListContent({
     if (reply) {
         return (
             <div className="flex w-[220px] max-w-full flex-col gap-0.5">
-                <div className="text-[10px] uppercase tracking-wide text-[var(--fg-tertiary)]">Scelta</div>
+                <div className="text-[10px] tracking-wide text-(--fg-tertiary) uppercase">
+                    Scelta
+                </div>
                 <div className="text-[14px] font-medium">{reply.title}</div>
                 {reply.description && (
-                    <div className="text-[11px] text-[var(--fg-secondary)]">{reply.description}</div>
+                    <div className="text-[11px] text-(--fg-secondary)">{reply.description}</div>
                 )}
             </div>
         );
@@ -97,21 +98,21 @@ export function ListContent({
             <div className="text-[13px]">
                 <Markdown text={body} />
             </div>
-            {footer && <div className="mt-0.5 text-[11px] text-[var(--fg-tertiary)]">{footer}</div>}
+            {footer && <div className="mt-0.5 text-[11px] text-(--fg-tertiary)">{footer}</div>}
             <button
                 type="button"
                 onClick={() => setOpen(!open)}
-                className="mt-2 flex w-full cursor-pointer items-center justify-center gap-2 rounded-md border border-[var(--border-strong)] py-1.5 text-[13px] font-medium text-[var(--fg-primary)] transition-all duration-200 ease-[cubic-bezier(0.16,1,0.3,1)] hover:bg-[var(--bg-hover)] active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ring)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--bg-panel)]"
+                className="mt-2 flex w-full cursor-pointer items-center justify-center gap-2 rounded-md border border-(--border-strong) py-1.5 text-[13px] font-medium text-(--fg-primary) transition-all duration-200 ease-[cubic-bezier(0.16,1,0.3,1)] hover:bg-(--bg-hover) focus-visible:ring-2 focus-visible:ring-(--ring) focus-visible:ring-offset-2 focus-visible:ring-offset-(--bg-panel) focus-visible:outline-none active:scale-95"
             >
                 <List className="h-3.5 w-3.5" />
                 {buttonTitle}
                 <ChevronDown className={cn("h-3 w-3 transition-transform", open && "rotate-180")} />
             </button>
             {open && (
-                <div className="absolute bottom-full left-0 right-0 z-10 mb-1 max-h-[260px] overflow-y-auto rounded-md border border-[var(--border-strong)] bg-[var(--bg-panel)] shadow-[var(--shadow-overlay)]">
+                <div className="absolute right-0 bottom-full left-0 z-10 mb-1 max-h-[260px] overflow-y-auto rounded-md border border-(--border-strong) bg-(--bg-panel) shadow-(--shadow-overlay)">
                     {sections.map((s) => (
                         <div key={s.title}>
-                            <div className="px-2 py-1 text-[10px] font-semibold uppercase tracking-wide text-[var(--fg-tertiary)]">
+                            <div className="px-2 py-1 text-[10px] font-semibold tracking-wide text-(--fg-tertiary) uppercase">
                                 {s.title}
                             </div>
                             {s.rows.map((r) => (
@@ -119,11 +120,15 @@ export function ListContent({
                                     type="button"
                                     key={r.id}
                                     onClick={() => setOpen(false)}
-                                    className="block w-full cursor-pointer px-2 py-1.5 text-left transition-all duration-200 ease-[cubic-bezier(0.16,1,0.3,1)] hover:bg-[var(--bg-hover)] active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ring)] focus-visible:ring-inset"
+                                    className="block w-full cursor-pointer px-2 py-1.5 text-left transition-all duration-200 ease-[cubic-bezier(0.16,1,0.3,1)] hover:bg-(--bg-hover) focus-visible:ring-2 focus-visible:ring-(--ring) focus-visible:outline-none focus-visible:ring-inset active:scale-95"
                                 >
-                                    <div className="text-[13px] font-medium text-[var(--fg-primary)]">{r.title}</div>
+                                    <div className="text-[13px] font-medium text-(--fg-primary)">
+                                        {r.title}
+                                    </div>
                                     {r.description && (
-                                        <div className="text-[11px] text-[var(--fg-secondary)]">{r.description}</div>
+                                        <div className="text-[11px] text-(--fg-secondary)">
+                                            {r.description}
+                                        </div>
                                     )}
                                 </button>
                             ))}
@@ -152,13 +157,13 @@ export function CtaUrlContent({
             <div className="text-[13px]">
                 <Markdown text={body} />
             </div>
-            {footer && <div className="text-[11px] text-[var(--fg-tertiary)]">{footer}</div>}
+            {footer && <div className="text-[11px] text-(--fg-tertiary)">{footer}</div>}
             <a
                 href={url}
                 target="_blank"
                 rel="noopener noreferrer"
                 onClick={(e) => e.preventDefault()}
-                className="flex cursor-pointer items-center justify-center gap-1.5 rounded-md border-t border-[var(--border-strong)] py-1.5 text-[13px] font-medium text-[var(--accent)] transition-all duration-200 ease-[cubic-bezier(0.16,1,0.3,1)] hover:bg-[var(--bg-hover)] active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ring)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--bg-panel)]"
+                className="flex cursor-pointer items-center justify-center gap-1.5 rounded-md border-t border-(--border-strong) py-1.5 text-[13px] font-medium text-(--accent) transition-all duration-200 ease-[cubic-bezier(0.16,1,0.3,1)] hover:bg-(--bg-hover) focus-visible:ring-2 focus-visible:ring-(--ring) focus-visible:ring-offset-2 focus-visible:ring-offset-(--bg-panel) focus-visible:outline-none active:scale-95"
             >
                 <ExternalLink className="h-3.5 w-3.5" /> {ctaTitle}
             </a>
@@ -182,22 +187,22 @@ export function FlowContent({
     if (reply) {
         return (
             <div className="flex w-[240px] max-w-full flex-col gap-1.5">
-                <div className="flex items-center gap-1.5 text-[13px] font-semibold text-[var(--accent)]">
+                <div className="flex items-center gap-1.5 text-[13px] font-semibold text-(--accent)">
                     <CheckCheck className="h-4 w-4" /> Modulo completato
                 </div>
-                <div className="text-[11px] text-[var(--fg-tertiary)]">Flow: {reply.flowName}</div>
+                <div className="text-[11px] text-(--fg-tertiary)">Flow: {reply.flowName}</div>
                 <dl className="grid grid-cols-2 gap-x-2 gap-y-0.5 text-[11px]">
                     {Object.entries(reply.responseJson).map(([k, v]) => (
                         <div key={`flow-${k}`} className="contents">
-                            <dt className="text-[var(--fg-tertiary)]">{k}</dt>
-                            <dd className="text-[var(--fg-primary)]">{String(v)}</dd>
+                            <dt className="text-(--fg-tertiary)">{k}</dt>
+                            <dd className="text-(--fg-primary)">{String(v)}</dd>
                         </div>
                     ))}
                 </dl>
                 <button
                     type="button"
                     onClick={() => setShowJson(!showJson)}
-                    className="cursor-pointer rounded text-left text-[10px] text-[var(--fg-link)] transition-all duration-200 ease-[cubic-bezier(0.16,1,0.3,1)] active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ring)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--bg-panel)]"
+                    className="cursor-pointer rounded text-left text-[10px] text-(--fg-link) transition-all duration-200 ease-[cubic-bezier(0.16,1,0.3,1)] focus-visible:ring-2 focus-visible:ring-(--ring) focus-visible:ring-offset-2 focus-visible:ring-offset-(--bg-panel) focus-visible:outline-none active:scale-95"
                 >
                     {showJson ? "Nascondi dettagli" : "Vedi dettagli"}
                 </button>
@@ -216,11 +221,11 @@ export function FlowContent({
             </div>
             <button
                 type="button"
-                className="flex cursor-pointer items-center justify-center gap-1.5 rounded-md border-t border-[var(--border-strong)] py-1.5 text-[13px] font-medium text-[var(--accent)] transition-all duration-200 ease-[cubic-bezier(0.16,1,0.3,1)] hover:bg-[var(--bg-hover)] active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ring)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--bg-panel)]"
+                className="flex cursor-pointer items-center justify-center gap-1.5 rounded-md border-t border-(--border-strong) py-1.5 text-[13px] font-medium text-(--accent) transition-all duration-200 ease-[cubic-bezier(0.16,1,0.3,1)] hover:bg-(--bg-hover) focus-visible:ring-2 focus-visible:ring-(--ring) focus-visible:ring-offset-2 focus-visible:ring-offset-(--bg-panel) focus-visible:outline-none active:scale-95"
             >
                 <ExternalLink className="h-3.5 w-3.5" /> {ctaTitle}
             </button>
-            <div className="text-[10px] text-[var(--fg-tertiary)]">Flow: {flowName}</div>
+            <div className="text-[10px] text-(--fg-tertiary)">Flow: {flowName}</div>
         </div>
     );
 }
@@ -230,17 +235,19 @@ export function CallPermissionContent({ state }: { state: "pending" | "accepted"
     return (
         <div className="flex w-[220px] max-w-full flex-col gap-1.5">
             <div className="flex items-center gap-1.5 text-[13px]">
-                <PhoneCall className="h-4 w-4 text-[var(--accent)]" />
+                <PhoneCall className="h-4 w-4 text-(--accent)" />
                 Richiesta di chiamata
             </div>
             {state === "pending" && (
-                <div className="text-[11px] text-[var(--fg-tertiary)]">In attesa di autorizzazione (1/24h, 2/7gg)</div>
+                <div className="text-[11px] text-(--fg-tertiary)">
+                    In attesa di autorizzazione (1/24h, 2/7gg)
+                </div>
             )}
             {state === "accepted" && (
-                <div className="text-[11px] text-[var(--accent)]">✓ Autorizzata</div>
+                <div className="text-[11px] text-(--accent)">✓ Autorizzata</div>
             )}
             {state === "rejected" && (
-                <div className="text-[11px] text-[var(--status-failed)]">✗ Rifiutata</div>
+                <div className="text-[11px] text-(--status-failed)">✗ Rifiutata</div>
             )}
         </div>
     );
@@ -254,19 +261,22 @@ export function CarouselContent({ cards }: { cards: CarouselCard[] }) {
                 {cards.map((c) => (
                     <div
                         key={c.id}
-                        className="w-[200px] shrink-0 snap-start rounded-md border border-[var(--border-strong)] bg-[var(--bg-panel-2)] overflow-hidden"
+                        className="w-[200px] shrink-0 snap-start overflow-hidden rounded-md border border-(--border-strong) bg-(--bg-panel-2)"
                     >
                         {c.headerImage && (
-                            <MediaPlaceholder url={c.headerImage} className="aspect-video w-full rounded-none" />
+                            <MediaPlaceholder
+                                url={c.headerImage}
+                                className="aspect-video w-full rounded-none"
+                            />
                         )}
                         <div className="p-2">
-                            <div className="text-[12px] text-[var(--fg-primary)]">{c.body}</div>
-                            <div className="mt-1.5 flex flex-col gap-1 border-t border-[var(--border-strong)] pt-1.5">
+                            <div className="text-[12px] text-(--fg-primary)">{c.body}</div>
+                            <div className="mt-1.5 flex flex-col gap-1 border-t border-(--border-strong) pt-1.5">
                                 {c.buttons.map((b) => (
                                     <button
                                         type="button"
                                         key={b.id}
-                                        className="flex cursor-pointer items-center justify-center gap-1 rounded py-0.5 text-[11px] font-medium text-[var(--accent)] transition-all duration-200 ease-[cubic-bezier(0.16,1,0.3,1)] hover:bg-[var(--bg-hover)] active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ring)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--bg-panel)]"
+                                        className="flex cursor-pointer items-center justify-center gap-1 rounded py-0.5 text-[11px] font-medium text-(--accent) transition-all duration-200 ease-[cubic-bezier(0.16,1,0.3,1)] hover:bg-(--bg-hover) focus-visible:ring-2 focus-visible:ring-(--ring) focus-visible:ring-offset-2 focus-visible:ring-offset-(--bg-panel) focus-visible:outline-none active:scale-95"
                                     >
                                         {b.kind === "url" && <ExternalLink className="h-3 w-3" />}
                                         {b.title}
@@ -283,7 +293,7 @@ export function CarouselContent({ cards }: { cards: CarouselCard[] }) {
                         key={c.id}
                         className={cn(
                             "h-1 rounded-full",
-                            idx === 0 ? "w-3 bg-[var(--accent)]" : "w-1 bg-[var(--fg-tertiary)]/40"
+                            idx === 0 ? "w-3 bg-(--accent)" : "w-1 bg-(--fg-tertiary)/40"
                         )}
                     />
                 ))}
@@ -296,17 +306,26 @@ export function CarouselContent({ cards }: { cards: CarouselCard[] }) {
 export function ProductContent({
     product,
 }: {
-    product: { id: string; name: string; price: string; currency: string; description?: string; image: string };
+    product: {
+        id: string;
+        name: string;
+        price: string;
+        currency: string;
+        description?: string;
+        image: string;
+    };
 }) {
     return (
-        <div className="flex w-[220px] max-w-full flex-col gap-1.5 rounded-md overflow-hidden">
+        <div className="flex w-[220px] max-w-full flex-col gap-1.5 overflow-hidden rounded-md">
             <MediaPlaceholder url={product.image} className="aspect-square w-full rounded-none" />
             <div className="px-2">
                 <div className="text-[13px] font-semibold">{product.name}</div>
                 {product.description && (
-                    <div className="text-[11px] text-[var(--fg-secondary)] line-clamp-2">{product.description}</div>
+                    <div className="line-clamp-2 text-[11px] text-(--fg-secondary)">
+                        {product.description}
+                    </div>
                 )}
-                <div className="text-[14px] font-bold text-[var(--accent)]">
+                <div className="text-[14px] font-bold text-(--accent)">
                     {product.price} {product.currency}
                 </div>
             </div>
@@ -326,15 +345,22 @@ export function ProductListContent({
 }) {
     return (
         <div className="flex w-[220px] max-w-full flex-col gap-1.5">
-            {headerImage && <MediaPlaceholder url={headerImage} className="aspect-[5/2] rounded-md" />}
+            {headerImage && (
+                <MediaPlaceholder url={headerImage} className="aspect-[5/2] rounded-md" />
+            )}
             {title && <div className="text-[13px] font-semibold">{title}</div>}
             {sections.map((s) => (
                 <div key={s.title}>
-                    <div className="text-[10px] uppercase tracking-wide text-[var(--fg-tertiary)]">{s.title}</div>
+                    <div className="text-[10px] tracking-wide text-(--fg-tertiary) uppercase">
+                        {s.title}
+                    </div>
                     {s.items.map((it) => (
-                        <div key={it.id} className="flex items-center justify-between py-0.5 text-[12px]">
+                        <div
+                            key={it.id}
+                            className="flex items-center justify-between py-0.5 text-[12px]"
+                        >
                             <span>{it.name}</span>
-                            <span className="text-[var(--accent)]">{it.price}</span>
+                            <span className="text-(--accent)">{it.price}</span>
                         </div>
                     ))}
                 </div>
@@ -356,13 +382,13 @@ export function CatalogContent({
     return (
         <div className="flex w-[220px] max-w-full flex-col gap-1.5">
             <div className="flex items-center gap-2">
-                <ShoppingCart className="h-5 w-5 text-[var(--accent)]" />
+                <ShoppingCart className="h-5 w-5 text-(--accent)" />
                 <div className="text-[13px] font-semibold">{title}</div>
             </div>
-            {body && <div className="text-[11px] text-[var(--fg-secondary)]">{body}</div>}
+            {body && <div className="text-[11px] text-(--fg-secondary)">{body}</div>}
             <button
                 type="button"
-                className="flex cursor-pointer items-center justify-center gap-1.5 rounded-md border-t border-[var(--border-strong)] py-1.5 text-[13px] font-medium text-[var(--accent)] transition-all duration-200 ease-[cubic-bezier(0.16,1,0.3,1)] hover:bg-[var(--bg-hover)] active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ring)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--bg-panel)]"
+                className="flex cursor-pointer items-center justify-center gap-1.5 rounded-md border-t border-(--border-strong) py-1.5 text-[13px] font-medium text-(--accent) transition-all duration-200 ease-[cubic-bezier(0.16,1,0.3,1)] hover:bg-(--bg-hover) focus-visible:ring-2 focus-visible:ring-(--ring) focus-visible:ring-offset-2 focus-visible:ring-offset-(--bg-panel) focus-visible:outline-none active:scale-95"
             >
                 {ctaTitle}
             </button>
@@ -391,7 +417,7 @@ export function TemplateButtonRow({ button }: { button: TemplateButton }) {
                     target="_blank"
                     rel="noopener noreferrer"
                     onClick={(e) => e.preventDefault()}
-                    className="flex cursor-pointer items-center justify-center gap-1.5 py-1.5 text-[12px] font-medium text-[var(--accent)] transition-all duration-200 ease-[cubic-bezier(0.16,1,0.3,1)] hover:bg-[var(--bg-hover)] active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ring)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--bg-panel)]"
+                    className="flex cursor-pointer items-center justify-center gap-1.5 py-1.5 text-[12px] font-medium text-(--accent) transition-all duration-200 ease-[cubic-bezier(0.16,1,0.3,1)] hover:bg-(--bg-hover) focus-visible:ring-2 focus-visible:ring-(--ring) focus-visible:ring-offset-2 focus-visible:ring-offset-(--bg-panel) focus-visible:outline-none active:scale-95"
                 >
                     <ExternalLink className="h-3 w-3" /> {button.title}
                 </a>
@@ -401,7 +427,7 @@ export function TemplateButtonRow({ button }: { button: TemplateButton }) {
                 <a
                     href={`tel:${button.phone}`}
                     onClick={(e) => e.preventDefault()}
-                    className="flex cursor-pointer items-center justify-center gap-1.5 py-1.5 text-[12px] font-medium text-[var(--accent)] transition-all duration-200 ease-[cubic-bezier(0.16,1,0.3,1)] hover:bg-[var(--bg-hover)] active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ring)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--bg-panel)]"
+                    className="flex cursor-pointer items-center justify-center gap-1.5 py-1.5 text-[12px] font-medium text-(--accent) transition-all duration-200 ease-[cubic-bezier(0.16,1,0.3,1)] hover:bg-(--bg-hover) focus-visible:ring-2 focus-visible:ring-(--ring) focus-visible:ring-offset-2 focus-visible:ring-offset-(--bg-panel) focus-visible:outline-none active:scale-95"
                 >
                     <Phone className="h-3 w-3" /> {button.title}
                 </a>
@@ -412,9 +438,10 @@ export function TemplateButtonRow({ button }: { button: TemplateButton }) {
                 <button
                     type="button"
                     onClick={() => handleCopy(button.code)}
-                    className="flex cursor-pointer items-center justify-center gap-1.5 py-1.5 text-[12px] font-medium text-[var(--accent)] transition-all duration-200 ease-[cubic-bezier(0.16,1,0.3,1)] hover:bg-[var(--bg-hover)] active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ring)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--bg-panel)]"
+                    className="flex cursor-pointer items-center justify-center gap-1.5 py-1.5 text-[12px] font-medium text-(--accent) transition-all duration-200 ease-[cubic-bezier(0.16,1,0.3,1)] hover:bg-(--bg-hover) focus-visible:ring-2 focus-visible:ring-(--ring) focus-visible:ring-offset-2 focus-visible:ring-offset-(--bg-panel) focus-visible:outline-none active:scale-95"
                 >
-                    {copied ? <Check className="h-3 w-3" /> : <Copy className="h-3 w-3" />} {button.title}
+                    {copied ? <Check className="h-3 w-3" /> : <Copy className="h-3 w-3" />}{" "}
+                    {button.title}
                 </button>
             );
         case "otp_one_tap":
@@ -422,7 +449,7 @@ export function TemplateButtonRow({ button }: { button: TemplateButton }) {
                 <button
                     type="button"
                     onClick={() => handleCopy(button.code)}
-                    className="flex cursor-pointer items-center justify-center gap-1.5 py-1.5 text-[12px] font-medium text-[var(--accent)] transition-all duration-200 ease-[cubic-bezier(0.16,1,0.3,1)] hover:bg-[var(--bg-hover)] active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ring)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--bg-panel)]"
+                    className="flex cursor-pointer items-center justify-center gap-1.5 py-1.5 text-[12px] font-medium text-(--accent) transition-all duration-200 ease-[cubic-bezier(0.16,1,0.3,1)] hover:bg-(--bg-hover) focus-visible:ring-2 focus-visible:ring-(--ring) focus-visible:ring-offset-2 focus-visible:ring-offset-(--bg-panel) focus-visible:outline-none active:scale-95"
                 >
                     <CheckCheck className="h-3 w-3" /> {button.title}
                 </button>
@@ -434,7 +461,7 @@ export function TemplateButtonRow({ button }: { button: TemplateButton }) {
             return (
                 <button
                     type="button"
-                    className="flex cursor-pointer items-center justify-center gap-1.5 py-1.5 text-[12px] font-medium text-[var(--accent)] transition-all duration-200 ease-[cubic-bezier(0.16,1,0.3,1)] hover:bg-[var(--bg-hover)] active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ring)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--bg-panel)]"
+                    className="flex cursor-pointer items-center justify-center gap-1.5 py-1.5 text-[12px] font-medium text-(--accent) transition-all duration-200 ease-[cubic-bezier(0.16,1,0.3,1)] hover:bg-(--bg-hover) focus-visible:ring-2 focus-visible:ring-(--ring) focus-visible:ring-offset-2 focus-visible:ring-offset-(--bg-panel) focus-visible:outline-none active:scale-95"
                 >
                     {button.kind === "catalog" && <ShoppingCart className="h-3 w-3" />}
                     {button.kind === "flow" && <ExternalLink className="h-3 w-3" />}

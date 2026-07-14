@@ -5,19 +5,19 @@ import { cn } from "@/lib/utils";
 
 const buttonVariants = cva(
     // 2026: cursor-pointer + active:scale-95 (haptic-like press) + ring-offset
-    "inline-flex cursor-pointer items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-[background-color,color,box-shadow,transform] duration-200 ease-[cubic-bezier(0.16,1,0.3,1)] active:scale-[0.97] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ring)] focus-visible:ring-offset-[var(--ring-offset)] focus-visible:ring-offset-[var(--bg-panel)] disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50 [&_svg]:size-4 [&_svg]:shrink-0",
+    "inline-flex cursor-pointer items-center justify-center gap-2 rounded-md text-sm font-medium whitespace-nowrap transition-[background-color,color,box-shadow,transform] duration-200 ease-[cubic-bezier(0.16,1,0.3,1)] focus-visible:ring-2 focus-visible:ring-(--ring) focus-visible:ring-offset-(--bg-panel) focus-visible:ring-offset-(--ring-offset) focus-visible:outline-none active:scale-[0.97] disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50 [&_svg]:size-4 [&_svg]:shrink-0",
     {
         variants: {
             variant: {
-                default: "bg-[var(--accent)] text-[var(--accent-fg)] shadow-[var(--shadow-sm)] hover:bg-[var(--accent-hover)] hover:shadow-[var(--shadow-md)]",
+                default:
+                    "bg-(--accent) text-(--accent-fg) shadow-(--shadow-sm) hover:bg-(--accent-hover) hover:shadow-(--shadow-md)",
                 destructive:
-                    "bg-[var(--destructive)] text-white shadow-[var(--shadow-sm)] hover:bg-[var(--destructive)]/90 hover:shadow-[var(--shadow-md)]",
+                    "bg-(--destructive) text-white shadow-(--shadow-sm) hover:bg-(--destructive)/90 hover:shadow-(--shadow-md)",
                 outline:
-                    "border border-[var(--border-strong)] bg-transparent hover:bg-[var(--bg-hover)] hover:text-[var(--fg-primary)] hover:border-[var(--border-strong)]",
-                secondary:
-                    "bg-[var(--bg-panel-2)] text-[var(--fg-primary)] hover:bg-[var(--bg-hover)]",
-                ghost: "hover:bg-[var(--bg-hover)] hover:text-[var(--fg-primary)]",
-                link: "text-[var(--fg-link)] underline-offset-4 hover:underline",
+                    "border border-(--border-strong) bg-transparent hover:border-(--border-strong) hover:bg-(--bg-hover) hover:text-(--fg-primary)",
+                secondary: "bg-(--bg-panel-2) text-(--fg-primary) hover:bg-(--bg-hover)",
+                ghost: "hover:bg-(--bg-hover) hover:text-(--fg-primary)",
+                link: "text-(--fg-link) underline-offset-4 hover:underline",
             },
             size: {
                 default: "h-9 px-4 py-2",
@@ -36,8 +36,7 @@ const buttonVariants = cva(
 );
 
 export interface ButtonProps
-    extends React.ButtonHTMLAttributes<HTMLButtonElement>,
-        VariantProps<typeof buttonVariants> {
+    extends React.ButtonHTMLAttributes<HTMLButtonElement>, VariantProps<typeof buttonVariants> {
     asChild?: boolean;
 }
 

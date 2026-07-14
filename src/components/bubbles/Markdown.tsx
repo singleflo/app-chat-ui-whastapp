@@ -5,7 +5,11 @@ import type { ReactNode } from "react";
  * `inline code`, ```code block```, > quote, lists. Naive but spec-aligned.
  */
 export function Markdown({ text }: { text: string }) {
-    return <span className="whitespace-pre-wrap leading-snug text-[var(--fg-primary)]">{renderInline(text)}</span>;
+    return (
+        <span className="leading-snug whitespace-pre-wrap text-(--fg-primary)">
+            {renderInline(text)}
+        </span>
+    );
 }
 
 function renderInline(text: string): ReactNode[] {
@@ -16,7 +20,7 @@ function renderInline(text: string): ReactNode[] {
             return (
                 <code
                     key={key}
-                    className="block overflow-x-auto whitespace-pre-wrap break-words rounded bg-black/10 px-2 py-1 font-mono text-[12px]"
+                    className="block overflow-x-auto rounded bg-black/10 px-2 py-1 font-mono text-[12px] break-words whitespace-pre-wrap"
                 >
                     {tok.slice(3, -3)}
                 </code>
@@ -24,7 +28,10 @@ function renderInline(text: string): ReactNode[] {
         }
         if (tok.startsWith("`") && tok.endsWith("`")) {
             return (
-                <code key={key} className="break-words rounded bg-black/10 px-1 font-mono text-[12px]">
+                <code
+                    key={key}
+                    className="rounded bg-black/10 px-1 font-mono text-[12px] break-words"
+                >
                     {tok.slice(1, -1)}
                 </code>
             );

@@ -18,11 +18,19 @@ export function ImageContent({
     return (
         <div className="flex flex-col gap-1">
             <div className="relative">
-                <button type="button" onClick={openLightbox} className="block cursor-zoom-in rounded-lg transition-all duration-200 ease-[cubic-bezier(0.16,1,0.3,1)] active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ring)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--bg-panel)]" aria-label="Apri immagine">
-                    <MediaPlaceholder url={url} className="aspect-video w-[240px] max-w-full max-w-[320px] rounded-lg" />
+                <button
+                    type="button"
+                    onClick={openLightbox}
+                    className="block cursor-zoom-in rounded-lg transition-all duration-200 ease-[cubic-bezier(0.16,1,0.3,1)] focus-visible:ring-2 focus-visible:ring-(--ring) focus-visible:ring-offset-2 focus-visible:ring-offset-(--bg-panel) focus-visible:outline-none active:scale-95"
+                    aria-label="Apri immagine"
+                >
+                    <MediaPlaceholder
+                        url={url}
+                        className="aspect-video w-[240px] max-w-[320px] max-w-full rounded-lg"
+                    />
                 </button>
                 {album && (
-                    <span className="absolute bottom-1 right-1 rounded bg-black/60 px-1.5 py-0.5 text-[10px] text-white">
+                    <span className="absolute right-1 bottom-1 rounded bg-black/60 px-1.5 py-0.5 text-[10px] text-white">
                         +{album.total - 1}
                     </span>
                 )}
@@ -52,18 +60,18 @@ export function VideoContent({
             <div className="relative">
                 <MediaPlaceholder
                     url={poster ?? url}
-                    className="aspect-video w-[240px] max-w-full max-w-[320px] rounded-lg"
+                    className="aspect-video w-[240px] max-w-[320px] max-w-full rounded-lg"
                 />
                 <button
                     type="button"
-                    className="absolute inset-0 flex cursor-pointer items-center justify-center transition-all duration-200 ease-[cubic-bezier(0.16,1,0.3,1)] active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ring)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--bg-panel)]"
+                    className="absolute inset-0 flex cursor-pointer items-center justify-center transition-all duration-200 ease-[cubic-bezier(0.16,1,0.3,1)] focus-visible:ring-2 focus-visible:ring-(--ring) focus-visible:ring-offset-2 focus-visible:ring-offset-(--bg-panel) focus-visible:outline-none active:scale-95"
                     aria-label="Riproduci"
                 >
                     <span className="flex h-12 w-12 items-center justify-center rounded-full bg-black/60 text-white">
                         <Play className="h-5 w-5" />
                     </span>
                 </button>
-                <span className="absolute bottom-1 right-1 rounded bg-black/60 px-1.5 py-0.5 text-[10px] text-white">
+                <span className="absolute right-1 bottom-1 rounded bg-black/60 px-1.5 py-0.5 text-[10px] text-white">
                     {gif ? "GIF" : `${mm}:${ss}`}
                 </span>
             </div>
@@ -85,18 +93,22 @@ export function DocumentContent({
 }) {
     const Icon = pickDocIcon(mime);
     return (
-        <div className="flex w-[220px] max-w-full items-center gap-2 rounded-md bg-[var(--bg-panel-2)] p-2">
-            <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded bg-[var(--accent-soft)] text-[var(--accent)]">
+        <div className="flex w-[220px] max-w-full items-center gap-2 rounded-md bg-(--bg-panel-2) p-2">
+            <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded bg-(--accent-soft) text-(--accent)">
                 <Icon className="h-5 w-5" />
             </div>
             <div className="min-w-0 flex-1">
                 <div className="truncate text-[13px] font-medium">{truncateMiddle(name, 28)}</div>
-                <div className="text-[10px] text-[var(--fg-tertiary)]">
+                <div className="text-[10px] text-(--fg-tertiary)">
                     {fmtBytes(sizeBytes)}
                     {pages ? ` · ${pages} pag` : ""}
                 </div>
             </div>
-            <button type="button" className="shrink-0 cursor-pointer rounded text-[var(--fg-tertiary)] transition-all duration-200 ease-[cubic-bezier(0.16,1,0.3,1)] hover:text-[var(--fg-secondary)] active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ring)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--bg-panel)]" aria-label="Opzioni documento">
+            <button
+                type="button"
+                className="shrink-0 cursor-pointer rounded text-(--fg-tertiary) transition-all duration-200 ease-[cubic-bezier(0.16,1,0.3,1)] hover:text-(--fg-secondary) focus-visible:ring-2 focus-visible:ring-(--ring) focus-visible:ring-offset-2 focus-visible:ring-offset-(--bg-panel) focus-visible:outline-none active:scale-95"
+                aria-label="Opzioni documento"
+            >
                 <MoreVertical className="h-4 w-4" />
             </button>
         </div>
@@ -106,13 +118,9 @@ export function DocumentContent({
 export function StickerContent({ url, animated }: { url: string; animated: boolean }) {
     return (
         <div className="relative h-[140px] w-[140px] overflow-hidden rounded-lg">
-            <MediaPlaceholder
-                url={url}
-                className="h-[140px] w-[140px] rounded-lg"
-                transparent
-            />
+            <MediaPlaceholder url={url} className="h-[140px] w-[140px] rounded-lg" transparent />
             {animated && (
-                <span className="absolute bottom-1 right-1 rounded bg-black/50 px-1 text-[9px] text-white">
+                <span className="absolute right-1 bottom-1 rounded bg-black/50 px-1 text-[9px] text-white">
                     ANIM
                 </span>
             )}
@@ -133,7 +141,7 @@ export function MediaPlaceholder({
     return (
         <div
             className={cn(
-                !transparent && "bg-[var(--bg-panel-2)]",
+                !transparent && "bg-(--bg-panel-2)",
                 "flex items-center justify-center",
                 className
             )}
@@ -160,8 +168,10 @@ function hashHue(s: string) {
 
 function pickDocIcon(mime: string) {
     if (mime.includes("pdf")) return FileText;
-    if (mime.includes("spreadsheet") || mime.includes("excel") || mime.includes("xls")) return FileSpreadsheet;
-    if (mime.includes("json") || mime.includes("javascript") || mime.includes("text/")) return FileCode;
+    if (mime.includes("spreadsheet") || mime.includes("excel") || mime.includes("xls"))
+        return FileSpreadsheet;
+    if (mime.includes("json") || mime.includes("javascript") || mime.includes("text/"))
+        return FileCode;
     if (mime.includes("zip") || mime.includes("rar") || mime.includes("tar") || mime.includes("gz"))
         return FileArchive;
     if (mime.includes("presentation") || mime.includes("powerpoint")) return Layers;

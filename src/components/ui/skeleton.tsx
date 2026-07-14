@@ -11,12 +11,7 @@ import { cn } from "@/lib/utils";
  * <Skeleton className="h-12 w-12 rounded-full" /> // avatar
  */
 function Skeleton({ className, ...props }: React.HTMLAttributes<HTMLDivElement>) {
-    return (
-        <div
-            className={cn("animate-pulse rounded-md bg-[var(--bg-muted)]", className)}
-            {...props}
-        />
-    );
+    return <div className={cn("animate-pulse rounded-md bg-(--bg-muted)", className)} {...props} />;
 }
 
 export { Skeleton };

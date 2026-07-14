@@ -15,7 +15,7 @@ export function OrderContent({
 }) {
     return (
         <div className="flex w-[260px] max-w-full flex-col gap-2">
-            <div className="text-[10px] uppercase tracking-wide text-[var(--fg-tertiary)]">
+            <div className="text-[10px] tracking-wide text-(--fg-tertiary) uppercase">
                 🛒 Ordine · {items.length} articoli
             </div>
             <div className="space-y-1.5">
@@ -27,23 +27,23 @@ export function OrderContent({
                         />
                         <div className="min-w-0 flex-1">
                             <div className="truncate text-[12px] font-medium">{it.name}</div>
-                            <div className="text-[10px] text-[var(--fg-tertiary)]">
+                            <div className="text-[10px] text-(--fg-tertiary)">
                                 {it.qty} × {it.price} {it.currency}
                             </div>
                         </div>
                     </div>
                 ))}
             </div>
-            {note && <div className="text-[11px] italic text-[var(--fg-secondary)]">"{note}"</div>}
-            <div className="flex items-center justify-between border-t border-[var(--border-strong)] pt-1.5 text-[13px] font-semibold">
+            {note && <div className="text-[11px] text-(--fg-secondary) italic">"{note}"</div>}
+            <div className="flex items-center justify-between border-t border-(--border-strong) pt-1.5 text-[13px] font-semibold">
                 <span>Totale</span>
-                <span className="text-[var(--accent)]">
+                <span className="text-(--accent)">
                     {total} {currency}
                 </span>
             </div>
             <button
                 type="button"
-                className="flex cursor-pointer items-center justify-center gap-1 rounded py-1 text-[12px] font-medium text-[var(--accent)] transition-all duration-200 ease-[cubic-bezier(0.16,1,0.3,1)] hover:bg-[var(--bg-hover)] active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ring)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--bg-panel)]"
+                className="flex cursor-pointer items-center justify-center gap-1 rounded py-1 text-[12px] font-medium text-(--accent) transition-all duration-200 ease-[cubic-bezier(0.16,1,0.3,1)] hover:bg-(--bg-hover) focus-visible:ring-2 focus-visible:ring-(--ring) focus-visible:ring-offset-2 focus-visible:ring-offset-(--bg-panel) focus-visible:outline-none active:scale-95"
             >
                 Vedi ordine <ChevronRight className="h-3 w-3" />
             </button>

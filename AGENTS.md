@@ -26,25 +26,25 @@ src/
 
 ## WHERE TO LOOK
 
-| Task | Location | Notes |
-|------|----------|-------|
-| Add a message content type | `types/chat.ts` (union) → `bubbles/MessageRenderer.tsx` (dispatch) → `bubbles/content/X.tsx` (renderer) | 3-step, all required |
-| Change theme colors / white-label | `index.css` `:root` + `[data-theme="dark"]` tokens | components read `var(--…)` only |
-| Add demo data | `fixtures/demo-dataset.json` | consume via `data/dataset.ts` helpers, never import JSON directly |
-| Add a surface (desktop/mobile/…) | `components/chat/types.ts` (`SURFACE_CAPS`) + `routes/surfaces.tsx` | |
-| Add a showcase screen | `routes/*.tsx` + register route+nav in `App.tsx` | |
-| Layout / drag-resize / overlays | `components/chat/ChatApp.tsx` | |
+| Task                              | Location                                                                                                | Notes                                                             |
+| --------------------------------- | ------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------- |
+| Add a message content type        | `types/chat.ts` (union) → `bubbles/MessageRenderer.tsx` (dispatch) → `bubbles/content/X.tsx` (renderer) | 3-step, all required                                              |
+| Change theme colors / white-label | `index.css` `:root` + `[data-theme="dark"]` tokens                                                      | components read `var(--…)` only                                   |
+| Add demo data                     | `fixtures/demo-dataset.json`                                                                            | consume via `data/dataset.ts` helpers, never import JSON directly |
+| Add a surface (desktop/mobile/…)  | `components/chat/types.ts` (`SURFACE_CAPS`) + `routes/surfaces.tsx`                                     |                                                                   |
+| Add a showcase screen             | `routes/*.tsx` + register route+nav in `App.tsx`                                                        |                                                                   |
+| Layout / drag-resize / overlays   | `components/chat/ChatApp.tsx`                                                                           |                                                                   |
 
 ## CODE MAP
 
-| Symbol | Type | Location | Role |
-|--------|------|----------|------|
-| `MessageContent` | union (25+ kinds) | `types/chat.ts#L51` | discriminant for every bubble variant |
-| `ChatEntry` = `Message \| SystemPill` | union | `types/chat.ts#L448` | stream item; narrow with `isMessage()` |
-| `DemoDataset` | interface | `types/chat.ts#L410` | shape of `demo-dataset.json` |
-| `dataset` + selectors | const/fn | `data/dataset.ts` | `conversationById`, `messagesFor`, `profileFor`, `activityFor`, `automationRunsFor` |
-| `MessageRenderer` / `renderContent` | dispatch | `bubbles/MessageRenderer.tsx` | switch on `content.kind` |
-| `ChatApp` / `DesktopChatApp` | component | `chat/ChatApp.tsx` | surface orchestration + overlay/lightbox state |
+| Symbol                                | Type              | Location                      | Role                                                                                |
+| ------------------------------------- | ----------------- | ----------------------------- | ----------------------------------------------------------------------------------- |
+| `MessageContent`                      | union (25+ kinds) | `types/chat.ts#L51`           | discriminant for every bubble variant                                               |
+| `ChatEntry` = `Message \| SystemPill` | union             | `types/chat.ts#L448`          | stream item; narrow with `isMessage()`                                              |
+| `DemoDataset`                         | interface         | `types/chat.ts#L410`          | shape of `demo-dataset.json`                                                        |
+| `dataset` + selectors                 | const/fn          | `data/dataset.ts`             | `conversationById`, `messagesFor`, `profileFor`, `activityFor`, `automationRunsFor` |
+| `MessageRenderer` / `renderContent`   | dispatch          | `bubbles/MessageRenderer.tsx` | switch on `content.kind`                                                            |
+| `ChatApp` / `DesktopChatApp`          | component         | `chat/ChatApp.tsx`            | surface orchestration + overlay/lightbox state                                      |
 
 ## CONVENTIONS (deviations from standard)
 

@@ -11,15 +11,15 @@ Mockup statico e navigabile di ogni superficie e tipo di messaggio della **Whats
 
 ## Stack tecnico
 
-| Layer | Scelta |
-|---|---|
-| Build | Vite 5 |
-| UI | React 18 + TypeScript strict |
-| Stile | Tailwind CSS v4 (CSS-first, nessun `tailwind.config.js`) |
-| Componenti base | shadcn/ui (copiati nel repo, non da npm) |
-| Routing | React Router (dichiarato manualmente in `App.tsx`, non file-based) |
-| Icone | Lucide |
-| Package manager | pnpm |
+| Layer           | Scelta                                                             |
+| --------------- | ------------------------------------------------------------------ |
+| Build           | Vite 5                                                             |
+| UI              | React 18 + TypeScript strict                                       |
+| Stile           | Tailwind CSS v4 (CSS-first, nessun `tailwind.config.js`)           |
+| Componenti base | shadcn/ui (copiati nel repo, non da npm)                           |
+| Routing         | React Router (dichiarato manualmente in `App.tsx`, non file-based) |
+| Icone           | Lucide                                                             |
+| Package manager | pnpm                                                               |
 
 Nessun backend, nessuna fetch, nessuno storage proprio (per scelta di spec).
 
@@ -44,18 +44,18 @@ pnpm preview       # serve la build di dist/
 All'avvio si apre la superficie **Desktop** (3 colonne: lista conversazioni, chat, pannello contesto). La barra di navigazione in alto permette di passare tra:
 
 - **Superfici demo** (stesso dataset, resa diversa):
-  - **Desktop** — layout 3 colonne ridimensionabile (drag sui separatori).
-  - **Mobile** — phone frame, singola colonna con back-navigation.
-  - **Side panel** — pannello laterale stretto (380px).
-  - **Quick popover** — bottone flottante che apre una chat in overlay.
+    - **Desktop** — layout 3 colonne ridimensionabile (drag sui separatori).
+    - **Mobile** — phone frame, singola colonna con back-navigation.
+    - **Side panel** — pannello laterale stretto (380px).
+    - **Quick popover** — bottone flottante che apre una chat in overlay.
 - **Schermate showcase** (stati e flussi isolati):
-  - **Composer** — tutti gli stati dell'input messaggio (vuoto, con testo, con allegato, con quote, ecc.).
-  - **Calls** — banner chiamata in arrivo, chiamata attiva, log chiamate.
-  - **Search** — ricerca conversazioni/messaggi.
-  - **New chat** — creazione nuova conversazione.
-  - **Starred** — messaggi preferiti.
-  - **Settings** — impostazioni + toggle tema chiaro/scuro.
-  - **RTL** — stessa UI in arabo, layout right-to-left.
+    - **Composer** — tutti gli stati dell'input messaggio (vuoto, con testo, con allegato, con quote, ecc.).
+    - **Calls** — banner chiamata in arrivo, chiamata attiva, log chiamate.
+    - **Search** — ricerca conversazioni/messaggi.
+    - **New chat** — creazione nuova conversazione.
+    - **Starred** — messaggi preferiti.
+    - **Settings** — impostazioni + toggle tema chiaro/scuro.
+    - **RTL** — stessa UI in arabo, layout right-to-left.
 
 Nella lista conversazioni a sinistra (superficie Desktop/Mobile) si trovano 8 conversazioni fixture: cliccandole si naviga tra tutti i tipi di bolla (testo, immagini, audio, location, contatti, template, ordini, errori, note interne, messaggi modificati/eliminati, ecc.), tutti raggiungibili scorrendo la chat. Il pannello contesto a destra (Desktop) mostra profilo, attributi e automazioni della conversazione selezionata, ed è collassabile.
 

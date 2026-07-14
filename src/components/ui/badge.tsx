@@ -3,18 +3,17 @@ import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@/lib/utils";
 
 const badgeVariants = cva(
-    "inline-flex items-center rounded-full border px-2 py-0.5 text-xs font-medium transition-colors duration-200 ease-[cubic-bezier(0.16,1,0.3,1)] tabular-nums",
+    "inline-flex items-center rounded-full border px-2 py-0.5 text-xs font-medium tabular-nums transition-colors duration-200 ease-[cubic-bezier(0.16,1,0.3,1)]",
     {
         variants: {
             variant: {
-                default: "border-transparent bg-[var(--accent)] text-[var(--accent-fg)]",
-                secondary: "border-transparent bg-[var(--bg-panel-2)] text-[var(--fg-secondary)]",
-                outline: "border-[var(--border-strong)] text-[var(--fg-secondary)]",
-                success: "border-transparent bg-[var(--fg-success)] text-white",
-                warning: "border-transparent bg-[var(--fg-warning)] text-[var(--fg-primary)]",
-                error: "border-transparent bg-[var(--destructive)] text-white",
-                unread:
-                    "border-transparent bg-[var(--accent)] text-[var(--accent-fg)] font-semibold shadow-[var(--shadow-sm)]",
+                default: "border-transparent bg-(--accent) text-(--accent-fg)",
+                secondary: "border-transparent bg-(--bg-panel-2) text-(--fg-secondary)",
+                outline: "border-(--border-strong) text-(--fg-secondary)",
+                success: "border-transparent bg-(--fg-success) text-white",
+                warning: "border-transparent bg-(--fg-warning) text-(--fg-primary)",
+                error: "border-transparent bg-(--destructive) text-white",
+                unread: "border-transparent bg-(--accent) font-semibold text-(--accent-fg) shadow-(--shadow-sm)",
             },
         },
         defaultVariants: { variant: "default" },
@@ -22,8 +21,7 @@ const badgeVariants = cva(
 );
 
 export interface BadgeProps
-    extends React.HTMLAttributes<HTMLDivElement>,
-        VariantProps<typeof badgeVariants> {}
+    extends React.HTMLAttributes<HTMLDivElement>, VariantProps<typeof badgeVariants> {}
 
 function Badge({ className, variant, ...props }: BadgeProps) {
     return <div className={cn(badgeVariants({ variant }), className)} {...props} />;

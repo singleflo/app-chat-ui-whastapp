@@ -9,9 +9,9 @@ import { useState, useCallback, useEffect } from "react";
 import { PanelRightOpen } from "lucide-react";
 
 const focusRing =
-    "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ring)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--bg-panel)]";
+    "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-(--ring) focus-visible:ring-offset-2 focus-visible:ring-offset-(--bg-panel)";
 const iconBtn = `cursor-pointer transition-all duration-200 ease-[cubic-bezier(0.16,1,0.3,1)] active:scale-[0.97] ${focusRing}`;
-const resizeHandle = `w-1 shrink-0 cursor-col-resize border-0 bg-[var(--border-strong)] p-0 transition-all duration-200 ease-[cubic-bezier(0.16,1,0.3,1)] hover:bg-[var(--accent)] active:bg-[var(--accent)] ${focusRing}`;
+const resizeHandle = `w-1 shrink-0 cursor-col-resize border-0 bg-(--border-strong) p-0 transition-all duration-200 ease-[cubic-bezier(0.16,1,0.3,1)] hover:bg-(--accent) active:bg-(--accent) ${focusRing}`;
 const LIST_MIN = 280;
 const LIST_MAX = 600;
 const CTX_MIN = 240;
@@ -22,12 +22,23 @@ export function ChatApp({ variant }: { variant: SurfaceVariant }) {
     const [selectedConvId, setSelectedConvId] = useState("c1");
     const [stack, setStack] = useState<"list" | "chat" | "context">("chat");
     const [overlay, setOverlay] = useState<OverlayState>(null);
-    const [lightbox, setLightbox] = useState<LightboxState>({ open: false, url: "", index: 0, total: 1 });
+    const [lightbox, setLightbox] = useState<LightboxState>({
+        open: false,
+        url: "",
+        index: 0,
+        total: 1,
+    });
 
     useEffect(() => {
         const handler = (e: Event) => {
             const detail = (e as CustomEvent).detail as { url: string; caption?: string };
-            setLightbox({ open: true, url: detail.url, caption: detail.caption, index: 0, total: 1 });
+            setLightbox({
+                open: true,
+                url: detail.url,
+                caption: detail.caption,
+                index: 0,
+                total: 1,
+            });
         };
         window.addEventListener("wa-lightbox-open", handler);
         return () => window.removeEventListener("wa-lightbox-open", handler);
@@ -51,7 +62,9 @@ export function ChatApp({ variant }: { variant: SurfaceVariant }) {
                 state={lightbox}
                 onClose={() => setLightbox((s) => ({ ...s, open: false }))}
                 onPrev={() => setLightbox((s) => ({ ...s, index: Math.max(0, s.index - 1) }))}
-                onNext={() => setLightbox((s) => ({ ...s, index: Math.min(s.total - 1, s.index + 1) }))}
+                onNext={() =>
+                    setLightbox((s) => ({ ...s, index: Math.min(s.total - 1, s.index + 1) }))
+                }
             />
         </>
     );
@@ -73,7 +86,11 @@ export function ChatApp({ variant }: { variant: SurfaceVariant }) {
         <>
             <div className="flex h-full w-full flex-col overflow-hidden">
                 {stack === "list" && (
-                    <ConversationListShell onOpenChat={handleSelect} activeId={selectedConvId} onNewChat={() => setOverlay({ type: "new-chat" })} />
+                    <ConversationListShell
+                        onOpenChat={handleSelect}
+                        activeId={selectedConvId}
+                        onNewChat={() => setOverlay({ type: "new-chat" })}
+                    />
                 )}
                 {stack === "chat" && (
                     <ChatColumnShell
@@ -84,7 +101,10 @@ export function ChatApp({ variant }: { variant: SurfaceVariant }) {
                     />
                 )}
                 {stack === "context" && caps.contextPanelCollapsible && (
-                    <ContextPanelShell conversationId={selectedConvId} onBack={() => setStack("chat")} />
+                    <ContextPanelShell
+                        conversationId={selectedConvId}
+                        onBack={() => setStack("chat")}
+                    />
                 )}
             </div>
             {overlays}
@@ -135,7 +155,6 @@ function DesktopChatApp({
                 document.body.style.cursor = "col-resize";
                 document.body.style.userSelect = "none";
             },
-            // eslint-disable-next-line react-hooks/exhaustive-deps
             [setWidth, min, max, invert]
         );
     };
@@ -156,10 +175,14 @@ function DesktopChatApp({
     return (
         <div className="flex h-full w-full overflow-hidden">
             <aside
-                className="flex shrink-0 flex-col border-r border-[var(--border-strong)] bg-[var(--bg-panel)] overflow-hidden"
+                className="flex shrink-0 flex-col overflow-hidden border-r border-(--border-strong) bg-(--bg-panel)"
                 style={{ width: listWidth }}
             >
-                <ConversationListShell onOpenChat={onSelect} activeId={selectedConvId} onNewChat={onNewChat} />
+                <ConversationListShell
+                    onOpenChat={onSelect}
+                    activeId={selectedConvId}
+                    onNewChat={onNewChat}
+                />
             </aside>
 
             {/* biome-ignore lint/a11y/useSemanticElements: interactive resize splitter must stay a focusable button, not a static <hr> */}
@@ -200,7 +223,7 @@ function DesktopChatApp({
                         aria-label="Ridimensiona pannello contesto"
                     />
                     <aside
-                        className="flex shrink-0 flex-col border-l border-[var(--border-strong)] bg-[var(--bg-panel)] overflow-hidden"
+                        className="flex shrink-0 flex-col overflow-hidden border-l border-(--border-strong) bg-(--bg-panel)"
                         style={{ width: contextWidth }}
                     >
                         <ContextPanelShell
@@ -215,7 +238,7 @@ function DesktopChatApp({
                 <button
                     type="button"
                     onClick={() => setContextOpen(true)}
-                    className={`absolute right-3 top-16 z-20 flex h-9 w-9 items-center justify-center rounded-full bg-[var(--bg-panel)] text-[var(--fg-secondary)] shadow-[var(--shadow-overlay)] hover:text-[var(--accent)] ${iconBtn}`}
+                    className={`absolute top-16 right-3 z-20 flex h-9 w-9 items-center justify-center rounded-full bg-(--bg-panel) text-(--fg-secondary) shadow-(--shadow-overlay) hover:text-(--accent) ${iconBtn}`}
                     aria-label="Apri pannello contesto"
                 >
                     <PanelRightOpen className="h-4 w-4" />

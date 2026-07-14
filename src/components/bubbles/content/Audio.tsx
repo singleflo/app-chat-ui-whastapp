@@ -49,40 +49,47 @@ export function AudioContent({
                 <button
                     type="button"
                     onClick={() => setIsPlaying(!isPlaying)}
-                    className="flex h-8 w-8 shrink-0 cursor-pointer items-center justify-center rounded-full bg-[var(--accent)] text-[var(--accent-fg)] transition-all duration-200 ease-[cubic-bezier(0.16,1,0.3,1)] hover:bg-[var(--accent-hover)] active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ring)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--bg-panel)]"
+                    className="flex h-8 w-8 shrink-0 cursor-pointer items-center justify-center rounded-full bg-(--accent) text-(--accent-fg) transition-all duration-200 ease-[cubic-bezier(0.16,1,0.3,1)] hover:bg-(--accent-hover) focus-visible:ring-2 focus-visible:ring-(--ring) focus-visible:ring-offset-2 focus-visible:ring-offset-(--bg-panel) focus-visible:outline-none active:scale-95"
                     aria-label={isPlaying ? "Pausa" : "Riproduci"}
                 >
                     {isPlaying ? <Pause className="h-4 w-4" /> : <Play className="h-4 w-4" />}
                 </button>
                 {voice ? (
-                    <Mic className={cn("h-3.5 w-3.5", played && "text-[var(--color-ack-blue)]")} />
+                    <Mic className={cn("h-3.5 w-3.5", played && "text-(--color-ack-blue)")} />
                 ) : (
-                    <FileAudio className="h-3.5 w-3.5 text-[var(--fg-secondary)]" />
+                    <FileAudio className="h-3.5 w-3.5 text-(--fg-secondary)" />
                 )}
                 <Waveform peaks={waveform} progress={progress} />
-                <span className="ml-1 min-w-10 text-right text-[10px] tabular-nums text-[var(--fg-tertiary)]">
+                <span className="ml-1 min-w-10 text-right text-[10px] text-(--fg-tertiary) tabular-nums">
                     {fmtDuration(remaining)}
                 </span>
                 <button
                     type="button"
                     onClick={() => setSpeed(speed === 1 ? 1.5 : speed === 1.5 ? 2 : 1)}
-                    className="cursor-pointer rounded px-1 text-[10px] font-semibold text-[var(--accent)] transition-all duration-200 ease-[cubic-bezier(0.16,1,0.3,1)] hover:bg-[var(--bg-hover)] active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ring)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--bg-panel)]"
+                    className="cursor-pointer rounded px-1 text-[10px] font-semibold text-(--accent) transition-all duration-200 ease-[cubic-bezier(0.16,1,0.3,1)] hover:bg-(--bg-hover) focus-visible:ring-2 focus-visible:ring-(--ring) focus-visible:ring-offset-2 focus-visible:ring-offset-(--bg-panel) focus-visible:outline-none active:scale-95"
                     aria-label="Velocità riproduzione"
                 >
                     {speed}×
                 </button>
             </div>
             {transcript && (
-                <div className="rounded bg-[var(--bg-panel-2)] p-1.5">
+                <div className="rounded bg-(--bg-panel-2) p-1.5">
                     <button
                         type="button"
                         onClick={() => setShowTranscript(!showTranscript)}
-                        className="flex cursor-pointer items-center gap-1 rounded text-[10px] text-[var(--fg-link)] transition-all duration-200 ease-[cubic-bezier(0.16,1,0.3,1)] active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ring)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--bg-panel)]"
+                        className="flex cursor-pointer items-center gap-1 rounded text-[10px] text-(--fg-link) transition-all duration-200 ease-[cubic-bezier(0.16,1,0.3,1)] focus-visible:ring-2 focus-visible:ring-(--ring) focus-visible:ring-offset-2 focus-visible:ring-offset-(--bg-panel) focus-visible:outline-none active:scale-95"
                     >
-                        ✨ Trascrizione {transcript.state === "ready" ? "✓" : transcript.state === "processing" ? "…" : "⚠"}
+                        ✨ Trascrizione{" "}
+                        {transcript.state === "ready"
+                            ? "✓"
+                            : transcript.state === "processing"
+                              ? "…"
+                              : "⚠"}
                     </button>
                     {showTranscript && transcript.state === "ready" && (
-                        <div className="mt-1 text-[12px] text-[var(--fg-primary)]">{transcript.text}</div>
+                        <div className="mt-1 text-[12px] text-(--fg-primary)">
+                            {transcript.text}
+                        </div>
                     )}
                 </div>
             )}
@@ -102,7 +109,7 @@ function Waveform({ peaks, progress }: { peaks: number[]; progress: number }) {
                     key={b.id}
                     className={cn(
                         "w-[2px] rounded-full",
-                        b.ratio <= progress ? "bg-[var(--accent)]" : "bg-[var(--fg-tertiary)]/40"
+                        b.ratio <= progress ? "bg-(--accent)" : "bg-(--fg-tertiary)/40"
                     )}
                     style={{ height: `${Math.max(b.value, 8)}%` }}
                 />

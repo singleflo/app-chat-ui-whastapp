@@ -22,11 +22,12 @@ export function LocationContent({
         return (
             <div className="flex w-[220px] max-w-full flex-col gap-2">
                 <div className="text-sm">
-                    Per favore condividi la tua posizione per consentirci di organizzare la consegna.
+                    Per favore condividi la tua posizione per consentirci di organizzare la
+                    consegna.
                 </div>
                 <button
                     type="button"
-                    className="flex cursor-pointer items-center justify-center gap-1.5 rounded-md bg-[var(--accent)] px-3 py-1.5 text-[12px] font-medium text-[var(--accent-fg)] transition-all duration-200 ease-[cubic-bezier(0.16,1,0.3,1)] hover:bg-[var(--accent-hover)] active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ring)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--bg-panel)]"
+                    className="flex cursor-pointer items-center justify-center gap-1.5 rounded-md bg-(--accent) px-3 py-1.5 text-[12px] font-medium text-(--accent-fg) transition-all duration-200 ease-[cubic-bezier(0.16,1,0.3,1)] hover:bg-(--accent-hover) focus-visible:ring-2 focus-visible:ring-(--ring) focus-visible:ring-offset-2 focus-visible:ring-offset-(--bg-panel) focus-visible:outline-none active:scale-95"
                 >
                     <Send className="h-3.5 w-3.5" /> Invia posizione
                 </button>
@@ -41,7 +42,7 @@ export function LocationContent({
                 </div>
                 <button
                     type="button"
-                    className="flex cursor-pointer items-center justify-center gap-1.5 rounded-md border border-[var(--accent)] px-3 py-1.5 text-[12px] font-medium text-[var(--accent)] transition-all duration-200 ease-[cubic-bezier(0.16,1,0.3,1)] hover:bg-[var(--bg-hover)] active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ring)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--bg-panel)]"
+                    className="flex cursor-pointer items-center justify-center gap-1.5 rounded-md border border-(--accent) px-3 py-1.5 text-[12px] font-medium text-(--accent) transition-all duration-200 ease-[cubic-bezier(0.16,1,0.3,1)] hover:bg-(--bg-hover) focus-visible:ring-2 focus-visible:ring-(--ring) focus-visible:ring-offset-2 focus-visible:ring-offset-(--bg-panel) focus-visible:outline-none active:scale-95"
                 >
                     <Navigation className="h-3.5 w-3.5" /> Fornisci indirizzo
                 </button>
@@ -55,11 +56,13 @@ export function LocationContent({
                 className="aspect-[2/1] w-full rounded-md"
             />
             <div className="flex items-start gap-1.5 p-1">
-                <MapPin className="mt-0.5 h-3.5 w-3.5 shrink-0 text-[var(--accent)]" />
+                <MapPin className="mt-0.5 h-3.5 w-3.5 shrink-0 text-(--accent)" />
                 <div className="min-w-0">
                     {name && <div className="truncate text-[13px] font-medium">{name}</div>}
-                    {address && <div className="truncate text-[11px] text-[var(--fg-secondary)]">{address}</div>}
-                    <div className="text-[10px] text-[var(--fg-tertiary)]">
+                    {address && (
+                        <div className="truncate text-[11px] text-(--fg-secondary)">{address}</div>
+                    )}
+                    <div className="text-[10px] text-(--fg-tertiary)">
                         {lat?.toFixed(4)}, {lng?.toFixed(4)}
                     </div>
                 </div>

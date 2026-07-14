@@ -9,20 +9,12 @@
 export type ChatType = "individual" | "group";
 
 export type AckStatus =
-    | "composing"
-    | "pending"
-    | "sent"
-    | "delivered"
-    | "read"
-    | "played"
-    | "failed";
+    "composing" | "pending" | "sent" | "delivered" | "read" | "played" | "failed";
 
 export type ConversationState = "open" | "done";
 
 export type WindowState =
-    | { kind: "open"; closesAt: string }
-    | { kind: "closed" }
-    | { kind: "ctwa"; expiresAt: string };
+    { kind: "open"; closesAt: string } | { kind: "closed" } | { kind: "ctwa"; expiresAt: string };
 
 /** Attribuzione autore outbound — Q2. */
 export interface SenderAttribution {
@@ -51,7 +43,14 @@ export interface QuotedMessage {
 export type MessageContent =
     | { kind: "text"; body: string; linkPreview?: LinkPreview }
     | { kind: "image"; url: string; caption?: string; album?: { total: number } }
-    | { kind: "video"; url: string; poster?: string; durationSec: number; caption?: string; gif?: boolean }
+    | {
+          kind: "video";
+          url: string;
+          poster?: string;
+          durationSec: number;
+          caption?: string;
+          gif?: boolean;
+      }
     | {
           kind: "audio";
           url: string;
@@ -61,9 +60,24 @@ export type MessageContent =
           transcript?: { state: "ready" | "processing" | "error"; text?: string };
           played?: boolean;
       }
-    | { kind: "document"; url: string; mime: string; name: string; sizeBytes: number; pages?: number; thumbnail?: string }
+    | {
+          kind: "document";
+          url: string;
+          mime: string;
+          name: string;
+          sizeBytes: number;
+          pages?: number;
+          thumbnail?: string;
+      }
     | { kind: "sticker"; url: string; animated: boolean }
-    | { kind: "location"; lat: number; lng: number; name?: string; address?: string; staticMapUrl: string }
+    | {
+          kind: "location";
+          lat: number;
+          lng: number;
+          name?: string;
+          address?: string;
+          staticMapUrl: string;
+      }
     | { kind: "location_request" }
     | { kind: "address_request" }
     | { kind: "contacts"; cards: ContactCard[] }
@@ -81,7 +95,10 @@ export type MessageContent =
           body: string;
           footer?: string;
           buttonTitle: string;
-          sections: { title: string; rows: { id: string; title: string; description?: string }[] }[];
+          sections: {
+              title: string;
+              rows: { id: string; title: string; description?: string }[];
+          }[];
           reply?: { id: string; title: string; description?: string };
       }
     | { kind: "interactive_cta_url"; body: string; footer?: string; ctaTitle: string; url: string }
@@ -100,7 +117,14 @@ export type MessageContent =
       }
     | {
           kind: "product";
-          product: { id: string; name: string; price: string; currency: string; description?: string; image: string };
+          product: {
+              id: string;
+              name: string;
+              price: string;
+              currency: string;
+              description?: string;
+              image: string;
+          };
       }
     | {
           kind: "product_list";
@@ -119,7 +143,13 @@ export type MessageContent =
           name: string;
           language: string;
           category: string;
-          header?: { text?: string; image?: string; video?: string; document?: string; location?: { lat: number; lng: number } };
+          header?: {
+              text?: string;
+              image?: string;
+              video?: string;
+              document?: string;
+              location?: { lat: number; lng: number };
+          };
           body: string;
           footer?: string;
           buttons?: TemplateButton[];
@@ -213,7 +243,16 @@ export interface CarouselCard {
 }
 
 export interface TemplateButton {
-    kind: "quick_reply" | "url" | "phone" | "copy_code" | "flow" | "otp_one_tap" | "otp_copy" | "catalog" | "mpm";
+    kind:
+        | "quick_reply"
+        | "url"
+        | "phone"
+        | "copy_code"
+        | "flow"
+        | "otp_one_tap"
+        | "otp_copy"
+        | "catalog"
+        | "mpm";
     title: string;
     /** For url buttons. */
     url?: string;
@@ -308,7 +347,13 @@ export interface Conversation {
     /** Record refs (Q7). */
     linkedRecords?: { kind: "lead" | "order" | "ticket"; id: string }[];
     /** Group members (when type=group). */
-    members?: { id: string; name: string; color: string; role: "admin" | "member"; phone?: string }[];
+    members?: {
+        id: string;
+        name: string;
+        color: string;
+        role: "admin" | "member";
+        phone?: string;
+    }[];
 }
 
 export interface User {
@@ -368,7 +413,11 @@ export interface ContactProfile {
     name: string;
     pushName?: string;
     avatarColor: string;
-    phones: { number: string; label: "WHATSAPP" | "WORK" | "HOME" | "MOBILE"; verified?: boolean }[];
+    phones: {
+        number: string;
+        label: "WHATSAPP" | "WORK" | "HOME" | "MOBILE";
+        verified?: boolean;
+    }[];
     emails: string[];
     company?: string;
     language?: string;

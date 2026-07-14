@@ -15,20 +15,20 @@ ChatEntryRenderer(entry)              # MessageRenderer.tsx#L28
 
 ## FILES
 
-| File | Renders |
-|------|---------|
-| `MessageRenderer.tsx` | dispatcher + outbound avatar-wrap logic + special-kind handling |
-| `Bubble.tsx` | `Bubble` shell, `BubbleMeta` (ts+ACK), `SenderTag`, `SenderAvatar`, `Reactions`, `QuotedBlock`, `ForwardedLabel` |
-| `Markdown.tsx` | inline WhatsApp markdown (`*bold*` `_it_` `~s~` `` `code` ``) |
-| `MessageContextMenu.tsx` | hover chevron → dropdown (reply/react/forward/copy/star/delete) + quick-reaction bar |
-| `content/Text.tsx` | text + link-preview card |
-| `content/Media.tsx` | image/video/document/sticker + `MediaPlaceholder` (CSS-gradient stand-in) |
-| `content/Audio.tsx` | voice/audio + waveform + transcript |
-| `content/Location.tsx` | location + location_request + address_request |
-| `content/Contacts.tsx` | single/multi vCard |
-| `content/Interactive.tsx` | buttons/list/cta_url/flow/call_permission/carousel/product/catalog |
-| `content/Order.tsx` · `Template.tsx` | order cart · template (+ LTO countdown + OTP) |
-| `content/System.tsx` · `Special.tsx` · `InternalNote.tsx` · `Error.tsx` | pills · deleted/fallback · team note · error+actions |
+| File                                                                    | Renders                                                                                                          |
+| ----------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------- |
+| `MessageRenderer.tsx`                                                   | dispatcher + outbound avatar-wrap logic + special-kind handling                                                  |
+| `Bubble.tsx`                                                            | `Bubble` shell, `BubbleMeta` (ts+ACK), `SenderTag`, `SenderAvatar`, `Reactions`, `QuotedBlock`, `ForwardedLabel` |
+| `Markdown.tsx`                                                          | inline WhatsApp markdown (`*bold*` `_it_` `~s~` `` `code` ``)                                                    |
+| `MessageContextMenu.tsx`                                                | hover chevron → dropdown (reply/react/forward/copy/star/delete) + quick-reaction bar                             |
+| `content/Text.tsx`                                                      | text + link-preview card                                                                                         |
+| `content/Media.tsx`                                                     | image/video/document/sticker + `MediaPlaceholder` (CSS-gradient stand-in)                                        |
+| `content/Audio.tsx`                                                     | voice/audio + waveform + transcript                                                                              |
+| `content/Location.tsx`                                                  | location + location_request + address_request                                                                    |
+| `content/Contacts.tsx`                                                  | single/multi vCard                                                                                               |
+| `content/Interactive.tsx`                                               | buttons/list/cta_url/flow/call_permission/carousel/product/catalog                                               |
+| `content/Order.tsx` · `Template.tsx`                                    | order cart · template (+ LTO countdown + OTP)                                                                    |
+| `content/System.tsx` · `Special.tsx` · `InternalNote.tsx` · `Error.tsx` | pills · deleted/fallback · team note · error+actions                                                             |
 
 ## ADD A NEW CONTENT TYPE (all 3 required)
 
