@@ -1,0 +1,16 @@
+{
+    "nav": {
+        "index": "Index",
+        "desktop": "Desktop",
+        "mobile": "Mobile",
+        "side": "Side",
+        "popover": "Popover",
+        "composer": "Composer",
+        "calls": "Calls",
+        "search": "Search",
+        "newChat": "New",
+        "starred": "Starred",
+        "settings": "Settings",
+        "rtl": "RTL"
+    }
+}

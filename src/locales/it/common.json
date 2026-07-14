@@ -1,0 +1,14 @@
+{
+    "common": {
+        "language": {
+            "label": "Lingua",
+            "en": "English",
+            "it": "Italiano",
+            "ar": "العربية"
+        },
+        "relative": {
+            "today": "Oggi",
+            "yesterday": "Ieri"
+        }
+    }
+}

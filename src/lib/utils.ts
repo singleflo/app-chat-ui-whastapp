@@ -1,5 +1,6 @@
 import { clsx, type ClassValue } from "clsx";
 import { twMerge } from "tailwind-merge";
+import i18n from "../i18n";
 
 export function cn(...inputs: ClassValue[]) {
     return twMerge(clsx(inputs));
@@ -28,7 +29,7 @@ export function initials(name: string): string {
 /** Italian short time HH:mm. */
 export function fmtTime(ts: string | number): string {
     const d = new Date(ts);
-    return d.toLocaleTimeString("it-IT", { hour: "2-digit", minute: "2-digit" });
+    return d.toLocaleTimeString(i18n.language, { hour: "2-digit", minute: "2-digit" });
 }
 
 /** Adaptive timestamp: today → HH:mm, yesterday → "Ieri", <7d → weekday, else short date. */
@@ -39,11 +40,11 @@ export function fmtRelativeDay(ts: string | number): string {
     const sameDay = d.toDateString() === now.toDateString();
     if (sameDay) return fmtTime(ts);
     const yesterday = new Date(now.getTime() - dayMs);
-    if (d.toDateString() === yesterday.toDateString()) return "Ieri";
+    if (d.toDateString() === yesterday.toDateString()) return i18n.t("common.relative.yesterday");
     if (now.getTime() - d.getTime() < 7 * dayMs) {
-        return d.toLocaleDateString("it-IT", { weekday: "long" });
+        return d.toLocaleDateString(i18n.language, { weekday: "long" });
     }
-    return d.toLocaleDateString("it-IT", { day: "2-digit", month: "2-digit", year: "2-digit" });
+    return d.toLocaleDateString(i18n.language, { day: "2-digit", month: "2-digit", year: "2-digit" });
 }
 
 /** Format seconds → mm:ss or h:mm:ss. */
