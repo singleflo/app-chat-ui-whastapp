@@ -21,7 +21,7 @@ export function ImageContent({
                 <button
                     type="button"
                     onClick={openLightbox}
-                    className="block cursor-zoom-in rounded-lg transition-all duration-200 ease-[cubic-bezier(0.16,1,0.3,1)] focus-visible:ring-2 focus-visible:ring-(--ring) focus-visible:ring-offset-2 focus-visible:ring-offset-(--bg-panel) focus-visible:outline-none active:scale-95"
+                    className="block cursor-zoom-in rounded-lg transition-all duration-200 ease-out focus-visible:ring-2 focus-visible:ring-(--ring) focus-visible:ring-offset-2 focus-visible:ring-offset-(--bg-panel) focus-visible:outline-none active:scale-95"
                     aria-label="Apri immagine"
                 >
                     <MediaPlaceholder
@@ -64,7 +64,7 @@ export function VideoContent({
                 />
                 <button
                     type="button"
-                    className="absolute inset-0 flex cursor-pointer items-center justify-center transition-all duration-200 ease-[cubic-bezier(0.16,1,0.3,1)] focus-visible:ring-2 focus-visible:ring-(--ring) focus-visible:ring-offset-2 focus-visible:ring-offset-(--bg-panel) focus-visible:outline-none active:scale-95"
+                    className="absolute inset-0 flex cursor-pointer items-center justify-center transition-all duration-200 ease-out focus-visible:ring-2 focus-visible:ring-(--ring) focus-visible:ring-offset-2 focus-visible:ring-offset-(--bg-panel) focus-visible:outline-none active:scale-95"
                     aria-label="Riproduci"
                 >
                     <span className="flex h-12 w-12 items-center justify-center rounded-full bg-black/60 text-white">
@@ -106,7 +106,7 @@ export function DocumentContent({
             </div>
             <button
                 type="button"
-                className="shrink-0 cursor-pointer rounded text-(--fg-tertiary) transition-all duration-200 ease-[cubic-bezier(0.16,1,0.3,1)] hover:text-(--fg-secondary) focus-visible:ring-2 focus-visible:ring-(--ring) focus-visible:ring-offset-2 focus-visible:ring-offset-(--bg-panel) focus-visible:outline-none active:scale-95"
+                className="shrink-0 cursor-pointer rounded text-(--fg-tertiary) transition-all duration-200 ease-out hover:text-(--fg-secondary) focus-visible:ring-2 focus-visible:ring-(--ring) focus-visible:ring-offset-2 focus-visible:ring-offset-(--bg-panel) focus-visible:outline-none active:scale-95"
                 aria-label="Opzioni documento"
             >
                 <MoreVertical className="h-4 w-4" />

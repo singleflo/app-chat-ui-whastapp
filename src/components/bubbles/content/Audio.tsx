@@ -49,7 +49,7 @@ export function AudioContent({
                 <button
                     type="button"
                     onClick={() => setIsPlaying(!isPlaying)}
-                    className="flex h-8 w-8 shrink-0 cursor-pointer items-center justify-center rounded-full bg-(--accent) text-(--accent-fg) transition-all duration-200 ease-[cubic-bezier(0.16,1,0.3,1)] hover:bg-(--accent-hover) focus-visible:ring-2 focus-visible:ring-(--ring) focus-visible:ring-offset-2 focus-visible:ring-offset-(--bg-panel) focus-visible:outline-none active:scale-95"
+                    className="flex h-8 w-8 shrink-0 cursor-pointer items-center justify-center rounded-full bg-(--accent) text-(--accent-fg) transition-all duration-200 ease-out hover:bg-(--accent-hover) focus-visible:ring-2 focus-visible:ring-(--ring) focus-visible:ring-offset-2 focus-visible:ring-offset-(--bg-panel) focus-visible:outline-none active:scale-95"
                     aria-label={isPlaying ? "Pausa" : "Riproduci"}
                 >
                     {isPlaying ? <Pause className="h-4 w-4" /> : <Play className="h-4 w-4" />}
@@ -66,7 +66,7 @@ export function AudioContent({
                 <button
                     type="button"
                     onClick={() => setSpeed(speed === 1 ? 1.5 : speed === 1.5 ? 2 : 1)}
-                    className="cursor-pointer rounded px-1 text-[10px] font-semibold text-(--accent) transition-all duration-200 ease-[cubic-bezier(0.16,1,0.3,1)] hover:bg-(--bg-hover) focus-visible:ring-2 focus-visible:ring-(--ring) focus-visible:ring-offset-2 focus-visible:ring-offset-(--bg-panel) focus-visible:outline-none active:scale-95"
+                    className="cursor-pointer rounded px-1 text-[10px] font-semibold text-(--accent) transition-all duration-200 ease-out hover:bg-(--bg-hover) focus-visible:ring-2 focus-visible:ring-(--ring) focus-visible:ring-offset-2 focus-visible:ring-offset-(--bg-panel) focus-visible:outline-none active:scale-95"
                     aria-label="Velocità riproduzione"
                 >
                     {speed}×
@@ -77,7 +77,7 @@ export function AudioContent({
                     <button
                         type="button"
                         onClick={() => setShowTranscript(!showTranscript)}
-                        className="flex cursor-pointer items-center gap-1 rounded text-[10px] text-(--fg-link) transition-all duration-200 ease-[cubic-bezier(0.16,1,0.3,1)] focus-visible:ring-2 focus-visible:ring-(--ring) focus-visible:ring-offset-2 focus-visible:ring-offset-(--bg-panel) focus-visible:outline-none active:scale-95"
+                        className="flex cursor-pointer items-center gap-1 rounded text-[10px] text-(--fg-link) transition-all duration-200 ease-out focus-visible:ring-2 focus-visible:ring-(--ring) focus-visible:ring-offset-2 focus-visible:ring-offset-(--bg-panel) focus-visible:outline-none active:scale-95"
                     >
                         ✨ Trascrizione{" "}
                         {transcript.state === "ready"

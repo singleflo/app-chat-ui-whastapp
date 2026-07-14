@@ -79,14 +79,14 @@ export function ConversationListShell({
                     <button
                         type="button"
                         onClick={onNewChat}
-                        className="flex h-8 w-8 cursor-pointer items-center justify-center rounded-full text-(--fg-secondary) transition-colors duration-200 ease-[cubic-bezier(0.16,1,0.3,1)] hover:bg-(--bg-hover) hover:text-(--fg-primary) focus-visible:ring-2 focus-visible:ring-(--ring) focus-visible:ring-offset-2 focus-visible:ring-offset-(--bg-header) focus-visible:outline-none active:scale-95"
+                        className="flex h-8 w-8 cursor-pointer items-center justify-center rounded-full text-(--fg-secondary) transition-colors duration-200 ease-out hover:bg-(--bg-hover) hover:text-(--fg-primary) focus-visible:ring-2 focus-visible:ring-(--ring) focus-visible:ring-offset-2 focus-visible:ring-offset-(--bg-header) focus-visible:outline-none active:scale-95"
                         aria-label="Nuova chat"
                     >
                         <MessageSquare className="h-4 w-4" />
                     </button>
                     <button
                         type="button"
-                        className="flex h-8 w-8 cursor-pointer items-center justify-center rounded-full text-(--fg-secondary) transition-colors duration-200 ease-[cubic-bezier(0.16,1,0.3,1)] hover:bg-(--bg-hover) hover:text-(--fg-primary) focus-visible:ring-2 focus-visible:ring-(--ring) focus-visible:ring-offset-2 focus-visible:ring-offset-(--bg-header) focus-visible:outline-none active:scale-95"
+                        className="flex h-8 w-8 cursor-pointer items-center justify-center rounded-full text-(--fg-secondary) transition-colors duration-200 ease-out hover:bg-(--bg-hover) hover:text-(--fg-primary) focus-visible:ring-2 focus-visible:ring-(--ring) focus-visible:ring-offset-2 focus-visible:ring-offset-(--bg-header) focus-visible:outline-none active:scale-95"
                         aria-label="Menu"
                     >
                         <MoreVertical className="h-4 w-4" />
@@ -111,7 +111,7 @@ export function ConversationListShell({
                         type="button"
                         key={f.label}
                         className={cn(
-                            "flex shrink-0 cursor-pointer items-center gap-1 rounded-full border px-2.5 py-0.5 text-[11px] font-medium transition-all duration-200 ease-[cubic-bezier(0.16,1,0.3,1)] active:scale-95",
+                            "flex shrink-0 cursor-pointer items-center gap-1 rounded-full border px-2.5 py-0.5 text-[11px] font-medium transition-all duration-200 ease-out active:scale-95",
                             i === 0
                                 ? "border-(--accent) bg-(--accent-soft) text-(--accent)"
                                 : "border-(--border-strong) text-(--fg-secondary) hover:bg-(--bg-hover) hover:text-(--fg-primary)"
@@ -166,7 +166,7 @@ function ConversationRow({
             type="button"
             onClick={onClick}
             className={cn(
-                "flex w-full cursor-pointer items-start gap-3 border-b border-(--border-soft) px-3 py-2.5 text-left transition-colors duration-200 ease-[cubic-bezier(0.16,1,0.3,1)] hover:bg-(--bg-hover) focus-visible:bg-(--bg-hover) focus-visible:ring-2 focus-visible:ring-(--ring) focus-visible:outline-none focus-visible:ring-inset",
+                "flex w-full cursor-pointer items-start gap-3 border-b border-(--border-soft) px-3 py-2.5 text-left transition-colors duration-200 ease-out hover:bg-(--bg-hover) focus-visible:bg-(--bg-hover) focus-visible:ring-2 focus-visible:ring-(--ring) focus-visible:outline-none focus-visible:ring-inset",
                 active && "bg-(--bg-active)"
             )}
         >

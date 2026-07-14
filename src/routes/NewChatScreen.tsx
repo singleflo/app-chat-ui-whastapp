@@ -23,7 +23,7 @@ export function NewChatScreen() {
                 <button
                     type="button"
                     aria-label="Indietro"
-                    className="flex h-8 w-8 cursor-pointer items-center justify-center rounded-full text-(--fg-secondary) transition-all duration-200 ease-[cubic-bezier(0.16,1,0.3,1)] hover:bg-(--bg-hover) hover:text-(--fg-primary) focus-visible:ring-2 focus-visible:ring-(--ring) focus-visible:ring-offset-2 focus-visible:ring-offset-(--bg-panel) focus-visible:outline-none active:scale-[0.97]"
+                    className="flex h-8 w-8 cursor-pointer items-center justify-center rounded-full text-(--fg-secondary) transition-all duration-200 ease-out hover:bg-(--bg-hover) hover:text-(--fg-primary) focus-visible:ring-2 focus-visible:ring-(--ring) focus-visible:ring-offset-2 focus-visible:ring-offset-(--bg-panel) focus-visible:outline-none active:scale-[0.97]"
                 >
                     <ArrowLeft className="h-4 w-4" />
                 </button>
@@ -45,7 +45,7 @@ export function NewChatScreen() {
                         type="button"
                         onClick={() => setShowPhoneInput(!showPhoneInput)}
                         aria-expanded={showPhoneInput}
-                        className="flex cursor-pointer items-center gap-3 px-3 py-2.5 text-left transition-colors duration-200 ease-[cubic-bezier(0.16,1,0.3,1)] hover:bg-(--bg-hover) focus-visible:ring-2 focus-visible:ring-(--ring) focus-visible:outline-none focus-visible:ring-inset"
+                        className="flex cursor-pointer items-center gap-3 px-3 py-2.5 text-left transition-colors duration-200 ease-out hover:bg-(--bg-hover) focus-visible:ring-2 focus-visible:ring-(--ring) focus-visible:outline-none focus-visible:ring-inset"
                     >
                         <div className="flex h-10 w-10 items-center justify-center rounded-full bg-(--accent-soft) text-(--accent)">
                             <UserPlus className="h-5 w-5" />
@@ -86,7 +86,7 @@ export function NewChatScreen() {
                                     type="button"
                                     disabled={!isValidE164}
                                     className={cn(
-                                        "flex items-center gap-1 rounded-md px-2 py-1 text-[11px] font-medium transition-all duration-200 ease-[cubic-bezier(0.16,1,0.3,1)] focus-visible:ring-2 focus-visible:ring-(--ring) focus-visible:ring-offset-2 focus-visible:ring-offset-(--bg-panel) focus-visible:outline-none",
+                                        "flex items-center gap-1 rounded-md px-2 py-1 text-[11px] font-medium transition-all duration-200 ease-out focus-visible:ring-2 focus-visible:ring-(--ring) focus-visible:ring-offset-2 focus-visible:ring-offset-(--bg-panel) focus-visible:outline-none",
                                         isValidE164
                                             ? "cursor-pointer bg-(--accent) text-(--accent-fg) hover:bg-(--accent-hover) active:scale-95"
                                             : "cursor-not-allowed bg-(--bg-panel) text-(--fg-tertiary)"
@@ -107,7 +107,7 @@ export function NewChatScreen() {
                         <button
                             key={c.id}
                             type="button"
-                            className="flex cursor-pointer items-center gap-3 px-3 py-2.5 text-left transition-colors duration-200 ease-[cubic-bezier(0.16,1,0.3,1)] hover:bg-(--bg-hover) focus-visible:ring-2 focus-visible:ring-(--ring) focus-visible:outline-none focus-visible:ring-inset"
+                            className="flex cursor-pointer items-center gap-3 px-3 py-2.5 text-left transition-colors duration-200 ease-out hover:bg-(--bg-hover) focus-visible:ring-2 focus-visible:ring-(--ring) focus-visible:outline-none focus-visible:ring-inset"
                         >
                             <Avatar className="h-10 w-10">
                                 <AvatarFallback

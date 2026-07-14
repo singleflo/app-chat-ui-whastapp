@@ -57,7 +57,7 @@ function QuickChatTrigger() {
     return (
         <button
             type="button"
-            className="relative flex h-14 w-14 cursor-pointer items-center justify-center rounded-full bg-(--accent) text-(--accent-fg) shadow-(--shadow-overlay) transition-all duration-200 ease-[cubic-bezier(0.16,1,0.3,1)] hover:scale-105 hover:bg-(--accent-hover) focus-visible:ring-2 focus-visible:ring-(--ring) focus-visible:ring-offset-2 focus-visible:ring-offset-(--bg-app) focus-visible:outline-none active:scale-[0.97]"
+            className="relative flex h-14 w-14 cursor-pointer items-center justify-center rounded-full bg-(--accent) text-(--accent-fg) shadow-(--shadow-overlay) transition-all duration-200 ease-out hover:scale-105 hover:bg-(--accent-hover) focus-visible:ring-2 focus-visible:ring-(--ring) focus-visible:ring-offset-2 focus-visible:ring-offset-(--bg-app) focus-visible:outline-none active:scale-[0.97]"
             aria-label="Quick chat"
         >
             <MessageSquare className="h-6 w-6" />
@@ -85,7 +85,7 @@ function QuickChatPanel() {
                         onClick={() => setTab("assigned")}
                         aria-pressed={tab === "assigned"}
                         className={cn(
-                            "cursor-pointer rounded-md px-2 py-1 text-xs font-medium transition-all duration-200 ease-[cubic-bezier(0.16,1,0.3,1)] focus-visible:ring-2 focus-visible:ring-(--ring) focus-visible:ring-offset-2 focus-visible:ring-offset-(--bg-header) focus-visible:outline-none active:scale-95",
+                            "cursor-pointer rounded-md px-2 py-1 text-xs font-medium transition-all duration-200 ease-out focus-visible:ring-2 focus-visible:ring-(--ring) focus-visible:ring-offset-2 focus-visible:ring-offset-(--bg-header) focus-visible:outline-none active:scale-95",
                             tab === "assigned"
                                 ? "bg-(--accent) text-(--accent-fg)"
                                 : "text-(--fg-secondary) hover:bg-(--bg-hover) hover:text-(--fg-primary)"
@@ -98,7 +98,7 @@ function QuickChatPanel() {
                         onClick={() => setTab("unassigned")}
                         aria-pressed={tab === "unassigned"}
                         className={cn(
-                            "cursor-pointer rounded-md px-2 py-1 text-xs font-medium transition-all duration-200 ease-[cubic-bezier(0.16,1,0.3,1)] focus-visible:ring-2 focus-visible:ring-(--ring) focus-visible:ring-offset-2 focus-visible:ring-offset-(--bg-header) focus-visible:outline-none active:scale-95",
+                            "cursor-pointer rounded-md px-2 py-1 text-xs font-medium transition-all duration-200 ease-out focus-visible:ring-2 focus-visible:ring-(--ring) focus-visible:ring-offset-2 focus-visible:ring-offset-(--bg-header) focus-visible:outline-none active:scale-95",
                             tab === "unassigned"
                                 ? "bg-(--unassigned) text-(--fg-on-accent)"
                                 : "text-(--fg-secondary) hover:bg-(--bg-hover) hover:text-(--fg-primary)"
@@ -111,7 +111,7 @@ function QuickChatPanel() {
                     <button
                         type="button"
                         aria-label="Aggiorna"
-                        className="flex h-7 w-7 cursor-pointer items-center justify-center rounded-full text-(--fg-secondary) transition-all duration-200 ease-[cubic-bezier(0.16,1,0.3,1)] hover:bg-(--bg-hover) hover:text-(--fg-primary) focus-visible:ring-2 focus-visible:ring-(--ring) focus-visible:ring-offset-2 focus-visible:ring-offset-(--bg-header) focus-visible:outline-none active:scale-[0.97]"
+                        className="flex h-7 w-7 cursor-pointer items-center justify-center rounded-full text-(--fg-secondary) transition-all duration-200 ease-out hover:bg-(--bg-hover) hover:text-(--fg-primary) focus-visible:ring-2 focus-visible:ring-(--ring) focus-visible:ring-offset-2 focus-visible:ring-offset-(--bg-header) focus-visible:outline-none active:scale-[0.97]"
                     >
                         <RefreshCw className="h-3.5 w-3.5" />
                     </button>
@@ -123,7 +123,7 @@ function QuickChatPanel() {
                         <button
                             key={conv.id}
                             type="button"
-                            className="flex w-full cursor-pointer items-start gap-2 border-b border-(--border-soft) px-3 py-2 text-left transition-colors duration-200 ease-[cubic-bezier(0.16,1,0.3,1)] hover:bg-(--bg-hover) focus-visible:ring-2 focus-visible:ring-(--ring) focus-visible:outline-none focus-visible:ring-inset"
+                            className="flex w-full cursor-pointer items-start gap-2 border-b border-(--border-soft) px-3 py-2 text-left transition-colors duration-200 ease-out hover:bg-(--bg-hover) focus-visible:ring-2 focus-visible:ring-(--ring) focus-visible:outline-none focus-visible:ring-inset"
                         >
                             <Avatar className="h-8 w-8 shrink-0">
                                 <AvatarFallback
@@ -171,7 +171,7 @@ function QuickChatPanel() {
                     ))}
                     <button
                         type="button"
-                        className="cursor-pointer px-3 py-2 text-center text-[11px] text-(--fg-link) transition-colors duration-200 ease-[cubic-bezier(0.16,1,0.3,1)] hover:bg-(--bg-hover) focus-visible:ring-2 focus-visible:ring-(--ring) focus-visible:outline-none focus-visible:ring-inset"
+                        className="cursor-pointer px-3 py-2 text-center text-[11px] text-(--fg-link) transition-colors duration-200 ease-out hover:bg-(--bg-hover) focus-visible:ring-2 focus-visible:ring-(--ring) focus-visible:outline-none focus-visible:ring-inset"
                     >
                         Mostra altre (
                         {(tab === "assigned" ? assigned : unassigned).length - 5 > 0

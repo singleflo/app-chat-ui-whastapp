@@ -47,7 +47,7 @@ export function SearchScreen() {
                 <button
                     type="button"
                     aria-label="Indietro"
-                    className="flex h-8 w-8 cursor-pointer items-center justify-center rounded-full text-(--fg-secondary) transition-all duration-200 ease-[cubic-bezier(0.16,1,0.3,1)] hover:bg-(--bg-hover) hover:text-(--fg-primary) focus-visible:ring-2 focus-visible:ring-(--ring) focus-visible:ring-offset-2 focus-visible:ring-offset-(--bg-panel) focus-visible:outline-none active:scale-[0.97]"
+                    className="flex h-8 w-8 cursor-pointer items-center justify-center rounded-full text-(--fg-secondary) transition-all duration-200 ease-out hover:bg-(--bg-hover) hover:text-(--fg-primary) focus-visible:ring-2 focus-visible:ring-(--ring) focus-visible:ring-offset-2 focus-visible:ring-offset-(--bg-panel) focus-visible:outline-none active:scale-[0.97]"
                 >
                     <ArrowLeft className="h-4 w-4" />
                 </button>
@@ -69,7 +69,7 @@ export function SearchScreen() {
                         type="button"
                         aria-pressed={i === 0}
                         className={cn(
-                            "shrink-0 cursor-pointer rounded-full border px-2.5 py-0.5 text-[11px] font-medium transition-all duration-200 ease-[cubic-bezier(0.16,1,0.3,1)] focus-visible:ring-2 focus-visible:ring-(--ring) focus-visible:ring-offset-2 focus-visible:ring-offset-(--bg-panel) focus-visible:outline-none active:scale-95",
+                            "shrink-0 cursor-pointer rounded-full border px-2.5 py-0.5 text-[11px] font-medium transition-all duration-200 ease-out focus-visible:ring-2 focus-visible:ring-(--ring) focus-visible:ring-offset-2 focus-visible:ring-offset-(--bg-panel) focus-visible:outline-none active:scale-95",
                             i === 0
                                 ? "border-(--accent) bg-(--accent-soft) text-(--accent)"
                                 : "border-(--border-strong) text-(--fg-secondary) hover:bg-(--bg-hover) hover:text-(--fg-primary)"
@@ -89,7 +89,7 @@ export function SearchScreen() {
                             {matchedConvs.map((c) => (
                                 <div
                                     key={c.id}
-                                    className="flex cursor-pointer items-center gap-3 px-3 py-2 transition-colors duration-200 ease-[cubic-bezier(0.16,1,0.3,1)] hover:bg-(--bg-hover)"
+                                    className="flex cursor-pointer items-center gap-3 px-3 py-2 transition-colors duration-200 ease-out hover:bg-(--bg-hover)"
                                 >
                                     <Avatar className="h-9 w-9">
                                         <AvatarFallback style={{ backgroundColor: c.avatarColor }}>
@@ -120,7 +120,7 @@ export function SearchScreen() {
                                 return (
                                     <div
                                         key={m.id}
-                                        className="cursor-pointer px-3 py-2 transition-colors duration-200 ease-[cubic-bezier(0.16,1,0.3,1)] hover:bg-(--bg-hover)"
+                                        className="cursor-pointer px-3 py-2 transition-colors duration-200 ease-out hover:bg-(--bg-hover)"
                                     >
                                         <div className="text-xs font-medium text-(--accent)">
                                             {conv?.name}
@@ -140,7 +140,7 @@ export function SearchScreen() {
                             {matchedContacts.map((p) => (
                                 <div
                                     key={p.contactId}
-                                    className="flex cursor-pointer items-center gap-3 px-3 py-2 transition-colors duration-200 ease-[cubic-bezier(0.16,1,0.3,1)] hover:bg-(--bg-hover)"
+                                    className="flex cursor-pointer items-center gap-3 px-3 py-2 transition-colors duration-200 ease-out hover:bg-(--bg-hover)"
                                 >
                                     <Avatar className="h-9 w-9">
                                         <AvatarFallback style={{ backgroundColor: p.avatarColor }}>

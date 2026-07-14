@@ -43,7 +43,7 @@ export function OrderContent({
             </div>
             <button
                 type="button"
-                className="flex cursor-pointer items-center justify-center gap-1 rounded py-1 text-[12px] font-medium text-(--accent) transition-all duration-200 ease-[cubic-bezier(0.16,1,0.3,1)] hover:bg-(--bg-hover) focus-visible:ring-2 focus-visible:ring-(--ring) focus-visible:ring-offset-2 focus-visible:ring-offset-(--bg-panel) focus-visible:outline-none active:scale-95"
+                className="flex cursor-pointer items-center justify-center gap-1 rounded py-1 text-[12px] font-medium text-(--accent) transition-all duration-200 ease-out hover:bg-(--bg-hover) focus-visible:ring-2 focus-visible:ring-(--ring) focus-visible:ring-offset-2 focus-visible:ring-offset-(--bg-panel) focus-visible:outline-none active:scale-95"
             >
                 Vedi ordine <ChevronRight className="h-3 w-3" />
             </button>

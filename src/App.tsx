@@ -79,7 +79,7 @@ export function App() {
                             end={s.end}
                             className={({ isActive }) =>
                                 cn(
-                                    "flex cursor-pointer items-center gap-1.5 rounded-md px-2.5 py-1.5 text-xs font-medium transition-all duration-200 ease-[cubic-bezier(0.16,1,0.3,1)] focus-visible:ring-2 focus-visible:ring-(--ring) focus-visible:ring-offset-2 focus-visible:ring-offset-(--bg-panel) focus-visible:outline-none active:scale-95",
+                                    "flex cursor-pointer items-center gap-1.5 rounded-md px-2.5 py-1.5 text-xs font-medium transition-all duration-200 ease-out focus-visible:ring-2 focus-visible:ring-(--ring) focus-visible:ring-offset-2 focus-visible:ring-offset-(--bg-panel) focus-visible:outline-none active:scale-95",
                                     isActive
                                         ? "bg-(--accent) text-(--accent-fg) shadow-(--shadow-sm)"
                                         : "text-(--fg-secondary) hover:bg-(--bg-hover) hover:text-(--fg-primary)"
@@ -97,7 +97,7 @@ export function App() {
                             to={s.to}
                             className={({ isActive }) =>
                                 cn(
-                                    "flex cursor-pointer items-center gap-1.5 rounded-md px-2.5 py-1.5 text-xs font-medium transition-all duration-200 ease-[cubic-bezier(0.16,1,0.3,1)] focus-visible:ring-2 focus-visible:ring-(--ring) focus-visible:ring-offset-2 focus-visible:ring-offset-(--bg-panel) focus-visible:outline-none active:scale-95",
+                                    "flex cursor-pointer items-center gap-1.5 rounded-md px-2.5 py-1.5 text-xs font-medium transition-all duration-200 ease-out focus-visible:ring-2 focus-visible:ring-(--ring) focus-visible:ring-offset-2 focus-visible:ring-offset-(--bg-panel) focus-visible:outline-none active:scale-95",
                                     isActive
                                         ? "bg-(--accent) text-(--accent-fg) shadow-(--shadow-sm)"
                                         : "text-(--fg-secondary) hover:bg-(--bg-hover) hover:text-(--fg-primary)"
@@ -113,7 +113,7 @@ export function App() {
                     type="button"
                     onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
                     title={`Passa al tema ${theme === "dark" ? "chiaro" : "scuro"}`}
-                    className="flex cursor-pointer items-center gap-1.5 rounded-md px-2.5 py-1.5 text-xs font-medium text-(--fg-secondary) transition-all duration-200 ease-[cubic-bezier(0.16,1,0.3,1)] hover:bg-(--bg-hover) hover:text-(--fg-primary) focus-visible:ring-2 focus-visible:ring-(--ring) focus-visible:ring-offset-2 focus-visible:ring-offset-(--bg-panel) focus-visible:outline-none active:scale-95"
+                    className="flex cursor-pointer items-center gap-1.5 rounded-md px-2.5 py-1.5 text-xs font-medium text-(--fg-secondary) transition-all duration-200 ease-out hover:bg-(--bg-hover) hover:text-(--fg-primary) focus-visible:ring-2 focus-visible:ring-(--ring) focus-visible:ring-offset-2 focus-visible:ring-offset-(--bg-panel) focus-visible:outline-none active:scale-95"
                     aria-label="Cambia tema"
                 >
                     <Palette className="h-3.5 w-3.5" />

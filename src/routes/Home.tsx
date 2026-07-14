@@ -74,10 +74,10 @@ export function Home() {
                             key={c.to}
                             to={c.to}
                             style={{ animationDelay: `${i * 50}ms` }}
-                            className="group animate-slide-up flex cursor-pointer flex-col gap-3 rounded-xl border border-(--border-strong) bg-(--bg-panel) p-5 shadow-(--shadow-sm) transition-all duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] hover:-translate-y-0.5 hover:border-(--accent) hover:shadow-(--shadow-lg) focus-visible:ring-2 focus-visible:ring-(--ring) focus-visible:ring-offset-2 focus-visible:ring-offset-(--bg-app) focus-visible:outline-none"
+                            className="group animate-slide-up flex cursor-pointer flex-col gap-3 rounded-xl border border-(--border-strong) bg-(--bg-panel) p-5 shadow-(--shadow-sm) transition-all duration-300 ease-out hover:-translate-y-0.5 hover:border-(--accent) hover:shadow-(--shadow-lg) focus-visible:ring-2 focus-visible:ring-(--ring) focus-visible:ring-offset-2 focus-visible:ring-offset-(--bg-app) focus-visible:outline-none"
                         >
                             <div className="flex items-center justify-between">
-                                <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-(--accent-soft) text-(--accent) transition-transform duration-300 ease-[cubic-bezier(0.34,1.56,0.64,1)] group-hover:scale-110">
+                                <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-(--accent-soft) text-(--accent) transition-transform duration-300 ease-spring group-hover:scale-110">
                                     <c.icon className="h-5 w-5" />
                                 </div>
                                 <ArrowRight className="h-4 w-4 text-(--fg-tertiary) transition-all duration-300 group-hover:translate-x-1 group-hover:text-(--accent)" />

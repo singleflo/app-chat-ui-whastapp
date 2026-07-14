@@ -134,7 +134,7 @@ export function Bubble({
     return (
         <div
             className={cn(
-                "group relative max-w-[78%] rounded-[10px] px-2 py-1.5 text-sm shadow-(--shadow-bubble) transition-shadow duration-200 ease-[cubic-bezier(0.16,1,0.3,1)] hover:shadow-(--shadow-md)",
+                "group relative max-w-[78%] rounded-[10px] px-2 py-1.5 text-sm shadow-(--shadow-bubble) transition-shadow duration-200 ease-out hover:shadow-(--shadow-md)",
                 side === "in"
                     ? "animate-bubble-in self-start bg-(--bg-bubble-in)"
                     : "animate-bubble-out self-end bg-(--bg-bubble-out)",

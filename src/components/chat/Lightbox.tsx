@@ -4,7 +4,7 @@ import { MediaPlaceholder } from "@/components/bubbles/content/Media";
 
 const focusRing =
     "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-(--ring) focus-visible:ring-offset-2 focus-visible:ring-offset-(--scrim)";
-const iconBtn = `cursor-pointer transition-all duration-200 ease-[cubic-bezier(0.16,1,0.3,1)] active:scale-[0.97] ${focusRing}`;
+const iconBtn = `cursor-pointer transition-all duration-200 ease-out active:scale-[0.97] ${focusRing}`;
 
 export interface LightboxState {
     open: boolean;

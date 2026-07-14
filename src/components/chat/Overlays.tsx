@@ -7,8 +7,8 @@ import { dataset } from "@/data/dataset";
 const TITLE_ID = "overlay-dialog-title";
 const focusRing =
     "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-(--ring) focus-visible:ring-offset-2 focus-visible:ring-offset-(--bg-panel)";
-const iconBtn = `cursor-pointer transition-all duration-200 ease-[cubic-bezier(0.16,1,0.3,1)] active:scale-[0.97] ${focusRing}`;
-const actionBtn = `cursor-pointer transition-all duration-200 ease-[cubic-bezier(0.16,1,0.3,1)] active:scale-95 ${focusRing}`;
+const iconBtn = `cursor-pointer transition-all duration-200 ease-out active:scale-[0.97] ${focusRing}`;
+const actionBtn = `cursor-pointer transition-all duration-200 ease-out active:scale-95 ${focusRing}`;
 
 export type OverlayState =
     | { type: "new-chat" }

@@ -5,7 +5,7 @@ import { cn } from "@/lib/utils";
 
 const buttonVariants = cva(
     // 2026: cursor-pointer + active:scale-95 (haptic-like press) + ring-offset
-    "inline-flex cursor-pointer items-center justify-center gap-2 rounded-md text-sm font-medium whitespace-nowrap transition-[background-color,color,box-shadow,transform] duration-200 ease-[cubic-bezier(0.16,1,0.3,1)] focus-visible:ring-2 focus-visible:ring-(--ring) focus-visible:ring-offset-(--bg-panel) focus-visible:ring-offset-(--ring-offset) focus-visible:outline-none active:scale-[0.97] disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50 [&_svg]:size-4 [&_svg]:shrink-0",
+    "inline-flex cursor-pointer items-center justify-center gap-2 rounded-md text-sm font-medium whitespace-nowrap transition-[background-color,color,box-shadow,transform] duration-200 ease-out focus-visible:ring-2 focus-visible:ring-(--ring) focus-visible:ring-offset-(--bg-panel) focus-visible:ring-offset-(--ring-offset) focus-visible:outline-none active:scale-[0.97] disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50 [&_svg]:size-4 [&_svg]:shrink-0",
     {
         variants: {
             variant: {

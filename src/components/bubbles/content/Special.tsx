@@ -44,7 +44,7 @@ export function FallbackContent({ message }: { message: Message }) {
             <button
                 type="button"
                 onClick={handleCopy}
-                className="flex cursor-pointer items-center justify-center gap-1 self-start rounded border border-(--border-strong) px-2 py-0.5 text-[10px] transition-all duration-200 ease-[cubic-bezier(0.16,1,0.3,1)] hover:bg-(--bg-hover) focus-visible:ring-2 focus-visible:ring-(--ring) focus-visible:ring-offset-2 focus-visible:ring-offset-(--bg-panel) focus-visible:outline-none active:scale-95"
+                className="flex cursor-pointer items-center justify-center gap-1 self-start rounded border border-(--border-strong) px-2 py-0.5 text-[10px] transition-all duration-200 ease-out hover:bg-(--bg-hover) focus-visible:ring-2 focus-visible:ring-(--ring) focus-visible:ring-offset-2 focus-visible:ring-offset-(--bg-panel) focus-visible:outline-none active:scale-95"
             >
                 <Copy className="h-3 w-3" /> Copia payload
             </button>

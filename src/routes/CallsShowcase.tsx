@@ -73,7 +73,7 @@ export function CallsShowcase() {
                         <button
                             type="button"
                             aria-label="Avvia chiamata"
-                            className="flex h-9 w-9 cursor-pointer items-center justify-center rounded-full bg-(--accent) text-(--accent-fg) transition-all duration-200 ease-[cubic-bezier(0.16,1,0.3,1)] hover:bg-(--accent-hover) focus-visible:ring-2 focus-visible:ring-(--ring) focus-visible:ring-offset-2 focus-visible:ring-offset-(--bg-panel) focus-visible:outline-none active:scale-[0.97]"
+                            className="flex h-9 w-9 cursor-pointer items-center justify-center rounded-full bg-(--accent) text-(--accent-fg) transition-all duration-200 ease-out hover:bg-(--accent-hover) focus-visible:ring-2 focus-visible:ring-(--ring) focus-visible:ring-offset-2 focus-visible:ring-offset-(--bg-panel) focus-visible:outline-none active:scale-[0.97]"
                         >
                             <Phone className="h-4 w-4" />
                         </button>
@@ -137,13 +137,13 @@ function IncomingCallBanner() {
             <div className="flex items-center gap-2">
                 <button
                     type="button"
-                    className="flex cursor-pointer items-center gap-1.5 rounded-full bg-(--status-failed) px-3 py-1.5 text-xs font-medium text-(--fg-on-accent) transition-all duration-200 ease-[cubic-bezier(0.16,1,0.3,1)] focus-visible:ring-2 focus-visible:ring-(--ring) focus-visible:ring-offset-2 focus-visible:ring-offset-(--bg-panel) focus-visible:outline-none active:scale-95"
+                    className="flex cursor-pointer items-center gap-1.5 rounded-full bg-(--status-failed) px-3 py-1.5 text-xs font-medium text-(--fg-on-accent) transition-all duration-200 ease-out focus-visible:ring-2 focus-visible:ring-(--ring) focus-visible:ring-offset-2 focus-visible:ring-offset-(--bg-panel) focus-visible:outline-none active:scale-95"
                 >
                     <PhoneOff className="h-3.5 w-3.5" /> Rifiuta
                 </button>
                 <button
                     type="button"
-                    className="flex animate-pulse cursor-pointer items-center gap-1.5 rounded-full bg-(--accent) px-3 py-1.5 text-xs font-medium text-(--accent-fg) transition-all duration-200 ease-[cubic-bezier(0.16,1,0.3,1)] hover:bg-(--accent-hover) focus-visible:ring-2 focus-visible:ring-(--ring) focus-visible:ring-offset-2 focus-visible:ring-offset-(--bg-panel) focus-visible:outline-none active:scale-95"
+                    className="flex animate-pulse cursor-pointer items-center gap-1.5 rounded-full bg-(--accent) px-3 py-1.5 text-xs font-medium text-(--accent-fg) transition-all duration-200 ease-out hover:bg-(--accent-hover) focus-visible:ring-2 focus-visible:ring-(--ring) focus-visible:ring-offset-2 focus-visible:ring-offset-(--bg-panel) focus-visible:outline-none active:scale-95"
                 >
                     <Phone className="h-3.5 w-3.5" /> Accetta
                 </button>
@@ -180,7 +180,7 @@ function ActiveCallScreen() {
                             key={k}
                             type="button"
                             aria-label={`Tasto ${k}`}
-                            className="flex h-10 w-10 cursor-pointer items-center justify-center rounded-full bg-(--bg-panel-2) text-sm font-medium transition-all duration-200 ease-[cubic-bezier(0.16,1,0.3,1)] hover:bg-(--bg-hover) focus-visible:ring-2 focus-visible:ring-(--ring) focus-visible:ring-offset-2 focus-visible:ring-offset-(--bg-panel) focus-visible:outline-none active:scale-95"
+                            className="flex h-10 w-10 cursor-pointer items-center justify-center rounded-full bg-(--bg-panel-2) text-sm font-medium transition-all duration-200 ease-out hover:bg-(--bg-hover) focus-visible:ring-2 focus-visible:ring-(--ring) focus-visible:ring-offset-2 focus-visible:ring-offset-(--bg-panel) focus-visible:outline-none active:scale-95"
                         >
                             {k}
                         </button>
@@ -210,7 +210,7 @@ function ActiveCallScreen() {
                 <CallControl active={false} onClick={() => {}} icon={Minimize2} label="Minimizza" />
                 <button
                     type="button"
-                    className="flex h-14 w-14 cursor-pointer items-center justify-center rounded-full bg-(--status-failed) text-(--fg-on-accent) transition-all duration-200 ease-[cubic-bezier(0.16,1,0.3,1)] focus-visible:ring-2 focus-visible:ring-(--ring) focus-visible:ring-offset-2 focus-visible:ring-offset-(--bg-panel) focus-visible:outline-none active:scale-[0.97]"
+                    className="flex h-14 w-14 cursor-pointer items-center justify-center rounded-full bg-(--status-failed) text-(--fg-on-accent) transition-all duration-200 ease-out focus-visible:ring-2 focus-visible:ring-(--ring) focus-visible:ring-offset-2 focus-visible:ring-offset-(--bg-panel) focus-visible:outline-none active:scale-[0.97]"
                     aria-label="Riaggancia"
                 >
                     <PhoneOff className="h-6 w-6" />
@@ -236,7 +236,7 @@ function CallControl({
             type="button"
             onClick={onClick}
             aria-pressed={active}
-            className="flex cursor-pointer flex-col items-center gap-1 rounded-lg transition-all duration-200 ease-[cubic-bezier(0.16,1,0.3,1)] focus-visible:ring-2 focus-visible:ring-(--ring) focus-visible:ring-offset-2 focus-visible:ring-offset-(--bg-panel) focus-visible:outline-none active:scale-95"
+            className="flex cursor-pointer flex-col items-center gap-1 rounded-lg transition-all duration-200 ease-out focus-visible:ring-2 focus-visible:ring-(--ring) focus-visible:ring-offset-2 focus-visible:ring-offset-(--bg-panel) focus-visible:outline-none active:scale-95"
             aria-label={label}
         >
             <span
@@ -276,14 +276,14 @@ function CallLog() {
                 <button
                     type="button"
                     aria-pressed="true"
-                    className="cursor-pointer rounded font-semibold text-(--accent) transition-all duration-200 ease-[cubic-bezier(0.16,1,0.3,1)] focus-visible:ring-2 focus-visible:ring-(--ring) focus-visible:ring-offset-2 focus-visible:ring-offset-(--bg-panel) focus-visible:outline-none active:scale-95"
+                    className="cursor-pointer rounded font-semibold text-(--accent) transition-all duration-200 ease-out focus-visible:ring-2 focus-visible:ring-(--ring) focus-visible:ring-offset-2 focus-visible:ring-offset-(--bg-panel) focus-visible:outline-none active:scale-95"
                 >
                     Tutte ({dataset.calls.length})
                 </button>
                 <button
                     type="button"
                     aria-pressed="false"
-                    className="cursor-pointer rounded text-(--fg-tertiary) transition-all duration-200 ease-[cubic-bezier(0.16,1,0.3,1)] hover:text-(--fg-primary) focus-visible:ring-2 focus-visible:ring-(--ring) focus-visible:ring-offset-2 focus-visible:ring-offset-(--bg-panel) focus-visible:outline-none active:scale-95"
+                    className="cursor-pointer rounded text-(--fg-tertiary) transition-all duration-200 ease-out hover:text-(--fg-primary) focus-visible:ring-2 focus-visible:ring-(--ring) focus-visible:ring-offset-2 focus-visible:ring-offset-(--bg-panel) focus-visible:outline-none active:scale-95"
                 >
                     Perse (1)
                 </button>
@@ -351,7 +351,7 @@ function CallLog() {
                         <button
                             type="button"
                             aria-label={`Richiama ${name}`}
-                            className="flex h-8 w-8 cursor-pointer items-center justify-center rounded-full text-(--accent) transition-all duration-200 ease-[cubic-bezier(0.16,1,0.3,1)] hover:bg-(--bg-hover) focus-visible:ring-2 focus-visible:ring-(--ring) focus-visible:ring-offset-2 focus-visible:ring-offset-(--bg-panel) focus-visible:outline-none active:scale-[0.97]"
+                            className="flex h-8 w-8 cursor-pointer items-center justify-center rounded-full text-(--accent) transition-all duration-200 ease-out hover:bg-(--bg-hover) focus-visible:ring-2 focus-visible:ring-(--ring) focus-visible:ring-offset-2 focus-visible:ring-offset-(--bg-panel) focus-visible:outline-none active:scale-[0.97]"
                         >
                             <PhoneCall className="h-4 w-4" />
                         </button>

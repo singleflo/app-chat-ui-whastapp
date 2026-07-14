@@ -17,7 +17,7 @@ function LinkPreviewCard({ preview }: { preview: LinkPreview }) {
             href={preview.url}
             target="_blank"
             rel="noopener noreferrer"
-            className={`mb-1.5 block cursor-pointer overflow-hidden rounded-lg border border-(--border-strong) bg-(--bg-panel) no-underline transition-all duration-200 ease-[cubic-bezier(0.16,1,0.3,1)] hover:border-(--accent) hover:shadow-(--shadow-md) focus-visible:ring-2 focus-visible:ring-(--ring) focus-visible:outline-none ${preview.compact ? "flex" : ""}`}
+            className={`mb-1.5 block cursor-pointer overflow-hidden rounded-lg border border-(--border-strong) bg-(--bg-panel) no-underline transition-all duration-200 ease-out hover:border-(--accent) hover:shadow-(--shadow-md) focus-visible:ring-2 focus-visible:ring-(--ring) focus-visible:outline-none ${preview.compact ? "flex" : ""}`}
             onClick={(e) => e.preventDefault()}
         >
             {!preview.compact && preview.image && (

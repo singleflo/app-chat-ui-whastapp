@@ -72,7 +72,7 @@ export function TemplateContent({ template }: { template: TemplateContentPayload
                     {template.buttons.length > 3 && (
                         <button
                             type="button"
-                            className="cursor-pointer rounded-md py-1.5 text-[12px] font-medium text-(--accent) transition-all duration-200 ease-[cubic-bezier(0.16,1,0.3,1)] hover:bg-(--bg-hover) focus-visible:ring-2 focus-visible:ring-(--ring) focus-visible:ring-offset-2 focus-visible:ring-offset-(--bg-panel) focus-visible:outline-none active:scale-95"
+                            className="cursor-pointer rounded-md py-1.5 text-[12px] font-medium text-(--accent) transition-all duration-200 ease-out hover:bg-(--bg-hover) focus-visible:ring-2 focus-visible:ring-(--ring) focus-visible:ring-offset-2 focus-visible:ring-offset-(--bg-panel) focus-visible:outline-none active:scale-95"
                         >
                             Vedi tutte le opzioni ({template.buttons.length})
                         </button>
@@ -123,7 +123,7 @@ function LtoBanner({
             <button
                 type="button"
                 onClick={() => onCopy(code)}
-                className="flex cursor-pointer items-center gap-1 rounded border border-(--border-strong) px-2 py-0.5 text-[11px] font-medium transition-all duration-200 ease-[cubic-bezier(0.16,1,0.3,1)] hover:bg-(--bg-hover) focus-visible:ring-2 focus-visible:ring-(--ring) focus-visible:ring-offset-2 focus-visible:ring-offset-(--bg-panel) focus-visible:outline-none active:scale-95"
+                className="flex cursor-pointer items-center gap-1 rounded border border-(--border-strong) px-2 py-0.5 text-[11px] font-medium transition-all duration-200 ease-out hover:bg-(--bg-hover) focus-visible:ring-2 focus-visible:ring-(--ring) focus-visible:ring-offset-2 focus-visible:ring-offset-(--bg-panel) focus-visible:outline-none active:scale-95"
             >
                 {copied ? <Check className="h-3 w-3" /> : <Copy className="h-3 w-3" />}
                 {code}

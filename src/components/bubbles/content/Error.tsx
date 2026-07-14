@@ -25,7 +25,7 @@ export function ErrorContent({ message }: { message: Message }) {
                             key={a.id}
                             type="button"
                             className={
-                                "flex cursor-pointer items-center gap-1 rounded-md px-2 py-1 text-[11px] font-medium transition-all duration-200 ease-[cubic-bezier(0.16,1,0.3,1)] focus-visible:ring-2 focus-visible:ring-(--ring) focus-visible:ring-offset-2 focus-visible:ring-offset-(--bg-panel) focus-visible:outline-none active:scale-95 " +
+                                "flex cursor-pointer items-center gap-1 rounded-md px-2 py-1 text-[11px] font-medium transition-all duration-200 ease-out focus-visible:ring-2 focus-visible:ring-(--ring) focus-visible:ring-offset-2 focus-visible:ring-offset-(--bg-panel) focus-visible:outline-none active:scale-95 " +
                                 (a.variant === "primary"
                                     ? "bg-(--accent) text-(--accent-fg) hover:bg-(--accent-hover)"
                                     : "border border-(--border-strong) hover:bg-(--bg-hover)")

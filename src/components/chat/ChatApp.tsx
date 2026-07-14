@@ -10,8 +10,8 @@ import { PanelRightOpen } from "lucide-react";
 
 const focusRing =
     "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-(--ring) focus-visible:ring-offset-2 focus-visible:ring-offset-(--bg-panel)";
-const iconBtn = `cursor-pointer transition-all duration-200 ease-[cubic-bezier(0.16,1,0.3,1)] active:scale-[0.97] ${focusRing}`;
-const resizeHandle = `w-1 shrink-0 cursor-col-resize border-0 bg-(--border-strong) p-0 transition-all duration-200 ease-[cubic-bezier(0.16,1,0.3,1)] hover:bg-(--accent) active:bg-(--accent) ${focusRing}`;
+const iconBtn = `cursor-pointer transition-all duration-200 ease-out active:scale-[0.97] ${focusRing}`;
+const resizeHandle = `w-1 shrink-0 cursor-col-resize border-0 bg-(--border-strong) p-0 transition-all duration-200 ease-out hover:bg-(--accent) active:bg-(--accent) ${focusRing}`;
 const LIST_MIN = 280;
 const LIST_MAX = 600;
 const CTX_MIN = 240;

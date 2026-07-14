@@ -25,7 +25,7 @@ export function SettingsScreen() {
                 <button
                     type="button"
                     aria-label="Indietro"
-                    className="flex h-8 w-8 cursor-pointer items-center justify-center rounded-full text-(--fg-secondary) transition-all duration-200 ease-[cubic-bezier(0.16,1,0.3,1)] hover:bg-(--bg-hover) hover:text-(--fg-primary) focus-visible:ring-2 focus-visible:ring-(--ring) focus-visible:ring-offset-2 focus-visible:ring-offset-(--bg-panel) focus-visible:outline-none active:scale-[0.97]"
+                    className="flex h-8 w-8 cursor-pointer items-center justify-center rounded-full text-(--fg-secondary) transition-all duration-200 ease-out hover:bg-(--bg-hover) hover:text-(--fg-primary) focus-visible:ring-2 focus-visible:ring-(--ring) focus-visible:ring-offset-2 focus-visible:ring-offset-(--bg-panel) focus-visible:outline-none active:scale-[0.97]"
                 >
                     <ArrowLeft className="h-4 w-4" />
                 </button>
@@ -135,19 +135,19 @@ function ToggleRow({
             type="button"
             onClick={() => setOn(!on)}
             aria-pressed={on}
-            className="flex w-full cursor-pointer items-center gap-3 px-3 py-2.5 text-left transition-colors duration-200 ease-[cubic-bezier(0.16,1,0.3,1)] hover:bg-(--bg-hover) focus-visible:ring-2 focus-visible:ring-(--ring) focus-visible:outline-none focus-visible:ring-inset"
+            className="flex w-full cursor-pointer items-center gap-3 px-3 py-2.5 text-left transition-colors duration-200 ease-out hover:bg-(--bg-hover) focus-visible:ring-2 focus-visible:ring-(--ring) focus-visible:outline-none focus-visible:ring-inset"
         >
             <Icon className="h-4 w-4 shrink-0 text-(--fg-tertiary)" />
             <span className="flex-1 text-sm">{label}</span>
             <span
                 className={cn(
-                    "relative h-5 w-9 rounded-full transition-colors duration-200 ease-[cubic-bezier(0.16,1,0.3,1)]",
+                    "relative h-5 w-9 rounded-full transition-colors duration-200 ease-out",
                     on ? "bg-(--accent)" : "bg-(--bg-panel-2)"
                 )}
             >
                 <span
                     className={cn(
-                        "absolute top-0.5 h-4 w-4 rounded-full bg-(--fg-on-accent) shadow-(--shadow-sm) transition-transform duration-200 ease-[cubic-bezier(0.16,1,0.3,1)]",
+                        "absolute top-0.5 h-4 w-4 rounded-full bg-(--fg-on-accent) shadow-(--shadow-sm) transition-transform duration-200 ease-out",
                         on ? "translate-x-4" : "translate-x-0.5"
                     )}
                 />
@@ -170,7 +170,7 @@ function ThemeRow() {
                         onClick={() => setTheme(t)}
                         aria-pressed={theme === t}
                         className={cn(
-                            "cursor-pointer rounded-md px-2 py-0.5 text-[11px] font-medium capitalize transition-all duration-200 ease-[cubic-bezier(0.16,1,0.3,1)] focus-visible:ring-2 focus-visible:ring-(--ring) focus-visible:ring-offset-2 focus-visible:ring-offset-(--bg-panel) focus-visible:outline-none active:scale-95",
+                            "cursor-pointer rounded-md px-2 py-0.5 text-[11px] font-medium capitalize transition-all duration-200 ease-out focus-visible:ring-2 focus-visible:ring-(--ring) focus-visible:ring-offset-2 focus-visible:ring-offset-(--bg-panel) focus-visible:outline-none active:scale-95",
                             theme === t
                                 ? "bg-(--accent) text-(--accent-fg)"
                                 : "bg-(--bg-panel-2) text-(--fg-secondary) hover:bg-(--bg-hover) hover:text-(--fg-primary)"
@@ -198,7 +198,7 @@ function DensityRow() {
                         onClick={() => setDensity(d)}
                         aria-pressed={density === d}
                         className={cn(
-                            "cursor-pointer rounded-md px-2 py-0.5 text-[11px] font-medium capitalize transition-all duration-200 ease-[cubic-bezier(0.16,1,0.3,1)] focus-visible:ring-2 focus-visible:ring-(--ring) focus-visible:ring-offset-2 focus-visible:ring-offset-(--bg-panel) focus-visible:outline-none active:scale-95",
+                            "cursor-pointer rounded-md px-2 py-0.5 text-[11px] font-medium capitalize transition-all duration-200 ease-out focus-visible:ring-2 focus-visible:ring-(--ring) focus-visible:ring-offset-2 focus-visible:ring-offset-(--bg-panel) focus-visible:outline-none active:scale-95",
                             density === d
                                 ? "bg-(--accent) text-(--accent-fg)"
                                 : "bg-(--bg-panel-2) text-(--fg-secondary) hover:bg-(--bg-hover) hover:text-(--fg-primary)"
@@ -226,7 +226,7 @@ function FontSizeRow() {
                         onClick={() => setSize(s)}
                         aria-pressed={size === s}
                         className={cn(
-                            "cursor-pointer rounded-md px-2 py-0.5 text-[11px] font-medium transition-all duration-200 ease-[cubic-bezier(0.16,1,0.3,1)] focus-visible:ring-2 focus-visible:ring-(--ring) focus-visible:ring-offset-2 focus-visible:ring-offset-(--bg-panel) focus-visible:outline-none active:scale-95",
+                            "cursor-pointer rounded-md px-2 py-0.5 text-[11px] font-medium transition-all duration-200 ease-out focus-visible:ring-2 focus-visible:ring-(--ring) focus-visible:ring-offset-2 focus-visible:ring-offset-(--bg-panel) focus-visible:outline-none active:scale-95",
                             size === s
                                 ? "bg-(--accent) text-(--accent-fg)"
                                 : "bg-(--bg-panel-2) text-(--fg-secondary) hover:bg-(--bg-hover) hover:text-(--fg-primary)"
@@ -250,7 +250,7 @@ function CannedRow({ title, body }: { title: string; body: string }) {
             </div>
             <button
                 type="button"
-                className="cursor-pointer rounded text-[11px] text-(--fg-link) transition-all duration-200 ease-[cubic-bezier(0.16,1,0.3,1)] hover:underline focus-visible:ring-2 focus-visible:ring-(--ring) focus-visible:ring-offset-2 focus-visible:ring-offset-(--bg-panel) focus-visible:outline-none active:scale-95"
+                className="cursor-pointer rounded text-[11px] text-(--fg-link) transition-all duration-200 ease-out hover:underline focus-visible:ring-2 focus-visible:ring-(--ring) focus-visible:ring-offset-2 focus-visible:ring-offset-(--bg-panel) focus-visible:outline-none active:scale-95"
             >
                 Modifica
             </button>
@@ -265,7 +265,7 @@ function LabelRow({ name, color }: { name: string; color: string }) {
             <span className="flex-1 text-xs">{name}</span>
             <button
                 type="button"
-                className="cursor-pointer rounded text-[11px] text-(--fg-link) transition-all duration-200 ease-[cubic-bezier(0.16,1,0.3,1)] hover:underline focus-visible:ring-2 focus-visible:ring-(--ring) focus-visible:ring-offset-2 focus-visible:ring-offset-(--bg-panel) focus-visible:outline-none active:scale-95"
+                className="cursor-pointer rounded text-[11px] text-(--fg-link) transition-all duration-200 ease-out hover:underline focus-visible:ring-2 focus-visible:ring-(--ring) focus-visible:ring-offset-2 focus-visible:ring-offset-(--bg-panel) focus-visible:outline-none active:scale-95"
             >
                 Modifica
             </button>
