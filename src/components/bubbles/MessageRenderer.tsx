@@ -1,6 +1,6 @@
 import type { ChatEntry, Message } from "@/types/chat";
 import { isMessage } from "@/types/chat";
-import { Bubble, BubbleMeta, ForwardedLabel, QuotedBlock, Reactions, SenderAvatar, SenderTag } from "./Bubble";
+import { Bubble, BubbleMeta, ForwardedLabel, QuotedBlock, Reactions, SenderTag } from "./Bubble";
 import { TextContent } from "./content/Text";
 import { ImageContent, VideoContent, DocumentContent, StickerContent } from "./content/Media";
 import { AudioContent } from "./content/Audio";
@@ -45,13 +45,8 @@ export function MessageRenderer({ message }: { message: Message }) {
                 <MessageContextMenu message={message} />
             </>
         );
-        if (direction === "out" && sender) {
-            return (
-                <div className="flex max-w-[78%] items-end justify-end gap-1.5 self-end">
-                    <Bubble side="out" tone="deleted" hasReactions={hasReactions} className="max-w-full min-w-0">{deletedInner}</Bubble>
-                    <SenderAvatar sender={sender} size={28} />
-                </div>
-            );
+        if (direction === "out") {
+            return <Bubble side="out" tone="deleted" hasReactions={hasReactions} className="self-end">{deletedInner}</Bubble>;
         }
         return <Bubble side="in" tone="deleted" hasReactions={hasReactions}>{deletedInner}</Bubble>;
     }
@@ -64,14 +59,6 @@ export function MessageRenderer({ message }: { message: Message }) {
                 <MessageContextMenu message={message} />
             </>
         );
-        if (direction === "out" && sender) {
-            return (
-                <div className="flex max-w-[78%] items-end justify-end gap-1.5 self-end">
-                    <Bubble side="out" tone="error" hasReactions={hasReactions} className="max-w-full min-w-0">{errorInner}</Bubble>
-                    <SenderAvatar sender={sender} size={28} />
-                </div>
-            );
-        }
         return <Bubble side="out" tone="error" hasReactions={hasReactions}>{errorInner}</Bubble>;
     }
     if (content.kind === "fallback") {
@@ -82,13 +69,8 @@ export function MessageRenderer({ message }: { message: Message }) {
                 <MessageContextMenu message={message} />
             </>
         );
-        if (direction === "out" && sender) {
-            return (
-                <div className="flex max-w-[78%] items-end justify-end gap-1.5 self-end">
-                    <Bubble side="out" tone="fallback" hasReactions={hasReactions} className="max-w-full min-w-0">{fallbackInner}</Bubble>
-                    <SenderAvatar sender={sender} size={28} />
-                </div>
-            );
+        if (direction === "out") {
+            return <Bubble side="out" tone="fallback" hasReactions={hasReactions} className="self-end">{fallbackInner}</Bubble>;
         }
         return <Bubble side="in" tone="fallback" hasReactions={hasReactions}>{fallbackInner}</Bubble>;
     }
@@ -102,14 +84,6 @@ export function MessageRenderer({ message }: { message: Message }) {
                 <MessageContextMenu message={message} />
             </>
         );
-        if (sender) {
-            return (
-                <div className="flex max-w-[78%] items-end justify-end gap-1.5 self-end">
-                    <Bubble side="out" tone="note" hasReactions={hasReactions} className="max-w-full min-w-0">{noteInner}</Bubble>
-                    <SenderAvatar sender={sender} size={28} />
-                </div>
-            );
-        }
         return <Bubble side="out" tone="note" hasReactions={hasReactions}>{noteInner}</Bubble>;
     }
 
@@ -119,7 +93,6 @@ export function MessageRenderer({ message }: { message: Message }) {
     }
 
     const tone = sender?.kind === "bot" ? "bot" : "default";
-    const showAvatar = direction === "out" && !!sender;
 
     const inner = (
         <>
@@ -139,17 +112,6 @@ export function MessageRenderer({ message }: { message: Message }) {
             <MessageContextMenu message={message} />
         </>
     );
-
-    if (showAvatar && sender) {
-        return (
-            <div className="flex max-w-[78%] items-end justify-end gap-1.5 self-end">
-                <Bubble side="out" tone={tone} hasReactions={hasReactions} className="max-w-full min-w-0">
-                    {inner}
-                </Bubble>
-                <SenderAvatar sender={sender} size={28} />
-            </div>
-        );
-    }
 
     return (
         <Bubble side={direction === "out" ? "out" : "in"} tone={tone} hasReactions={hasReactions}>{inner}</Bubble>

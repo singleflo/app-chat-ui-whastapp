@@ -39,7 +39,7 @@ ChatEntryRenderer(entry)              # MessageRenderer.tsx#L28
 ## CONVENTIONS (local)
 
 - **`Bubble` bakes in `max-w-[78%]` + `self-start/end`**. When wrapping an outbound bubble with an avatar row, pass `className="max-w-full min-w-0"` to the Bubble and put `max-w-[78%]` on the flex wrapper (avoids a circular max-width bug).
-- **Outbound avatar → RIGHT** of bubble: `<div className="flex max-w-[78%] items-end justify-end gap-1.5 self-end"><Bubble …/>‹avatar›</div>`.
+- **Outbound: render <Bubble side="out"> directly (no wrapper, no avatar). Wrapper+avatar pattern is DEPRECATED.**
 - **Bot bubbles**: `tone="bot"` → blue bg + `bot-bubble-pattern` (diagonal stripes) + `SenderAvatar` shows Bot icon.
 - **`hasReactions` prop** adds `mb-3` so the reaction pill doesn't overlap the next bubble.
 - Special kinds (deleted/error/fallback/internal_note) build their own `inner` fragment then reuse the same outbound-avatar wrapper — keep that pattern when adding one.

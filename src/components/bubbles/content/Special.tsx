@@ -31,7 +31,7 @@ export function FallbackContent({ message }: { message: Message }) {
         }
     };
     return (
-        <div className="flex min-w-[220px] flex-col gap-1.5 rounded-md bg-[var(--bg-bubble-fallback)] p-2">
+        <div className="flex w-[220px] max-w-full flex-col gap-1.5 rounded-md bg-[var(--bg-bubble-fallback)] p-2">
             <div className="flex items-center gap-1.5 text-[12px] text-[var(--fg-warning)]">
                 <AlertTriangle className="h-3.5 w-3.5" /> Tipo non supportato
             </div>

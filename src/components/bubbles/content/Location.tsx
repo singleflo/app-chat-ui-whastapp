@@ -20,7 +20,7 @@ export function LocationContent({
 }) {
     if (locationRequest) {
         return (
-            <div className="flex min-w-[220px] flex-col gap-2">
+            <div className="flex w-[220px] max-w-full flex-col gap-2">
                 <div className="text-sm">
                     Per favore condividi la tua posizione per consentirci di organizzare la consegna.
                 </div>
@@ -35,7 +35,7 @@ export function LocationContent({
     }
     if (addressRequest) {
         return (
-            <div className="flex min-w-[220px] flex-col gap-2">
+            <div className="flex w-[220px] max-w-full flex-col gap-2">
                 <div className="text-sm">
                     Per completare l'ordine abbiamo bisogno del tuo indirizzo di spedizione.
                 </div>
@@ -49,10 +49,10 @@ export function LocationContent({
         );
     }
     return (
-        <div className="flex min-w-[240px] flex-col gap-1">
+        <div className="flex w-[240px] max-w-full flex-col gap-1">
             <MediaPlaceholder
                 url={staticMapUrl ?? `map:${lat},${lng}`}
-                className="aspect-[2/1] w-full min-w-[240px] rounded-md"
+                className="aspect-[2/1] w-full rounded-md"
             />
             <div className="flex items-start gap-1.5 p-1">
                 <MapPin className="mt-0.5 h-3.5 w-3.5 shrink-0 text-[var(--accent)]" />

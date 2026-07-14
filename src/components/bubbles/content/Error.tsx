@@ -5,7 +5,7 @@ export function ErrorContent({ message }: { message: Message }) {
     const content = message.content;
     if (content.kind !== "error") return null;
     return (
-        <div className="flex min-w-[240px] flex-col gap-1.5 rounded-md bg-[var(--bg-bubble-error)] p-2">
+        <div className="flex w-[240px] max-w-full flex-col gap-1.5 rounded-md bg-[var(--bg-bubble-error)] p-2">
             <div className="flex items-center gap-1.5 text-[12px] font-semibold text-[var(--status-failed)]">
                 <AlertTriangle className="h-4 w-4" /> Errore {content.code}
             </div>

@@ -61,17 +61,17 @@ export function ConversationListShell({
                     </div>
                 </div>
                 <div className="flex items-center gap-1">
-                    <button type="button" onClick={onNewChat} className="flex h-8 w-8 items-center justify-center rounded-full text-[var(--fg-secondary)] hover:bg-[var(--bg-hover)]" aria-label="Nuova chat">
+                    <button type="button" onClick={onNewChat} className="flex h-8 w-8 cursor-pointer items-center justify-center rounded-full text-[var(--fg-secondary)] transition-colors duration-200 ease-[cubic-bezier(0.16,1,0.3,1)] hover:bg-[var(--bg-hover)] hover:text-[var(--fg-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ring)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--bg-header)] active:scale-95" aria-label="Nuova chat">
                         <MessageSquare className="h-4 w-4" />
                     </button>
-                    <button type="button" className="flex h-8 w-8 items-center justify-center rounded-full text-[var(--fg-secondary)] hover:bg-[var(--bg-hover)]" aria-label="Menu">
+                    <button type="button" className="flex h-8 w-8 cursor-pointer items-center justify-center rounded-full text-[var(--fg-secondary)] transition-colors duration-200 ease-[cubic-bezier(0.16,1,0.3,1)] hover:bg-[var(--bg-hover)] hover:text-[var(--fg-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ring)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--bg-header)] active:scale-95" aria-label="Menu">
                         <MoreVertical className="h-4 w-4" />
                     </button>
                 </div>
             </header>
 
             <div className="shrink-0 px-3 py-2">
-                <div className="flex items-center gap-2 rounded-lg bg-[var(--bg-panel-2)] px-3 py-1.5">
+                <div className="flex items-center gap-2 rounded-lg bg-[var(--bg-panel-2)] px-3 py-1.5 transition-colors duration-200 focus-within:bg-[var(--bg-panel)] focus-within:ring-2 focus-within:ring-[var(--ring)] focus-within:ring-offset-2 focus-within:ring-offset-[var(--bg-panel-2)]">
                     <Search className="h-3.5 w-3.5 text-[var(--fg-tertiary)]" />
                     <input
                         type="text"
@@ -87,14 +87,14 @@ export function ConversationListShell({
                         type="button"
                         key={f.label}
                         className={cn(
-                            "flex shrink-0 items-center gap-1 rounded-full border px-2.5 py-0.5 text-[11px] font-medium transition-colors",
+                            "flex shrink-0 cursor-pointer items-center gap-1 rounded-full border px-2.5 py-0.5 text-[11px] font-medium transition-all duration-200 ease-[cubic-bezier(0.16,1,0.3,1)] active:scale-95",
                             i === 0
                                 ? "border-[var(--accent)] bg-[var(--accent-soft)] text-[var(--accent)]"
-                                : "border-[var(--border-strong)] text-[var(--fg-secondary)] hover:bg-[var(--bg-hover)]"
+                                : "border-[var(--border-strong)] text-[var(--fg-secondary)] hover:bg-[var(--bg-hover)] hover:text-[var(--fg-primary)]"
                         )}
                     >
                         {f.label}
-                        {f.count > 0 && <span className="text-[10px] opacity-70">({f.count})</span>}
+                        {f.count > 0 && <span className="text-[10px] opacity-70 tabular-nums">({f.count})</span>}
                     </button>
                 ))}
             </div>
@@ -104,7 +104,7 @@ export function ConversationListShell({
                     {dataset.conversations.map((conv) => (
                         <ConversationRow key={conv.id} conv={conv} active={conv.id === activeId} onClick={() => onOpenChat?.(conv.id)} />
                     ))}
-                    <button type="button" className="flex items-center gap-3 px-3 py-2.5 text-left text-xs text-[var(--fg-secondary)] hover:bg-[var(--bg-hover)]">
+                    <button type="button" className="flex cursor-pointer items-center gap-3 px-3 py-2.5 text-left text-xs text-[var(--fg-secondary)] transition-colors duration-200 hover:bg-[var(--bg-hover)] hover:text-[var(--fg-primary)]">
                         <Archive className="h-4 w-4" />
                         Archiviate (12)
                     </button>
@@ -124,7 +124,7 @@ function ConversationRow({ conv, active, onClick }: { conv: Conversation; active
             type="button"
             onClick={onClick}
             className={cn(
-                "flex w-full items-start gap-3 px-3 py-2.5 text-left transition-colors hover:bg-[var(--bg-hover)] border-b border-[var(--border-soft)]",
+                "flex w-full cursor-pointer items-start gap-3 px-3 py-2.5 text-left transition-colors duration-200 ease-[cubic-bezier(0.16,1,0.3,1)] hover:bg-[var(--bg-hover)] focus-visible:bg-[var(--bg-hover)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[var(--ring)] border-b border-[var(--border-soft)]",
                 active && "bg-[var(--bg-active)]"
             )}
         >

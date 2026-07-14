@@ -44,7 +44,7 @@ export function AudioContent({
     const remaining = Math.max(0, Math.ceil(durationSec * (1 - progress)));
 
     return (
-        <div className="flex min-w-[230px] flex-col gap-1.5">
+        <div className="flex w-[230px] max-w-full flex-col gap-1.5">
             <div className="flex items-center gap-2">
                 <button
                     type="button"

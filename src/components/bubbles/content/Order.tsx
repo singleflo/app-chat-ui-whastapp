@@ -14,7 +14,7 @@ export function OrderContent({
     note?: string;
 }) {
     return (
-        <div className="flex min-w-[260px] flex-col gap-2">
+        <div className="flex w-[260px] max-w-full flex-col gap-2">
             <div className="text-[10px] uppercase tracking-wide text-[var(--fg-tertiary)]">
                 🛒 Ordine · {items.length} articoli
             </div>

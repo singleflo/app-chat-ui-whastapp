@@ -23,7 +23,7 @@ export function TemplateContent({ template }: { template: TemplateContentPayload
     };
 
     return (
-        <div className="relative flex min-w-[280px] max-w-[340px] flex-col gap-1.5">
+        <div className="relative flex w-[280px] max-w-full max-w-[340px] flex-col gap-1.5">
             <TemplateBadge name={template.name} language={template.language} />
 
             {template.header?.image && (

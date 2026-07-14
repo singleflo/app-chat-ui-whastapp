@@ -35,14 +35,14 @@ export function ButtonsContent({
 }) {
     if (reply) {
         return (
-            <div className="flex min-w-[220px] flex-col gap-1">
+            <div className="flex w-[220px] max-w-full flex-col gap-1">
                 <div className="text-[10px] uppercase tracking-wide text-[var(--fg-tertiary)]">Risposta</div>
                 <div className="text-[14px] font-medium">{reply.title}</div>
             </div>
         );
     }
     return (
-        <div className="flex min-w-[240px] flex-col gap-1.5">
+        <div className="flex w-[240px] max-w-full flex-col gap-1.5">
             {header?.image && (
                 <MediaPlaceholder url={header.image} className="aspect-video rounded-md" />
             )}
@@ -83,7 +83,7 @@ export function ListContent({
     const [open, setOpen] = useState(false);
     if (reply) {
         return (
-            <div className="flex min-w-[220px] flex-col gap-0.5">
+            <div className="flex w-[220px] max-w-full flex-col gap-0.5">
                 <div className="text-[10px] uppercase tracking-wide text-[var(--fg-tertiary)]">Scelta</div>
                 <div className="text-[14px] font-medium">{reply.title}</div>
                 {reply.description && (
@@ -93,7 +93,7 @@ export function ListContent({
         );
     }
     return (
-        <div className="relative min-w-[240px]">
+        <div className="relative w-[240px] max-w-full">
             <div className="text-[13px]">
                 <Markdown text={body} />
             </div>
@@ -148,7 +148,7 @@ export function CtaUrlContent({
     url: string;
 }) {
     return (
-        <div className="flex min-w-[220px] flex-col gap-1.5">
+        <div className="flex w-[220px] max-w-full flex-col gap-1.5">
             <div className="text-[13px]">
                 <Markdown text={body} />
             </div>
@@ -181,7 +181,7 @@ export function FlowContent({
     const [showJson, setShowJson] = useState(false);
     if (reply) {
         return (
-            <div className="flex min-w-[240px] flex-col gap-1.5">
+            <div className="flex w-[240px] max-w-full flex-col gap-1.5">
                 <div className="flex items-center gap-1.5 text-[13px] font-semibold text-[var(--accent)]">
                     <CheckCheck className="h-4 w-4" /> Modulo completato
                 </div>
@@ -210,7 +210,7 @@ export function FlowContent({
         );
     }
     return (
-        <div className="flex min-w-[220px] flex-col gap-1.5">
+        <div className="flex w-[220px] max-w-full flex-col gap-1.5">
             <div className="text-[13px]">
                 <Markdown text={body} />
             </div>
@@ -228,7 +228,7 @@ export function FlowContent({
 /* ============ B11 — Call permission request ============ */
 export function CallPermissionContent({ state }: { state: "pending" | "accepted" | "rejected" }) {
     return (
-        <div className="flex min-w-[220px] flex-col gap-1.5">
+        <div className="flex w-[220px] max-w-full flex-col gap-1.5">
             <div className="flex items-center gap-1.5 text-[13px]">
                 <PhoneCall className="h-4 w-4 text-[var(--accent)]" />
                 Richiesta di chiamata
@@ -249,7 +249,7 @@ export function CallPermissionContent({ state }: { state: "pending" | "accepted"
 /* ============ B11 — Carousel ============ */
 export function CarouselContent({ cards }: { cards: CarouselCard[] }) {
     return (
-        <div className="min-w-[260px]">
+        <div className="w-[260px] max-w-full">
             <div className="flex snap-x snap-mandatory gap-2 overflow-x-auto pb-1">
                 {cards.map((c) => (
                     <div
@@ -299,7 +299,7 @@ export function ProductContent({
     product: { id: string; name: string; price: string; currency: string; description?: string; image: string };
 }) {
     return (
-        <div className="flex min-w-[220px] flex-col gap-1.5 rounded-md overflow-hidden">
+        <div className="flex w-[220px] max-w-full flex-col gap-1.5 rounded-md overflow-hidden">
             <MediaPlaceholder url={product.image} className="aspect-square w-full rounded-none" />
             <div className="px-2">
                 <div className="text-[13px] font-semibold">{product.name}</div>
@@ -325,7 +325,7 @@ export function ProductListContent({
     title?: string;
 }) {
     return (
-        <div className="flex min-w-[220px] flex-col gap-1.5">
+        <div className="flex w-[220px] max-w-full flex-col gap-1.5">
             {headerImage && <MediaPlaceholder url={headerImage} className="aspect-[5/2] rounded-md" />}
             {title && <div className="text-[13px] font-semibold">{title}</div>}
             {sections.map((s) => (
@@ -354,7 +354,7 @@ export function CatalogContent({
     ctaTitle: string;
 }) {
     return (
-        <div className="flex min-w-[220px] flex-col gap-1.5">
+        <div className="flex w-[220px] max-w-full flex-col gap-1.5">
             <div className="flex items-center gap-2">
                 <ShoppingCart className="h-5 w-5 text-[var(--accent)]" />
                 <div className="text-[13px] font-semibold">{title}</div>

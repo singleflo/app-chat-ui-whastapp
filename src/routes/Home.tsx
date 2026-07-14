@@ -34,15 +34,15 @@ const CARDS = [
 
 export function Home() {
     return (
-        <div className="h-full overflow-y-auto bg-[var(--bg-app)] px-4 py-8 sm:px-8">
+        <div className="h-full overflow-y-auto bg-[var(--bg-app)] px-4 py-8 transition-colors duration-200 sm:px-8">
             <div className="mx-auto max-w-5xl">
-                <header className="mb-8">
-                    <h1 className="text-2xl font-bold text-[var(--fg-primary)] sm:text-3xl">
+                <header className="mb-8 animate-slide-up">
+                    <h1 className="text-2xl font-bold tracking-tight text-[var(--fg-primary)] sm:text-3xl">
                         WhatsApp Chat UI · Mockup navigabile
                     </h1>
-                    <p className="mt-2 max-w-3xl text-sm text-[var(--fg-secondary)]">
+                    <p className="mt-2 max-w-3xl text-sm leading-relaxed text-[var(--fg-secondary)]">
                         Implementazione completa della specifica{" "}
-                        <code className="rounded bg-[var(--bg-panel-2)] px-1 py-0.5 text-xs">
+                        <code className="rounded bg-[var(--bg-panel-2)] px-1 py-0.5 text-xs text-[var(--fg-primary)]">
                             specifica-ui-whatsapp-clone-100.md
                         </code>{" "}
                         (v1.3). Sezioni coperte: 0, A–T. 4 superfici, 27 tipi di bolle, composer
@@ -64,17 +64,18 @@ export function Home() {
                 </header>
 
                 <div className="grid gap-4 sm:grid-cols-2">
-                    {CARDS.map((c) => (
+                    {CARDS.map((c, i) => (
                         <Link
                             key={c.to}
                             to={c.to}
-                            className="group flex flex-col gap-3 rounded-xl border border-[var(--border-strong)] bg-[var(--bg-panel)] p-5 transition-all hover:border-[var(--accent)] hover:shadow-[var(--shadow-overlay)]"
+                            style={{ animationDelay: `${i * 50}ms` }}
+                            className="group flex animate-slide-up cursor-pointer flex-col gap-3 rounded-xl border border-[var(--border-strong)] bg-[var(--bg-panel)] p-5 shadow-[var(--shadow-sm)] transition-all duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] hover:-translate-y-0.5 hover:border-[var(--accent)] hover:shadow-[var(--shadow-lg)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ring)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--bg-app)]"
                         >
                             <div className="flex items-center justify-between">
-                                <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-[var(--accent-soft)] text-[var(--accent)]">
+                                <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-[var(--accent-soft)] text-[var(--accent)] transition-transform duration-300 ease-[cubic-bezier(0.34,1.56,0.64,1)] group-hover:scale-110">
                                     <c.icon className="h-5 w-5" />
                                 </div>
-                                <ArrowRight className="h-4 w-4 text-[var(--fg-tertiary)] transition-transform group-hover:translate-x-1" />
+                                <ArrowRight className="h-4 w-4 text-[var(--fg-tertiary)] transition-all duration-300 group-hover:translate-x-1 group-hover:text-[var(--accent)]" />
                             </div>
                             <h3 className="text-base font-semibold text-[var(--fg-primary)]">
                                 {c.title}

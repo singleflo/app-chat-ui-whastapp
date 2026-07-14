@@ -24,6 +24,16 @@ export function MessageContextMenu({ message }: { message: Message }) {
         return () => document.removeEventListener("mousedown", handler);
     }, [open]);
 
+    useEffect(() => {
+        if (!open && !showReactionBar) return;
+        const bubble = ref.current?.closest<HTMLElement>(".group");
+        if (!bubble) return;
+        bubble.style.zIndex = "50";
+        return () => {
+            bubble.style.zIndex = "";
+        };
+    }, [open, showReactionBar]);
+
     if (!open && !showReactionBar) {
         return (
             <button

@@ -44,20 +44,22 @@ export function App() {
 
     return (
         <div className="flex h-screen w-screen flex-col overflow-hidden bg-[var(--bg-app)] text-[var(--fg-primary)]">
-            <header className="flex h-12 shrink-0 items-center gap-1 border-b border-[var(--border-strong)] bg-[var(--bg-panel)] px-3">
+            <header className="flex h-14 shrink-0 items-center gap-1 border-b border-[var(--border-strong)] bg-[var(--bg-panel)] px-3 shadow-[var(--shadow-sm)]">
                 <div className="mr-2 flex items-center gap-2 font-semibold">
-                    <div className="flex h-6 w-6 items-center justify-center rounded-full bg-[var(--accent)] text-[var(--accent-fg)]">
+                    <div className="flex h-7 w-7 items-center justify-center rounded-full bg-[var(--accent)] text-[var(--accent-fg)] shadow-[var(--shadow-sm)]">
                         <MessageSquare className="h-3.5 w-3.5" />
                     </div>
                     <span className="hidden sm:inline">WhatsApp Chat UI</span>
-                    <span className="text-[10px] font-normal uppercase tracking-wide text-[var(--fg-tertiary)]">spec 1.3</span>
+                    <span className="rounded-full bg-[var(--bg-panel-2)] px-1.5 py-0.5 text-[10px] font-normal uppercase tracking-wide text-[var(--fg-tertiary)]">spec 1.3</span>
                 </div>
                 <nav className="flex flex-1 flex-wrap items-center gap-1">
                     {SURFACES.map((s) => (
                         <NavLink key={s.to} to={s.to} end={s.end}
                             className={({ isActive }) => cn(
-                                "flex items-center gap-1.5 rounded-md px-2.5 py-1.5 text-xs font-medium transition-colors",
-                                isActive ? "bg-[var(--accent)] text-[var(--accent-fg)]" : "text-[var(--fg-secondary)] hover:bg-[var(--bg-hover)] hover:text-[var(--fg-primary)]"
+                                "flex cursor-pointer items-center gap-1.5 rounded-md px-2.5 py-1.5 text-xs font-medium transition-all duration-200 ease-[cubic-bezier(0.16,1,0.3,1)] active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ring)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--bg-panel)]",
+                                isActive
+                                    ? "bg-[var(--accent)] text-[var(--accent-fg)] shadow-[var(--shadow-sm)]"
+                                    : "text-[var(--fg-secondary)] hover:bg-[var(--bg-hover)] hover:text-[var(--fg-primary)]"
                             )}>
                             <s.icon className="h-3.5 w-3.5" />
                             <span className="hidden md:inline">{s.label}</span>
@@ -67,8 +69,10 @@ export function App() {
                     {SCREENS.map((s) => (
                         <NavLink key={s.to} to={s.to}
                             className={({ isActive }) => cn(
-                                "flex items-center gap-1.5 rounded-md px-2.5 py-1.5 text-xs font-medium transition-colors",
-                                isActive ? "bg-[var(--accent)] text-[var(--accent-fg)]" : "text-[var(--fg-secondary)] hover:bg-[var(--bg-hover)] hover:text-[var(--fg-primary)]"
+                                "flex cursor-pointer items-center gap-1.5 rounded-md px-2.5 py-1.5 text-xs font-medium transition-all duration-200 ease-[cubic-bezier(0.16,1,0.3,1)] active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ring)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--bg-panel)]",
+                                isActive
+                                    ? "bg-[var(--accent)] text-[var(--accent-fg)] shadow-[var(--shadow-sm)]"
+                                    : "text-[var(--fg-secondary)] hover:bg-[var(--bg-hover)] hover:text-[var(--fg-primary)]"
                             )}>
                             <s.icon className="h-3.5 w-3.5" />
                             <span className="hidden lg:inline">{s.label}</span>
@@ -76,7 +80,8 @@ export function App() {
                     ))}
                 </nav>
                 <button type="button" onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-                    className="flex items-center gap-1.5 rounded-md px-2.5 py-1.5 text-xs font-medium text-[var(--fg-secondary)] hover:bg-[var(--bg-hover)] hover:text-[var(--fg-primary)]"
+                    title={`Passa al tema ${theme === "dark" ? "chiaro" : "scuro"}`}
+                    className="flex cursor-pointer items-center gap-1.5 rounded-md px-2.5 py-1.5 text-xs font-medium text-[var(--fg-secondary)] transition-all duration-200 ease-[cubic-bezier(0.16,1,0.3,1)] hover:bg-[var(--bg-hover)] hover:text-[var(--fg-primary)] active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ring)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--bg-panel)]"
                     aria-label="Cambia tema">
                     <Palette className="h-3.5 w-3.5" />
                     <span className="hidden sm:inline">{theme === "dark" ? "Light" : "Dark"}</span>

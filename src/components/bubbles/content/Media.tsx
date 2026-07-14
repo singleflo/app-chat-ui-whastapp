@@ -19,7 +19,7 @@ export function ImageContent({
         <div className="flex flex-col gap-1">
             <div className="relative">
                 <button type="button" onClick={openLightbox} className="block cursor-zoom-in" aria-label="Apri immagine">
-                    <MediaPlaceholder url={url} className="aspect-video min-w-[240px] max-w-[320px] rounded-lg" />
+                    <MediaPlaceholder url={url} className="aspect-video w-[240px] max-w-full max-w-[320px] rounded-lg" />
                 </button>
                 {album && (
                     <span className="absolute bottom-1 right-1 rounded bg-black/60 px-1.5 py-0.5 text-[10px] text-white">
@@ -52,7 +52,7 @@ export function VideoContent({
             <div className="relative">
                 <MediaPlaceholder
                     url={poster ?? url}
-                    className="aspect-video min-w-[240px] max-w-[320px] rounded-lg"
+                    className="aspect-video w-[240px] max-w-full max-w-[320px] rounded-lg"
                 />
                 <button
                     type="button"
@@ -85,7 +85,7 @@ export function DocumentContent({
 }) {
     const Icon = pickDocIcon(mime);
     return (
-        <div className="flex min-w-[220px] items-center gap-2 rounded-md bg-[var(--bg-panel-2)] p-2">
+        <div className="flex w-[220px] max-w-full items-center gap-2 rounded-md bg-[var(--bg-panel-2)] p-2">
             <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded bg-[var(--accent-soft)] text-[var(--accent)]">
                 <Icon className="h-5 w-5" />
             </div>

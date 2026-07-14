@@ -6,7 +6,7 @@ import { colorFromString, initials } from "@/lib/utils";
 export function ContactsContent({ cards }: { cards: ContactCard[] }) {
     if (cards.length === 1) return <ContactCardView card={cards[0]} />;
     return (
-        <div className="flex min-w-[220px] flex-col gap-1.5">
+        <div className="flex w-[220px] max-w-full flex-col gap-1.5">
             <div className="text-[12px] font-medium text-[var(--fg-secondary)]">
                 {cards.length} contatti
             </div>
@@ -19,7 +19,7 @@ export function ContactsContent({ cards }: { cards: ContactCard[] }) {
 
 function ContactCardView({ card, compact }: { card: ContactCard; compact?: boolean }) {
     return (
-        <div className="flex min-w-[220px] flex-col gap-1.5 rounded-md bg-[var(--bg-panel-2)] p-2">
+        <div className="flex w-[220px] max-w-full flex-col gap-1.5 rounded-md bg-[var(--bg-panel-2)] p-2">
             <div className="flex items-center gap-2">
                 <Avatar className="h-9 w-9">
                     <AvatarFallback style={{ backgroundColor: colorFromString(card.name.formatted) }}>

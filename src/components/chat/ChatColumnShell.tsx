@@ -77,7 +77,7 @@ export function ChatColumnShell({ conversationId = DEFAULT_CONV, readonly = fals
 
             <div className="chat-doodle-bg relative flex-1 overflow-hidden" ref={scrollRef} onScroll={handleScroll}>
                 <ScrollArea className="relative h-full">
-                    <div className="mx-auto flex max-w-3xl flex-col gap-1 px-4 py-4">
+                    <div className="flex w-full min-w-0 flex-col gap-1 px-4 py-4">
                         {messages.map((entry, idx) => (
                             <ChatEntryRenderer
                                 key={"id" in entry ? entry.id : `pill-${idx}-${entry.variant}`}

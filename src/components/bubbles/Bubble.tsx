@@ -115,8 +115,10 @@ export function Bubble({
     return (
         <div
             className={cn(
-                "group relative max-w-[78%] rounded-[10px] px-2 py-1.5 text-sm shadow-[var(--shadow-bubble)]",
-                side === "in" ? "self-start bg-[var(--bg-bubble-in)]" : "self-end bg-[var(--bg-bubble-out)]",
+                "group relative max-w-[78%] rounded-[10px] px-2 py-1.5 text-sm shadow-[var(--shadow-bubble)] transition-shadow duration-200 ease-[cubic-bezier(0.16,1,0.3,1)] hover:shadow-[var(--shadow-md)]",
+                side === "in"
+                    ? "self-start animate-bubble-in bg-[var(--bg-bubble-in)]"
+                    : "self-end animate-bubble-out bg-[var(--bg-bubble-out)]",
                 tone === "note" && "self-end bg-[var(--bg-bubble-internal-note)] border border-[var(--fg-warning)]/40",
                 tone === "error" && "self-end bg-[var(--bg-bubble-error)]",
                 tone === "fallback" && "self-end bg-[var(--bg-bubble-fallback)]",
@@ -178,7 +180,13 @@ export function QuotedBlock({
     media?: { kind: string; label: string };
 }) {
     return (
-        <div className="mb-1.5 rounded-l border-l-[3px] pl-2 text-[12px]" style={{ borderColor: authorColor }}>
+        <div
+            className="mb-1.5 rounded-l border-l-[3px] px-2 py-1 text-[12px]"
+            style={{
+                borderColor: authorColor,
+                backgroundColor: `color-mix(in srgb, ${authorColor} 15%, var(--bg-panel-2))`,
+            }}
+        >
             <div className="font-semibold" style={{ color: authorColor }}>
                 {authorName}
             </div>
