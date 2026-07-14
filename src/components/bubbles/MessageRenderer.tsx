@@ -1,6 +1,7 @@
 import type { ChatEntry, Message } from "@/types/chat";
 import { isMessage } from "@/types/chat";
-import { Bubble, BubbleMeta, ForwardedLabel, QuotedBlock, Reactions, SenderTag } from "./Bubble";
+import { cn } from "@/lib/utils";
+import { Bubble, BubbleMeta, ForwardedLabel, QuotedBlock, Reactions, SenderTag, SenderAvatar } from "./Bubble";
 import { TextContent } from "./content/Text";
 import { ImageContent, VideoContent, DocumentContent, StickerContent } from "./content/Media";
 import { AudioContent } from "./content/Audio";
@@ -33,9 +34,40 @@ export function ChatEntryRenderer({ entry }: { entry: ChatEntry }) {
 }
 
 export function MessageRenderer({ message }: { message: Message }) {
-    const { content, direction, sender, quoted, forwarded, frequentlyForwarded, reactions, ts, ack } = message;
+    const { content, direction, quoted, forwarded, frequentlyForwarded, reactions, ts, ack } = message;
     const hasReactions = !!reactions && reactions.length > 0;
     const isEdited = !!(message as { edited?: boolean }).edited;
+
+    let sender = message.sender;
+    if (!sender) {
+        if (content.kind === "fallback" || content.kind === "error") {
+            sender = { kind: "system", id: "system", name: "Sistema", color: "var(--fg-tertiary)" };
+        } else if (message.echo) {
+            sender = { kind: "api", id: "api", name: "API", color: "var(--fg-tertiary)" };
+        }
+    }
+
+    const renderWrapped = (innerContent: React.ReactNode, side: "in" | "out", toneType: any, overrideClass?: string) => {
+        if (!sender) {
+            return <Bubble side={side} tone={toneType} hasReactions={hasReactions} className={overrideClass}>{innerContent}</Bubble>;
+        }
+        
+        if (side === "out") {
+            return (
+                <div className="flex max-w-[78%] items-end justify-end gap-1.5 self-end">
+                    <Bubble side="out" tone={toneType} hasReactions={hasReactions} className={cn("max-w-full min-w-0", overrideClass)}>{innerContent}</Bubble>
+                    <SenderAvatar sender={sender} size={28} />
+                </div>
+            );
+        } else {
+            return (
+                <div className="flex max-w-[78%] items-end justify-start gap-1.5 self-start">
+                    <SenderAvatar sender={sender} size={28} />
+                    <Bubble side="in" tone={toneType} hasReactions={hasReactions} className={cn("max-w-full min-w-0", overrideClass)}>{innerContent}</Bubble>
+                </div>
+            );
+        }
+    };
 
     if (content.kind === "deleted") {
         const deletedInner = (
@@ -45,11 +77,9 @@ export function MessageRenderer({ message }: { message: Message }) {
                 <MessageContextMenu message={message} />
             </>
         );
-        if (direction === "out") {
-            return <Bubble side="out" tone="deleted" hasReactions={hasReactions} className="self-end">{deletedInner}</Bubble>;
-        }
-        return <Bubble side="in" tone="deleted" hasReactions={hasReactions}>{deletedInner}</Bubble>;
+        return renderWrapped(deletedInner, direction, "deleted", direction === "out" ? "self-end" : undefined);
     }
+
     if (content.kind === "error") {
         const errorInner = (
             <>
@@ -59,8 +89,9 @@ export function MessageRenderer({ message }: { message: Message }) {
                 <MessageContextMenu message={message} />
             </>
         );
-        return <Bubble side="out" tone="error" hasReactions={hasReactions}>{errorInner}</Bubble>;
+        return renderWrapped(errorInner, "out", "error");
     }
+
     if (content.kind === "fallback") {
         const fallbackInner = (
             <>
@@ -69,11 +100,9 @@ export function MessageRenderer({ message }: { message: Message }) {
                 <MessageContextMenu message={message} />
             </>
         );
-        if (direction === "out") {
-            return <Bubble side="out" tone="fallback" hasReactions={hasReactions} className="self-end">{fallbackInner}</Bubble>;
-        }
-        return <Bubble side="in" tone="fallback" hasReactions={hasReactions}>{fallbackInner}</Bubble>;
+        return renderWrapped(fallbackInner, direction, "fallback", direction === "out" ? "self-end" : undefined);
     }
+
     if (content.kind === "edited_marker") return null;
 
     if (content.kind === "internal_note") {
@@ -84,7 +113,7 @@ export function MessageRenderer({ message }: { message: Message }) {
                 <MessageContextMenu message={message} />
             </>
         );
-        return <Bubble side="out" tone="note" hasReactions={hasReactions}>{noteInner}</Bubble>;
+        return renderWrapped(noteInner, "out", "note");
     }
 
     if (content.kind === "system") {
@@ -113,9 +142,7 @@ export function MessageRenderer({ message }: { message: Message }) {
         </>
     );
 
-    return (
-        <Bubble side={direction === "out" ? "out" : "in"} tone={tone} hasReactions={hasReactions}>{inner}</Bubble>
-    );
+    return renderWrapped(inner, direction, tone);
 }
 
 function renderContent(content: Message["content"]) {

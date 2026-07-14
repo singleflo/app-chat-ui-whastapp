@@ -1,0 +1,101 @@
+35:export function MessageRenderer({ message }: { message: Message }) {
+36-    const { content, direction, sender, quoted, forwarded, frequentlyForwarded, reactions, ts, ack } = message;
+37-    const hasReactions = !!reactions && reactions.length > 0;
+38-    const isEdited = !!(message as { edited?: boolean }).edited;
+39-
+40-    if (content.kind === "deleted") {
+41-        const deletedInner = (
+42-            <>
+43-                <DeletedContent message={message} />
+44-                <BubbleMeta ts={ts} />
+45-                <MessageContextMenu message={message} />
+46-            </>
+47-        );
+48-        if (direction === "out" && sender) {
+49-            return (
+50-                <div className="flex max-w-[78%] items-end justify-end gap-1.5 self-end">
+51-                    <Bubble side="out" tone="deleted" hasReactions={hasReactions} className="max-w-full min-w-0 self-end">{deletedInner}</Bubble>
+52-                    <SenderAvatar sender={sender} size={28} />
+53-                </div>
+54-            );
+55-        } else if (direction === "out") {
+56-            return <Bubble side="out" tone="deleted" hasReactions={hasReactions} className="self-end">{deletedInner}</Bubble>;
+57-        }
+58-        return <Bubble side="in" tone="deleted" hasReactions={hasReactions}>{deletedInner}</Bubble>;
+59-    }
+60-    if (content.kind === "error") {
+61-        const errorInner = (
+62-            <>
+63-                {sender && <SenderTag sender={sender} />}
+64-                <ErrorContent message={message} />
+65-                <BubbleMeta ts={ts} ack={ack} />
+66-                <MessageContextMenu message={message} />
+67-            </>
+68-        );
+69-        if (direction === "out" && sender) {
+70-            return (
+71-                <div className="flex max-w-[78%] items-end justify-end gap-1.5 self-end">
+72-                    <Bubble side="out" tone="error" hasReactions={hasReactions} className="max-w-full min-w-0">{errorInner}</Bubble>
+73-                    <SenderAvatar sender={sender} size={28} />
+74-                </div>
+75-            );
+76-        }
+77-        return <Bubble side="out" tone="error" hasReactions={hasReactions}>{errorInner}</Bubble>;
+78-    }
+79-    if (content.kind === "fallback") {
+80-        const fallbackInner = (
+81-            <>
+82-                <FallbackContent message={message} />
+83-                <BubbleMeta ts={ts} />
+84-                <MessageContextMenu message={message} />
+85-            </>
+86-        );
+87-        if (direction === "out" && sender) {
+88-            return (
+89-                <div className="flex max-w-[78%] items-end justify-end gap-1.5 self-end">
+90-                    <Bubble side="out" tone="fallback" hasReactions={hasReactions} className="max-w-full min-w-0 self-end">{fallbackInner}</Bubble>
+91-                    <SenderAvatar sender={sender} size={28} />
+92-                </div>
+93-            );
+94-        } else if (direction === "out") {
+95-            return <Bubble side="out" tone="fallback" hasReactions={hasReactions} className="self-end">{fallbackInner}</Bubble>;
+96-        }
+97-        return <Bubble side="in" tone="fallback" hasReactions={hasReactions}>{fallbackInner}</Bubble>;
+98-    }
+99-    if (content.kind === "edited_marker") return null;
+100-
+101-    if (content.kind === "internal_note") {
+102-        const noteInner = (
+103-            <>
+104-                <InternalNoteContent message={message} />
+105-                <BubbleMeta ts={ts} />
+106-                <MessageContextMenu message={message} />
+107-            </>
+108-        );
+109-        if (sender) {
+110-            return (
+111-                <div className="flex max-w-[78%] items-end justify-end gap-1.5 self-end">
+112-                    <Bubble side="out" tone="note" hasReactions={hasReactions} className="max-w-full min-w-0">{noteInner}</Bubble>
+113-                    <SenderAvatar sender={sender} size={28} />
+114-                </div>
+115-            );
+116-        }
+117-        return <Bubble side="out" tone="note" hasReactions={hasReactions}>{noteInner}</Bubble>;
+118-    }
+119-
+120-    if (content.kind === "system") {
+121-        const sys = content;
+122-        return <SystemPillRow view={{ variant: sys.variant, text: sys.text, icon: sys.icon, referralAd: sys.referralAd }} />;
+123-    }
+124-
+125-    const tone = sender?.kind === "bot" ? "bot" : "default";
+126-
+127-    const inner = (
+128-        <>
+129-            {forwarded && <ForwardedLabel frequently={frequentlyForwarded} />}
+130-            <SenderTag sender={sender} />
+131-            {quoted && (
+132-                <QuotedBlock
+133-                    authorName={quoted.authorName}
+134-                    authorColor={quoted.authorColor}
+135-                    excerpt={quoted.excerpt}

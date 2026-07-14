@@ -26,7 +26,7 @@ export type WindowState =
 
 /** Attribuzione autore outbound — Q2. */
 export interface SenderAttribution {
-    kind: "user" | "bot" | "automation" | "api";
+    kind: "user" | "bot" | "automation" | "api" | "system";
     /** User id when kind=user/bot/automation; source device when kind=api. */
     id: string;
     name: string;

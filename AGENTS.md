@@ -79,5 +79,5 @@ pnpm lint         # eslint .
 
 - No CI (`.github/workflows` absent). No git commits yet.
 - LSP shows a persistent `index.css` warning "Tailwind-specific syntax is disabled" for `@theme`/`@import "tailwindcss"` — Tailwind v4 syntax the editor doesn't recognize. Not a real error; ignore.
-- Outbound bubbles: NO sender avatar; flush right via Bubble self-end.
+- Outbound bubbles: sender avatar sits to the RIGHT of the bubble (for Team Inbox visibility).
 - `edited` messages: use `edited: true` prop on the message (renders "modificato" inline), not a separate `edited_marker` entry.

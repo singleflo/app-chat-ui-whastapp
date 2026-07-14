@@ -1,4 +1,4 @@
-import { Check, CheckCheck, AlertTriangle, Bot, Smartphone, Zap } from "lucide-react";
+import { Check, CheckCheck, AlertTriangle, Bot, Smartphone, Zap, Settings } from "lucide-react";
 import type { ReactNode } from "react";
 import type { AckStatus, Message, SenderAttribution } from "@/types/chat";
 import { cn, fmtTime, initials } from "@/lib/utils";
@@ -50,6 +50,18 @@ export function SenderAvatar({ sender, size = 28 }: { sender: SenderAttribution;
                 title={sender.name}
             >
                 <Bot className="h-3.5 w-3.5" />
+            </div>
+        );
+    }
+
+    if (sender.kind === "system") {
+        return (
+            <div
+                className="flex shrink-0 items-center justify-center rounded-full text-white shadow-sm"
+                style={{ ...style, backgroundColor: sender.color }}
+                title={sender.name}
+            >
+                <Settings className="h-3.5 w-3.5" />
             </div>
         );
     }
