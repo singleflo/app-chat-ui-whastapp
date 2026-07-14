@@ -28,7 +28,7 @@ export function SearchScreen() {
     return (
         <div className="flex h-full flex-col bg-[var(--bg-panel)]">
             <header className="flex h-14 shrink-0 items-center gap-2 border-b border-[var(--border-strong)] bg-[var(--bg-header)] px-3">
-                <button type="button" className="flex h-8 w-8 items-center justify-center rounded-full text-[var(--fg-secondary)] hover:bg-[var(--bg-hover)]">
+                <button type="button" aria-label="Indietro" className="flex h-8 w-8 cursor-pointer items-center justify-center rounded-full text-[var(--fg-secondary)] transition-all duration-200 ease-[cubic-bezier(0.16,1,0.3,1)] hover:bg-[var(--bg-hover)] hover:text-[var(--fg-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ring)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--bg-panel)] active:scale-[0.97]">
                     <ArrowLeft className="h-4 w-4" />
                 </button>
                 <div className="flex flex-1 items-center gap-2 rounded-lg bg-[var(--bg-panel-2)] px-3 py-1.5">
@@ -38,7 +38,7 @@ export function SearchScreen() {
             </header>
             <div className="flex shrink-0 items-center gap-1.5 px-3 py-2">
                 {["Tutti", "📷 Media", "📄 Documenti", "🔗 Link", "🎤 Audio"].map((f, i) => (
-                    <button key={f} type="button" className={cn("shrink-0 rounded-full border px-2.5 py-0.5 text-[11px] font-medium", i === 0 ? "border-[var(--accent)] bg-[var(--accent-soft)] text-[var(--accent)]" : "border-[var(--border-strong)] text-[var(--fg-secondary)]")}>
+                    <button key={f} type="button" aria-pressed={i === 0} className={cn("shrink-0 cursor-pointer rounded-full border px-2.5 py-0.5 text-[11px] font-medium transition-all duration-200 ease-[cubic-bezier(0.16,1,0.3,1)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ring)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--bg-panel)] active:scale-95", i === 0 ? "border-[var(--accent)] bg-[var(--accent-soft)] text-[var(--accent)]" : "border-[var(--border-strong)] text-[var(--fg-secondary)] hover:bg-[var(--bg-hover)] hover:text-[var(--fg-primary)]")}>
                         {f}
                     </button>
                 ))}
@@ -48,13 +48,13 @@ export function SearchScreen() {
                     {matchedConvs.length > 0 && (
                         <ResultGroup icon={MessageSquare} title={`Conversazioni (${matchedConvs.length})`}>
                             {matchedConvs.map((c) => (
-                                <div key={c.id} className="flex items-center gap-3 px-3 py-2 hover:bg-[var(--bg-hover)]">
+                                <div key={c.id} className="flex cursor-pointer items-center gap-3 px-3 py-2 transition-colors duration-200 ease-[cubic-bezier(0.16,1,0.3,1)] hover:bg-[var(--bg-hover)]">
                                     <Avatar className="h-9 w-9"><AvatarFallback style={{ backgroundColor: c.avatarColor }}>{initials(c.name)}</AvatarFallback></Avatar>
                                     <div className="min-w-0 flex-1">
                                         <div className="truncate text-sm font-medium">{highlight(c.name)}</div>
                                         <div className="truncate text-xs text-[var(--fg-secondary)]">{highlight(c.lastMessagePreview)}</div>
                                     </div>
-                                    <span className="text-[10px] text-[var(--fg-tertiary)]">{fmtRelativeDay(c.lastMessageTs)}</span>
+                                    <span className="text-[11px] text-[var(--fg-tertiary)] tabular-nums">{fmtRelativeDay(c.lastMessageTs)}</span>
                                 </div>
                             ))}
                         </ResultGroup>
@@ -64,7 +64,7 @@ export function SearchScreen() {
                             {matchedMsgs.map((m) => {
                                 const conv = dataset.conversations.find((c) => c.id === m.conversationId);
                                 return (
-                                    <div key={m.id} className="px-3 py-2 hover:bg-[var(--bg-hover)]">
+                                    <div key={m.id} className="cursor-pointer px-3 py-2 transition-colors duration-200 ease-[cubic-bezier(0.16,1,0.3,1)] hover:bg-[var(--bg-hover)]">
                                         <div className="text-xs font-medium text-[var(--accent)]">{conv?.name}</div>
                                         {m.content.kind === "text" && <div className="mt-0.5 line-clamp-2 text-xs text-[var(--fg-secondary)]">{highlight(m.content.body)}</div>}
                                     </div>
@@ -75,7 +75,7 @@ export function SearchScreen() {
                     {matchedContacts.length > 0 && (
                         <ResultGroup icon={User} title={`Contatti (${matchedContacts.length})`}>
                             {matchedContacts.map((p) => (
-                                <div key={p.contactId} className="flex items-center gap-3 px-3 py-2 hover:bg-[var(--bg-hover)]">
+                                <div key={p.contactId} className="flex cursor-pointer items-center gap-3 px-3 py-2 transition-colors duration-200 ease-[cubic-bezier(0.16,1,0.3,1)] hover:bg-[var(--bg-hover)]">
                                     <Avatar className="h-9 w-9"><AvatarFallback style={{ backgroundColor: p.avatarColor }}>{initials(p.name)}</AvatarFallback></Avatar>
                                     <div className="min-w-0">
                                         <div className="truncate text-sm font-medium">{highlight(p.name)}</div>

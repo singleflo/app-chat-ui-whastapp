@@ -15,7 +15,7 @@ export function InternalNoteContent({ message }: { message: Message }) {
             <SenderTag sender={message.sender} />
             <Markdown text={content.body} />
             {content.mentions && content.mentions.length > 0 && (
-                <div className="mt-1 flex items-center gap-1 text-[10px] text-[var(--fg-link)]">
+                <div className="mt-1 flex flex-wrap items-center gap-1 text-[10px] text-[var(--fg-link)]">
                     <AtSign className="h-3 w-3" />
                     {content.mentions.join(", ")}
                 </div>

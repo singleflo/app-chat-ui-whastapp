@@ -26,7 +26,7 @@ export function LocationContent({
                 </div>
                 <button
                     type="button"
-                    className="flex items-center justify-center gap-1.5 rounded-md bg-[var(--accent)] px-3 py-1.5 text-[12px] font-medium text-[var(--accent-fg)]"
+                    className="flex cursor-pointer items-center justify-center gap-1.5 rounded-md bg-[var(--accent)] px-3 py-1.5 text-[12px] font-medium text-[var(--accent-fg)] transition-all duration-200 ease-[cubic-bezier(0.16,1,0.3,1)] hover:bg-[var(--accent-hover)] active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ring)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--bg-panel)]"
                 >
                     <Send className="h-3.5 w-3.5" /> Invia posizione
                 </button>
@@ -41,7 +41,7 @@ export function LocationContent({
                 </div>
                 <button
                     type="button"
-                    className="flex items-center justify-center gap-1.5 rounded-md border border-[var(--accent)] px-3 py-1.5 text-[12px] font-medium text-[var(--accent)]"
+                    className="flex cursor-pointer items-center justify-center gap-1.5 rounded-md border border-[var(--accent)] px-3 py-1.5 text-[12px] font-medium text-[var(--accent)] transition-all duration-200 ease-[cubic-bezier(0.16,1,0.3,1)] hover:bg-[var(--bg-hover)] active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ring)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--bg-panel)]"
                 >
                     <Navigation className="h-3.5 w-3.5" /> Fornisci indirizzo
                 </button>

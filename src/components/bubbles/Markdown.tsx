@@ -14,14 +14,17 @@ function renderInline(text: string): ReactNode[] {
         const key = `t-${i}-${tok.slice(0, 6)}`;
         if (tok.startsWith("```") && tok.endsWith("```")) {
             return (
-                <code key={key} className="block rounded bg-black/10 px-2 py-1 font-mono text-[12px]">
+                <code
+                    key={key}
+                    className="block overflow-x-auto whitespace-pre-wrap break-words rounded bg-black/10 px-2 py-1 font-mono text-[12px]"
+                >
                     {tok.slice(3, -3)}
                 </code>
             );
         }
         if (tok.startsWith("`") && tok.endsWith("`")) {
             return (
-                <code key={key} className="rounded bg-black/10 px-1 font-mono text-[12px]">
+                <code key={key} className="break-words rounded bg-black/10 px-1 font-mono text-[12px]">
                     {tok.slice(1, -1)}
                 </code>
             );

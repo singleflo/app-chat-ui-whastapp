@@ -1,6 +1,10 @@
-import { useState, useCallback, useEffect } from "react";
+import { useState, useCallback, useEffect, useRef } from "react";
 import { X, ChevronLeft, ChevronRight, Download, Share2, ZoomIn, ZoomOut } from "lucide-react";
 import { MediaPlaceholder } from "@/components/bubbles/content/Media";
+
+const focusRing =
+    "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ring)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--scrim)]";
+const iconBtn = `cursor-pointer transition-all duration-200 ease-[cubic-bezier(0.16,1,0.3,1)] active:scale-[0.97] ${focusRing}`;
 
 export interface LightboxState {
     open: boolean;
@@ -22,6 +26,7 @@ export function Lightbox({
     onNext: () => void;
 }) {
     const [zoomed, setZoomed] = useState(false);
+    const dialogRef = useRef<HTMLDivElement>(null);
     const [prevIndex, setPrevIndex] = useState(state.index);
     if (state.index !== prevIndex) {
         setPrevIndex(state.index);
@@ -38,6 +43,37 @@ export function Lightbox({
         document.addEventListener("keydown", handler);
         return () => document.removeEventListener("keydown", handler);
     }, [state, onClose, onPrev, onNext]);
+
+    useEffect(() => {
+        if (!state.open) return;
+        const previouslyFocused = document.activeElement as HTMLElement | null;
+        const focusable = () =>
+            Array.from(
+                dialogRef.current?.querySelectorAll<HTMLElement>(
+                    'button, [href], input, textarea, select, [tabindex]:not([tabindex="-1"])'
+                ) ?? []
+            ).filter((el) => !el.hasAttribute("disabled"));
+        focusable()[0]?.focus();
+        const onKeyDown = (e: KeyboardEvent) => {
+            if (e.key !== "Tab") return;
+            const items = focusable();
+            if (items.length === 0) return;
+            const first = items[0];
+            const last = items[items.length - 1];
+            if (e.shiftKey && document.activeElement === first) {
+                e.preventDefault();
+                last.focus();
+            } else if (!e.shiftKey && document.activeElement === last) {
+                e.preventDefault();
+                first.focus();
+            }
+        };
+        document.addEventListener("keydown", onKeyDown);
+        return () => {
+            document.removeEventListener("keydown", onKeyDown);
+            previouslyFocused?.focus();
+        };
+    }, [state.open]);
 
     const handleDownload = useCallback(() => {
         const link = document.createElement("a");
@@ -59,17 +95,23 @@ export function Lightbox({
     if (!state.open) return null;
 
     return (
-        <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/90">
+        <div
+            ref={dialogRef}
+            role="dialog"
+            aria-modal="true"
+            aria-label={state.caption ?? "Immagine"}
+            className="fixed inset-0 z-[100] flex items-center justify-center bg-[var(--scrim)]"
+        >
             <button
                 type="button"
                 onClick={onClose}
-                className="absolute right-4 top-4 z-10 flex h-10 w-10 items-center justify-center rounded-full bg-white/10 text-white hover:bg-white/20"
+                className={`absolute right-4 top-4 z-10 flex h-10 w-10 items-center justify-center rounded-full bg-[var(--bg-hover)] text-[var(--fg-on-accent)] hover:bg-[var(--bg-active)] ${iconBtn}`}
                 aria-label="Chiudi"
             >
                 <X className="h-5 w-5" />
             </button>
 
-            <div className="absolute left-4 top-4 z-10 rounded-full bg-white/10 px-3 py-1 text-sm font-medium text-white">
+            <div className="absolute left-4 top-4 z-10 rounded-full bg-[var(--bg-hover)] px-3 py-1 text-sm font-medium text-[var(--fg-on-accent)]">
                 {state.index + 1} di {state.total}
             </div>
 
@@ -77,7 +119,7 @@ export function Lightbox({
                 <button
                     type="button"
                     onClick={() => setZoomed(!zoomed)}
-                    className="flex h-10 w-10 items-center justify-center rounded-full bg-white/10 text-white hover:bg-white/20"
+                    className={`flex h-10 w-10 items-center justify-center rounded-full bg-[var(--bg-hover)] text-[var(--fg-on-accent)] hover:bg-[var(--bg-active)] ${iconBtn}`}
                     aria-label={zoomed ? "Riduci zoom" : "Ingrandisci"}
                 >
                     {zoomed ? <ZoomOut className="h-5 w-5" /> : <ZoomIn className="h-5 w-5" />}
@@ -85,7 +127,7 @@ export function Lightbox({
                 <button
                     type="button"
                     onClick={handleDownload}
-                    className="flex h-10 w-10 items-center justify-center rounded-full bg-white/10 text-white hover:bg-white/20"
+                    className={`flex h-10 w-10 items-center justify-center rounded-full bg-[var(--bg-hover)] text-[var(--fg-on-accent)] hover:bg-[var(--bg-active)] ${iconBtn}`}
                     aria-label="Scarica"
                 >
                     <Download className="h-5 w-5" />
@@ -93,7 +135,7 @@ export function Lightbox({
                 <button
                     type="button"
                     onClick={handleShare}
-                    className="flex h-10 w-10 items-center justify-center rounded-full bg-white/10 text-white hover:bg-white/20"
+                    className={`flex h-10 w-10 items-center justify-center rounded-full bg-[var(--bg-hover)] text-[var(--fg-on-accent)] hover:bg-[var(--bg-active)] ${iconBtn}`}
                     aria-label="Condividi"
                 >
                     <Share2 className="h-5 w-5" />
@@ -104,7 +146,7 @@ export function Lightbox({
                 <button
                     type="button"
                     onClick={onPrev}
-                    className="absolute left-4 top-1/2 z-10 flex h-12 w-12 -translate-y-1/2 items-center justify-center rounded-full bg-white/10 text-white hover:bg-white/20"
+                    className={`absolute left-4 top-1/2 z-10 flex h-12 w-12 -translate-y-1/2 items-center justify-center rounded-full bg-[var(--bg-hover)] text-[var(--fg-on-accent)] hover:bg-[var(--bg-active)] ${iconBtn}`}
                     aria-label="Precedente"
                 >
                     <ChevronLeft className="h-6 w-6" />
@@ -115,7 +157,7 @@ export function Lightbox({
                 <button
                     type="button"
                     onClick={onNext}
-                    className="absolute right-4 top-1/2 z-10 flex h-12 w-12 -translate-y-1/2 items-center justify-center rounded-full bg-white/10 text-white hover:bg-white/20"
+                    className={`absolute right-4 top-1/2 z-10 flex h-12 w-12 -translate-y-1/2 items-center justify-center rounded-full bg-[var(--bg-hover)] text-[var(--fg-on-accent)] hover:bg-[var(--bg-active)] ${iconBtn}`}
                     aria-label="Successiva"
                 >
                     <ChevronRight className="h-6 w-6" />
@@ -131,7 +173,7 @@ export function Lightbox({
                     className="max-h-[85vh] w-auto rounded-lg"
                 />
                 {state.caption && (
-                    <p className="mt-2 text-center text-sm text-white/80">{state.caption}</p>
+                    <p className="mt-2 text-center text-sm text-[var(--fg-secondary)]">{state.caption}</p>
                 )}
             </div>
         </div>

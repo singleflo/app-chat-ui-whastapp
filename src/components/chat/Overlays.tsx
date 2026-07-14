@@ -1,10 +1,16 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import {
     X, Search, UserPlus, Trash2, Forward, Check, AlertTriangle,
 } from "lucide-react";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { cn, colorFromString, initials } from "@/lib/utils";
 import { dataset } from "@/data/dataset";
+
+const TITLE_ID = "overlay-dialog-title";
+const focusRing =
+    "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ring)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--bg-panel)]";
+const iconBtn = `cursor-pointer transition-all duration-200 ease-[cubic-bezier(0.16,1,0.3,1)] active:scale-[0.97] ${focusRing}`;
+const actionBtn = `cursor-pointer transition-all duration-200 ease-[cubic-bezier(0.16,1,0.3,1)] active:scale-95 ${focusRing}`;
 
 export type OverlayState =
     | { type: "new-chat" }
@@ -25,6 +31,40 @@ export function ChatOverlays({
     onConfirmNewChat: (phoneOrContactId: string) => void;
     onConfirmForward: (messageId: string, targetIds: string[]) => void;
 }) {
+    const dialogRef = useRef<HTMLDivElement>(null);
+
+    useEffect(() => {
+        if (!state) return;
+        const previouslyFocused = document.activeElement as HTMLElement | null;
+        const focusable = () =>
+            Array.from(
+                dialogRef.current?.querySelectorAll<HTMLElement>(
+                    'button, [href], input, textarea, select, [tabindex]:not([tabindex="-1"])'
+                ) ?? []
+            ).filter((el) => !el.hasAttribute("disabled"));
+        focusable()[0]?.focus();
+        const onKeyDown = (e: KeyboardEvent) => {
+            if (e.key === "Escape") return onClose();
+            if (e.key !== "Tab") return;
+            const items = focusable();
+            if (items.length === 0) return;
+            const first = items[0];
+            const last = items[items.length - 1];
+            if (e.shiftKey && document.activeElement === first) {
+                e.preventDefault();
+                last.focus();
+            } else if (!e.shiftKey && document.activeElement === last) {
+                e.preventDefault();
+                first.focus();
+            }
+        };
+        document.addEventListener("keydown", onKeyDown);
+        return () => {
+            document.removeEventListener("keydown", onKeyDown);
+            previouslyFocused?.focus();
+        };
+    }, [state, onClose]);
+
     if (!state) return null;
     return (
         <div className="absolute inset-0 z-50 flex items-center justify-center">
@@ -34,7 +74,13 @@ export function ChatOverlays({
                 aria-label="Chiudi modale"
                 className="absolute inset-0 cursor-pointer border-0 bg-[var(--scrim)] p-0"
             />
-            <div className="relative z-10 mx-4 w-full max-w-md overflow-hidden rounded-xl border border-[var(--border-strong)] bg-[var(--bg-panel)] shadow-[var(--shadow-overlay)]">
+            <div
+                ref={dialogRef}
+                role="dialog"
+                aria-modal="true"
+                aria-labelledby={TITLE_ID}
+                className="relative z-10 mx-4 w-full max-w-md overflow-hidden rounded-xl border border-[var(--border-strong)] bg-[var(--bg-panel)] shadow-[var(--shadow-overlay)]"
+            >
                 {state.type === "new-chat" && (
                     <NewChatModal onClose={onClose} onConfirm={onConfirmNewChat} />
                 )}
@@ -66,11 +112,15 @@ export function ChatOverlays({
 function ModalHeader({ title, onClose }: { title: string; onClose: () => void }) {
     return (
         <header className="flex items-center justify-between border-b border-[var(--border-strong)] px-4 py-3">
-            <h3 className="text-sm font-semibold text-[var(--fg-primary)]">{title}</h3>
+            <h3 id={TITLE_ID} className="text-sm font-semibold text-[var(--fg-primary)]">{title}</h3>
             <button
                 type="button"
                 onClick={onClose}
-                className="flex h-7 w-7 items-center justify-center rounded-full text-[var(--fg-secondary)] hover:bg-[var(--bg-hover)]"
+                aria-label="Chiudi"
+                className={cn(
+                    "flex h-7 w-7 items-center justify-center rounded-full text-[var(--fg-secondary)] hover:bg-[var(--bg-hover)]",
+                    iconBtn
+                )}
             >
                 <X className="h-4 w-4" />
             </button>
@@ -106,14 +156,17 @@ function NewChatModal({ onClose, onConfirm }: { onClose: () => void; onConfirm: 
                         value={query}
                         onChange={(e) => setQuery(e.target.value)}
                         placeholder="Cerca contatto o numero"
-                        className="flex-1 bg-transparent text-sm focus:outline-none"
+                        className={cn("flex-1 rounded bg-transparent text-sm", focusRing)}
                     />
                 </div>
 
                 <button
                     type="button"
                     onClick={() => setShowPhone(!showPhone)}
-                    className="mb-2 flex w-full items-center gap-3 rounded-lg px-2 py-2 hover:bg-[var(--bg-hover)]"
+                    className={cn(
+                        "mb-2 flex w-full items-center gap-3 rounded-lg px-2 py-2 hover:bg-[var(--bg-hover)]",
+                        actionBtn
+                    )}
                 >
                     <div className="flex h-10 w-10 items-center justify-center rounded-full bg-[var(--accent-soft)] text-[var(--accent)]">
                         <UserPlus className="h-5 w-5" />
@@ -132,7 +185,10 @@ function NewChatModal({ onClose, onConfirm }: { onClose: () => void; onConfirm: 
                             value={phone}
                             onChange={(e) => setPhone(e.target.value)}
                             placeholder="+39 340 1234567"
-                            className="mb-2 w-full rounded-md border border-[var(--border-strong)] bg-[var(--bg-panel)] px-2 py-1.5 text-sm focus:border-[var(--accent)] focus:outline-none"
+                            className={cn(
+                                "mb-2 w-full rounded-md border border-[var(--border-strong)] bg-[var(--bg-panel)] px-2 py-1.5 text-sm focus:border-[var(--accent)]",
+                                focusRing
+                            )}
                         />
                         <div className="flex items-center justify-between">
                             <span className={cn("text-[10px]", isValid ? "text-[var(--accent)]" : phone ? "text-[var(--status-failed)]" : "text-[var(--fg-tertiary)]")}>
@@ -146,6 +202,7 @@ function NewChatModal({ onClose, onConfirm }: { onClose: () => void; onConfirm: 
                                 onClick={() => onConfirm(phone)}
                                 className={cn(
                                     "rounded-md px-3 py-1 text-xs font-medium",
+                                    actionBtn,
                                     isValid ? "bg-[var(--accent)] text-[var(--accent-fg)]" : "cursor-not-allowed bg-[var(--bg-panel-2)] text-[var(--fg-tertiary)]"
                                 )}
                             >
@@ -161,7 +218,10 @@ function NewChatModal({ onClose, onConfirm }: { onClose: () => void; onConfirm: 
                             key={c.id}
                             type="button"
                             onClick={() => onConfirm(c.id)}
-                            className="flex w-full items-center gap-3 rounded-lg px-2 py-2 text-left hover:bg-[var(--bg-hover)]"
+                            className={cn(
+                                "flex w-full items-center gap-3 rounded-lg px-2 py-2 text-left hover:bg-[var(--bg-hover)]",
+                                actionBtn
+                            )}
                         >
                             <Avatar className="h-10 w-10 shrink-0">
                                 <AvatarFallback style={{ backgroundColor: colorFromString(c.name) }}>
@@ -207,14 +267,20 @@ function DeleteChatModal({
                     <button
                         type="button"
                         onClick={onClose}
-                        className="flex-1 rounded-lg border border-[var(--border-strong)] py-2 text-sm font-medium text-[var(--fg-primary)] hover:bg-[var(--bg-hover)]"
+                        className={cn(
+                            "flex-1 rounded-lg border border-[var(--border-strong)] py-2 text-sm font-medium text-[var(--fg-primary)] hover:bg-[var(--bg-hover)]",
+                            actionBtn
+                        )}
                     >
                         Annulla
                     </button>
                     <button
                         type="button"
                         onClick={onConfirm}
-                        className="flex-1 rounded-lg bg-[var(--status-failed)] py-2 text-sm font-medium text-white hover:opacity-90"
+                        className={cn(
+                            "flex-1 rounded-lg bg-[var(--status-failed)] py-2 text-sm font-medium text-white hover:opacity-90",
+                            actionBtn
+                        )}
                     >
                         Elimina
                     </button>
@@ -264,7 +330,7 @@ function ForwardModal({
                         value={query}
                         onChange={(e) => setQuery(e.target.value)}
                         placeholder="Cerca chat o contatto"
-                        className="flex-1 bg-transparent text-sm focus:outline-none"
+                        className={cn("flex-1 rounded bg-transparent text-sm", focusRing)}
                     />
                 </div>
                 <div className="max-h-52 overflow-y-auto">
@@ -277,6 +343,7 @@ function ForwardModal({
                                 onClick={() => toggle(c.id)}
                                 className={cn(
                                     "flex w-full items-center gap-3 rounded-lg px-2 py-2 text-left hover:bg-[var(--bg-hover)]",
+                                    actionBtn,
                                     isSelected && "bg-[var(--accent-soft)]"
                                 )}
                             >
@@ -309,6 +376,7 @@ function ForwardModal({
                     onClick={() => onConfirm(Array.from(selected))}
                     className={cn(
                         "mt-3 flex w-full items-center justify-center gap-2 rounded-lg py-2.5 text-sm font-medium",
+                        actionBtn,
                         selected.size > 0
                             ? "bg-[var(--accent)] text-[var(--accent-fg)]"
                             : "cursor-not-allowed bg-[var(--bg-panel-2)] text-[var(--fg-tertiary)]"

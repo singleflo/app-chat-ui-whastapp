@@ -42,14 +42,14 @@ export function CallsShowcase() {
                 <Section title="R8 · CallButton header" spec="Abilitato · disabilitato con tooltip">
                     <div className="flex items-center gap-4 rounded-lg bg-[var(--bg-panel)] px-4 py-3">
                         <div className="text-xs text-[var(--fg-secondary)]">Abilitato:</div>
-                        <button type="button" className="flex h-9 w-9 items-center justify-center rounded-full bg-[var(--accent)] text-[var(--accent-fg)]">
+                        <button type="button" aria-label="Avvia chiamata" className="flex h-9 w-9 cursor-pointer items-center justify-center rounded-full bg-[var(--accent)] text-[var(--accent-fg)] transition-all duration-200 ease-[cubic-bezier(0.16,1,0.3,1)] hover:bg-[var(--accent-hover)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ring)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--bg-panel)] active:scale-[0.97]">
                             <Phone className="h-4 w-4" />
                         </button>
                         <div className="text-xs text-[var(--fg-secondary)]">Disabilitato:</div>
-                        <button type="button" disabled className="flex h-9 w-9 cursor-not-allowed items-center justify-center rounded-full bg-[var(--bg-panel-2)] text-[var(--fg-tertiary)]" title="Permesso di chiamata non accordato">
+                        <button type="button" disabled aria-label="Chiamata non disponibile" className="flex h-9 w-9 cursor-not-allowed items-center justify-center rounded-full bg-[var(--bg-panel-2)] text-[var(--fg-tertiary)]" title="Permesso di chiamata non accordato">
                             <PhoneOff className="h-4 w-4" />
                         </button>
-                        <div className="text-[10px] text-[var(--fg-tertiary)]">Permesso non accordato</div>
+                        <div className="text-[11px] text-[var(--fg-tertiary)]">Permesso non accordato</div>
                     </div>
                 </Section>
             </div>
@@ -83,10 +83,10 @@ function IncomingCallBanner() {
                 </div>
             </div>
             <div className="flex items-center gap-2">
-                <button type="button" className="flex items-center gap-1.5 rounded-full bg-[var(--status-failed)] px-3 py-1.5 text-xs font-medium text-white">
+                <button type="button" className="flex cursor-pointer items-center gap-1.5 rounded-full bg-[var(--status-failed)] px-3 py-1.5 text-xs font-medium text-[var(--fg-on-accent)] transition-all duration-200 ease-[cubic-bezier(0.16,1,0.3,1)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ring)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--bg-panel)] active:scale-95">
                     <PhoneOff className="h-3.5 w-3.5" /> Rifiuta
                 </button>
-                <button type="button" className="flex items-center gap-1.5 rounded-full bg-[var(--accent)] px-3 py-1.5 text-xs font-medium text-[var(--accent-fg)] animate-pulse">
+                <button type="button" className="flex cursor-pointer items-center gap-1.5 rounded-full bg-[var(--accent)] px-3 py-1.5 text-xs font-medium text-[var(--accent-fg)] transition-all duration-200 ease-[cubic-bezier(0.16,1,0.3,1)] hover:bg-[var(--accent-hover)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ring)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--bg-panel)] active:scale-95 animate-pulse">
                     <Phone className="h-3.5 w-3.5" /> Accetta
                 </button>
             </div>
@@ -113,7 +113,7 @@ function ActiveCallScreen() {
             {showDtmf && (
                 <div className="grid grid-cols-3 gap-1.5">
                     {["1","2","3","4","5","6","7","8","9","*","0","#"].map((k) => (
-                        <button key={k} type="button" className="flex h-10 w-10 items-center justify-center rounded-full bg-[var(--bg-panel-2)] text-sm font-medium hover:bg-[var(--bg-hover)]">{k}</button>
+                        <button key={k} type="button" aria-label={`Tasto ${k}`} className="flex h-10 w-10 cursor-pointer items-center justify-center rounded-full bg-[var(--bg-panel-2)] text-sm font-medium transition-all duration-200 ease-[cubic-bezier(0.16,1,0.3,1)] hover:bg-[var(--bg-hover)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ring)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--bg-panel)] active:scale-95">{k}</button>
                     ))}
                 </div>
             )}
@@ -123,7 +123,7 @@ function ActiveCallScreen() {
                 <CallControl active={speaker} onClick={() => setSpeaker(!speaker)} icon={Volume2} label="Vivavoce" />
                 <CallControl active={showDtmf} onClick={() => setShowDtmf(!showDtmf)} icon={Grid3x3} label="Tastierino" />
                 <CallControl active={false} onClick={() => {}} icon={Minimize2} label="Minimizza" />
-                <button type="button" className="flex h-14 w-14 items-center justify-center rounded-full bg-[var(--status-failed)] text-white" aria-label="Riaggancia">
+                <button type="button" className="flex h-14 w-14 cursor-pointer items-center justify-center rounded-full bg-[var(--status-failed)] text-[var(--fg-on-accent)] transition-all duration-200 ease-[cubic-bezier(0.16,1,0.3,1)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ring)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--bg-panel)] active:scale-[0.97]" aria-label="Riaggancia">
                     <PhoneOff className="h-6 w-6" />
                 </button>
             </div>
@@ -133,11 +133,11 @@ function ActiveCallScreen() {
 
 function CallControl({ active, onClick, icon: Icon, label }: { active: boolean; onClick: () => void; icon: React.ComponentType<{ className?: string }>; label: string }) {
     return (
-        <button type="button" onClick={onClick} className="flex flex-col items-center gap-1" aria-label={label}>
-            <span className={cn("flex h-12 w-12 items-center justify-center rounded-full", active ? "bg-white text-[var(--bg-panel)]" : "bg-[var(--bg-panel-2)] text-[var(--fg-primary)]")}>
+        <button type="button" onClick={onClick} aria-pressed={active} className="flex cursor-pointer flex-col items-center gap-1 rounded-lg transition-all duration-200 ease-[cubic-bezier(0.16,1,0.3,1)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ring)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--bg-panel)] active:scale-95" aria-label={label}>
+            <span className={cn("flex h-12 w-12 items-center justify-center rounded-full transition-colors duration-200", active ? "bg-[var(--fg-primary)] text-[var(--bg-panel)]" : "bg-[var(--bg-panel-2)] text-[var(--fg-primary)]")}>
                 <Icon className="h-5 w-5" />
             </span>
-            <span className="text-[9px] text-[var(--fg-tertiary)]">{label}</span>
+            <span className="text-[11px] text-[var(--fg-tertiary)]">{label}</span>
         </button>
     );
 }
@@ -159,8 +159,8 @@ function CallLog() {
     return (
         <div className="rounded-lg border border-[var(--border-strong)] bg-[var(--bg-panel)]">
             <div className="flex gap-2 border-b border-[var(--border-soft)] px-3 py-2 text-[11px]">
-                <button type="button" className="font-semibold text-[var(--accent)]">Tutte ({dataset.calls.length})</button>
-                <button type="button" className="text-[var(--fg-tertiary)]">Perse (1)</button>
+                <button type="button" aria-pressed="true" className="cursor-pointer rounded font-semibold text-[var(--accent)] transition-all duration-200 ease-[cubic-bezier(0.16,1,0.3,1)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ring)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--bg-panel)] active:scale-95">Tutte ({dataset.calls.length})</button>
+                <button type="button" aria-pressed="false" className="cursor-pointer rounded text-[var(--fg-tertiary)] transition-all duration-200 ease-[cubic-bezier(0.16,1,0.3,1)] hover:text-[var(--fg-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ring)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--bg-panel)] active:scale-95">Perse (1)</button>
             </div>
             {dataset.calls.map((call) => {
                 const conv = dataset.conversations.find((c) => c.id === call.conversationId);
@@ -181,7 +181,7 @@ function CallLog() {
                                 <span className="ml-1">· {call.startedAt.replace("T", " · ").replace(/:00\+.*$/, "")}</span>
                             </div>
                         </div>
-                        <button type="button" className="flex h-8 w-8 items-center justify-center rounded-full text-[var(--accent)] hover:bg-[var(--bg-hover)]">
+                        <button type="button" aria-label={`Richiama ${name}`} className="flex h-8 w-8 cursor-pointer items-center justify-center rounded-full text-[var(--accent)] transition-all duration-200 ease-[cubic-bezier(0.16,1,0.3,1)] hover:bg-[var(--bg-hover)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ring)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--bg-panel)] active:scale-[0.97]">
                             <PhoneCall className="h-4 w-4" />
                         </button>
                     </div>

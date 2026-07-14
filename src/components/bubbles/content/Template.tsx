@@ -61,7 +61,10 @@ export function TemplateContent({ template }: { template: TemplateContentPayload
                         <TemplateButtonRow key={`tb-${b.kind}-${b.title}`} button={b} />
                     ))}
                     {template.buttons.length > 3 && (
-                        <button type="button" className="py-1.5 text-[12px] font-medium text-[var(--accent)]">
+                        <button
+                            type="button"
+                            className="cursor-pointer rounded-md py-1.5 text-[12px] font-medium text-[var(--accent)] transition-all duration-200 ease-[cubic-bezier(0.16,1,0.3,1)] hover:bg-[var(--bg-hover)] active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ring)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--bg-panel)]"
+                        >
                             Vedi tutte le opzioni ({template.buttons.length})
                         </button>
                     )}
@@ -107,7 +110,7 @@ function LtoBanner({
             <button
                 type="button"
                 onClick={() => onCopy(code)}
-                className="flex items-center gap-1 rounded border border-[var(--border-strong)] px-2 py-0.5 text-[11px] font-medium"
+                className="flex cursor-pointer items-center gap-1 rounded border border-[var(--border-strong)] px-2 py-0.5 text-[11px] font-medium transition-all duration-200 ease-[cubic-bezier(0.16,1,0.3,1)] hover:bg-[var(--bg-hover)] active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ring)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--bg-panel)]"
             >
                 {copied ? <Check className="h-3 w-3" /> : <Copy className="h-3 w-3" />}
                 {code}

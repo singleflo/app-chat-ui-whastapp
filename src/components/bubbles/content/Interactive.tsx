@@ -56,7 +56,7 @@ export function ButtonsContent({
                     <button
                         type="button"
                         key={b.id}
-                        className="flex items-center justify-center py-1.5 text-[13px] font-medium text-[var(--accent)] hover:bg-[var(--bg-hover)]"
+                        className="flex cursor-pointer items-center justify-center py-1.5 text-[13px] font-medium text-[var(--accent)] transition-all duration-200 ease-[cubic-bezier(0.16,1,0.3,1)] hover:bg-[var(--bg-hover)] active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ring)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--bg-panel)]"
                     >
                         {b.title}
                     </button>
@@ -101,7 +101,7 @@ export function ListContent({
             <button
                 type="button"
                 onClick={() => setOpen(!open)}
-                className="mt-2 flex w-full items-center justify-center gap-2 rounded-md border border-[var(--border-strong)] py-1.5 text-[13px] font-medium text-[var(--fg-primary)] hover:bg-[var(--bg-hover)]"
+                className="mt-2 flex w-full cursor-pointer items-center justify-center gap-2 rounded-md border border-[var(--border-strong)] py-1.5 text-[13px] font-medium text-[var(--fg-primary)] transition-all duration-200 ease-[cubic-bezier(0.16,1,0.3,1)] hover:bg-[var(--bg-hover)] active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ring)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--bg-panel)]"
             >
                 <List className="h-3.5 w-3.5" />
                 {buttonTitle}
@@ -119,7 +119,7 @@ export function ListContent({
                                     type="button"
                                     key={r.id}
                                     onClick={() => setOpen(false)}
-                                    className="block w-full px-2 py-1.5 text-left hover:bg-[var(--bg-hover)]"
+                                    className="block w-full cursor-pointer px-2 py-1.5 text-left transition-all duration-200 ease-[cubic-bezier(0.16,1,0.3,1)] hover:bg-[var(--bg-hover)] active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ring)] focus-visible:ring-inset"
                                 >
                                     <div className="text-[13px] font-medium text-[var(--fg-primary)]">{r.title}</div>
                                     {r.description && (
@@ -158,7 +158,7 @@ export function CtaUrlContent({
                 target="_blank"
                 rel="noopener noreferrer"
                 onClick={(e) => e.preventDefault()}
-                className="flex items-center justify-center gap-1.5 rounded-md border-t border-[var(--border-strong)] py-1.5 text-[13px] font-medium text-[var(--accent)] hover:bg-[var(--bg-hover)]"
+                className="flex cursor-pointer items-center justify-center gap-1.5 rounded-md border-t border-[var(--border-strong)] py-1.5 text-[13px] font-medium text-[var(--accent)] transition-all duration-200 ease-[cubic-bezier(0.16,1,0.3,1)] hover:bg-[var(--bg-hover)] active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ring)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--bg-panel)]"
             >
                 <ExternalLink className="h-3.5 w-3.5" /> {ctaTitle}
             </a>
@@ -197,7 +197,7 @@ export function FlowContent({
                 <button
                     type="button"
                     onClick={() => setShowJson(!showJson)}
-                    className="text-left text-[10px] text-[var(--fg-link)]"
+                    className="cursor-pointer rounded text-left text-[10px] text-[var(--fg-link)] transition-all duration-200 ease-[cubic-bezier(0.16,1,0.3,1)] active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ring)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--bg-panel)]"
                 >
                     {showJson ? "Nascondi dettagli" : "Vedi dettagli"}
                 </button>
@@ -216,7 +216,7 @@ export function FlowContent({
             </div>
             <button
                 type="button"
-                className="flex items-center justify-center gap-1.5 rounded-md border-t border-[var(--border-strong)] py-1.5 text-[13px] font-medium text-[var(--accent)] hover:bg-[var(--bg-hover)]"
+                className="flex cursor-pointer items-center justify-center gap-1.5 rounded-md border-t border-[var(--border-strong)] py-1.5 text-[13px] font-medium text-[var(--accent)] transition-all duration-200 ease-[cubic-bezier(0.16,1,0.3,1)] hover:bg-[var(--bg-hover)] active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ring)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--bg-panel)]"
             >
                 <ExternalLink className="h-3.5 w-3.5" /> {ctaTitle}
             </button>
@@ -266,7 +266,7 @@ export function CarouselContent({ cards }: { cards: CarouselCard[] }) {
                                     <button
                                         type="button"
                                         key={b.id}
-                                        className="flex items-center justify-center gap-1 py-0.5 text-[11px] font-medium text-[var(--accent)]"
+                                        className="flex cursor-pointer items-center justify-center gap-1 rounded py-0.5 text-[11px] font-medium text-[var(--accent)] transition-all duration-200 ease-[cubic-bezier(0.16,1,0.3,1)] hover:bg-[var(--bg-hover)] active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ring)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--bg-panel)]"
                                     >
                                         {b.kind === "url" && <ExternalLink className="h-3 w-3" />}
                                         {b.title}
@@ -362,7 +362,7 @@ export function CatalogContent({
             {body && <div className="text-[11px] text-[var(--fg-secondary)]">{body}</div>}
             <button
                 type="button"
-                className="flex items-center justify-center gap-1.5 rounded-md border-t border-[var(--border-strong)] py-1.5 text-[13px] font-medium text-[var(--accent)] hover:bg-[var(--bg-hover)]"
+                className="flex cursor-pointer items-center justify-center gap-1.5 rounded-md border-t border-[var(--border-strong)] py-1.5 text-[13px] font-medium text-[var(--accent)] transition-all duration-200 ease-[cubic-bezier(0.16,1,0.3,1)] hover:bg-[var(--bg-hover)] active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ring)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--bg-panel)]"
             >
                 {ctaTitle}
             </button>
@@ -391,7 +391,7 @@ export function TemplateButtonRow({ button }: { button: TemplateButton }) {
                     target="_blank"
                     rel="noopener noreferrer"
                     onClick={(e) => e.preventDefault()}
-                    className="flex items-center justify-center gap-1.5 py-1.5 text-[12px] font-medium text-[var(--accent)] hover:bg-[var(--bg-hover)]"
+                    className="flex cursor-pointer items-center justify-center gap-1.5 py-1.5 text-[12px] font-medium text-[var(--accent)] transition-all duration-200 ease-[cubic-bezier(0.16,1,0.3,1)] hover:bg-[var(--bg-hover)] active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ring)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--bg-panel)]"
                 >
                     <ExternalLink className="h-3 w-3" /> {button.title}
                 </a>
@@ -401,7 +401,7 @@ export function TemplateButtonRow({ button }: { button: TemplateButton }) {
                 <a
                     href={`tel:${button.phone}`}
                     onClick={(e) => e.preventDefault()}
-                    className="flex items-center justify-center gap-1.5 py-1.5 text-[12px] font-medium text-[var(--accent)] hover:bg-[var(--bg-hover)]"
+                    className="flex cursor-pointer items-center justify-center gap-1.5 py-1.5 text-[12px] font-medium text-[var(--accent)] transition-all duration-200 ease-[cubic-bezier(0.16,1,0.3,1)] hover:bg-[var(--bg-hover)] active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ring)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--bg-panel)]"
                 >
                     <Phone className="h-3 w-3" /> {button.title}
                 </a>
@@ -412,7 +412,7 @@ export function TemplateButtonRow({ button }: { button: TemplateButton }) {
                 <button
                     type="button"
                     onClick={() => handleCopy(button.code)}
-                    className="flex items-center justify-center gap-1.5 py-1.5 text-[12px] font-medium text-[var(--accent)] hover:bg-[var(--bg-hover)]"
+                    className="flex cursor-pointer items-center justify-center gap-1.5 py-1.5 text-[12px] font-medium text-[var(--accent)] transition-all duration-200 ease-[cubic-bezier(0.16,1,0.3,1)] hover:bg-[var(--bg-hover)] active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ring)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--bg-panel)]"
                 >
                     {copied ? <Check className="h-3 w-3" /> : <Copy className="h-3 w-3" />} {button.title}
                 </button>
@@ -422,7 +422,7 @@ export function TemplateButtonRow({ button }: { button: TemplateButton }) {
                 <button
                     type="button"
                     onClick={() => handleCopy(button.code)}
-                    className="flex items-center justify-center gap-1.5 py-1.5 text-[12px] font-medium text-[var(--accent)] hover:bg-[var(--bg-hover)]"
+                    className="flex cursor-pointer items-center justify-center gap-1.5 py-1.5 text-[12px] font-medium text-[var(--accent)] transition-all duration-200 ease-[cubic-bezier(0.16,1,0.3,1)] hover:bg-[var(--bg-hover)] active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ring)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--bg-panel)]"
                 >
                     <CheckCheck className="h-3 w-3" /> {button.title}
                 </button>
@@ -434,7 +434,7 @@ export function TemplateButtonRow({ button }: { button: TemplateButton }) {
             return (
                 <button
                     type="button"
-                    className="flex items-center justify-center gap-1.5 py-1.5 text-[12px] font-medium text-[var(--accent)] hover:bg-[var(--bg-hover)]"
+                    className="flex cursor-pointer items-center justify-center gap-1.5 py-1.5 text-[12px] font-medium text-[var(--accent)] transition-all duration-200 ease-[cubic-bezier(0.16,1,0.3,1)] hover:bg-[var(--bg-hover)] active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ring)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--bg-panel)]"
                 >
                     {button.kind === "catalog" && <ShoppingCart className="h-3 w-3" />}
                     {button.kind === "flow" && <ExternalLink className="h-3 w-3" />}

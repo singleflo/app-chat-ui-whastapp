@@ -49,7 +49,7 @@ export function AudioContent({
                 <button
                     type="button"
                     onClick={() => setIsPlaying(!isPlaying)}
-                    className="flex h-8 w-8 items-center justify-center rounded-full bg-[var(--accent)] text-[var(--accent-fg)]"
+                    className="flex h-8 w-8 shrink-0 cursor-pointer items-center justify-center rounded-full bg-[var(--accent)] text-[var(--accent-fg)] transition-all duration-200 ease-[cubic-bezier(0.16,1,0.3,1)] hover:bg-[var(--accent-hover)] active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ring)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--bg-panel)]"
                     aria-label={isPlaying ? "Pausa" : "Riproduci"}
                 >
                     {isPlaying ? <Pause className="h-4 w-4" /> : <Play className="h-4 w-4" />}
@@ -66,7 +66,8 @@ export function AudioContent({
                 <button
                     type="button"
                     onClick={() => setSpeed(speed === 1 ? 1.5 : speed === 1.5 ? 2 : 1)}
-                    className="rounded px-1 text-[10px] font-semibold text-[var(--accent)]"
+                    className="cursor-pointer rounded px-1 text-[10px] font-semibold text-[var(--accent)] transition-all duration-200 ease-[cubic-bezier(0.16,1,0.3,1)] hover:bg-[var(--bg-hover)] active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ring)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--bg-panel)]"
+                    aria-label="Velocità riproduzione"
                 >
                     {speed}×
                 </button>
@@ -76,7 +77,7 @@ export function AudioContent({
                     <button
                         type="button"
                         onClick={() => setShowTranscript(!showTranscript)}
-                        className="flex items-center gap-1 text-[10px] text-[var(--fg-link)]"
+                        className="flex cursor-pointer items-center gap-1 rounded text-[10px] text-[var(--fg-link)] transition-all duration-200 ease-[cubic-bezier(0.16,1,0.3,1)] active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ring)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--bg-panel)]"
                     >
                         ✨ Trascrizione {transcript.state === "ready" ? "✓" : transcript.state === "processing" ? "…" : "⚠"}
                     </button>

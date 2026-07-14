@@ -8,6 +8,15 @@ import { Lightbox, type LightboxState } from "./Lightbox";
 import { useState, useCallback, useEffect } from "react";
 import { PanelRightOpen } from "lucide-react";
 
+const focusRing =
+    "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ring)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--bg-panel)]";
+const iconBtn = `cursor-pointer transition-all duration-200 ease-[cubic-bezier(0.16,1,0.3,1)] active:scale-[0.97] ${focusRing}`;
+const resizeHandle = `w-1 shrink-0 cursor-col-resize border-0 bg-[var(--border-strong)] p-0 transition-all duration-200 ease-[cubic-bezier(0.16,1,0.3,1)] hover:bg-[var(--accent)] active:bg-[var(--accent)] ${focusRing}`;
+const LIST_MIN = 280;
+const LIST_MAX = 600;
+const CTX_MIN = 240;
+const CTX_MAX = 480;
+
 export function ChatApp({ variant }: { variant: SurfaceVariant }) {
     const caps = SURFACE_CAPS[variant];
     const [selectedConvId, setSelectedConvId] = useState("c1");
@@ -131,8 +140,18 @@ function DesktopChatApp({
         );
     };
 
-    const onResizeList = useResizable(setListWidth, 280, 600);
-    const onResizeContext = useResizable(setContextWidth, 240, 480, true);
+    const onResizeList = useResizable(setListWidth, LIST_MIN, LIST_MAX);
+    const onResizeContext = useResizable(setContextWidth, CTX_MIN, CTX_MAX, true);
+
+    const keyResize =
+        (width: number, setWidth: (w: number) => void, min: number, max: number, invert = false) =>
+        (e: React.KeyboardEvent) => {
+            if (e.key !== "ArrowLeft" && e.key !== "ArrowRight") return;
+            e.preventDefault();
+            const dir = (e.key === "ArrowRight" ? 1 : -1) * (invert ? -1 : 1);
+            const step = (e.shiftKey ? 32 : 8) * dir;
+            setWidth(Math.min(max, Math.max(min, width + step)));
+        };
 
     return (
         <div className="flex h-full w-full overflow-hidden">
@@ -143,10 +162,17 @@ function DesktopChatApp({
                 <ConversationListShell onOpenChat={onSelect} activeId={selectedConvId} onNewChat={onNewChat} />
             </aside>
 
+            {/* biome-ignore lint/a11y/useSemanticElements: interactive resize splitter must stay a focusable button, not a static <hr> */}
             <button
                 type="button"
                 onMouseDown={onResizeList}
-                className="w-1 shrink-0 cursor-col-resize border-0 bg-[var(--border-strong)] p-0 hover:bg-[var(--accent)] transition-colors"
+                onKeyDown={keyResize(listWidth, setListWidth, LIST_MIN, LIST_MAX)}
+                role="separator"
+                aria-orientation="vertical"
+                aria-valuenow={Math.round(listWidth)}
+                aria-valuemin={LIST_MIN}
+                aria-valuemax={LIST_MAX}
+                className={resizeHandle}
                 aria-label="Ridimensiona lista"
             />
 
@@ -160,10 +186,17 @@ function DesktopChatApp({
 
             {contextOpen && (
                 <>
+                    {/* biome-ignore lint/a11y/useSemanticElements: interactive resize splitter must stay a focusable button, not a static <hr> */}
                     <button
                         type="button"
                         onMouseDown={onResizeContext}
-                        className="w-1 shrink-0 cursor-col-resize border-0 bg-[var(--border-strong)] p-0 hover:bg-[var(--accent)] transition-colors"
+                        onKeyDown={keyResize(contextWidth, setContextWidth, CTX_MIN, CTX_MAX, true)}
+                        role="separator"
+                        aria-orientation="vertical"
+                        aria-valuenow={Math.round(contextWidth)}
+                        aria-valuemin={CTX_MIN}
+                        aria-valuemax={CTX_MAX}
+                        className={resizeHandle}
                         aria-label="Ridimensiona pannello contesto"
                     />
                     <aside
@@ -182,7 +215,7 @@ function DesktopChatApp({
                 <button
                     type="button"
                     onClick={() => setContextOpen(true)}
-                    className="absolute right-3 top-16 z-20 flex h-9 w-9 items-center justify-center rounded-full bg-[var(--bg-panel)] text-[var(--fg-secondary)] shadow-[var(--shadow-overlay)] hover:text-[var(--accent)]"
+                    className={`absolute right-3 top-16 z-20 flex h-9 w-9 items-center justify-center rounded-full bg-[var(--bg-panel)] text-[var(--fg-secondary)] shadow-[var(--shadow-overlay)] hover:text-[var(--accent)] ${iconBtn}`}
                     aria-label="Apri pannello contesto"
                 >
                     <PanelRightOpen className="h-4 w-4" />

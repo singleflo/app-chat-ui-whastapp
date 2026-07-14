@@ -11,6 +11,9 @@ const WAVEFORM_BARS = [40, 60, 80, 50, 70, 90, 40, 60, 30, 50, 70, 80, 40, 60, 5
 );
 const EMOJI_SET = ["😀", "😂", "🥰", "😍", "🤔", "😎", "😢", "😡", "👍", "👎", "🙏", "👏", "🤝", "💪", "🎉", "🔥"];
 
+const BTN = "cursor-pointer transition-all duration-200 ease-[cubic-bezier(0.16,1,0.3,1)] active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ring)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--bg-panel)]";
+const ICON_BTN = "cursor-pointer transition-all duration-200 ease-[cubic-bezier(0.16,1,0.3,1)] active:scale-[0.97] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ring)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--bg-panel)]";
+
 export function ComposerShowcase() {
     return (
         <div className="h-full overflow-y-auto bg-[var(--bg-app)] p-4 sm:p-8">
@@ -80,12 +83,12 @@ function DefaultComposer() {
     return (
         <ComposerShell>
             <div className="flex items-end gap-2">
-                <IconBtn><Smile className="h-5 w-5" /></IconBtn>
-                <IconBtn><Plus className="h-5 w-5" /></IconBtn>
+                <IconBtn aria-label="Emoji"><Smile className="h-5 w-5" /></IconBtn>
+                <IconBtn aria-label="Allega"><Plus className="h-5 w-5" /></IconBtn>
                 <textarea rows={1} placeholder="Scrivi un messaggio" defaultValue=""
                     className="max-h-24 min-w-0 flex-1 resize-none bg-transparent px-2 py-1 text-sm text-[var(--fg-primary)] placeholder:text-[var(--fg-tertiary)] focus:outline-none" />
-                <IconBtn><Camera className="h-5 w-5" /></IconBtn>
-                <button type="button" className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-[var(--accent)] text-[var(--accent-fg)]">
+                <IconBtn aria-label="Fotocamera"><Camera className="h-5 w-5" /></IconBtn>
+                <button type="button" aria-label="Registra audio" className="flex h-9 w-9 shrink-0 cursor-pointer items-center justify-center rounded-full bg-[var(--accent)] text-[var(--accent-fg)] transition-all duration-200 ease-[cubic-bezier(0.16,1,0.3,1)] hover:bg-[var(--bg-hover)] hover:text-[var(--fg-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ring)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--bg-panel)] active:scale-[0.97]">
                     <Mic className="h-5 w-5" />
                 </button>
             </div>
@@ -101,13 +104,13 @@ function ReplyComposer() {
                     <div className="font-semibold text-[var(--accent)]">Giulia Romano</div>
                     <div className="truncate text-[var(--fg-secondary)]">Ciao! Volevo confermare l'ordine #S00042…</div>
                 </div>
-                <button type="button" className="text-[var(--fg-tertiary)]"><X className="h-4 w-4" /></button>
+                <button type="button" aria-label="Chiudi risposta" className="cursor-pointer text-[var(--fg-tertiary)] transition-all duration-200 ease-[cubic-bezier(0.16,1,0.3,1)] hover:text-[var(--fg-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ring)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--bg-panel)] active:scale-[0.97]"><X className="h-4 w-4" /></button>
             </div>
             <div className="flex items-end gap-2">
-                <IconBtn><Smile className="h-5 w-5" /></IconBtn>
-                <IconBtn><Plus className="h-5 w-5" /></IconBtn>
+                <IconBtn aria-label="Emoji"><Smile className="h-5 w-5" /></IconBtn>
+                <IconBtn aria-label="Allega"><Plus className="h-5 w-5" /></IconBtn>
                 <textarea rows={1} placeholder="Scrivi un messaggio" className="max-h-24 min-w-0 flex-1 resize-none bg-transparent px-2 py-1 text-sm focus:outline-none" />
-                <button type="button" className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-[var(--accent)] text-[var(--accent-fg)]"><Send className="h-4 w-4" /></button>
+                <button type="button" aria-label="Invia" className="flex h-9 w-9 shrink-0 cursor-pointer items-center justify-center rounded-full bg-[var(--accent)] text-[var(--accent-fg)] transition-all duration-200 ease-[cubic-bezier(0.16,1,0.3,1)] hover:bg-[var(--bg-hover)] hover:text-[var(--fg-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ring)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--bg-panel)] active:scale-[0.97]"><Send className="h-4 w-4" /></button>
             </div>
         </ComposerShell>
     );
@@ -118,7 +121,7 @@ function BlockedComposer() {
         <div className="space-y-2">
             <div className="flex items-center justify-between rounded-md bg-[var(--bg-bubble-error)] px-3 py-2 text-xs text-[var(--status-failed)]">
                 <span className="flex items-center gap-1.5"><Lock className="h-3.5 w-3.5" /> Finestra 24h chiusa · solo template</span>
-                <button type="button" className="flex items-center gap-1 rounded bg-[var(--accent)] px-2 py-0.5 text-[var(--accent-fg)]">
+                <button type="button" className={cn("flex items-center gap-1 rounded bg-[var(--accent)] px-2 py-0.5 text-[var(--accent-fg)] hover:bg-[var(--accent-hover)]", BTN)}>
                     <FileText className="h-3 w-3" /> Invia template
                 </button>
             </div>
@@ -140,14 +143,14 @@ function RecordingComposer() {
                     <span key={bar.id} className="w-0.5 rounded-full bg-[var(--accent)]" style={{ height: `${bar.value}%` }} />
                 ))}
             </div>
-            <span className="text-[10px] text-[var(--fg-tertiary)]">← slide per annullare</span>
-            <button type="button" className="flex h-8 w-8 items-center justify-center rounded-full bg-[var(--status-failed)]/10 text-[var(--status-failed)]" aria-label="Annulla">
+            <span className="text-[11px] text-[var(--fg-tertiary)]">← slide per annullare</span>
+            <button type="button" className={cn("flex h-8 w-8 items-center justify-center rounded-full bg-[var(--status-failed)]/10 text-[var(--status-failed)] hover:bg-[var(--status-failed)]/20", ICON_BTN)} aria-label="Annulla">
                 <Trash2 className="h-4 w-4" />
             </button>
-            <button type="button" className="flex items-center gap-1 rounded bg-[var(--bg-panel-2)] px-2 py-1 text-[10px] text-[var(--fg-secondary)]">
+            <button type="button" className={cn("flex items-center gap-1 rounded bg-[var(--bg-panel-2)] px-2 py-1 text-[11px] text-[var(--fg-secondary)] hover:bg-[var(--bg-hover)]", BTN)}>
                 <Pin className="h-3 w-3" /> Lock
             </button>
-            <button type="button" className="flex h-8 w-8 items-center justify-center rounded-full bg-[var(--accent)] text-[var(--accent-fg)]" aria-label="Invia">
+            <button type="button" className={cn("flex h-8 w-8 items-center justify-center rounded-full bg-[var(--accent)] text-[var(--accent-fg)] hover:bg-[var(--accent-hover)]", ICON_BTN)} aria-label="Invia">
                 <Send className="h-4 w-4" />
             </button>
         </div>
@@ -159,12 +162,12 @@ function InternalNoteComposer() {
     return (
         <ComposerShell note={tab === "note"}>
             <div className="mb-1 flex gap-1 border-b border-[var(--border-soft)] pb-1">
-                <button type="button" onClick={() => setTab("message")}
-                    className={cn("rounded-md px-3 py-1 text-xs font-medium", tab === "message" ? "bg-[var(--bg-panel)] text-[var(--fg-primary)]" : "text-[var(--fg-tertiary)]")}>
+                <button type="button" onClick={() => setTab("message")} aria-pressed={tab === "message"}
+                    className={cn("rounded-md px-3 py-1 text-xs font-medium", BTN, tab === "message" ? "bg-[var(--bg-panel)] text-[var(--fg-primary)]" : "text-[var(--fg-tertiary)] hover:bg-[var(--bg-hover)]")}>
                     Messaggio
                 </button>
-                <button type="button" onClick={() => setTab("note")}
-                    className={cn("rounded-md px-3 py-1 text-xs font-medium", tab === "note" ? "bg-[var(--fg-warning)]/20 text-[var(--fg-warning)]" : "text-[var(--fg-tertiary)]")}>
+                <button type="button" onClick={() => setTab("note")} aria-pressed={tab === "note"}
+                    className={cn("rounded-md px-3 py-1 text-xs font-medium", BTN, tab === "note" ? "bg-[var(--fg-warning)]/20 text-[var(--fg-warning)]" : "text-[var(--fg-tertiary)] hover:bg-[var(--bg-hover)]")}>
                     📝 Nota interna
                 </button>
             </div>
@@ -172,11 +175,11 @@ function InternalNoteComposer() {
                 <IconBtn><Smile className="h-5 w-5" /></IconBtn>
                 <textarea rows={1} placeholder={tab === "note" ? "Scrivi una nota interna (visibile solo al team)…" : "Scrivi un messaggio"}
                     className="max-h-24 min-w-0 flex-1 resize-none bg-transparent px-2 py-1 text-sm focus:outline-none" />
-                <button type="button" className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-[var(--accent)] text-[var(--accent-fg)]">
+                <button type="button" aria-label="Invia" className={cn("flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-[var(--accent)] text-[var(--accent-fg)] hover:bg-[var(--accent-hover)]", ICON_BTN)}>
                     <Send className="h-4 w-4" />
                 </button>
             </div>
-            {tab === "note" && <div className="mt-1 text-[10px] italic text-[var(--fg-warning)]">Mai inviata a WhatsApp · visibile solo al team</div>}
+            {tab === "note" && <div className="mt-1 text-[11px] italic text-[var(--fg-warning)]">Mai inviata a WhatsApp · visibile solo al team</div>}
         </ComposerShell>
     );
 }
@@ -193,19 +196,19 @@ function AttachmentsComposer() {
                     { icon: MapPin, label: "Posizione", color: "var(--fg-link)" },
                     { icon: Pin, label: "Richiesta posizione", color: "var(--fg-warning)" },
                 ].map((item) => (
-                    <button key={item.label} type="button" className="flex flex-col items-center gap-1.5 rounded-lg p-2 hover:bg-[var(--bg-hover)]">
+                    <button key={item.label} type="button" className={cn("flex flex-col items-center gap-1.5 rounded-lg p-2 hover:bg-[var(--bg-hover)]", BTN)}>
                         <div className="flex h-10 w-10 items-center justify-center rounded-full" style={{ backgroundColor: `color-mix(in srgb, ${item.color} 15%, transparent)`, color: item.color }}>
                             <item.icon className="h-5 w-5" />
                         </div>
-                        <span className="text-[10px] text-[var(--fg-secondary)]">{item.label}</span>
+                        <span className="text-[11px] text-[var(--fg-secondary)]">{item.label}</span>
                     </button>
                 ))}
             </div>
             <ComposerShell>
                 <div className="flex items-end gap-2">
-                    <IconBtn><ChevronDown className="h-5 w-5 rotate-45" /></IconBtn>
+                    <IconBtn aria-label="Chiudi allegati"><ChevronDown className="h-5 w-5 rotate-45" /></IconBtn>
                     <textarea rows={1} placeholder="Scrivi un messaggio" className="min-w-0 flex-1 resize-none bg-transparent px-2 py-1 text-sm focus:outline-none" />
-                    <button type="button" className="flex h-9 w-9 items-center justify-center rounded-full bg-[var(--accent)] text-[var(--accent-fg)]"><Mic className="h-5 w-5" /></button>
+                    <button type="button" aria-label="Registra audio" className={cn("flex h-9 w-9 items-center justify-center rounded-full bg-[var(--accent)] text-[var(--accent-fg)] hover:bg-[var(--accent-hover)]", ICON_BTN)}><Mic className="h-5 w-5" /></button>
                 </div>
             </ComposerShell>
         </div>
@@ -219,27 +222,27 @@ function EmojiPickerComposer() {
                 <div className="mb-2 flex items-center gap-2 rounded-md bg-[var(--bg-panel-2)] px-2 py-1">
                     <Smile className="h-3.5 w-3.5 text-[var(--fg-tertiary)]" />
                     <input type="text" placeholder="Cerca emoji" className="flex-1 bg-transparent text-xs focus:outline-none" />
-                    <span className="text-[10px] text-[var(--fg-tertiary)]">🖐️</span>
+                    <span className="text-[11px] text-[var(--fg-tertiary)]">🖐️</span>
                 </div>
-                <div className="flex gap-1 border-b border-[var(--border-soft)] pb-1 text-[10px]">
-                    <button type="button" className="rounded bg-[var(--bg-hover)] px-1.5 py-0.5 text-[var(--accent)]">😀 Recenti</button>
-                    <button type="button" className="px-1.5 py-0.5 text-[var(--fg-tertiary)]">😎</button>
-                    <button type="button" className="px-1.5 py-0.5 text-[var(--fg-tertiary)]">🐻</button>
-                    <button type="button" className="px-1.5 py-0.5 text-[var(--fg-tertiary)]">🍔</button>
-                    <button type="button" className="px-1.5 py-0.5 text-[var(--fg-tertiary)]">⚽</button>
-                    <button type="button" className="px-1.5 py-0.5 text-[var(--fg-tertiary)]">💡</button>
+                <div className="flex gap-1 border-b border-[var(--border-soft)] pb-1 text-[11px]">
+                    <button type="button" aria-label="Emoji recenti" className={cn("rounded bg-[var(--bg-hover)] px-1.5 py-0.5 text-[var(--accent)]", BTN)}>😀 Recenti</button>
+                    <button type="button" aria-label="Smileys" className={cn("px-1.5 py-0.5 text-[var(--fg-tertiary)] hover:bg-[var(--bg-hover)] rounded", BTN)}>😎</button>
+                    <button type="button" aria-label="Animali" className={cn("px-1.5 py-0.5 text-[var(--fg-tertiary)] hover:bg-[var(--bg-hover)] rounded", BTN)}>🐻</button>
+                    <button type="button" aria-label="Cibo" className={cn("px-1.5 py-0.5 text-[var(--fg-tertiary)] hover:bg-[var(--bg-hover)] rounded", BTN)}>🍔</button>
+                    <button type="button" aria-label="Sport" className={cn("px-1.5 py-0.5 text-[var(--fg-tertiary)] hover:bg-[var(--bg-hover)] rounded", BTN)}>⚽</button>
+                    <button type="button" aria-label="Oggetti" className={cn("px-1.5 py-0.5 text-[var(--fg-tertiary)] hover:bg-[var(--bg-hover)] rounded", BTN)}>💡</button>
                 </div>
                 <div className="grid grid-cols-8 gap-0.5 pt-1.5 text-lg">
                     {EMOJI_SET.map((e) => (
-                        <button key={e} type="button" className="rounded p-1 hover:bg-[var(--bg-hover)]">{e}</button>
+                        <button key={e} type="button" aria-label={`Emoji ${e}`} className={cn("rounded p-1 hover:bg-[var(--bg-hover)]", ICON_BTN)}>{e}</button>
                     ))}
                 </div>
             </div>
             <ComposerShell>
                 <div className="flex items-end gap-2">
-                    <IconBtn><Slash className="h-5 w-5" /></IconBtn>
+                    <IconBtn aria-label="Comandi"><Slash className="h-5 w-5" /></IconBtn>
                     <textarea rows={1} placeholder="Scrivi un messaggio" className="min-w-0 flex-1 resize-none bg-transparent px-2 py-1 text-sm focus:outline-none" />
-                    <button type="button" className="flex h-9 w-9 items-center justify-center rounded-full bg-[var(--accent)] text-[var(--accent-fg)]"><Mic className="h-5 w-5" /></button>
+                    <button type="button" aria-label="Registra audio" className={cn("flex h-9 w-9 items-center justify-center rounded-full bg-[var(--accent)] text-[var(--accent-fg)] hover:bg-[var(--accent-hover)]", ICON_BTN)}><Mic className="h-5 w-5" /></button>
                 </div>
             </ComposerShell>
         </div>
@@ -250,13 +253,13 @@ function CannedComposer() {
     return (
         <div className="space-y-2">
             <div className="rounded-lg bg-[var(--bg-panel)] p-2 shadow-[var(--shadow-bubble)]">
-                <div className="mb-1.5 text-[10px] uppercase tracking-wide text-[var(--fg-tertiary)]">Risposte rapide</div>
+                <div className="mb-1.5 text-[11px] uppercase tracking-wide text-[var(--fg-tertiary)]">Risposte rapide</div>
                 {[
                     { title: "/saluto", body: "Ciao {{nome}}! Come posso aiutarti?" },
                     { title: "/spedizione", body: "Il tuo ordine {{numero}} sarà spedito entro 24h." },
                     { title: "/orari", body: "Siamo aperti lun–ven 9:00–18:00." },
                 ].map((c) => (
-                    <button key={c.title} type="button" className="block w-full rounded-md px-2 py-1.5 text-left hover:bg-[var(--bg-hover)]">
+                    <button key={c.title} type="button" className={cn("block w-full rounded-md px-2 py-1.5 text-left hover:bg-[var(--bg-hover)]", BTN)}>
                         <div className="text-xs font-medium text-[var(--accent)]">{c.title}</div>
                         <div className="truncate text-[11px] text-[var(--fg-secondary)]">{c.body}</div>
                     </button>
@@ -264,9 +267,9 @@ function CannedComposer() {
             </div>
             <ComposerShell>
                 <div className="flex items-end gap-2">
-                    <IconBtn><Slash className="h-5 w-5 text-[var(--accent)]" /></IconBtn>
+                    <IconBtn aria-label="Comandi"><Slash className="h-5 w-5 text-[var(--accent)]" /></IconBtn>
                     <textarea rows={1} defaultValue="/" className="min-w-0 flex-1 resize-none bg-transparent px-2 py-1 text-sm text-[var(--accent)] focus:outline-none" />
-                    <button type="button" className="flex h-9 w-9 items-center justify-center rounded-full bg-[var(--accent)] text-[var(--accent-fg)]"><Mic className="h-5 w-5" /></button>
+                    <button type="button" aria-label="Registra audio" className={cn("flex h-9 w-9 items-center justify-center rounded-full bg-[var(--accent)] text-[var(--accent-fg)] hover:bg-[var(--accent-hover)]", ICON_BTN)}><Mic className="h-5 w-5" /></button>
                 </div>
             </ComposerShell>
         </div>
@@ -284,7 +287,7 @@ function OfflineComposer() {
                     <IconBtn><Smile className="h-5 w-5" /></IconBtn>
                     <IconBtn><Plus className="h-5 w-5" /></IconBtn>
                     <textarea rows={1} placeholder="Scrivi un messaggio" className="min-w-0 flex-1 resize-none bg-transparent px-2 py-1 text-sm focus:outline-none" />
-                    <button type="button" className="flex h-9 w-9 items-center justify-center rounded-full bg-[var(--accent)] text-[var(--accent-fg)]"><Send className="h-4 w-4" /></button>
+                    <button type="button" aria-label="Invia" className={cn("flex h-9 w-9 items-center justify-center rounded-full bg-[var(--accent)] text-[var(--accent-fg)] hover:bg-[var(--accent-hover)]", ICON_BTN)}><Send className="h-4 w-4" /></button>
                 </div>
             </ComposerShell>
         </div>
@@ -295,7 +298,7 @@ function IceBreakersComposer() {
     return (
         <div className="flex flex-wrap gap-2">
             {["🛒 Visualizza catalogo", "📅 Prenota un appuntamento", "💬 Parla con un operatore", "📍 Dove siamo", "❓ Domande frequenti"].map((label) => (
-                <button key={label} type="button" className="flex items-center gap-1.5 rounded-full border border-[var(--accent)] bg-[var(--accent-soft)] px-3 py-1.5 text-xs font-medium text-[var(--accent)] hover:bg-[var(--accent)] hover:text-[var(--accent-fg)]">
+                <button key={label} type="button" className={cn("flex items-center gap-1.5 rounded-full border border-[var(--accent)] bg-[var(--accent-soft)] px-3 py-1.5 text-xs font-medium text-[var(--accent)] hover:bg-[var(--accent)] hover:text-[var(--accent-fg)]", BTN)}>
                     <Sparkles className="h-3 w-3" /> {label}
                 </button>
             ))}
@@ -303,9 +306,9 @@ function IceBreakersComposer() {
     );
 }
 
-function IconBtn({ children }: { children: React.ReactNode }) {
+function IconBtn({ children, "aria-label": ariaLabel }: { children: React.ReactNode; "aria-label"?: string }) {
     return (
-        <button type="button" className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full text-[var(--fg-secondary)] hover:bg-[var(--bg-hover)]">
+        <button type="button" aria-label={ariaLabel} className="flex h-9 w-9 shrink-0 cursor-pointer items-center justify-center rounded-full text-[var(--fg-secondary)] transition-all duration-200 ease-[cubic-bezier(0.16,1,0.3,1)] hover:bg-[var(--bg-hover)] hover:text-[var(--fg-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ring)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--bg-panel)] active:scale-[0.97]">
             {children}
         </button>
     );

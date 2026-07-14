@@ -18,7 +18,7 @@ export function ImageContent({
     return (
         <div className="flex flex-col gap-1">
             <div className="relative">
-                <button type="button" onClick={openLightbox} className="block cursor-zoom-in" aria-label="Apri immagine">
+                <button type="button" onClick={openLightbox} className="block cursor-zoom-in rounded-lg transition-all duration-200 ease-[cubic-bezier(0.16,1,0.3,1)] active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ring)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--bg-panel)]" aria-label="Apri immagine">
                     <MediaPlaceholder url={url} className="aspect-video w-[240px] max-w-full max-w-[320px] rounded-lg" />
                 </button>
                 {album && (
@@ -56,7 +56,7 @@ export function VideoContent({
                 />
                 <button
                     type="button"
-                    className="absolute inset-0 flex items-center justify-center"
+                    className="absolute inset-0 flex cursor-pointer items-center justify-center transition-all duration-200 ease-[cubic-bezier(0.16,1,0.3,1)] active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ring)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--bg-panel)]"
                     aria-label="Riproduci"
                 >
                     <span className="flex h-12 w-12 items-center justify-center rounded-full bg-black/60 text-white">
@@ -96,7 +96,7 @@ export function DocumentContent({
                     {pages ? ` · ${pages} pag` : ""}
                 </div>
             </div>
-            <button type="button" className="text-[var(--fg-tertiary)]" aria-label="Opzioni documento">
+            <button type="button" className="shrink-0 cursor-pointer rounded text-[var(--fg-tertiary)] transition-all duration-200 ease-[cubic-bezier(0.16,1,0.3,1)] hover:text-[var(--fg-secondary)] active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ring)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--bg-panel)]" aria-label="Opzioni documento">
                 <MoreVertical className="h-4 w-4" />
             </button>
         </div>
@@ -105,7 +105,7 @@ export function DocumentContent({
 
 export function StickerContent({ url, animated }: { url: string; animated: boolean }) {
     return (
-        <div className="p-0">
+        <div className="relative h-[140px] w-[140px] overflow-hidden rounded-lg">
             <MediaPlaceholder
                 url={url}
                 className="h-[140px] w-[140px] rounded-lg"

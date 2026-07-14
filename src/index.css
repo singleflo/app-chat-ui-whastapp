@@ -118,6 +118,13 @@
     --assigned-other: #53bdeb;
     --unassigned: #f9a825;
 
+    /* Label / tag palette (taxonomy chips) */
+    --label-purple: #7e57c2;
+    --label-orange: #ef6c00;
+
+    /* Device frame (phone bezel/notch) */
+    --device-frame: #111b21;
+
     /* Outlined borders */
     --border-strong: #e9edef;
     --border-soft: #f0f2f5;
@@ -199,6 +206,11 @@
     --assigned-me: #00a884;
     --assigned-other: #53bdeb;
     --unassigned: #fbc02d;
+
+    --label-purple: #b39ddb;
+    --label-orange: #ffa726;
+
+    --device-frame: #000000;
 
     --border-strong: #222e35;
     --border-soft: #202c33;

@@ -7,13 +7,13 @@ export function SettingsScreen() {
     return (
         <div className="flex h-full flex-col bg-[var(--bg-panel)]">
             <header className="flex h-14 shrink-0 items-center gap-2 border-b border-[var(--border-strong)] bg-[var(--bg-header)] px-3">
-                <button type="button" className="flex h-8 w-8 items-center justify-center rounded-full text-[var(--fg-secondary)] hover:bg-[var(--bg-hover)]">
+                <button type="button" aria-label="Indietro" className="flex h-8 w-8 cursor-pointer items-center justify-center rounded-full text-[var(--fg-secondary)] transition-all duration-200 ease-[cubic-bezier(0.16,1,0.3,1)] hover:bg-[var(--bg-hover)] hover:text-[var(--fg-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ring)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--bg-panel)] active:scale-[0.97]">
                     <ArrowLeft className="h-4 w-4" />
                 </button>
                 <h2 className="flex-1 text-sm font-semibold">Impostazioni</h2>
             </header>
             <ScrollArea className="flex-1">
-                <div className="flex flex-col gap-4 p-4">
+                <div className="mx-auto flex max-w-2xl flex-col gap-4 p-4">
                     <SettingsGroup title="Aspetto" icon={Palette}>
                         <ThemeRow />
                         <Row icon={ImageIcon} label="Sfondo chat" value="Pattern doodle" />
@@ -39,10 +39,10 @@ export function SettingsScreen() {
                         <CannedRow title="/orari" body="Siamo aperti lun–ven 9:00–18:00." />
                     </SettingsGroup>
                     <SettingsGroup title="Etichette" icon={Tag}>
-                        <LabelRow name="VIP" color="#f9a825" />
-                        <LabelRow name="Nord-Est" color="#1cb1d6" />
-                        <LabelRow name="B2C" color="#7e57c2" />
-                        <LabelRow name="Lead" color="#ef6c00" />
+                        <LabelRow name="VIP" color="var(--fg-warning)" />
+                        <LabelRow name="Nord-Est" color="var(--color-ack-blue)" />
+                        <LabelRow name="B2C" color="var(--label-purple)" />
+                        <LabelRow name="Lead" color="var(--label-orange)" />
                     </SettingsGroup>
                     <SettingsGroup title="Avanzate" icon={Bug}>
                         <ToggleRow icon={Bug} label="Modalità debug (payload raw)" />
@@ -61,7 +61,7 @@ function SettingsGroup({ title, icon: Icon, children }: { title: string; icon: R
             <div className="mb-1.5 flex items-center gap-1.5 px-1 text-[11px] font-semibold uppercase tracking-wide text-[var(--fg-secondary)]">
                 <Icon className="h-3.5 w-3.5" /> {title}
             </div>
-            <div className="overflow-hidden rounded-lg border border-[var(--border-strong)] bg-[var(--bg-panel)] divide-y divide-[var(--border-soft)]">{children}</div>
+            <div className="overflow-visible rounded-lg border border-[var(--border-strong)] bg-[var(--bg-panel)] divide-y divide-[var(--border-soft)]">{children}</div>
         </div>
     );
 }
@@ -79,11 +79,11 @@ function Row({ icon: Icon, label, value }: { icon: React.ComponentType<{ classNa
 function ToggleRow({ icon: Icon, label, defaultOn }: { icon: React.ComponentType<{ className?: string }>; label: string; defaultOn?: boolean }) {
     const [on, setOn] = useState(!!defaultOn);
     return (
-        <button type="button" onClick={() => setOn(!on)} className="flex w-full items-center gap-3 px-3 py-2.5 text-left">
+        <button type="button" onClick={() => setOn(!on)} aria-pressed={on} className="flex w-full cursor-pointer items-center gap-3 px-3 py-2.5 text-left transition-colors duration-200 ease-[cubic-bezier(0.16,1,0.3,1)] hover:bg-[var(--bg-hover)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[var(--ring)]">
             <Icon className="h-4 w-4 shrink-0 text-[var(--fg-tertiary)]" />
             <span className="flex-1 text-sm">{label}</span>
-            <span className={cn("relative h-5 w-9 rounded-full transition-colors", on ? "bg-[var(--accent)]" : "bg-[var(--bg-panel-2)]")}>
-                <span className={cn("absolute top-0.5 h-4 w-4 rounded-full bg-white transition-transform", on ? "translate-x-4" : "translate-x-0.5")} />
+            <span className={cn("relative h-5 w-9 rounded-full transition-colors duration-200 ease-[cubic-bezier(0.16,1,0.3,1)]", on ? "bg-[var(--accent)]" : "bg-[var(--bg-panel-2)]")}>
+                <span className={cn("absolute top-0.5 h-4 w-4 rounded-full bg-[var(--fg-on-accent)] shadow-[var(--shadow-sm)] transition-transform duration-200 ease-[cubic-bezier(0.16,1,0.3,1)]", on ? "translate-x-4" : "translate-x-0.5")} />
             </span>
         </button>
     );
@@ -97,8 +97,8 @@ function ThemeRow() {
             <span className="flex-1 text-sm">Tema</span>
             <div className="flex gap-1">
                 {(["light", "dark", "auto"] as const).map((t) => (
-                    <button key={t} type="button" onClick={() => setTheme(t)}
-                        className={cn("rounded-md px-2 py-0.5 text-[11px] font-medium capitalize", theme === t ? "bg-[var(--accent)] text-[var(--accent-fg)]" : "bg-[var(--bg-panel-2)] text-[var(--fg-secondary)]")}>
+                    <button key={t} type="button" onClick={() => setTheme(t)} aria-pressed={theme === t}
+                        className={cn("cursor-pointer rounded-md px-2 py-0.5 text-[11px] font-medium capitalize transition-all duration-200 ease-[cubic-bezier(0.16,1,0.3,1)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ring)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--bg-panel)] active:scale-95", theme === t ? "bg-[var(--accent)] text-[var(--accent-fg)]" : "bg-[var(--bg-panel-2)] text-[var(--fg-secondary)] hover:bg-[var(--bg-hover)] hover:text-[var(--fg-primary)]")}>
                         {t === "auto" ? "Auto" : t === "light" ? "Light" : "Dark"}
                     </button>
                 ))}
@@ -115,8 +115,8 @@ function DensityRow() {
             <span className="flex-1 text-sm">Densità</span>
             <div className="flex gap-1">
                 {(["comfortable", "compact"] as const).map((d) => (
-                    <button key={d} type="button" onClick={() => setDensity(d)}
-                        className={cn("rounded-md px-2 py-0.5 text-[11px] font-medium capitalize", density === d ? "bg-[var(--accent)] text-[var(--accent-fg)]" : "bg-[var(--bg-panel-2)] text-[var(--fg-secondary)]")}>
+                    <button key={d} type="button" onClick={() => setDensity(d)} aria-pressed={density === d}
+                        className={cn("cursor-pointer rounded-md px-2 py-0.5 text-[11px] font-medium capitalize transition-all duration-200 ease-[cubic-bezier(0.16,1,0.3,1)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ring)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--bg-panel)] active:scale-95", density === d ? "bg-[var(--accent)] text-[var(--accent-fg)]" : "bg-[var(--bg-panel-2)] text-[var(--fg-secondary)] hover:bg-[var(--bg-hover)] hover:text-[var(--fg-primary)]")}>
                         {d === "comfortable" ? "Comoda" : "Compatta"}
                     </button>
                 ))}
@@ -133,8 +133,8 @@ function FontSizeRow() {
             <span className="flex-1 text-sm">Dimensione font messaggi</span>
             <div className="flex gap-1">
                 {(["small", "medium", "large"] as const).map((s) => (
-                    <button key={s} type="button" onClick={() => setSize(s)}
-                        className={cn("rounded-md px-2 py-0.5 text-[11px] font-medium", size === s ? "bg-[var(--accent)] text-[var(--accent-fg)]" : "bg-[var(--bg-panel-2)] text-[var(--fg-secondary)]")}>
+                    <button key={s} type="button" onClick={() => setSize(s)} aria-pressed={size === s}
+                        className={cn("cursor-pointer rounded-md px-2 py-0.5 text-[11px] font-medium transition-all duration-200 ease-[cubic-bezier(0.16,1,0.3,1)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ring)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--bg-panel)] active:scale-95", size === s ? "bg-[var(--accent)] text-[var(--accent-fg)]" : "bg-[var(--bg-panel-2)] text-[var(--fg-secondary)] hover:bg-[var(--bg-hover)] hover:text-[var(--fg-primary)]")}>
                         {s === "small" ? "P" : s === "medium" ? "M" : "G"}
                     </button>
                 ))}
@@ -151,7 +151,7 @@ function CannedRow({ title, body }: { title: string; body: string }) {
                 <div className="text-xs font-medium text-[var(--accent)]">{title}</div>
                 <div className="truncate text-[11px] text-[var(--fg-secondary)]">{body}</div>
             </div>
-            <button type="button" className="text-[10px] text-[var(--fg-link)]">Modifica</button>
+            <button type="button" className="cursor-pointer rounded text-[11px] text-[var(--fg-link)] transition-all duration-200 ease-[cubic-bezier(0.16,1,0.3,1)] hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ring)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--bg-panel)] active:scale-95">Modifica</button>
         </div>
     );
 }
@@ -161,7 +161,7 @@ function LabelRow({ name, color }: { name: string; color: string }) {
         <div className="flex items-center gap-2 px-3 py-2">
             <span className="h-3 w-3 rounded-full" style={{ backgroundColor: color }} />
             <span className="flex-1 text-xs">{name}</span>
-            <button type="button" className="text-[10px] text-[var(--fg-link)]">Modifica</button>
+            <button type="button" className="cursor-pointer rounded text-[11px] text-[var(--fg-link)] transition-all duration-200 ease-[cubic-bezier(0.16,1,0.3,1)] hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ring)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--bg-panel)] active:scale-95">Modifica</button>
         </div>
     );
 }

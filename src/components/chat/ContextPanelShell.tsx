@@ -30,7 +30,12 @@ import {
     conversationById,
 } from "@/data/dataset";
 import type { ActivityEvent, AutomationRun } from "@/types/chat";
-import { useState } from "react";
+import { useId, useState } from "react";
+
+const focusRing =
+    "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ring)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--bg-panel)]";
+const iconBtn = `cursor-pointer transition-all duration-200 ease-[cubic-bezier(0.16,1,0.3,1)] active:scale-[0.97] ${focusRing}`;
+const actionBtn = `cursor-pointer transition-all duration-200 ease-[cubic-bezier(0.16,1,0.3,1)] active:scale-95 ${focusRing}`;
 
 export function ContextPanelShell({
     conversationId = "c1",
@@ -54,7 +59,10 @@ export function ContextPanelShell({
                     <button
                         type="button"
                         onClick={onBack}
-                        className="flex h-7 w-7 items-center justify-center rounded-full text-[var(--fg-secondary)] hover:bg-[var(--bg-hover)]"
+                        className={cn(
+                            "flex h-7 w-7 items-center justify-center rounded-full text-[var(--fg-secondary)] hover:bg-[var(--bg-hover)]",
+                            iconBtn
+                        )}
                         aria-label="Indietro"
                     >
                         <ArrowLeft className="h-4 w-4" />
@@ -63,7 +71,10 @@ export function ContextPanelShell({
                 <h2 className="flex-1 truncate text-xs font-semibold text-[var(--fg-primary)]">Contesto cliente</h2>
                 <button
                     type="button"
-                    className="flex h-7 w-7 items-center justify-center rounded-full text-[var(--fg-secondary)] hover:bg-[var(--bg-hover)]"
+                    className={cn(
+                        "flex h-7 w-7 items-center justify-center rounded-full text-[var(--fg-secondary)] hover:bg-[var(--bg-hover)]",
+                        iconBtn
+                    )}
                     aria-label="Modifica contatto"
                 >
                     <Pencil className="h-3.5 w-3.5" />
@@ -72,7 +83,10 @@ export function ContextPanelShell({
                     <button
                         type="button"
                         onClick={onCollapse}
-                        className="flex h-7 w-7 items-center justify-center rounded-full text-[var(--fg-secondary)] hover:bg-[var(--bg-hover)]"
+                        className={cn(
+                            "flex h-7 w-7 items-center justify-center rounded-full text-[var(--fg-secondary)] hover:bg-[var(--bg-hover)]",
+                            iconBtn
+                        )}
                         aria-label="Collassa pannello"
                     >
                         <PanelRightClose className="h-3.5 w-3.5" />
@@ -106,18 +120,28 @@ function Section({
     defaultOpen?: boolean;
 }) {
     const [open, setOpen] = useState(defaultOpen);
+    const panelId = useId();
     return (
         <div className="border-b border-[var(--border-soft)]">
             <button
                 type="button"
                 onClick={() => setOpen(!open)}
-                className="flex w-full cursor-pointer list-none items-center gap-2 px-3 py-2 text-[11px] font-semibold uppercase tracking-wide text-[var(--fg-secondary)] hover:bg-[var(--bg-hover)]"
+                aria-expanded={open}
+                aria-controls={panelId}
+                className={cn(
+                    "flex w-full list-none items-center gap-2 px-3 py-2 text-[11px] font-semibold uppercase tracking-wide text-[var(--fg-secondary)] hover:bg-[var(--bg-hover)]",
+                    actionBtn
+                )}
             >
                 <Icon className="h-3.5 w-3.5" />
                 <span className="flex-1 text-left">{title}</span>
                 {open ? <ChevronDown className="h-3 w-3" /> : <ChevronRight className="h-3 w-3" />}
             </button>
-            {open && <div className="px-3 pb-3">{children}</div>}
+            {open && (
+                <div id={panelId} className="px-3 pb-3">
+                    {children}
+                </div>
+            )}
         </div>
     );
 }
@@ -201,7 +225,10 @@ function CustomFieldsSection({ attrs }: { attrs: Record<string, string | number 
                     );
                 })}
                 {hidden.length > 0 && (
-                    <button type="button" className="mt-1 text-[10px] text-[var(--fg-link)] hover:underline">
+                    <button
+                        type="button"
+                        className={cn("mt-1 rounded text-[10px] text-[var(--fg-link)] hover:underline", actionBtn)}
+                    >
                         Mostra altri ({hidden.length})
                     </button>
                 )}
@@ -264,7 +291,10 @@ function LinkedRecordsSection({ conv }: { conv: NonNullable<ReturnType<typeof co
                     <button
                         type="button"
                         key={`${r.kind}-${r.id}`}
-                        className="rounded-full border border-[var(--border-strong)] px-2 py-0.5 hover:bg-[var(--bg-hover)]"
+                        className={cn(
+                            "rounded-full border border-[var(--border-strong)] px-2 py-0.5 hover:bg-[var(--bg-hover)]",
+                            actionBtn
+                        )}
                     >
                         {r.kind === "lead" && "🎯"}
                         {r.kind === "order" && "🧾"}
@@ -326,9 +356,9 @@ function GallerySection() {
     return (
         <Section title="Galleria condivisa" icon={ImageIcon} defaultOpen={false}>
             <div className="mb-2 flex gap-2 text-[10px]">
-                <button type="button" className="font-semibold text-[var(--accent)]">Media (8)</button>
-                <button type="button" className="text-[var(--fg-tertiary)]">Link (3)</button>
-                <button type="button" className="text-[var(--fg-tertiary)]">Documenti (2)</button>
+                <button type="button" className={cn("rounded px-1 font-semibold text-[var(--accent)]", actionBtn)}>Media (8)</button>
+                <button type="button" className={cn("rounded px-1 text-[var(--fg-tertiary)]", actionBtn)}>Link (3)</button>
+                <button type="button" className={cn("rounded px-1 text-[var(--fg-tertiary)]", actionBtn)}>Documenti (2)</button>
             </div>
             <div className="grid grid-cols-3 gap-1">
                 {GALLERY_TILES.map((tile) => (
@@ -341,7 +371,10 @@ function GallerySection() {
             </div>
             <button
                 type="button"
-                className="mt-2 flex w-full items-center justify-center gap-1 rounded-md border border-[var(--border-strong)] py-1 text-[10px] text-[var(--fg-secondary)] hover:bg-[var(--bg-hover)]"
+                className={cn(
+                    "mt-2 flex w-full items-center justify-center gap-1 rounded-md border border-[var(--border-strong)] py-1 text-[10px] text-[var(--fg-secondary)] hover:bg-[var(--bg-hover)]",
+                    actionBtn
+                )}
             >
                 <Star className="h-3 w-3" /> Vedi importanti
             </button>

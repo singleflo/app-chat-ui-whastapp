@@ -26,6 +26,11 @@ import { ChatEntryRenderer } from "@/components/bubbles/MessageRenderer";
 import { conversationById, messagesFor } from "@/data/dataset";
 import { useState, useRef, useEffect } from "react";
 
+const focusRing =
+    "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ring)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--bg-panel)]";
+const iconBtn = `cursor-pointer transition-all duration-200 ease-[cubic-bezier(0.16,1,0.3,1)] active:scale-[0.97] ${focusRing}`;
+const actionBtn = `cursor-pointer transition-all duration-200 ease-[cubic-bezier(0.16,1,0.3,1)] active:scale-95 ${focusRing}`;
+
 interface Props {
     conversationId?: string;
     readonly?: boolean;
@@ -115,7 +120,10 @@ function ChatHeader({
                 <button
                     type="button"
                     onClick={onBack}
-                    className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full text-[var(--fg-secondary)] hover:bg-[var(--bg-hover)]"
+                    className={cn(
+                        "flex h-8 w-8 shrink-0 items-center justify-center rounded-full text-[var(--fg-secondary)] hover:bg-[var(--bg-hover)]",
+                        iconBtn
+                    )}
                     aria-label="Indietro"
                 >
                     <ArrowLeft className="h-4 w-4" />
@@ -124,7 +132,11 @@ function ChatHeader({
             <button
                 type="button"
                 onClick={onOpenContext}
-                className="flex min-w-0 flex-1 items-center gap-2.5 overflow-hidden text-left"
+                className={cn(
+                    "flex min-w-0 flex-1 items-center gap-2.5 overflow-hidden rounded-lg text-left",
+                    actionBtn
+                )}
+                aria-label={`Apri contesto di ${name}`}
             >
                 <Avatar className="h-9 w-9 shrink-0">
                     <AvatarFallback style={{ backgroundColor: conv?.avatarColor ?? colorFromString(name) }}>
@@ -150,15 +162,18 @@ function ChatHeader({
                 </div>
             </button>
             <div className="flex shrink-0 items-center gap-0.5">
-                <HeaderIcon><Video className="h-4 w-4" /></HeaderIcon>
-                <HeaderIcon><Phone className="h-4 w-4" /></HeaderIcon>
-                <HeaderIcon><Search className="h-4 w-4" /></HeaderIcon>
-                <HeaderIcon><MoreVertical className="h-4 w-4" /></HeaderIcon>
+                <HeaderIcon label="Videochiamata"><Video className="h-4 w-4" /></HeaderIcon>
+                <HeaderIcon label="Chiamata"><Phone className="h-4 w-4" /></HeaderIcon>
+                <HeaderIcon label="Cerca nella chat"><Search className="h-4 w-4" /></HeaderIcon>
+                <HeaderIcon label="Altre opzioni"><MoreVertical className="h-4 w-4" /></HeaderIcon>
                 {showContextBtn && (
                     <button
                         type="button"
                         onClick={onOpenContext}
-                        className="flex h-8 w-8 items-center justify-center rounded-full text-[var(--accent)] hover:bg-[var(--bg-hover)]"
+                        className={cn(
+                            "flex h-8 w-8 items-center justify-center rounded-full text-[var(--accent)] hover:bg-[var(--bg-hover)]",
+                            iconBtn
+                        )}
                         aria-label="Mostra pannello contesto"
                     >
                         <Info className="h-4 w-4" />
@@ -169,11 +184,12 @@ function ChatHeader({
     );
 }
 
-function HeaderIcon({ children }: { children: React.ReactNode }) {
+function HeaderIcon({ children, label }: { children: React.ReactNode; label?: string }) {
     return (
         <button
             type="button"
-            className="flex h-8 w-8 items-center justify-center rounded-full text-[var(--fg-secondary)] hover:bg-[var(--bg-hover)]"
+            aria-label={label}
+            className="flex h-8 w-8 cursor-pointer items-center justify-center rounded-full text-[var(--fg-secondary)] transition-all duration-200 ease-[cubic-bezier(0.16,1,0.3,1)] hover:bg-[var(--bg-hover)] active:scale-[0.97] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ring)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--bg-panel)]"
         >
             {children}
         </button>
@@ -240,7 +256,10 @@ function BotBanner({ agentName }: { agentName: string }) {
             </span>
             <button
                 type="button"
-                className="rounded-md bg-[var(--accent)] px-2 py-0.5 text-[10px] font-semibold text-[var(--accent-fg)]"
+                className={cn(
+                    "rounded-md bg-[var(--accent)] px-2 py-0.5 text-[10px] font-semibold text-[var(--accent-fg)]",
+                    actionBtn
+                )}
             >
                 Intervieni
             </button>
@@ -254,7 +273,11 @@ function PinnedMessagesBar() {
         <div className="flex shrink-0 items-center gap-2 border-b border-[var(--border-soft)] bg-[var(--bg-panel)] px-3 py-1.5 text-[11px] text-[var(--fg-secondary)]">
             <Pin className="h-3 w-3 text-[var(--fg-tertiary)]" />
             <span className="truncate">1/2 — Promemoria appuntamento domani 16:00</span>
-            <button type="button" className="ml-auto" aria-label="Messaggio fissato successivo">
+            <button
+                type="button"
+                className={cn("ml-auto flex items-center justify-center rounded-full", iconBtn)}
+                aria-label="Messaggio fissato successivo"
+            >
                 <ChevronUp className="h-3 w-3" />
             </button>
         </div>
@@ -307,7 +330,10 @@ function ScrollToBottomFab({ onClick }: { onClick: () => void }) {
         <button
             type="button"
             onClick={onClick}
-            className="absolute bottom-4 right-4 z-20 flex h-9 w-9 items-center justify-center rounded-full bg-[var(--bg-panel)] shadow-[var(--shadow-overlay)] transition-opacity hover:bg-[var(--bg-hover)]"
+            className={cn(
+                "absolute bottom-4 right-4 z-20 flex h-9 w-9 items-center justify-center rounded-full bg-[var(--bg-panel)] shadow-[var(--shadow-overlay)] hover:bg-[var(--bg-hover)]",
+                iconBtn
+            )}
             aria-label="Vai in fondo"
         >
             <svg viewBox="0 0 24 24" className="h-4 w-4 text-[var(--fg-secondary)]" fill="none" role="presentation">
@@ -328,7 +354,10 @@ function ComposerShell({ conv }: { conv: ReturnType<typeof conversationById> }) 
                     <span>Finestra 24h chiusa · solo template</span>
                     <button
                         type="button"
-                        className="rounded bg-[var(--accent)] px-2 py-0.5 text-[var(--accent-fg)]"
+                        className={cn(
+                            "rounded bg-[var(--accent)] px-2 py-0.5 text-[var(--accent-fg)] hover:opacity-90",
+                            actionBtn
+                        )}
                     >
                         Invia template
                     </button>
@@ -347,14 +376,20 @@ function ComposerShell({ conv }: { conv: ReturnType<typeof conversationById> }) 
                 <textarea
                     rows={1}
                     placeholder="Scrivi un messaggio"
-                    className="max-h-24 min-w-0 flex-1 resize-none bg-transparent px-1 py-1 text-sm text-[var(--fg-primary)] placeholder:text-[var(--fg-tertiary)] focus:outline-none"
+                    className={cn(
+                        "max-h-24 min-w-0 flex-1 resize-none rounded-md bg-transparent px-1 py-1 text-sm text-[var(--fg-primary)] placeholder:text-[var(--fg-tertiary)] focus:outline-none",
+                        focusRing
+                    )}
                 />
                 <ComposerIcon label="Fotocamera">
                     <Camera className="h-5 w-5" />
                 </ComposerIcon>
                 <button
                     type="button"
-                    className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-[var(--accent)] text-[var(--accent-fg)] transition-transform hover:scale-105"
+                    className={cn(
+                        "flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-[var(--accent)] text-[var(--accent-fg)] hover:scale-105",
+                        actionBtn
+                    )}
                     aria-label="Invia messaggio"
                 >
                     <Send className="h-4 w-4" />
@@ -371,7 +406,8 @@ function ComposerIcon({ children, label, highlight }: { children: React.ReactNod
             title={label}
             aria-label={label}
             className={cn(
-                "flex h-9 w-9 shrink-0 items-center justify-center rounded-full transition-colors",
+                "flex h-9 w-9 shrink-0 items-center justify-center rounded-full",
+                iconBtn,
                 highlight
                     ? "text-[var(--accent)] hover:bg-[var(--accent-soft)]"
                     : "text-[var(--fg-secondary)] hover:bg-[var(--bg-hover)]"

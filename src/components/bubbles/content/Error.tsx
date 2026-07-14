@@ -25,10 +25,10 @@ export function ErrorContent({ message }: { message: Message }) {
                             key={a.id}
                             type="button"
                             className={
-                                "flex items-center gap-1 rounded-md px-2 py-1 text-[11px] font-medium " +
+                                "flex cursor-pointer items-center gap-1 rounded-md px-2 py-1 text-[11px] font-medium transition-all duration-200 ease-[cubic-bezier(0.16,1,0.3,1)] active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ring)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--bg-panel)] " +
                                 (a.variant === "primary"
-                                    ? "bg-[var(--accent)] text-[var(--accent-fg)]"
-                                    : "border border-[var(--border-strong)]")
+                                    ? "bg-[var(--accent)] text-[var(--accent-fg)] hover:bg-[var(--accent-hover)]"
+                                    : "border border-[var(--border-strong)] hover:bg-[var(--bg-hover)]")
                             }
                         >
                             {a.id === "retry" && <RefreshCw className="h-3 w-3" />}

@@ -14,10 +14,10 @@ export function RtlScreen() {
                         <div className="truncate text-[11px] text-[var(--fg-tertiary)]">آنترنت · آخر ظهور 14:28</div>
                     </div>
                     <div className="flex items-center gap-0.5">
-                        <button type="button" className="flex h-8 w-8 items-center justify-center rounded-full text-[var(--fg-secondary)] hover:bg-[var(--bg-hover)]"><Video className="h-4 w-4" /></button>
-                        <button type="button" className="flex h-8 w-8 items-center justify-center rounded-full text-[var(--fg-secondary)] hover:bg-[var(--bg-hover)]"><Phone className="h-4 w-4" /></button>
-                        <button type="button" className="flex h-8 w-8 items-center justify-center rounded-full text-[var(--fg-secondary)] hover:bg-[var(--bg-hover)]"><Search className="h-4 w-4" /></button>
-                        <button type="button" className="flex h-8 w-8 items-center justify-center rounded-full text-[var(--fg-secondary)] hover:bg-[var(--bg-hover)]"><MoreVertical className="h-4 w-4" /></button>
+                        <button type="button" aria-label="مكالمة فيديو" className="flex h-8 w-8 cursor-pointer items-center justify-center rounded-full text-[var(--fg-secondary)] transition-all duration-200 ease-[cubic-bezier(0.16,1,0.3,1)] hover:bg-[var(--bg-hover)] hover:text-[var(--fg-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ring)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--bg-panel)] active:scale-[0.97]"><Video className="h-4 w-4" /></button>
+                        <button type="button" aria-label="مكالمة صوتية" className="flex h-8 w-8 cursor-pointer items-center justify-center rounded-full text-[var(--fg-secondary)] transition-all duration-200 ease-[cubic-bezier(0.16,1,0.3,1)] hover:bg-[var(--bg-hover)] hover:text-[var(--fg-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ring)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--bg-panel)] active:scale-[0.97]"><Phone className="h-4 w-4" /></button>
+                        <button type="button" aria-label="بحث" className="flex h-8 w-8 cursor-pointer items-center justify-center rounded-full text-[var(--fg-secondary)] transition-all duration-200 ease-[cubic-bezier(0.16,1,0.3,1)] hover:bg-[var(--bg-hover)] hover:text-[var(--fg-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ring)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--bg-panel)] active:scale-[0.97]"><Search className="h-4 w-4" /></button>
+                        <button type="button" aria-label="المزيد" className="flex h-8 w-8 cursor-pointer items-center justify-center rounded-full text-[var(--fg-secondary)] transition-all duration-200 ease-[cubic-bezier(0.16,1,0.3,1)] hover:bg-[var(--bg-hover)] hover:text-[var(--fg-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ring)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--bg-panel)] active:scale-[0.97]"><MoreVertical className="h-4 w-4" /></button>
                     </div>
                 </header>
                 <div className="chat-doodle-bg relative flex-1 overflow-hidden">
@@ -40,14 +40,14 @@ export function RtlScreen() {
                 </div>
                 <div className="shrink-0 bg-[var(--bg-panel-2)] px-3 py-2" dir="rtl">
                     <div className="flex items-end gap-2 rounded-lg bg-[var(--bg-panel)] px-2 py-1.5">
-                        <button type="button" className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full text-[var(--fg-secondary)] hover:bg-[var(--bg-hover)]"><Smile className="h-5 w-5" /></button>
-                        <button type="button" className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full text-[var(--fg-secondary)] hover:bg-[var(--bg-hover)]"><Plus className="h-5 w-5" /></button>
+                        <button type="button" aria-label="رموز تعبيرية" className="flex h-9 w-9 shrink-0 cursor-pointer items-center justify-center rounded-full text-[var(--fg-secondary)] transition-all duration-200 ease-[cubic-bezier(0.16,1,0.3,1)] hover:bg-[var(--bg-hover)] hover:text-[var(--fg-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ring)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--bg-panel)] active:scale-[0.97]"><Smile className="h-5 w-5" /></button>
+                        <button type="button" aria-label="إرفاق" className="flex h-9 w-9 shrink-0 cursor-pointer items-center justify-center rounded-full text-[var(--fg-secondary)] transition-all duration-200 ease-[cubic-bezier(0.16,1,0.3,1)] hover:bg-[var(--bg-hover)] hover:text-[var(--fg-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ring)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--bg-panel)] active:scale-[0.97]"><Plus className="h-5 w-5" /></button>
                         <textarea rows={1} dir="auto" placeholder="اكتب رسالة" className="max-h-24 min-w-0 flex-1 resize-none bg-transparent px-2 py-1 text-sm focus:outline-none" />
-                        <button type="button" className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-[var(--accent)] text-[var(--accent-fg)]"><Mic className="h-5 w-5" /></button>
+                        <button type="button" aria-label="تسجيل صوتي" className="flex h-9 w-9 shrink-0 cursor-pointer items-center justify-center rounded-full bg-[var(--accent)] text-[var(--accent-fg)] transition-all duration-200 ease-[cubic-bezier(0.16,1,0.3,1)] hover:bg-[var(--accent-hover)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ring)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--bg-panel)] active:scale-[0.97]"><Mic className="h-5 w-5" /></button>
                     </div>
                 </div>
             </div>
-            <div className="absolute bottom-4 left-4 rounded-lg bg-[var(--bg-panel)] px-3 py-2 text-[10px] text-[var(--fg-tertiary)] shadow-[var(--shadow-panel)]">
+            <div className="absolute bottom-4 left-4 rounded-lg bg-[var(--bg-panel)] px-3 py-2 text-[11px] text-[var(--fg-tertiary)] shadow-[var(--shadow-panel)]">
                 <div className="font-semibold text-[var(--fg-secondary)]">RTL — Arabic demo</div>
                 <div>dir="rtl" · bolla/ACK/swipe mirrored · dir="auto" su testo</div>
             </div>
@@ -80,7 +80,7 @@ function RtlText({ text }: { text: string }) {
 
 function RtlMeta({ ts, ack }: { ts: string; ack: "read" | "delivered" }) {
     return (
-        <span className="float-left ml-2 mt-1 flex items-center gap-0.5 text-[10px] text-[var(--fg-tertiary)]">
+        <span className="float-left ml-2 mt-1 flex items-center gap-0.5 text-[11px] text-[var(--fg-tertiary)] tabular-nums">
             {ts}
             {ack === "read" && <CheckCheck className="h-3 w-3" style={{ color: "var(--color-ack-blue)" }} />}
             {ack === "delivered" && <CheckCheck className="h-3 w-3 text-[var(--fg-tertiary)]" />}

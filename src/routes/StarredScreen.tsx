@@ -20,14 +20,14 @@ export function StarredScreen() {
     return (
         <div className="flex h-full flex-col bg-[var(--bg-panel)]">
             <header className="flex h-14 shrink-0 items-center gap-2 border-b border-[var(--border-strong)] bg-[var(--bg-header)] px-3">
-                <button type="button" className="flex h-8 w-8 items-center justify-center rounded-full text-[var(--fg-secondary)] hover:bg-[var(--bg-hover)]">
+                <button type="button" aria-label="Indietro" className="flex h-8 w-8 cursor-pointer items-center justify-center rounded-full text-[var(--fg-secondary)] transition-all duration-200 ease-[cubic-bezier(0.16,1,0.3,1)] hover:bg-[var(--bg-hover)] hover:text-[var(--fg-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ring)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--bg-panel)] active:scale-[0.97]">
                     <ArrowLeft className="h-4 w-4" />
                 </button>
                 <div className="flex-1">
                     <h2 className="text-sm font-semibold">Messaggi importanti</h2>
-                    <div className="text-[10px] text-[var(--fg-tertiary)]">{items.length} messaggi</div>
+                    <div className="text-[11px] text-[var(--fg-tertiary)] tabular-nums">{items.length} messaggi</div>
                 </div>
-                <button type="button" className="flex h-8 w-8 items-center justify-center rounded-full text-[var(--fg-secondary)] hover:bg-[var(--bg-hover)]">
+                <button type="button" aria-label="Filtra" className="flex h-8 w-8 cursor-pointer items-center justify-center rounded-full text-[var(--fg-secondary)] transition-all duration-200 ease-[cubic-bezier(0.16,1,0.3,1)] hover:bg-[var(--bg-hover)] hover:text-[var(--fg-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ring)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--bg-panel)] active:scale-[0.97]">
                     <Filter className="h-4 w-4" />
                 </button>
             </header>
@@ -46,7 +46,7 @@ export function StarredScreen() {
                                     </Avatar>
                                     <span className="flex-1 truncate text-xs font-medium text-[var(--accent)]">{conv?.name}</span>
                                     <Star className="h-3.5 w-3.5 fill-[var(--fg-warning)] text-[var(--fg-warning)]" />
-                                    <span className="text-[10px] text-[var(--fg-tertiary)]">{fmtTime(msg.ts)}</span>
+                                    <span className="text-[11px] text-[var(--fg-tertiary)] tabular-nums">{fmtTime(msg.ts)}</span>
                                 </div>
                                 {msg.content.body && (
                                     <div className={cn("text-xs", msg.direction === "out" ? "text-[var(--fg-primary)]" : "text-[var(--fg-secondary)]")}>
