@@ -4,11 +4,6 @@ import {
     Video,
     Search,
     MoreVertical,
-    Smile,
-    Plus,
-    Camera,
-    Send,
-    FileText,
     Check,
     CheckCheck,
     Clock,
@@ -24,6 +19,7 @@ import { Badge } from "@/components/ui/badge";
 import { cn, colorFromString, initials } from "@/lib/utils";
 import { useConversation } from "@/data/chat-data";
 import { MessageList } from "./MessageList";
+import { Composer } from "./Composer";
 
 const focusRing =
     "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-(--ring) focus-visible:ring-offset-2 focus-visible:ring-offset-(--bg-panel)";
@@ -68,7 +64,7 @@ export function ChatColumnShell({
 
             <MessageList conversationId={conversationId} />
 
-            {!readonly && <ComposerShell conv={conv} />}
+            {!readonly && <Composer conversationId={conversationId} />}
             {readonly && <ReadonlyComposerHint />}
         </div>
     );
@@ -332,89 +328,6 @@ function TeamPresenceBar() {
             </div>
             {t("chat.team.typing", { name: "Laura" })}
         </div>
-    );
-}
-
-/* ---------------- COMPOSER (R5/E1-E11) ---------------- */
-function ComposerShell({ conv }: { conv: ReturnType<typeof useConversation> }) {
-    const { t } = useTranslation();
-    const isWindowClosed = conv?.windowClosed;
-    return (
-        <div className="shrink-0 bg-(--bg-panel-2) px-3 py-2">
-            {isWindowClosed && (
-                <div className="mb-1.5 flex items-center justify-between rounded-md bg-(--bg-bubble-error) px-2 py-1 text-[11px] text-(--status-failed)">
-                    <span>{t("chat.composer.windowClosed")}</span>
-                    <button
-                        type="button"
-                        className={cn(
-                            "rounded bg-(--accent) px-2 py-0.5 text-(--accent-fg) hover:opacity-90",
-                            actionBtn
-                        )}
-                    >
-                        {t("chat.composer.sendTemplate")}
-                    </button>
-                </div>
-            )}
-            <div className="flex items-end gap-1.5 rounded-lg bg-(--bg-panel) px-2 py-1.5 shadow-(--shadow-bubble)">
-                <ComposerIcon label={t("chat.composer.emoji")}>
-                    <Smile className="h-5 w-5" />
-                </ComposerIcon>
-                <ComposerIcon label={t("chat.composer.attachments")}>
-                    <Plus className="h-5 w-5" />
-                </ComposerIcon>
-                <ComposerIcon label={t("chat.composer.template")} highlight>
-                    <FileText className="h-5 w-5" />
-                </ComposerIcon>
-                <textarea
-                    rows={1}
-                    placeholder={t("chat.composer.placeholder")}
-                    className={cn(
-                        "max-h-24 min-w-0 flex-1 resize-none rounded-md bg-transparent px-1 py-1 text-sm text-(--fg-primary) placeholder:text-(--fg-tertiary) focus:outline-none",
-                        focusRing
-                    )}
-                />
-                <ComposerIcon label={t("chat.composer.camera")}>
-                    <Camera className="h-5 w-5" />
-                </ComposerIcon>
-                <button
-                    type="button"
-                    className={cn(
-                        "flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-(--accent) text-(--accent-fg) hover:scale-105",
-                        actionBtn
-                    )}
-                    aria-label={t("chat.composer.send")}
-                >
-                    <Send className="h-4 w-4" />
-                </button>
-            </div>
-        </div>
-    );
-}
-
-function ComposerIcon({
-    children,
-    label,
-    highlight,
-}: {
-    children: React.ReactNode;
-    label?: string;
-    highlight?: boolean;
-}) {
-    return (
-        <button
-            type="button"
-            title={label}
-            aria-label={label}
-            className={cn(
-                "flex h-9 w-9 shrink-0 items-center justify-center rounded-full",
-                iconBtn,
-                highlight
-                    ? "text-(--accent) hover:bg-(--accent-soft)"
-                    : "text-(--fg-secondary) hover:bg-(--bg-hover)"
-            )}
-        >
-            {children}
-        </button>
     );
 }
 

@@ -1,90 +1,105 @@
 {
-    "chat": {
-        "header": {
-            "back": "Indietro",
-            "openContext": "Apri contesto di {{name}}",
-            "participants": "· {{n}} part.",
-            "videoCall": "Videochiamata",
-            "call": "Chiamata",
-            "searchInChat": "Cerca nella chat",
-            "moreOptions": "Altre opzioni",
-            "showContext": "Mostra pannello contesto"
-        },
-        "status": {
-            "typing": "sta scrivendo…",
-            "recordingAudio": "sta registrando un audio…",
-            "online": "online · {{phone}}"
-        },
-        "window": {
-            "closedTemplateOnly": "Finestra chiusa · solo template",
-            "open": "Finestra · 5h 12m",
-            "outsideHours": "Fuori orario"
-        },
-        "assignment": {
-            "unassigned": "Non assegnata"
-        },
-        "bot": {
-            "defaultAgent": "Agente",
-            "managing": "sta gestendo questa conversazione",
-            "takeOver": "Intervieni"
-        },
-        "pinned": {
-            "sample": "1/2 — Promemoria appuntamento domani 16:00",
-            "next": "Messaggio fissato successivo"
-        },
-        "records": {
-            "linked": "Collegata:"
-        },
-        "team": {
-            "typing": "{{name}} sta scrivendo…"
-        },
-        "composer": {
-            "windowClosed": "Finestra 24h chiusa · solo template",
-            "sendTemplate": "Invia template",
-            "emoji": "Emoji",
-            "attachments": "Allegati",
-            "template": "Template (E8)",
-            "placeholder": "Scrivi un messaggio",
-            "camera": "Fotocamera",
-            "send": "Invia messaggio"
-        },
-        "readonly": {
-            "hint": "Anteprima sola lettura · Quick Popover readonly"
-        },
-        "list": {
-            "numbers": "{{n}} numeri",
-            "newChat": "Nuova chat",
-            "menu": "Menu",
-            "searchPlaceholder": "Cerca o inizia una nuova chat",
-            "archived_one": "Archiviata ({{count}})",
-            "archived_other": "Archiviate ({{count}})",
-            "botActive": "Bot attivo",
-            "businessVerified": "Business verificato",
-            "you": "Tu: ",
-            "draft": "Bozza:",
-            "assignmentFailed": "Assegnazione fallita",
-            "mention": "@menzione",
-            "loadingMore": "Carica messaggi precedenti…"
-        },
-        "filters": {
-            "all": "Tutte",
-            "unread": "Non lette",
-            "mine": "Mie",
-            "unassigned": "Non assegnate",
-            "groups": "Gruppi",
-            "closed": "Chiuse"
-        },
-        "newMessages_one": "1 nuovo messaggio",
-        "newMessages_other": "{{count}} nuovi messaggi",
-        "scroll": {
-            "toBottom": "Vai in fondo"
-        },
-        "resize": {
-            "list": "Ridimensiona lista",
-            "context": "Ridimensiona pannello contesto"
-        },
-        "context": {
-            "open": "Apri pannello contesto"
-        }
+  "chat": {
+    "header": {
+      "back": "Indietro",
+      "openContext": "Apri contesto di {{name}}",
+      "participants": "· {{n}} part.",
+      "videoCall": "Videochiamata",
+      "call": "Chiamata",
+      "searchInChat": "Cerca nella chat",
+      "moreOptions": "Altre opzioni",
+      "showContext": "Mostra pannello contesto"
+    },
+    "status": {
+      "typing": "sta scrivendo…",
+      "recordingAudio": "sta registrando un audio…",
+      "online": "online · {{phone}}"
+    },
+    "window": {
+      "closedTemplateOnly": "Finestra chiusa · solo template",
+      "open": "Finestra · 5h 12m",
+      "outsideHours": "Fuori orario"
+    },
+    "assignment": {
+      "unassigned": "Non assegnata"
+    },
+    "bot": {
+      "defaultAgent": "Agente",
+      "managing": "sta gestendo questa conversazione",
+      "takeOver": "Intervieni"
+    },
+    "pinned": {
+      "sample": "1/2 — Promemoria appuntamento domani 16:00",
+      "next": "Messaggio fissato successivo"
+    },
+    "records": {
+      "linked": "Collegata:"
+    },
+    "team": {
+      "typing": "{{name}} sta scrivendo…"
+    },
+    "composer": {
+      "windowClosed": "Finestra 24h chiusa · solo template",
+      "sendTemplate": "Invia template",
+      "emoji": "Emoji",
+      "attachments": "Allegati",
+      "template": "Template (E8)",
+      "placeholder": "Scrivi un messaggio",
+      "camera": "Fotocamera",
+      "send": "Invia messaggio",
+      "attach": {
+        "photoVideo": "Foto e video",
+        "camera": "Fotocamera",
+        "document": "Documento",
+        "contact": "Contatto",
+        "location": "Posizione"
+      },
+      "emojiTitle": "Emoji",
+      "templateTitle": "Modelli",
+      "templatesEmpty": "Nessun modello disponibile",
+      "category": {
+        "marketing": "Marketing",
+        "utility": "Utilità",
+        "authentication": "Autenticazione"
+      }
+    },
+    "readonly": {
+      "hint": "Anteprima sola lettura · Quick Popover readonly"
+    },
+    "list": {
+      "numbers": "{{n}} numeri",
+      "newChat": "Nuova chat",
+      "menu": "Menu",
+      "searchPlaceholder": "Cerca o inizia una nuova chat",
+      "archived_one": "Archiviata ({{count}})",
+      "archived_other": "Archiviate ({{count}})",
+      "botActive": "Bot attivo",
+      "businessVerified": "Business verificato",
+      "you": "Tu: ",
+      "draft": "Bozza:",
+      "assignmentFailed": "Assegnazione fallita",
+      "mention": "@menzione",
+      "loadingMore": "Carica messaggi precedenti…"
+    },
+    "filters": {
+      "all": "Tutte",
+      "unread": "Non lette",
+      "mine": "Mie",
+      "unassigned": "Non assegnate",
+      "groups": "Gruppi",
+      "closed": "Chiuse"
+    },
+    "newMessages_one": "1 nuovo messaggio",
+    "newMessages_other": "{{count}} nuovi messaggi",
+    "scroll": {
+      "toBottom": "Vai in fondo"
+    },
+    "resize": {
+      "list": "Ridimensiona lista",
+      "context": "Ridimensiona pannello contesto"
+    },
+    "context": {
+      "open": "Apri pannello contesto"
     }
+  }
 }

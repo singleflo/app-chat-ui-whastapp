@@ -22,6 +22,7 @@ import type {
     Conversation,
     DemoDataset,
     Message,
+    Template,
 } from "@/types/chat";
 
 export interface DataLoadError {
@@ -66,6 +67,7 @@ export interface StoreState {
     readonly loadingMore: Record<string, boolean>;
     readonly refreshing: Record<string, boolean>;
     readonly calls: readonly CallLog[];
+    readonly templates: readonly Template[];
     readonly contactsProfiles: readonly ContactProfile[];
     readonly attributesSchema: readonly AttributeSchema[];
     readonly attributesValues: DemoDataset["attributesValues"];
@@ -196,6 +198,7 @@ function createInitialState(seed: DemoDataset): StoreState {
         loadingMore,
         refreshing,
         calls: seed.calls,
+        templates: seed.templates,
         contactsProfiles: seed.contactsProfiles,
         attributesSchema: seed.attributesSchema,
         attributesValues: seed.attributesValues,
@@ -638,6 +641,12 @@ export function useChatActions(convId: string): { readonly sendText: (text: stri
 export function useCalls(): readonly CallLog[] {
     const store = useChatStore();
     const getSnapshot = useCallback(() => store.getState().calls, [store]);
+    return useSyncExternalStore(store.subscribe, getSnapshot, getSnapshot);
+}
+
+export function useTemplates(): readonly Template[] {
+    const store = useChatStore();
+    const getSnapshot = useCallback(() => store.getState().templates, [store]);
     return useSyncExternalStore(store.subscribe, getSnapshot, getSnapshot);
 }
 
