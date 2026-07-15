@@ -47,7 +47,7 @@ export function ChatColumnShell({
     const conv = useConversation(conversationId);
 
     return (
-        <div className="flex h-full flex-col">
+        <div className="flex h-full flex-col" data-chat-column>
             <ChatHeader
                 conv={conv}
                 onBack={onBack}

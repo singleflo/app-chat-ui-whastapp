@@ -44,6 +44,8 @@ export function Composer({ conversationId }: ComposerProps) {
     const [text, setText] = React.useState("");
     const [tplOpen, setTplOpen] = React.useState(false);
     const textareaRef = React.useRef<HTMLTextAreaElement>(null);
+    const composerRef = React.useRef<HTMLDivElement>(null);
+    const [boundary, setBoundary] = React.useState<HTMLElement | null>(null);
 
     const isWindowClosed = conv?.windowClosed;
 
@@ -58,6 +60,11 @@ export function Composer({ conversationId }: ComposerProps) {
     React.useEffect(() => {
         adjustHeight();
     }, [adjustHeight]);
+
+    // Popover collision boundary: keeps popovers inside the chat column (not past the mobile frame).
+    React.useEffect(() => {
+        setBoundary(composerRef.current?.closest<HTMLElement>("[data-chat-column]") ?? null);
+    }, []);
 
     const handleSend = React.useCallback(() => {
         const trimmed = text.trim();
@@ -94,7 +101,7 @@ export function Composer({ conversationId }: ComposerProps) {
     };
 
     return (
-        <div className="shrink-0 bg-(--bg-panel-2) px-3 py-2">
+        <div ref={composerRef} className="shrink-0 bg-(--bg-panel-2) px-3 py-2">
             {isWindowClosed && (
                 <div className="mb-1.5 flex items-center justify-between rounded-md bg-(--bg-bubble-error) px-2 py-1 text-[11px] text-(--status-failed)">
                     <span>{t("chat.composer.windowClosed")}</span>
@@ -116,7 +123,14 @@ export function Composer({ conversationId }: ComposerProps) {
                             <Smile className="h-5 w-5" />
                         </ComposerIcon>
                     </PopoverTrigger>
-                    <PopoverContent side="top" className="w-64 p-2" onOpenAutoFocus={(e) => e.preventDefault()}>
+                    <PopoverContent
+                        side="top"
+                        align="start"
+                        collisionPadding={8}
+                        collisionBoundary={boundary}
+                        className="w-64 max-w-[var(--radix-popper-available-width)] p-2"
+                        onOpenAutoFocus={(e) => e.preventDefault()}
+                    >
                         <div className="mb-2 text-xs font-semibold text-(--fg-secondary)">
                             {t("chat.composer.emojiTitle")}
                         </div>
@@ -141,7 +155,12 @@ export function Composer({ conversationId }: ComposerProps) {
                             <Plus className="h-5 w-5" />
                         </ComposerIcon>
                     </DropdownMenuTrigger>
-                    <DropdownMenuContent side="top" className="w-48">
+                    <DropdownMenuContent
+                        side="top"
+                        collisionPadding={8}
+                        collisionBoundary={boundary}
+                        className="w-48"
+                    >
                         <DropdownMenuItem>
                             <ImageIcon className="text-(--accent)" />
                             <span>{t("chat.composer.attach.photoVideo")}</span>
@@ -171,7 +190,14 @@ export function Composer({ conversationId }: ComposerProps) {
                             <FileText className="h-5 w-5" />
                         </ComposerIcon>
                     </PopoverTrigger>
-                    <PopoverContent side="top" className="w-80 p-0" onOpenAutoFocus={(e) => e.preventDefault()}>
+                    <PopoverContent
+                        side="top"
+                        align="start"
+                        collisionPadding={8}
+                        collisionBoundary={boundary}
+                        className="w-80 max-w-[var(--radix-popper-available-width)] p-0"
+                        onOpenAutoFocus={(e) => e.preventDefault()}
+                    >
                         <div className="border-b border-(--border-strong) p-3 text-sm font-semibold text-(--fg-primary)">
                             {t("chat.composer.templateTitle")}
                         </div>
