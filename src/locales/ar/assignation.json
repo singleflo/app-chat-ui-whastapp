@@ -1,0 +1,18 @@
+{
+    "assignation": {
+        "title": "إسناد المحادثات",
+        "usersPanelCount": "المستخدمون ({{count}})",
+        "unassignedPanelCount": "المحادثات غير المعينة ({{count}})",
+        "searchUser": "ابحث عن مستخدم…",
+        "searchChat": "ابحث عن محادثة…",
+        "instanceLabel": "الحساب",
+        "instanceAll": "كل الحسابات",
+        "showClosed": "إظهار المغلقة",
+        "viewKanban": "كانبان",
+        "viewList": "قائمة",
+        "simulateLabel": "محاكاة",
+        "simulateIncoming": "رسالة واردة",
+        "simulateReassign": "تغيير الإسناد",
+        "emptyList": "لا توجد محادثات مطابقة"
+    }
+}

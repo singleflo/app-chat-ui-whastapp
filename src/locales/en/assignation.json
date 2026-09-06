@@ -1,0 +1,18 @@
+{
+    "assignation": {
+        "title": "Chat assignation",
+        "usersPanelCount": "Users ({{count}})",
+        "unassignedPanelCount": "Unassigned chats ({{count}})",
+        "searchUser": "Search users…",
+        "searchChat": "Search chats…",
+        "instanceLabel": "Instance",
+        "instanceAll": "All instances",
+        "showClosed": "Show closed",
+        "viewKanban": "Kanban",
+        "viewList": "List",
+        "simulateLabel": "Simulate",
+        "simulateIncoming": "Incoming message",
+        "simulateReassign": "Reassign a chat",
+        "emptyList": "No conversations match the current filters"
+    }
+}
