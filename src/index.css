@@ -12,7 +12,9 @@
  * - Apple-style scrollbar (invisible until hover)
  * - smooth theme switch (transition on body bg/color)
  * - bubble entrance keyframe
+ * - design languages: [data-design] token layers (see design/README.md)
  */
+@import "@fontsource-variable/inter";
 @import "tailwindcss";
 
 @theme {
@@ -227,6 +229,172 @@
     --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.5), 0 2px 4px -2px rgba(0, 0, 0, 0.4);
     --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.5), 0 4px 6px -4px rgba(0, 0, 0, 0.4);
     --shadow-focus: 0 0 0 3px rgba(37, 211, 102, 0.3);
+
+    color-scheme: dark;
+}
+
+/* ============ DESIGN LANGUAGE: LINEAR (design/linear.DESIGN.md) ============ */
+/* Light derived from Linear's inverse tokens; dark is native. Hairline-led
+   depth (shadows near-zero), lavender #5e6ad2 as the single accent. */
+:root[data-design="linear"] {
+    --font-sans: "Inter Variable", "Inter", ui-sans-serif, system-ui, -apple-system, sans-serif;
+
+    --bg-app: #f7f8f8;
+    --bg-panel: #ffffff;
+    --bg-panel-2: #f5f6f6;
+    --bg-header: #f5f6f6;
+    --bg-hover: #f6f7f7;
+    --bg-active: #eceef0;
+    --bg-selected: #eceef0;
+    --bg-muted: #f5f6f6;
+
+    --bg-chat: #f7f8f8;
+    --bg-chat-overlay: rgba(247, 248, 248, 0.92);
+
+    --bg-bubble-in: #ffffff;
+    --bg-bubble-out: #e6e8f7;
+    --bg-bubble-system: #ebebebcc;
+    --bg-bubble-bot: #e3edfb;
+    --bg-bubble-automation: #fdf0e0;
+    --bg-bubble-internal-note: #faf3c9;
+    --bg-bubble-error: #fdeaea;
+    --bg-bubble-fallback: #f5f6f6;
+    --bg-bubble-deleted: #f5f6f6;
+
+    --border-bubble: rgba(0, 0, 0, 0.07);
+
+    --fg-primary: #0f1011;
+    --fg-secondary: #3c3f44;
+    --fg-tertiary: #8a8f98;
+    --fg-on-accent: #ffffff;
+    --fg-on-bubble-out: #0f1011;
+    --fg-link: #5e6ad2;
+    --fg-error: #c13145;
+    --fg-success: #27a644;
+    --fg-warning: #b88216;
+    --fg-muted: #8a8f98;
+
+    --accent: #5e6ad2;
+    --accent-hover: #828fff;
+    --accent-fg: #ffffff;
+    --accent-soft: #e6e8f7;
+
+    --ring: #5e6ad2;
+    --destructive: #c13145;
+
+    --status-pending: #8a8f98;
+    --status-sent: #8a8f98;
+    --status-delivered: #8a8f98;
+    --status-read: #5e6ad2;
+    --status-failed: #d5445a;
+
+    --window-open: #27a644;
+    --window-warning: #b88216;
+    --window-closed: #d5445a;
+
+    --assigned-me: #5e6ad2;
+    --assigned-other: #3b82c4;
+    --unassigned: #b88216;
+
+    --label-purple: #8465d6;
+    --label-orange: #e0823d;
+
+    --device-frame: #0f1011;
+
+    --border-strong: #e0e2e6;
+    --border-soft: #eceef0;
+    --border-divider: #e0e2e6;
+
+    --scrim: rgba(1, 1, 2, 0.5);
+    --scrim-light: rgba(255, 255, 255, 0.7);
+
+    /* Hairline-led depth: shadows near-zero, borders carry hierarchy */
+    --shadow-bubble: 0 1px 0 rgba(15, 16, 17, 0.04);
+    --shadow-panel: 0 1px 2px rgba(15, 16, 17, 0.04);
+    --shadow-overlay: 0 16px 32px -16px rgba(1, 1, 2, 0.25);
+    --shadow-sm: 0 1px 2px rgba(15, 16, 17, 0.05);
+    --shadow-md: 0 2px 4px -1px rgba(15, 16, 17, 0.06);
+    --shadow-lg: 0 4px 12px -4px rgba(15, 16, 17, 0.08);
+    --shadow-focus: 0 0 0 3px rgba(94, 106, 210, 0.25);
+}
+
+[data-design="linear"][data-theme="dark"] {
+    --bg-app: #010102;
+    --bg-panel: #0f1011;
+    --bg-panel-2: #141516;
+    --bg-header: #141516;
+    --bg-hover: #18191a;
+    --bg-active: #191a1b;
+    --bg-selected: #191a1b;
+    --bg-muted: #141516;
+
+    --bg-chat: #010102;
+    --bg-chat-overlay: rgba(1, 1, 2, 0.9);
+
+    --bg-bubble-in: #141516;
+    --bg-bubble-out: #212352;
+    --bg-bubble-system: #191a1bcc;
+    --bg-bubble-bot: #12202e;
+    --bg-bubble-automation: #241a10;
+    --bg-bubble-internal-note: #2b2513;
+    --bg-bubble-error: #2b1318;
+    --bg-bubble-fallback: #101113;
+    --bg-bubble-deleted: #101113;
+
+    --border-bubble: rgba(255, 255, 255, 0.07);
+
+    --fg-primary: #f7f8f8;
+    --fg-secondary: #d0d6e0;
+    --fg-tertiary: #8a8f98;
+    --fg-on-accent: #ffffff;
+    --fg-on-bubble-out: #eceefb;
+    --fg-link: #828fff;
+    --fg-error: #ef6a78;
+    --fg-success: #3fbf5f;
+    --fg-warning: #e2b23a;
+    --fg-muted: #8a8f98;
+
+    --accent: #5e6ad2;
+    --accent-hover: #828fff;
+    --accent-fg: #ffffff;
+    --accent-soft: #23244d;
+
+    --ring: #828fff;
+    --destructive: #ef6a78;
+
+    --status-pending: #8a8f98;
+    --status-sent: #8a8f98;
+    --status-delivered: #8a8f98;
+    --status-read: #828fff;
+    --status-failed: #ef6a78;
+
+    --window-open: #3fbf5f;
+    --window-warning: #e2b23a;
+    --window-closed: #ef6a78;
+
+    --assigned-me: #828fff;
+    --assigned-other: #5aa9e6;
+    --unassigned: #e2b23a;
+
+    --label-purple: #a48bdb;
+    --label-orange: #f0a35e;
+
+    --device-frame: #000000;
+
+    --border-strong: #23252a;
+    --border-soft: #141516;
+    --border-divider: #23252a;
+
+    --scrim: rgba(0, 0, 0, 0.7);
+    --scrim-light: rgba(1, 1, 2, 0.7);
+
+    --shadow-bubble: 0 1px 0.5px rgba(0, 0, 0, 0.5);
+    --shadow-panel: 0 1px 2px rgba(0, 0, 0, 0.4);
+    --shadow-overlay: 0 16px 40px -16px rgba(0, 0, 0, 0.7);
+    --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.4);
+    --shadow-md: 0 2px 4px -1px rgba(0, 0, 0, 0.45);
+    --shadow-lg: 0 4px 12px -4px rgba(0, 0, 0, 0.5);
+    --shadow-focus: 0 0 0 3px rgba(130, 143, 255, 0.3);
 
     color-scheme: dark;
 }
