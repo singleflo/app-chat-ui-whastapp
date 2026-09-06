@@ -1,6 +1,6 @@
 import { fireEvent, render, screen, within } from "@testing-library/react";
 import { MemoryRouter } from "react-router-dom";
-import { describe, expect, it } from "vitest";
+import { beforeEach, describe, expect, it } from "vitest";
 import { ChatDataProvider } from "@/data/chat-data";
 import { AssignationScreen } from "./AssignationScreen";
 
@@ -22,6 +22,10 @@ function openCardMenu(cardTitle: string) {
 }
 
 describe("AssignationScreen", () => {
+    beforeEach(() => {
+        localStorage.removeItem("wa-assignation-view");
+    });
+
     it("renders title, panel counters and view toggle", () => {
         renderScreen();
 
@@ -39,15 +43,13 @@ describe("AssignationScreen", () => {
     });
 
     it("persists the selected view mode", () => {
-        localStorage.removeItem("wa-assignation-view");
         renderScreen();
 
         fireEvent.click(screen.getByRole("button", { name: "Lista" }));
 
         expect(localStorage.getItem("wa-assignation-view")).toBe("list");
-        expect(screen.getByText("Nessuna conversazione con i filtri attuali")).toBeInTheDocument();
-
-        localStorage.removeItem("wa-assignation-view");
+        expect(screen.getByRole("button", { name: "Lista" })).toHaveAttribute("aria-pressed", "true");
+        expect(screen.queryByText("Chat non assegnate (3)")).not.toBeInTheDocument();
     });
 
     it("assign dialog flow moves a chat to the selected user", () => {
@@ -92,5 +94,29 @@ describe("AssignationScreen", () => {
         fireEvent.drop(userCard);
 
         expect(screen.queryByText("Ufficio Commerciali")).not.toBeInTheDocument();
+    });
+});
+
+describe("assignation list view", () => {
+    it("renders all conversations with assignee badges", () => {
+        renderScreen();
+
+        fireEvent.click(screen.getByRole("button", { name: "Lista" }));
+
+        expect(screen.getByText("Giulia Romano")).toBeInTheDocument();
+        expect(screen.getAllByText("Marco Rossi").length).toBeGreaterThan(0);
+        expect(screen.getAllByText("Non assegnata").length).toBeGreaterThan(0);
+        expect(screen.getByText("Assegnazione fallita")).toBeInTheDocument();
+    });
+
+    it("right-click opens the row context menu and close works", () => {
+        renderScreen();
+
+        fireEvent.click(screen.getByRole("button", { name: "Lista" }));
+        const row = screen.getByText("Promo mailing · otp-out test").closest("[data-chat-row]") as HTMLElement;
+        fireEvent.contextMenu(row);
+        fireEvent.click(screen.getByRole("menuitem", { name: "Chiudi" }));
+
+        expect(screen.queryByText("Promo mailing · otp-out test")).not.toBeInTheDocument();
     });
 });

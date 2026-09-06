@@ -20,6 +20,7 @@ import {
     useUnassignedChats,
     useUsers,
 } from "@/data/chat-data";
+import { AssignationListView } from "@/components/assignation/AssignationListView";
 import { AssignDialog } from "@/components/assignation/AssignDialog";
 import { ChatCard, type AssignationCardAction } from "@/components/assignation/ChatCard";
 import { UserCard } from "@/components/assignation/UserCard";
@@ -83,6 +84,15 @@ export function AssignationScreen() {
             }),
         [byUser, matchesFilters, searchChat],
     );
+
+    const visibleAll = useMemo(() => {
+        const q = searchChat.trim().toLowerCase();
+        return conversations.items.filter(
+            (c) =>
+                matchesFilters(c) &&
+                (!q || c.name.toLowerCase().includes(q) || c.phone.includes(q)),
+        );
+    }, [conversations.items, matchesFilters, searchChat]);
 
     const switchView = useCallback((mode: ViewMode) => {
         setViewMode(mode);
@@ -338,9 +348,11 @@ export function AssignationScreen() {
                         </section>
                     </>
                 ) : (
-                    <div className="flex flex-1 items-center justify-center rounded-lg border border-(--border-strong) bg-(--bg-panel) text-sm text-(--fg-tertiary)">
-                        {t("assignation.emptyList")}
-                    </div>
+                    <AssignationListView
+                        conversations={visibleAll}
+                        users={users}
+                        onAction={handleCardAction}
+                    />
                 )}
             </main>
 
