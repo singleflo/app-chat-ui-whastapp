@@ -31,6 +31,7 @@ import { RtlScreen } from "./routes/RtlScreen";
 import { cn } from "./lib/utils";
 
 import { LanguageSwitcher } from "./components/LanguageSwitcher";
+import { applyDesignAttribute, useDesign } from "./lib/design";
 
 const SURFACES = [
     { to: "/", label: "nav.index", icon: MessageSquare, end: true },
@@ -52,6 +53,7 @@ const SCREENS = [
 
 export function App() {
     const { t } = useTranslation();
+    const [design] = useDesign();
     const [theme, setTheme] = useState<"light" | "dark">(() => {
         const stored = localStorage.getItem("wa-theme");
         if (stored === "light" || stored === "dark") return stored;
@@ -62,6 +64,10 @@ export function App() {
         document.documentElement.setAttribute("data-theme", theme);
         localStorage.setItem("wa-theme", theme);
     }, [theme]);
+
+    useEffect(() => {
+        applyDesignAttribute(design);
+    }, [design]);
 
     return (
         <div className="flex h-screen w-screen flex-col overflow-hidden bg-(--bg-app) text-(--fg-primary)">
