@@ -338,6 +338,8 @@ export interface Conversation {
     assignmentFailed?: boolean;
     /** Assignation surface — WhatsApp instance this conversation belongs to. */
     instanceId?: string;
+    /** Assignation surface — acquisition channel shown on unassigned cards. */
+    channel?: "ads" | "whatsapp" | "api";
     state: ConversationState;
     closedAt?: string;
     isBotActive?: boolean;

@@ -1,5 +1,5 @@
 import { describe, it, expect, beforeEach, afterEach, vi } from "vitest";
-import { fmtTime, fmtRelativeDay, waitTimeLabel } from "./utils";
+import { fmtTime, fmtRelativeDay, waitTimeLabel, windowRemainingMs } from "./utils";
 import i18n from "../i18n";
 
 describe("utils", () => {
@@ -61,5 +61,33 @@ describe("waitTimeLabel", () => {
 
     it("returns empty string for invalid timestamps", () => {
         expect(waitTimeLabel("not-a-date")).toBe("");
+    });
+});
+
+describe("windowRemainingMs", () => {
+    beforeEach(() => {
+        vi.useFakeTimers();
+        vi.setSystemTime(new Date("2026-07-14T12:00:00Z"));
+    });
+
+    afterEach(() => {
+        vi.useRealTimers();
+    });
+
+    it("returns positive ms inside the 24h window", () => {
+        // last inbound message 2h ago → 22h remaining
+        expect(windowRemainingMs("2026-07-14T10:00:00Z")).toBe(22 * 3_600_000);
+    });
+
+    it("returns zero when exactly 24h passed", () => {
+        expect(windowRemainingMs("2026-07-13T12:00:00Z")).toBe(0);
+    });
+
+    it("returns negative ms when the window expired", () => {
+        expect(windowRemainingMs("2026-07-12T00:00:00Z")).toBeLessThan(0);
+    });
+
+    it("returns 0 for invalid timestamps (treated as expired)", () => {
+        expect(windowRemainingMs("not-a-date")).toBe(0);
     });
 });

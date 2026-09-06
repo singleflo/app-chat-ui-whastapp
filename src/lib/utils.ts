@@ -74,3 +74,10 @@ export function waitTimeLabel(ts: string, now: number = Date.now()): string {
     const days = Math.floor(hours / 24);
     return `${days}${i18n.language === "it" ? "g" : "d"}`;
 }
+
+/** 24h customer-service window remaining (ms). Negative = expired, 0 = just expired/invalid. */
+export function windowRemainingMs(ts: string, now: number = Date.now()): number {
+    const start = Date.parse(ts);
+    if (!Number.isFinite(start)) return 0;
+    return start + 24 * 3_600_000 - now;
+}

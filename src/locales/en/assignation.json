@@ -26,6 +26,12 @@
         "assignedCount": "{{count}} assigned",
         "conversationsCount": "{{count}} conversations",
         "closedBadge": "Closed",
-        "cardMenu": "Chat menu"
+        "cardMenu": "Chat menu",
+        "channelLabel": "Filter by channel:",
+        "channelAll": "All channels",
+        "sortByWait": "Waiting time",
+        "endOfList": "— end of list —",
+        "windowRemaining": "{{hours}}h {{minutes}}m remaining",
+        "windowExpired": "24h window expired"
     }
 }

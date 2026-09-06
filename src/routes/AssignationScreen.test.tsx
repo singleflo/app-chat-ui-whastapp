@@ -49,7 +49,8 @@ describe("AssignationScreen", () => {
 
         expect(localStorage.getItem("wa-assignation-view")).toBe("list");
         expect(screen.getByRole("button", { name: "Lista" })).toHaveAttribute("aria-pressed", "true");
-        expect(screen.queryByText("Chat non assegnate (3)")).not.toBeInTheDocument();
+        expect(document.querySelectorAll("[data-chat-row]").length).toBe(8);
+        expect(document.querySelectorAll("[data-chat-card]").length).toBe(0);
     });
 
     it("assign dialog flow moves a chat to the selected user", () => {
@@ -105,6 +106,37 @@ describe("AssignationScreen", () => {
         fireEvent.click(screen.getByRole("menuitem", { name: "Nuovo messaggio in arrivo" }));
 
         expect(screen.getByText(/Simulated message #/)).toBeInTheDocument();
+    });
+
+    it("channel filter narrows unassigned cards", () => {
+        renderScreen();
+
+        const channelTrigger = screen.getByRole("button", { name: /Tutti i canali/ });
+        fireEvent.pointerDown(channelTrigger, { button: 0, ctrlKey: false });
+        fireEvent.click(screen.getByRole("menuitem", { name: "ads" }));
+
+        const cards = document.querySelectorAll("[data-chat-card]");
+        expect(cards.length).toBe(2);
+        expect(screen.getByText("Ufficio Commerciali")).toBeInTheDocument();
+        expect(screen.queryByText("Team vendite Nord")).not.toBeInTheDocument();
+    });
+
+    it("wait sort toggles card order", () => {
+        renderScreen();
+
+        const firstBefore = document.querySelector("[data-chat-card]")?.textContent;
+        fireEvent.click(screen.getByRole("button", { name: /Tempo di attesa/ }));
+        const firstAfterToggle = document.querySelector("[data-chat-card]")?.textContent;
+
+        expect(firstBefore).toBeTruthy();
+        expect(firstAfterToggle).toBeTruthy();
+        expect(firstBefore).not.toBe(firstAfterToggle);
+    });
+
+    it("expired 24h window banner shows on old fixture chats", () => {
+        renderScreen();
+
+        expect(screen.getAllByText("Finestra 24h scaduta").length).toBeGreaterThan(0);
     });
 });
 
