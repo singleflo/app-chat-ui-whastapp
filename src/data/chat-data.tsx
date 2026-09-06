@@ -14,6 +14,7 @@ import { isMessage } from "@/types/chat";
 import type {
     AckStatus,
     ActivityEvent,
+    Agent,
     AttributeSchema,
     AutomationRun,
     CallLog,
@@ -21,8 +22,10 @@ import type {
     ContactProfile,
     Conversation,
     DemoDataset,
+    Instance,
     Message,
     Template,
+    User,
 } from "@/types/chat";
 
 export interface DataLoadError {
@@ -54,10 +57,22 @@ export type DataEvent =
       }
     | { readonly type: "conversation.upsert"; readonly conv: Conversation }
     | { readonly type: "conversation.deleted"; readonly id: string }
-    | { readonly type: "typing.changed"; readonly convId: string; readonly typing: TypingState };
+    | { readonly type: "typing.changed"; readonly convId: string; readonly typing: TypingState }
+    | {
+          readonly type: "conversation.assign";
+          readonly convId: string;
+          readonly userId: string | null;
+          readonly ts: string;
+      }
+    | { readonly type: "conversation.close"; readonly convId: string; readonly ts: string }
+    | { readonly type: "conversation.reopen"; readonly convId: string; readonly ts: string }
+    | { readonly type: "activity.append"; readonly convId: string; readonly event: ActivityEvent };
 
 export interface StoreState {
     readonly account: DemoDataset["account"];
+    readonly users: readonly User[];
+    readonly agents: readonly (Agent & { emoji: string })[];
+    readonly instances: readonly Instance[];
     readonly conversations: Record<string, Conversation>;
     readonly convOrder: readonly string[];
     readonly messages: Record<string, readonly ChatEntry[]>;
@@ -115,6 +130,7 @@ const EMPTY_AUTOMATION_RUNS: readonly AutomationRun[] = [];
 const EMPTY_ENTRIES: readonly ChatEntry[] = [];
 
 let optimisticId = 0;
+let activitySeq = 0;
 
 class ChatDataError extends Error {
     constructor(message: string) {
@@ -189,6 +205,9 @@ function createInitialState(seed: DemoDataset): StoreState {
 
     return {
         account: seed.account,
+        users: seed.users,
+        agents: seed.agents,
+        instances: seed.instances,
         conversations,
         convOrder,
         messages,
@@ -261,6 +280,16 @@ function growWindow(state: StoreState, convId: string): StoreState {
     return {
         ...state,
         windows: { ...state.windows, [convId]: nextWindow },
+    };
+}
+
+function withActivity(state: StoreState, convId: string, event: ActivityEvent): StoreState {
+    return {
+        ...state,
+        activity: {
+            ...state.activity,
+            [convId]: [...(state.activity[convId] ?? EMPTY_ACTIVITY), event],
+        },
     };
 }
 
@@ -374,6 +403,77 @@ export function reducer(state: StoreState, event: DataEvent): StoreState {
                 automationRuns: omitRecordKey(state.automationRuns, event.id),
                 attributesValues: omitRecordKey(state.attributesValues, event.id),
             };
+        }
+        case "conversation.assign": {
+            const current = state.conversations[event.convId];
+            if (!current) {
+                return state;
+            }
+
+            const assigned = event.userId !== null;
+            const nextConversation: Conversation = assigned
+                ? {
+                      ...current,
+                      assignedUserId: event.userId,
+                      assignedAt: event.ts,
+                      unassigned: false,
+                      assignmentFailed: false,
+                  }
+                : { ...current, assignedUserId: undefined, assignedAt: undefined, unassigned: true };
+
+            return withActivity(
+                { ...state, conversations: { ...state.conversations, [event.convId]: nextConversation } },
+                event.convId,
+                {
+                    id: `act_assign_${++activitySeq}`,
+                    ts: event.ts,
+                    type: assigned ? "assigned" : "unassigned",
+                    ...(assigned ? { targetUserId: event.userId } : {}),
+                },
+            );
+        }
+        case "conversation.close": {
+            const current = state.conversations[event.convId];
+            if (!current || current.state === "done") {
+                return state;
+            }
+
+            return withActivity(
+                {
+                    ...state,
+                    conversations: {
+                        ...state.conversations,
+                        [event.convId]: { ...current, state: "done", closedAt: event.ts },
+                    },
+                },
+                event.convId,
+                { id: `act_close_${++activitySeq}`, ts: event.ts, type: "state_closed" },
+            );
+        }
+        case "conversation.reopen": {
+            const current = state.conversations[event.convId];
+            if (!current || current.state === "open") {
+                return state;
+            }
+
+            return withActivity(
+                {
+                    ...state,
+                    conversations: {
+                        ...state.conversations,
+                        [event.convId]: { ...current, state: "open", closedAt: undefined },
+                    },
+                },
+                event.convId,
+                { id: `act_reopen_${++activitySeq}`, ts: event.ts, type: "state_reopened" },
+            );
+        }
+        case "activity.append": {
+            if (!state.conversations[event.convId]) {
+                return state;
+            }
+
+            return withActivity(state, event.convId, event.event);
         }
         case "typing.changed":
             if ((state.typing[event.convId] ?? null) === event.typing) {

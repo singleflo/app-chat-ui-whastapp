@@ -60,6 +60,7 @@ function seed(conversations: readonly Conversation[], messages: Record<string, r
         account: { name: "Demo", phoneNumbers: [] },
         users: [],
         agents: [],
+        instances: [],
         conversations: [...conversations],
         messages: Object.fromEntries(Object.entries(messages).map(([id, entries]) => [id, [...entries]])),
         activity: {},
@@ -246,5 +247,77 @@ describe("chat data reducer/store", () => {
             "read",
             "read",
         ]);
+    });
+});
+
+describe("assignation events", () => {
+    const ts = "2026-01-01T00:05:00.000Z";
+
+    it("conversation.assign sets the assignee and appends an assigned activity", () => {
+        const store = createStore(seed([conversation("c1", { unassigned: true })], {}));
+
+        store.dispatch({ type: "conversation.assign", convId: "c1", userId: "u_sara", ts });
+
+        const conv = store.getState().conversations["c1"];
+        expect(conv.assignedUserId).toBe("u_sara");
+        expect(conv.assignedAt).toBe(ts);
+        expect(conv.unassigned).toBe(false);
+        expect(conv.assignmentFailed).toBe(false);
+
+        const activity = store.getState().activity["c1"];
+        expect(activity).toHaveLength(1);
+        expect(activity?.[0]).toMatchObject({ type: "assigned", targetUserId: "u_sara", ts });
+    });
+
+    it("conversation.assign with null user releases the chat", () => {
+        const store = createStore(seed([conversation("c1", { assignedUserId: "u_marco" })], {}));
+
+        store.dispatch({ type: "conversation.assign", convId: "c1", userId: null, ts });
+
+        const conv = store.getState().conversations["c1"];
+        expect(conv.assignedUserId).toBeUndefined();
+        expect(conv.assignedAt).toBeUndefined();
+        expect(conv.unassigned).toBe(true);
+        expect(store.getState().activity["c1"]?.[0]?.type).toBe("unassigned");
+    });
+
+    it("conversation.assign on unknown conversation leaves state untouched", () => {
+        const store = createStore(seed([conversation("c1")], {}));
+        const before = store.getState();
+
+        store.dispatch({ type: "conversation.assign", convId: "missing", userId: "u_sara", ts });
+
+        expect(store.getState()).toBe(before);
+    });
+
+    it("conversation.close marks done with closedAt and appends activity", () => {
+        const store = createStore(seed([conversation("c1")], {}));
+
+        store.dispatch({ type: "conversation.close", convId: "c1", ts });
+
+        const conv = store.getState().conversations["c1"];
+        expect(conv.state).toBe("done");
+        expect(conv.closedAt).toBe(ts);
+        expect(store.getState().activity["c1"]?.[0]?.type).toBe("state_closed");
+    });
+
+    it("conversation.reopen restores open and clears closedAt", () => {
+        const store = createStore(seed([conversation("c1", { state: "done", closedAt: ts })], {}));
+
+        store.dispatch({ type: "conversation.reopen", convId: "c1", ts });
+
+        const conv = store.getState().conversations["c1"];
+        expect(conv.state).toBe("open");
+        expect(conv.closedAt).toBeUndefined();
+        expect(store.getState().activity["c1"]?.[0]?.type).toBe("state_reopened");
+    });
+
+    it("activity.append adds a prebuilt event to the conversation stream", () => {
+        const store = createStore(seed([conversation("c1")], {}));
+        const event = { id: "act_x", ts, type: "assigned" as const, targetUserId: "u_sara" };
+
+        store.dispatch({ type: "activity.append", convId: "c1", event });
+
+        expect(store.getState().activity["c1"]).toEqual([event]);
     });
 });
