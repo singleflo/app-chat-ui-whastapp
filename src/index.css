@@ -399,6 +399,176 @@
     color-scheme: dark;
 }
 
+/* ============ DESIGN LANGUAGE: INTERCOM (design/intercom.DESIGN.md) ============ */
+/* Light native (cream canvas, charcoal primary, Fin Orange reserved for AI
+   surfaces); dark derived with the same warm undertone. Depth = surface
+   change on cream, not drop shadows. */
+:root[data-design="intercom"] {
+    --font-sans: "Inter Variable", "Inter", ui-sans-serif, system-ui, -apple-system, sans-serif;
+
+    --bg-app: #f5f1ec;
+    --bg-panel: #ffffff;
+    --bg-panel-2: #ebe7e1;
+    --bg-header: #ebe7e1;
+    --bg-hover: #f0ece6;
+    --bg-active: #e6e0d7;
+    --bg-selected: #e6e0d7;
+    --bg-muted: #ebe7e1;
+
+    --bg-chat: #f5f1ec;
+    --bg-chat-overlay: rgba(245, 241, 236, 0.94);
+
+    --bg-bubble-in: #ffffff;
+    --bg-bubble-out: #ece5da;
+    --bg-bubble-system: #f0ede6cc;
+    --bg-bubble-bot: #ffe9de;
+    --bg-bubble-automation: #ffe3cc;
+    --bg-bubble-internal-note: #fdf3c4;
+    --bg-bubble-error: #fde5e5;
+    --bg-bubble-fallback: #f5f1ec;
+    --bg-bubble-deleted: #f0ede6;
+
+    --border-bubble: rgba(17, 17, 17, 0.08);
+
+    --fg-primary: #111111;
+    --fg-secondary: #626260;
+    --fg-tertiary: #7b7b78;
+    --fg-on-accent: #ffffff;
+    --fg-on-bubble-out: #111111;
+    --fg-link: #0007cb;
+    --fg-error: #c41c1c;
+    /* semantic-success #0bdf50 darkened for text contrast on cream */
+    --fg-success: #0aa34f;
+    --fg-warning: #b88216;
+    --fg-muted: #9c9fa5;
+
+    /* Intercom rule: the system primary is charcoal ink, not a hue */
+    --accent: #111111;
+    --accent-hover: #000000;
+    --accent-fg: #ffffff;
+    --accent-soft: #ebe7e1;
+
+    --ring: #111111;
+    --destructive: #c41c1c;
+
+    --status-pending: #7b7b78;
+    --status-sent: #7b7b78;
+    --status-delivered: #7b7b78;
+    --status-read: #0007cb;
+    --status-failed: #d64550;
+
+    --window-open: #0aa34f;
+    --window-warning: #b88216;
+    --window-closed: #d64550;
+
+    --assigned-me: #111111;
+    --assigned-other: #3b82c4;
+    --unassigned: #b88216;
+
+    --label-purple: #7e57c2;
+    --label-orange: #d9730d;
+
+    --device-frame: #111111;
+
+    --border-strong: #d3cec6;
+    --border-soft: #ebe7e1;
+    --border-divider: #d3cec6;
+
+    --scrim: rgba(17, 17, 17, 0.5);
+    --scrim-light: rgba(255, 255, 255, 0.7);
+
+    /* Intercom resists drop shadows: hierarchy = white-on-cream lift.
+       Overlays keep a soft shadow only to float over content. */
+    --shadow-bubble: none;
+    --shadow-panel: 0 1px 2px rgba(31, 26, 20, 0.04);
+    --shadow-overlay: 0 12px 32px -12px rgba(31, 26, 20, 0.18);
+    --shadow-sm: none;
+    --shadow-md: 0 2px 8px rgba(31, 26, 20, 0.06);
+    --shadow-lg: 0 4px 16px -4px rgba(31, 26, 20, 0.1);
+    --shadow-focus: 0 0 0 3px rgba(17, 17, 17, 0.15);
+}
+
+[data-design="intercom"][data-theme="dark"] {
+    --bg-app: #171512;
+    --bg-panel: #211e1a;
+    --bg-panel-2: #2a2620;
+    --bg-header: #2a2620;
+    --bg-hover: #302b24;
+    --bg-active: #383229;
+    --bg-selected: #383229;
+    --bg-muted: #2a2620;
+
+    --bg-chat: #171512;
+    --bg-chat-overlay: rgba(23, 21, 18, 0.92);
+
+    --bg-bubble-in: #2a2620;
+    --bg-bubble-out: #3a332a;
+    --bg-bubble-system: #262320cc;
+    --bg-bubble-bot: #33231a;
+    --bg-bubble-automation: #3a2a18;
+    --bg-bubble-internal-note: #332c14;
+    --bg-bubble-error: #33181a;
+    --bg-bubble-fallback: #1f1c18;
+    --bg-bubble-deleted: #1f1c18;
+
+    --border-bubble: rgba(255, 255, 255, 0.08);
+
+    --fg-primary: #f5f1ec;
+    --fg-secondary: #d8d2c8;
+    --fg-tertiary: #a39d92;
+    --fg-on-accent: #171512;
+    --fg-on-bubble-out: #f5f1ec;
+    --fg-link: #8f9bff;
+    --fg-error: #f27a6d;
+    --fg-success: #35c66b;
+    --fg-warning: #e2b23a;
+    --fg-muted: #a39d92;
+
+    --accent: #f5f1ec;
+    --accent-hover: #ffffff;
+    --accent-fg: #171512;
+    --accent-soft: #3a332a;
+
+    --ring: #f5f1ec;
+    --destructive: #f27a6d;
+
+    --status-pending: #a39d92;
+    --status-sent: #a39d92;
+    --status-delivered: #a39d92;
+    --status-read: #8f9bff;
+    --status-failed: #f27a6d;
+
+    --window-open: #35c66b;
+    --window-warning: #e2b23a;
+    --window-closed: #f27a6d;
+
+    --assigned-me: #f5f1ec;
+    --assigned-other: #5aa9e6;
+    --unassigned: #e2b23a;
+
+    --label-purple: #b39ddb;
+    --label-orange: #f0a35e;
+
+    --device-frame: #000000;
+
+    --border-strong: #3a352c;
+    --border-soft: #2a2620;
+    --border-divider: #3a352c;
+
+    --scrim: rgba(0, 0, 0, 0.7);
+    --scrim-light: rgba(23, 21, 18, 0.7);
+
+    --shadow-bubble: none;
+    --shadow-panel: 0 1px 2px rgba(0, 0, 0, 0.3);
+    --shadow-overlay: 0 12px 36px -12px rgba(0, 0, 0, 0.6);
+    --shadow-sm: none;
+    --shadow-md: 0 2px 8px rgba(0, 0, 0, 0.35);
+    --shadow-lg: 0 4px 16px -4px rgba(0, 0, 0, 0.45);
+    --shadow-focus: 0 0 0 3px rgba(245, 241, 236, 0.25);
+
+    color-scheme: dark;
+}
+
 /* ============ BASE ============ */
 * {
     box-sizing: border-box;
