@@ -569,6 +569,172 @@
     color-scheme: dark;
 }
 
+/* ============ DESIGN LANGUAGE: SLACK (design/slack.DESIGN.md) ============ */
+/* Light native (white canvas, cream app bg, lavender bands, aubergine
+   #4a154b primary); dark derived as deep aubergine. System font stack per
+   spec (Salesforce faces are proprietary). */
+:root[data-design="slack"] {
+    --font-sans: system-ui, -apple-system, "Segoe UI", BlinkMacSystemFont, sans-serif;
+
+    --bg-app: #f4ede4;
+    --bg-panel: #ffffff;
+    --bg-panel-2: #f9f0ff;
+    --bg-header: #f9f0ff;
+    --bg-hover: #f6f1fa;
+    --bg-active: #efe6f6;
+    --bg-selected: #efe6f6;
+    --bg-muted: #f9f0ff;
+
+    --bg-chat: #faf5ef;
+    --bg-chat-overlay: rgba(250, 245, 239, 0.94);
+
+    --bg-bubble-in: #ffffff;
+    --bg-bubble-out: #efe0f2;
+    --bg-bubble-system: #f4ede4cc;
+    --bg-bubble-bot: #e3f0fa;
+    --bg-bubble-automation: #fdeadd;
+    --bg-bubble-internal-note: #fdf3c4;
+    --bg-bubble-error: #fde8e0;
+    --bg-bubble-fallback: #f6f1fa;
+    --bg-bubble-deleted: #f6f1fa;
+
+    --border-bubble: rgba(29, 29, 29, 0.08);
+
+    --fg-primary: #1d1d1d;
+    --fg-secondary: #696969;
+    --fg-tertiary: #949494;
+    --fg-on-accent: #ffffff;
+    --fg-on-bubble-out: #1d1d1d;
+    --fg-link: #1264a3;
+    --fg-error: #cc4117;
+    --fg-success: #007a5a;
+    --fg-warning: #b88216;
+    --fg-muted: #949494;
+
+    --accent: #4a154b;
+    --accent-hover: #611f69;
+    --accent-fg: #ffffff;
+    --accent-soft: #f3e8f8;
+
+    --ring: #4a154b;
+    --destructive: #cc4117;
+
+    --status-pending: #696969;
+    --status-sent: #696969;
+    --status-delivered: #696969;
+    --status-read: #1264a3;
+    --status-failed: #cc4117;
+
+    --window-open: #007a5a;
+    --window-warning: #b88216;
+    --window-closed: #cc4117;
+
+    --assigned-me: #4a154b;
+    --assigned-other: #1264a3;
+    --unassigned: #b88216;
+
+    --label-purple: #7c4f9e;
+    --label-orange: #d9730d;
+
+    --device-frame: #1d1d1d;
+
+    --border-strong: #e6e6e6;
+    --border-soft: #f0f0f0;
+    --border-divider: #e6e6e6;
+
+    --scrim: rgba(29, 29, 29, 0.5);
+    --scrim-light: rgba(255, 255, 255, 0.7);
+
+    --shadow-bubble: 0 1px 0.5px rgba(29, 29, 29, 0.1);
+    --shadow-panel: 0 1px 3px rgba(29, 29, 29, 0.08);
+    --shadow-overlay: 0 12px 32px -8px rgba(29, 29, 29, 0.22);
+    --shadow-sm: 0 1px 2px rgba(29, 29, 29, 0.06);
+    --shadow-md: 0 2px 4px -1px rgba(29, 29, 29, 0.08);
+    --shadow-lg: 0 4px 12px -4px rgba(29, 29, 29, 0.1);
+    --shadow-focus: 0 0 0 3px rgba(74, 21, 75, 0.2);
+}
+
+[data-design="slack"][data-theme="dark"] {
+    --bg-app: #1a1225;
+    --bg-panel: #241a33;
+    --bg-panel-2: #2d2140;
+    --bg-header: #2d2140;
+    --bg-hover: #342649;
+    --bg-active: #3b2b52;
+    --bg-selected: #3b2b52;
+    --bg-muted: #2d2140;
+
+    --bg-chat: #1a1225;
+    --bg-chat-overlay: rgba(26, 18, 37, 0.92);
+
+    --bg-bubble-in: #2d2140;
+    --bg-bubble-out: #452a5a;
+    --bg-bubble-system: #251c33cc;
+    --bg-bubble-bot: #182f42;
+    --bg-bubble-automation: #3a2513;
+    --bg-bubble-internal-note: #332c14;
+    --bg-bubble-error: #391a10;
+    --bg-bubble-fallback: #221936;
+    --bg-bubble-deleted: #221936;
+
+    --border-bubble: rgba(255, 255, 255, 0.08);
+
+    --fg-primary: #f4ede4;
+    --fg-secondary: #d9cfe4;
+    --fg-tertiary: #a99fb8;
+    --fg-on-accent: #ffffff;
+    --fg-on-bubble-out: #f0e8f6;
+    --fg-link: #6fb1e8;
+    --fg-error: #f27452;
+    --fg-success: #2eb889;
+    --fg-warning: #e2b23a;
+    --fg-muted: #a99fb8;
+
+    --accent: #a45cab;
+    --accent-hover: #bd74c4;
+    --accent-fg: #ffffff;
+    --accent-soft: #452a5a;
+
+    --ring: #a45cab;
+    --destructive: #f27452;
+
+    --status-pending: #a99fb8;
+    --status-sent: #a99fb8;
+    --status-delivered: #a99fb8;
+    --status-read: #6fb1e8;
+    --status-failed: #f27452;
+
+    --window-open: #2eb889;
+    --window-warning: #e2b23a;
+    --window-closed: #f27452;
+
+    --assigned-me: #a45cab;
+    --assigned-other: #6fb1e8;
+    --unassigned: #e2b23a;
+
+    --label-purple: #b39ddb;
+    --label-orange: #f0a35e;
+
+    --device-frame: #0d0812;
+
+    --border-strong: #3a2c4e;
+    --border-soft: #2d2140;
+    --border-divider: #3a2c4e;
+
+    --scrim: rgba(0, 0, 0, 0.7);
+    --scrim-light: rgba(26, 18, 37, 0.7);
+
+    --shadow-bubble: 0 1px 0.5px rgba(0, 0, 0, 0.45);
+    --shadow-panel: 0 1px 3px rgba(0, 0, 0, 0.35);
+    --shadow-overlay: 0 12px 36px -10px rgba(0, 0, 0, 0.65);
+    --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.4);
+    --shadow-md: 0 2px 4px -1px rgba(0, 0, 0, 0.42);
+    --shadow-lg: 0 4px 12px -4px rgba(0, 0, 0, 0.48);
+    --shadow-focus: 0 0 0 3px rgba(164, 92, 171, 0.3);
+
+    color-scheme: dark;
+}
+
 /* ============ BASE ============ */
 * {
     box-sizing: border-box;
