@@ -16,6 +16,7 @@
  */
 @import "@fontsource-variable/inter";
 @import "tailwindcss";
+@import "tw-animate-css";
 
 @theme {
     /* Font families (bundle-local, MV3-safe) */
