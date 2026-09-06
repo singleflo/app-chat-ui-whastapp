@@ -97,6 +97,7 @@ export interface ChatDataStore {
     readonly loadMore: (convId: string) => Promise<void>;
     readonly refresh: (convId: string) => Promise<void>;
     readonly sendText: (convId: string, text: string) => void;
+    readonly simulateIncoming: (convId: string, text?: string) => void;
 }
 
 type StoreListener = () => void;
@@ -548,6 +549,34 @@ export function createStore(seed: DemoDataset): ChatDataStore {
 
             store.dispatch({ type: "message.new", convId, entry });
         },
+        simulateIncoming: (convId, text) => {
+            optimisticId += 1;
+            const body = text ?? `Simulated message #${optimisticId}`;
+            const ts = new Date().toISOString();
+            const entry: Message = {
+                id: `sim-${Date.now()}-${optimisticId}`,
+                conversationId: convId,
+                ts,
+                direction: "in",
+                content: { kind: "text", body },
+            };
+
+            store.dispatch({ type: "message.new", convId, entry });
+            const current = store.getState().conversations[convId];
+            if (current) {
+                store.dispatch({
+                    type: "conversation.upsert",
+                    conv: {
+                        ...current,
+                        unread: current.unread + 1,
+                        lastMessagePreview: body,
+                        lastMessageTs: ts,
+                        lastMessageDirection: "in",
+                        lastMessageType: "text",
+                    },
+                });
+            }
+        },
     };
 
     return store;
@@ -767,4 +796,117 @@ export function useAttributesSchema(): readonly AttributeSchema[] {
     const store = useChatStore();
     const getSnapshot = useCallback(() => store.getState().attributesSchema, [store]);
     return useSyncExternalStore(store.subscribe, getSnapshot, getSnapshot);
+}
+
+/** Assignment semantics: unassigned = no assignee and no failed attempt. */
+export function isUnassignedConversation(conv: Conversation): boolean {
+    return !conv.assignedUserId && !conv.assignmentFailed;
+}
+
+export function useUsers(): readonly User[] {
+    const store = useChatStore();
+    const getSnapshot = useCallback(() => store.getState().users, [store]);
+    return useSyncExternalStore(store.subscribe, getSnapshot, getSnapshot);
+}
+
+export function useAgents(): readonly (Agent & { emoji: string })[] {
+    const store = useChatStore();
+    const getSnapshot = useCallback(() => store.getState().agents, [store]);
+    return useSyncExternalStore(store.subscribe, getSnapshot, getSnapshot);
+}
+
+export function useInstances(): readonly Instance[] {
+    const store = useChatStore();
+    const getSnapshot = useCallback(() => store.getState().instances, [store]);
+    return useSyncExternalStore(store.subscribe, getSnapshot, getSnapshot);
+}
+
+function createUnassignedChatsSelector(store: ChatDataStore): () => readonly Conversation[] {
+    let cache: {
+        conversations: Record<string, Conversation>;
+        snapshot: readonly Conversation[];
+    } | null = null;
+
+    return () => {
+        const state = store.getState();
+        if (cache && cache.conversations === state.conversations) {
+            return cache.snapshot;
+        }
+
+        const snapshot = Object.values(state.conversations).filter(isUnassignedConversation);
+        cache = { conversations: state.conversations, snapshot };
+        return snapshot;
+    };
+}
+
+export function useUnassignedChats(): readonly Conversation[] {
+    const store = useChatStore();
+    const selector = useMemo(() => createUnassignedChatsSelector(store), [store]);
+    const getSnapshot = useCallback(() => selector(), [selector]);
+    return useSyncExternalStore(store.subscribe, getSnapshot, getSnapshot);
+}
+
+function createAssignedByUserSelector(
+    store: ChatDataStore,
+): () => ReadonlyMap<string, readonly Conversation[]> {
+    let cache: {
+        conversations: Record<string, Conversation>;
+        snapshot: ReadonlyMap<string, readonly Conversation[]>;
+    } | null = null;
+
+    return () => {
+        const state = store.getState();
+        if (cache && cache.conversations === state.conversations) {
+            return cache.snapshot;
+        }
+
+        const map = new Map<string, Conversation[]>();
+        for (const conv of Object.values(state.conversations)) {
+            if (!conv.assignedUserId) {
+                continue;
+            }
+
+            const list = map.get(conv.assignedUserId);
+            if (list) {
+                list.push(conv);
+            } else {
+                map.set(conv.assignedUserId, [conv]);
+            }
+        }
+        cache = { conversations: state.conversations, snapshot: map };
+        return map;
+    };
+}
+
+export function useAssignedConversationsByUser(): ReadonlyMap<string, readonly Conversation[]> {
+    const store = useChatStore();
+    const selector = useMemo(() => createAssignedByUserSelector(store), [store]);
+    const getSnapshot = useCallback(() => selector(), [selector]);
+    return useSyncExternalStore(store.subscribe, getSnapshot, getSnapshot);
+}
+
+export function useAssignationActions(): {
+    readonly assign: (convId: string, userId: string | null) => void;
+    readonly close: (convId: string) => void;
+    readonly reopen: (convId: string) => void;
+    readonly simulateIncoming: (convId: string, text?: string) => void;
+} {
+    const store = useChatStore();
+    return useMemo(
+        () => ({
+            assign: (convId, userId) =>
+                store.dispatch({
+                    type: "conversation.assign",
+                    convId,
+                    userId,
+                    ts: new Date().toISOString(),
+                }),
+            close: (convId) =>
+                store.dispatch({ type: "conversation.close", convId, ts: new Date().toISOString() }),
+            reopen: (convId) =>
+                store.dispatch({ type: "conversation.reopen", convId, ts: new Date().toISOString() }),
+            simulateIncoming: (convId, text) => store.simulateIncoming(convId, text),
+        }),
+        [store],
+    );
 }

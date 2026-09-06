@@ -62,3 +62,15 @@ export function fmtBytes(bytes: number): string {
     if (bytes < 1024 * 1024) return `${(bytes / 1024).toFixed(1)} KB`;
     return `${(bytes / (1024 * 1024)).toFixed(1)} MB`;
 }
+
+/** Elapsed-time badge for the assignation surface ("30m", "5h", "3g"/"3d"). */
+export function waitTimeLabel(ts: string, now: number = Date.now()): string {
+    const start = Date.parse(ts);
+    if (!Number.isFinite(start)) return "";
+    const minutes = Math.max(0, Math.floor((now - start) / 60000));
+    if (minutes < 60) return `${minutes}m`;
+    const hours = Math.floor(minutes / 60);
+    if (hours < 24) return `${hours}h`;
+    const days = Math.floor(hours / 24);
+    return `${days}${i18n.language === "it" ? "g" : "d"}`;
+}
