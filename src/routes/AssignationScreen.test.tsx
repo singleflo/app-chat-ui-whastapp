@@ -95,6 +95,17 @@ describe("AssignationScreen", () => {
 
         expect(screen.queryByText("Ufficio Commerciali")).not.toBeInTheDocument();
     });
+
+    it("simulate menu injects an incoming message on a visible chat", () => {
+        renderScreen();
+
+        const simulateTrigger = screen.getByRole("button", { name: "Simula" });
+        // Radix DropdownMenu opens on pointerdown (button 0, no ctrl).
+        fireEvent.pointerDown(simulateTrigger, { button: 0, ctrlKey: false });
+        fireEvent.click(screen.getByRole("menuitem", { name: "Nuovo messaggio in arrivo" }));
+
+        expect(screen.getByText(/Simulated message #/)).toBeInTheDocument();
+    });
 });
 
 describe("assignation list view", () => {

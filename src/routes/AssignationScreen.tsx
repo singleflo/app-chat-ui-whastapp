@@ -318,6 +318,11 @@ export function AssignationScreen() {
                                             onChatAction={handleCardAction}
                                         />
                                     ))}
+                                    {visibleUsers.length === 0 && (
+                                        <div className="flex h-24 items-center justify-center text-sm text-(--fg-tertiary)">
+                                            {t("assignation.emptyList")}
+                                        </div>
+                                    )}
                                 </div>
                             </ScrollArea>
                         </section>
@@ -343,6 +348,11 @@ export function AssignationScreen() {
                                             onAction={handleCardAction}
                                         />
                                     ))}
+                                    {visibleChats.length === 0 && (
+                                        <div className="flex h-24 items-center justify-center text-sm text-(--fg-tertiary)">
+                                            {t("assignation.emptyList")}
+                                        </div>
+                                    )}
                                 </div>
                             </ScrollArea>
                         </section>
