@@ -36,6 +36,9 @@ export function setDesign(design: DesignId): void {
     if (design === getDesign()) return;
     current = design;
     localStorage.setItem(STORAGE_KEY, design);
+    // Invariant: any store change is immediately reflected on <html>,
+    // independent of which component triggered it.
+    applyDesignAttribute(design);
     listeners.forEach((notify) => notify());
 }
 

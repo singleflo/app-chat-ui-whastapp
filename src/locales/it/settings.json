@@ -22,6 +22,13 @@
             "dark": "Dark",
             "auto": "Auto"
         },
+        "design": {
+            "label": "Linguaggio design",
+            "whatsapp": "WhatsApp",
+            "linear": "Linear",
+            "intercom": "Intercom",
+            "slack": "Slack"
+        },
         "density": {
             "label": "Densità",
             "comfortable": "Comoda",

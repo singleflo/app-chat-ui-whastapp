@@ -18,6 +18,8 @@ import { ScrollArea } from "@/components/ui/scroll-area";
 import { cn } from "@/lib/utils";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
+import { Paintbrush } from "lucide-react";
+import { DESIGN_IDS, useDesign } from "@/lib/design";
 
 export function SettingsScreen() {
     const { t } = useTranslation();
@@ -37,6 +39,7 @@ export function SettingsScreen() {
                 <div className="mx-auto flex max-w-2xl flex-col gap-4 p-4">
                     <SettingsGroup title={t("settings.groups.appearance")} icon={Palette}>
                         <ThemeRow />
+                        <DesignRow />
                         <Row
                             icon={ImageIcon}
                             label={t("settings.appearance.chatWallpaper")}
@@ -184,6 +187,35 @@ function ThemeRow() {
                         )}
                     >
                         {t(`settings.theme.${opt}`)}
+                    </button>
+                ))}
+            </div>
+        </div>
+    );
+}
+
+function DesignRow() {
+    const { t } = useTranslation();
+    const [design, setDesign] = useDesign();
+    return (
+        <div className="flex items-center gap-3 px-3 py-2.5">
+            <Paintbrush className="h-4 w-4 shrink-0 text-(--fg-tertiary)" />
+            <span className="flex-1 text-sm">{t("settings.design.label")}</span>
+            <div className="flex gap-1">
+                {DESIGN_IDS.map((d) => (
+                    <button
+                        key={d}
+                        type="button"
+                        onClick={() => setDesign(d)}
+                        aria-pressed={design === d}
+                        className={cn(
+                            "cursor-pointer rounded-md px-2 py-0.5 text-[11px] font-medium transition-all duration-200 ease-out focus-visible:ring-2 focus-visible:ring-(--ring) focus-visible:ring-offset-2 focus-visible:ring-offset-(--bg-panel) focus-visible:outline-none active:scale-95",
+                            design === d
+                                ? "bg-(--accent) text-(--accent-fg)"
+                                : "bg-(--bg-panel-2) text-(--fg-secondary) hover:bg-(--bg-hover) hover:text-(--fg-primary)"
+                        )}
+                    >
+                        {t(`settings.design.${d}`)}
                     </button>
                 ))}
             </div>
