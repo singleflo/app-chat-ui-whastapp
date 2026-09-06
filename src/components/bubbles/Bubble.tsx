@@ -1,4 +1,4 @@
-import { Check, CheckCheck, AlertTriangle, Bot, Smartphone, Zap, Settings } from "lucide-react";
+import { Check, CheckCheck, AlertTriangle, Bot, Smartphone, Zap, Settings, X, Clock } from "lucide-react";
 import type { ReactNode } from "react";
 import { useTranslation } from "react-i18next";
 import type { AckStatus, Message, SenderAttribution } from "@/types/chat";
@@ -7,9 +7,9 @@ import { cn, fmtTime, initials } from "@/lib/utils";
 export type BubbleTone = "default" | "note" | "error" | "fallback" | "deleted" | "bot";
 
 export function AckIcon({ status }: { status?: AckStatus }) {
-    if (status === "failed") return <span className="text-(--status-failed)">✗</span>;
+    if (status === "failed") return <X className="h-3.5 w-3.5 text-(--status-failed)" />;
     if (status === "pending" || status === "composing")
-        return <span className="text-(--fg-tertiary)">⏱</span>;
+        return <Clock className="h-3.5 w-3.5 text-(--fg-tertiary)" />;
     if (status === "sent") return <Check className="h-3.5 w-3.5 text-(--fg-tertiary)" />;
     if (status === "delivered") return <CheckCheck className="h-3.5 w-3.5 text-(--fg-tertiary)" />;
     if (status === "read" || status === "played")
@@ -137,7 +137,7 @@ export function Bubble({
     return (
         <div
             className={cn(
-                "group relative max-w-[78%] rounded-[10px] px-2 py-1.5 text-sm shadow-(--shadow-bubble) transition-shadow duration-200 ease-out hover:shadow-(--shadow-md)",
+                "group relative max-w-[78%] rounded-(--radius-bubble) px-2 py-1.5 text-sm shadow-(--shadow-bubble) transition-shadow duration-200 ease-out hover:shadow-(--shadow-md)",
                 side === "in"
                     ? "animate-bubble-in self-start bg-(--bg-bubble-in)"
                     : "animate-bubble-out self-end bg-(--bg-bubble-out)",
