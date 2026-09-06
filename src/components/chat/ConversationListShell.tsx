@@ -115,7 +115,7 @@ export function ConversationListShell({
                         type="button"
                         key={f.label}
                         className={cn(
-                            "flex shrink-0 cursor-pointer items-center gap-1 rounded-full border px-2.5 py-0.5 text-[11px] font-medium transition-all duration-200 ease-out active:scale-95",
+                            "flex shrink-0 cursor-pointer items-center gap-1 rounded-full border px-2.5 py-0.5 text-[11px] font-medium transition-[background-color,color,box-shadow,transform,border-color] duration-200 ease-out active:scale-95",
                             i === 0
                                 ? "border-(--accent) bg-(--accent-soft) text-(--accent)"
                                 : "border-(--border-strong) text-(--fg-secondary) hover:bg-(--bg-hover) hover:text-(--fg-primary)"

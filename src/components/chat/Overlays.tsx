@@ -4,12 +4,9 @@ import { X, Search, UserPlus, Trash2, Forward, Check, AlertTriangle } from "luci
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { cn, colorFromString, initials } from "@/lib/utils";
 import { useConversations } from "@/data/chat-data";
+import { actionBtn, focusRing, iconBtn } from "./shared";
 
 const TITLE_ID = "overlay-dialog-title";
-const focusRing =
-    "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-(--ring) focus-visible:ring-offset-2 focus-visible:ring-offset-(--bg-panel)";
-const iconBtn = `cursor-pointer transition-all duration-200 ease-out active:scale-[0.97] ${focusRing}`;
-const actionBtn = `cursor-pointer transition-all duration-200 ease-out active:scale-95 ${focusRing}`;
 
 export type OverlayState =
     | { type: "new-chat" }

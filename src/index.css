@@ -16,6 +16,7 @@
  */
 @import "@fontsource-variable/inter";
 @import "tailwindcss";
+@import "tw-animate-css";
 
 @theme {
     /* Font families (bundle-local, MV3-safe) */
@@ -83,14 +84,14 @@
     /* Text */
     --fg-primary: #111b21;
     --fg-secondary: #3b4a54;
-    --fg-tertiary: #667781;
+    --fg-tertiary: #5e6d77;
     --fg-on-accent: #ffffff;
     --fg-on-bubble-out: #111b21;
     --fg-link: #027eb5;
     --fg-error: #d93025;
     --fg-success: #00a884;
     --fg-warning: #f9a825;
-    --fg-muted: #667781;
+    --fg-muted: #5e6d77;
 
     /* Accent (WhatsApp teal) */
     --accent: #00a884;
@@ -238,6 +239,8 @@
    depth (shadows near-zero), lavender #5e6ad2 as the single accent. */
 :root[data-design="linear"] {
     --font-sans: "Inter Variable", "Inter", ui-sans-serif, system-ui, -apple-system, sans-serif;
+    --radius-bubble: 6px;
+    --radius-bubble-tail: 6px 6px 6px 2px;
 
     --bg-app: #f7f8f8;
     --bg-panel: #ffffff;
@@ -265,14 +268,14 @@
 
     --fg-primary: #0f1011;
     --fg-secondary: #3c3f44;
-    --fg-tertiary: #8a8f98;
+    --fg-tertiary: #71757d;
     --fg-on-accent: #ffffff;
     --fg-on-bubble-out: #0f1011;
     --fg-link: #5e6ad2;
     --fg-error: #c13145;
     --fg-success: #27a644;
     --fg-warning: #b88216;
-    --fg-muted: #8a8f98;
+    --fg-muted: #71757d;
 
     --accent: #5e6ad2;
     --accent-hover: #828fff;
@@ -405,6 +408,8 @@
    change on cream, not drop shadows. */
 :root[data-design="intercom"] {
     --font-sans: "Inter Variable", "Inter", ui-sans-serif, system-ui, -apple-system, sans-serif;
+    --radius-bubble: 8px;
+    --radius-bubble-tail: 8px 8px 8px 2px;
 
     --bg-app: #f5f1ec;
     --bg-panel: #ffffff;
@@ -432,7 +437,7 @@
 
     --fg-primary: #111111;
     --fg-secondary: #626260;
-    --fg-tertiary: #7b7b78;
+    --fg-tertiary: #747471;
     --fg-on-accent: #ffffff;
     --fg-on-bubble-out: #111111;
     --fg-link: #0007cb;
@@ -440,7 +445,7 @@
     /* semantic-success #0bdf50 darkened for text contrast on cream */
     --fg-success: #0aa34f;
     --fg-warning: #b88216;
-    --fg-muted: #9c9fa5;
+    --fg-muted: #707277;
 
     /* Intercom rule: the system primary is charcoal ink, not a hue */
     --accent: #111111;
@@ -575,6 +580,8 @@
    spec (Salesforce faces are proprietary). */
 :root[data-design="slack"] {
     --font-sans: system-ui, -apple-system, "Segoe UI", BlinkMacSystemFont, sans-serif;
+    --radius-bubble: 14px;
+    --radius-bubble-tail: 14px 14px 14px 4px;
 
     --bg-app: #f4ede4;
     --bg-panel: #ffffff;
@@ -602,14 +609,14 @@
 
     --fg-primary: #1d1d1d;
     --fg-secondary: #696969;
-    --fg-tertiary: #949494;
+    --fg-tertiary: #737373;
     --fg-on-accent: #ffffff;
     --fg-on-bubble-out: #1d1d1d;
     --fg-link: #1264a3;
     --fg-error: #cc4117;
     --fg-success: #007a5a;
     --fg-warning: #b88216;
-    --fg-muted: #949494;
+    --fg-muted: #737373;
 
     --accent: #4a154b;
     --accent-hover: #611f69;
@@ -938,14 +945,17 @@ body {
     }
 }
 
-/* Reduced motion */
+/* Reduced motion: fewer and gentler, not zero — keep opacity/color
+   feedback, drop movement (transitions whitelist + kill keyframes). */
 @media (prefers-reduced-motion: reduce) {
     *,
     *::before,
     *::after {
         animation-duration: 0.01ms !important;
         animation-iteration-count: 1 !important;
-        transition-duration: 0.01ms !important;
+        transition-property:
+            color, background-color, border-color, opacity,
+            box-shadow, fill, stroke !important;
         scroll-behavior: auto !important;
     }
 }

@@ -20,11 +20,8 @@ import {
     DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Badge } from "@/components/ui/badge";
+import { actionBtn, focusRing, iconBtn } from "./shared";
 
-const focusRing =
-    "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-(--ring) focus-visible:ring-offset-2 focus-visible:ring-offset-(--bg-panel)";
-const iconBtn = `cursor-pointer transition-all duration-200 ease-out active:scale-[0.97] ${focusRing}`;
-const actionBtn = `cursor-pointer transition-all duration-200 ease-out active:scale-95 ${focusRing}`;
 
 const EMOJIS = [
     "😀", "😂", "🥰", "😍", "🤔", "😎", "😢", "😡", "👍", "👎",

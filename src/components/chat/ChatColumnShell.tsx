@@ -20,11 +20,8 @@ import { cn, colorFromString, initials } from "@/lib/utils";
 import { useConversation } from "@/data/chat-data";
 import { MessageList } from "./MessageList";
 import { Composer } from "./Composer";
+import { actionBtn, iconBtn } from "./shared";
 
-const focusRing =
-    "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-(--ring) focus-visible:ring-offset-2 focus-visible:ring-offset-(--bg-panel)";
-const iconBtn = `cursor-pointer transition-all duration-200 ease-out active:scale-[0.97] ${focusRing}`;
-const actionBtn = `cursor-pointer transition-all duration-200 ease-out active:scale-95 ${focusRing}`;
 
 interface Props {
     conversationId?: string;
@@ -170,7 +167,7 @@ function HeaderIcon({ children, label }: { children: React.ReactNode; label?: st
         <button
             type="button"
             aria-label={label}
-            className="flex h-8 w-8 cursor-pointer items-center justify-center rounded-full text-(--fg-secondary) transition-all duration-200 ease-out hover:bg-(--bg-hover) focus-visible:ring-2 focus-visible:ring-(--ring) focus-visible:ring-offset-2 focus-visible:ring-offset-(--bg-panel) focus-visible:outline-none active:scale-[0.97]"
+            className="flex h-8 w-8 cursor-pointer items-center justify-center rounded-full text-(--fg-secondary) transition-[background-color,color,box-shadow,transform,border-color] duration-200 ease-out hover:bg-(--bg-hover) focus-visible:ring-2 focus-visible:ring-(--ring) focus-visible:ring-offset-2 focus-visible:ring-offset-(--bg-panel) focus-visible:outline-none active:scale-[0.97]"
         >
             {children}
         </button>
@@ -289,7 +286,7 @@ function PinnedMessagesBar() {
 function RecordChipsBar({ conv }: { conv: NonNullable<ReturnType<typeof useConversation>> }) {
     const { t } = useTranslation();
     return (
-        <div className="flex shrink-0 items-center gap-1.5 px-3 py-1 text-[10px] text-(--fg-secondary)">
+        <div className="flex shrink-0 items-center gap-1.5 border-b border-(--border-soft) bg-(--bg-panel) px-3 py-1 text-[10px] text-(--fg-secondary)">
             <span className="opacity-60">{t("chat.records.linked")}</span>
             {conv.linkedRecords?.map((r) => (
                 <span

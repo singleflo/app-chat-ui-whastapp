@@ -6,10 +6,8 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { cn } from "@/lib/utils";
 import { ChatEntryRenderer } from "@/components/bubbles/MessageRenderer";
 import { useMessages } from "@/data/chat-data";
+import { iconBtn } from "./shared";
 
-const focusRing =
-    "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-(--ring) focus-visible:ring-offset-2 focus-visible:ring-offset-(--bg-panel)";
-const iconBtn = `cursor-pointer transition-all duration-200 ease-out active:scale-[0.97] ${focusRing}`;
 
 interface MessageListProps {
     readonly conversationId: string;
@@ -114,7 +112,10 @@ export function MessageList({ conversationId }: MessageListProps) {
     return (
         <div className="chat-doodle-bg relative flex-1 overflow-hidden" ref={scrollRef}>
             <ScrollArea className="relative h-full">
-                <div className="flex w-full min-w-0 flex-col gap-1 px-4 py-4">
+                <div
+                    key={conversationId}
+                    className="flex w-full min-w-0 animate-fade-in flex-col gap-1 px-4 py-4"
+                >
                     {loadingMore && (
                         <div className="flex flex-col items-center justify-center gap-2 py-2">
                             <Skeleton className="h-6 w-32 rounded-full bg-(--bg-panel-2)/50" />

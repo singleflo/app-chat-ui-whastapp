@@ -39,10 +39,8 @@ import { useId, useState } from "react";
 import { useTranslation } from "react-i18next";
 import type { TFunction } from "i18next";
 
-const focusRing =
-    "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-(--ring) focus-visible:ring-offset-2 focus-visible:ring-offset-(--bg-panel)";
-const iconBtn = `cursor-pointer transition-all duration-200 ease-out active:scale-[0.97] ${focusRing}`;
-const actionBtn = `cursor-pointer transition-all duration-200 ease-out active:scale-95 ${focusRing}`;
+import { actionBtn, iconBtn } from "./shared";
+
 
 export function ContextPanelShell({
     conversationId = "c1",
@@ -277,7 +275,7 @@ function FieldRow({ label, value, type }: { label: string; value: string; type: 
     return (
         <div className="flex items-center justify-between gap-2 rounded-md border border-(--border-soft) bg-(--bg-panel-2) px-2 py-1">
             <div className="min-w-0">
-                <div className="truncate text-[10px] text-(--fg-tertiary) uppercase">{label}</div>
+                <div className="truncate text-[10px] tracking-wide text-(--fg-tertiary) uppercase">{label}</div>
                 <div
                     className={cn(
                         "truncate",
