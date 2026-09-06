@@ -13,6 +13,19 @@
         "simulateLabel": "Simulate",
         "simulateIncoming": "Incoming message",
         "simulateReassign": "Reassign a chat",
-        "emptyList": "No conversations match the current filters"
+        "emptyList": "No conversations match the current filters",
+        "openChat": "Open",
+        "assignTo": "Assign to…",
+        "release": "Release",
+        "closeChat": "Close",
+        "reopenChat": "Reopen",
+        "assignDialogTitle": "Assign conversation",
+        "confirm": "Assign",
+        "cancel": "Cancel",
+        "youBadge": "You",
+        "assignedCount": "{{count}} assigned",
+        "conversationsCount": "{{count}} conversations",
+        "closedBadge": "Closed",
+        "cardMenu": "Chat menu"
     }
 }

@@ -13,6 +13,19 @@
         "simulateLabel": "Simula",
         "simulateIncoming": "Nuovo messaggio in arrivo",
         "simulateReassign": "Cambia assegnazione",
-        "emptyList": "Nessuna conversazione con i filtri attuali"
+        "emptyList": "Nessuna conversazione con i filtri attuali",
+        "openChat": "Apri",
+        "assignTo": "Assegna a…",
+        "release": "Rilascia",
+        "closeChat": "Chiudi",
+        "reopenChat": "Riapri",
+        "assignDialogTitle": "Assegna conversazione",
+        "confirm": "Assegna",
+        "cancel": "Annulla",
+        "youBadge": "Tu",
+        "assignedCount": "{{count}} assegnate",
+        "conversationsCount": "{{count}} conversazioni",
+        "closedBadge": "Chiusa",
+        "cardMenu": "Menu conversazione"
     }
 }

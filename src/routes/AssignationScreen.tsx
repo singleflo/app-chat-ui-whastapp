@@ -1,5 +1,6 @@
 import { useCallback, useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
+import { useNavigate } from "react-router-dom";
 import { FlaskConical, LayoutGrid, List, Users } from "lucide-react";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Input } from "@/components/ui/input";
@@ -9,7 +10,8 @@ import {
     DropdownMenuItem,
     DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { cn, initials, waitTimeLabel } from "@/lib/utils";
+import { cn } from "@/lib/utils";
+import { currentUser } from "@/data/dataset";
 import {
     useAssignationActions,
     useAssignedConversationsByUser,
@@ -18,6 +20,10 @@ import {
     useUnassignedChats,
     useUsers,
 } from "@/data/chat-data";
+import { AssignDialog } from "@/components/assignation/AssignDialog";
+import { ChatCard, type AssignationCardAction } from "@/components/assignation/ChatCard";
+import { UserCard } from "@/components/assignation/UserCard";
+import type { Conversation } from "@/types/chat";
 
 const VIEW_KEY = "wa-assignation-view";
 type ViewMode = "kanban" | "list";
@@ -28,6 +34,7 @@ function readStoredViewMode(): ViewMode {
 
 export function AssignationScreen() {
     const { t } = useTranslation();
+    const navigate = useNavigate();
     const chats = useUnassignedChats();
     const users = useUsers();
     const instances = useInstances();
@@ -40,29 +47,95 @@ export function AssignationScreen() {
     const [instanceId, setInstanceId] = useState<string | null>(null);
     const [showClosed, setShowClosed] = useState(false);
     const [viewMode, setViewMode] = useState<ViewMode>(readStoredViewMode);
+    const [dragChat, setDragChat] = useState<Conversation | null>(null);
+    const [assignDialog, setAssignDialog] = useState<Conversation | null>(null);
+    const [expandedUsers, setExpandedUsers] = useState<ReadonlySet<string>>(new Set());
 
-    const visibleChats = useMemo(
-        () =>
-            chats.filter((c) => {
-                const q = searchChat.trim().toLowerCase();
-                return (
-                    (showClosed || c.state === "open") &&
-                    (!instanceId || c.instanceId === instanceId) &&
-                    (!q || c.name.toLowerCase().includes(q) || c.phone.includes(q))
-                );
-            }),
-        [chats, showClosed, instanceId, searchChat],
+    const matchesFilters = useCallback(
+        (conv: Conversation) =>
+            (showClosed || conv.state === "open") &&
+            (!instanceId || conv.instanceId === instanceId),
+        [showClosed, instanceId],
     );
+
+    const visibleChats = useMemo(() => {
+        const q = searchChat.trim().toLowerCase();
+        return chats.filter(
+            (c) =>
+                matchesFilters(c) &&
+                (!q || c.name.toLowerCase().includes(q) || c.phone.includes(q)),
+        );
+    }, [chats, matchesFilters, searchChat]);
 
     const visibleUsers = useMemo(() => {
         const q = searchUser.trim().toLowerCase();
         return users.filter((u) => !q || u.name.toLowerCase().includes(q));
     }, [users, searchUser]);
 
+    const conversationsOf = useCallback(
+        (userId: string) =>
+            (byUser.get(userId) ?? []).filter((c) => {
+                const q = searchChat.trim().toLowerCase();
+                return (
+                    matchesFilters(c) &&
+                    (!q || c.name.toLowerCase().includes(q) || c.phone.includes(q))
+                );
+            }),
+        [byUser, matchesFilters, searchChat],
+    );
+
     const switchView = useCallback((mode: ViewMode) => {
         setViewMode(mode);
         localStorage.setItem(VIEW_KEY, mode);
     }, []);
+
+    const toggleUserExpanded = useCallback((userId: string) => {
+        setExpandedUsers((prev) => {
+            const next = new Set(prev);
+            if (next.has(userId)) {
+                next.delete(userId);
+            } else {
+                next.add(userId);
+            }
+            return next;
+        });
+    }, []);
+
+    const handleChatDragStart = useCallback((chat: Conversation) => setDragChat(chat), []);
+    const handleChatDragEnd = useCallback(() => setDragChat(null), []);
+
+    const handleDropOnUser = useCallback(
+        (userId: string) => {
+            if (dragChat) {
+                actions.assign(dragChat.id, userId);
+            }
+            setDragChat(null);
+        },
+        [actions, dragChat],
+    );
+
+    const handleCardAction = useCallback(
+        (chat: Conversation, action: AssignationCardAction) => {
+            switch (action) {
+                case "open":
+                    navigate("/");
+                    break;
+                case "assign":
+                    setAssignDialog(chat);
+                    break;
+                case "close":
+                    actions.close(chat.id);
+                    break;
+                case "reopen":
+                    actions.reopen(chat.id);
+                    break;
+                case "release":
+                    actions.assign(chat.id, null);
+                    break;
+            }
+        },
+        [actions, navigate],
+    );
 
     const simulateIncoming = () => {
         const target = visibleChats.find((c) => c.state === "open") ?? visibleChats[0];
@@ -89,7 +162,7 @@ export function AssignationScreen() {
         : t("assignation.instanceAll");
 
     return (
-        <div className="flex h-full flex-col bg-(--bg-panel)">
+        <div className="relative flex h-full flex-col bg-(--bg-panel)">
             <header className="flex h-14 shrink-0 items-center gap-2 border-b border-(--border-strong) bg-(--bg-header) px-3">
                 <Users className="h-4 w-4 text-(--fg-tertiary)" />
                 <h2 className="flex-1 text-sm font-semibold">{t("assignation.title")}</h2>
@@ -202,61 +275,63 @@ export function AssignationScreen() {
                 </div>
             </div>
 
-            <main className="flex min-h-0 flex-1 flex-col gap-3 overflow-hidden p-3 lg:flex-row">
+            <main
+                className={cn(
+                    "flex min-h-0 flex-1 flex-col gap-3 overflow-hidden p-3 lg:flex-row",
+                    dragChat && "ring-1 ring-(--ring) ring-inset",
+                )}
+            >
                 {viewMode === "kanban" ? (
                     <>
-                        <section className="flex min-w-0 flex-1 flex-col overflow-hidden rounded-lg border border-(--border-strong) bg-(--bg-panel)">
+                        <section
+                            className={cn(
+                                "flex min-w-0 flex-1 flex-col overflow-hidden rounded-lg border border-(--border-strong) bg-(--bg-panel)",
+                                dragChat && "opacity-80",
+                            )}
+                        >
                             <div className="flex h-9 shrink-0 items-center border-b border-(--border-strong) px-3 text-[11px] font-semibold uppercase tracking-wide text-(--fg-secondary)">
                                 {t("assignation.usersPanelCount", { count: visibleUsers.length })}
                             </div>
                             <ScrollArea className="flex-1">
-                                <div className="flex flex-col gap-1 p-2">
-                                    {visibleUsers.map((u) => {
-                                        const assignedCount = byUser.get(u.id)?.length ?? 0;
-                                        return (
-                                            <div
-                                                key={u.id}
-                                                className="flex items-center gap-2 rounded-md px-2 py-1.5"
-                                            >
-                                                <span
-                                                    className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full text-[10px] font-semibold text-white"
-                                                    style={{ backgroundColor: u.color }}
-                                                >
-                                                    {initials(u.name)}
-                                                </span>
-                                                <span className="min-w-0 flex-1 truncate text-sm">
-                                                    {u.name}
-                                                </span>
-                                                <span className="text-[11px] tabular-nums text-(--fg-tertiary)">
-                                                    {assignedCount}
-                                                </span>
-                                            </div>
-                                        );
-                                    })}
+                                <div className="flex flex-col gap-2 p-2">
+                                    {visibleUsers.map((u) => (
+                                        <UserCard
+                                            key={u.id}
+                                            user={u}
+                                            conversations={conversationsOf(u.id)}
+                                            isCurrentUser={u.id === currentUser.id}
+                                            expanded={expandedUsers.has(u.id)}
+                                            onToggleExpand={() => toggleUserExpanded(u.id)}
+                                            onDropUser={handleDropOnUser}
+                                            onChatDragStart={handleChatDragStart}
+                                            onChatDragEnd={handleChatDragEnd}
+                                            onChatAction={handleCardAction}
+                                        />
+                                    ))}
                                 </div>
                             </ScrollArea>
                         </section>
 
-                        <section className="flex min-w-0 flex-1 flex-col overflow-hidden rounded-lg border border-(--border-strong) bg-(--bg-panel)">
+                        <section
+                            className={cn(
+                                "flex min-w-0 flex-1 flex-col overflow-hidden rounded-lg border border-(--border-strong) bg-(--bg-panel)",
+                                dragChat && "opacity-80",
+                            )}
+                        >
                             <div className="flex h-9 shrink-0 items-center border-b border-(--border-strong) px-3 text-[11px] font-semibold uppercase tracking-wide text-(--fg-secondary)">
                                 {t("assignation.unassignedPanelCount", { count: visibleChats.length })}
                             </div>
                             <ScrollArea className="flex-1">
-                                <div className="flex flex-col gap-1 p-2">
+                                <div className="flex flex-col gap-2 p-2">
                                     {visibleChats.map((c) => (
-                                        <div key={c.id} className="rounded-md px-2 py-1.5">
-                                            <div className="flex items-center gap-2">
-                                                <span className="min-w-0 flex-1 truncate text-sm font-medium">
-                                                    {c.name}
-                                                </span>
-                                                <span className="text-[10px] tabular-nums text-(--fg-tertiary)">
-                                                    {waitTimeLabel(c.lastMessageTs)}
-                                                </span>
-                                            </div>
-                                            <div className="truncate text-xs text-(--fg-tertiary)">
-                                                {c.lastMessagePreview}
-                                            </div>
-                                        </div>
+                                        <ChatCard
+                                            key={c.id}
+                                            chat={c}
+                                            draggable
+                                            onDragStart={handleChatDragStart}
+                                            onDragEnd={handleChatDragEnd}
+                                            onAction={handleCardAction}
+                                        />
                                     ))}
                                 </div>
                             </ScrollArea>
@@ -268,6 +343,18 @@ export function AssignationScreen() {
                     </div>
                 )}
             </main>
+
+            {assignDialog && (
+                <AssignDialog
+                    conversation={assignDialog}
+                    users={users}
+                    onAssign={(userId) => {
+                        actions.assign(assignDialog.id, userId);
+                        setAssignDialog(null);
+                    }}
+                    onClose={() => setAssignDialog(null)}
+                />
+            )}
         </div>
     );
 }

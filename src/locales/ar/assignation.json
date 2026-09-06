@@ -13,6 +13,19 @@
         "simulateLabel": "محاكاة",
         "simulateIncoming": "رسالة واردة",
         "simulateReassign": "تغيير الإسناد",
-        "emptyList": "لا توجد محادثات مطابقة"
+        "emptyList": "لا توجد محادثات مطابقة",
+        "openChat": "فتح",
+        "assignTo": "تعيين إلى…",
+        "release": "إفلات",
+        "closeChat": "إغلاق",
+        "reopenChat": "إعادة فتح",
+        "assignDialogTitle": "تعيين المحادثة",
+        "confirm": "تعيين",
+        "cancel": "إلغاء",
+        "youBadge": "أنت",
+        "assignedCount": "{{count}} معينة",
+        "conversationsCount": "{{count}} محادثات",
+        "closedBadge": "مغلقة",
+        "cardMenu": "قائمة المحادثة"
     }
 }
