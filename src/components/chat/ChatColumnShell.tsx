@@ -286,7 +286,7 @@ function PinnedMessagesBar() {
 function RecordChipsBar({ conv }: { conv: NonNullable<ReturnType<typeof useConversation>> }) {
     const { t } = useTranslation();
     return (
-        <div className="flex shrink-0 items-center gap-1.5 px-3 py-1 text-[10px] text-(--fg-secondary)">
+        <div className="flex shrink-0 items-center gap-1.5 border-b border-(--border-soft) bg-(--bg-panel) px-3 py-1 text-[10px] text-(--fg-secondary)">
             <span className="opacity-60">{t("chat.records.linked")}</span>
             {conv.linkedRecords?.map((r) => (
                 <span

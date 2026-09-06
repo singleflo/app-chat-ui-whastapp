@@ -112,7 +112,10 @@ export function MessageList({ conversationId }: MessageListProps) {
     return (
         <div className="chat-doodle-bg relative flex-1 overflow-hidden" ref={scrollRef}>
             <ScrollArea className="relative h-full">
-                <div className="flex w-full min-w-0 flex-col gap-1 px-4 py-4">
+                <div
+                    key={conversationId}
+                    className="flex w-full min-w-0 animate-fade-in flex-col gap-1 px-4 py-4"
+                >
                     {loadingMore && (
                         <div className="flex flex-col items-center justify-center gap-2 py-2">
                             <Skeleton className="h-6 w-32 rounded-full bg-(--bg-panel-2)/50" />
