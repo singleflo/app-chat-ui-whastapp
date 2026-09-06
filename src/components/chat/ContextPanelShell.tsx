@@ -277,7 +277,7 @@ function FieldRow({ label, value, type }: { label: string; value: string; type: 
     return (
         <div className="flex items-center justify-between gap-2 rounded-md border border-(--border-soft) bg-(--bg-panel-2) px-2 py-1">
             <div className="min-w-0">
-                <div className="truncate text-[10px] text-(--fg-tertiary) uppercase">{label}</div>
+                <div className="truncate text-[10px] tracking-wide text-(--fg-tertiary) uppercase">{label}</div>
                 <div
                     className={cn(
                         "truncate",

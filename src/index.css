@@ -945,14 +945,17 @@ body {
     }
 }
 
-/* Reduced motion */
+/* Reduced motion: fewer and gentler, not zero — keep opacity/color
+   feedback, drop movement (transitions whitelist + kill keyframes). */
 @media (prefers-reduced-motion: reduce) {
     *,
     *::before,
     *::after {
         animation-duration: 0.01ms !important;
         animation-iteration-count: 1 !important;
-        transition-duration: 0.01ms !important;
+        transition-property:
+            color, background-color, border-color, opacity,
+            box-shadow, fill, stroke !important;
         scroll-behavior: auto !important;
     }
 }
