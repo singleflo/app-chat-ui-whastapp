@@ -8,11 +8,9 @@ import { Lightbox, type LightboxState } from "./Lightbox";
 import { useState, useCallback, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { PanelRightOpen } from "lucide-react";
+import { focusRing, iconBtn } from "./shared";
 
-const focusRing =
-    "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-(--ring) focus-visible:ring-offset-2 focus-visible:ring-offset-(--bg-panel)";
-const iconBtn = `cursor-pointer transition-all duration-200 ease-out active:scale-[0.97] ${focusRing}`;
-const resizeHandle = `w-1 shrink-0 cursor-col-resize border-0 bg-(--border-strong) p-0 transition-all duration-200 ease-out hover:bg-(--accent) active:bg-(--accent) ${focusRing}`;
+const resizeHandle = `w-1 shrink-0 cursor-col-resize border-0 bg-(--border-strong) p-0 transition-[background-color,color,box-shadow,transform,border-color] duration-200 ease-out hover:bg-(--accent) active:bg-(--accent) ${focusRing}`;
 const LIST_MIN = 280;
 const LIST_MAX = 600;
 const CTX_MIN = 240;

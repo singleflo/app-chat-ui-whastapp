@@ -39,10 +39,8 @@ import { useId, useState } from "react";
 import { useTranslation } from "react-i18next";
 import type { TFunction } from "i18next";
 
-const focusRing =
-    "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-(--ring) focus-visible:ring-offset-2 focus-visible:ring-offset-(--bg-panel)";
-const iconBtn = `cursor-pointer transition-all duration-200 ease-out active:scale-[0.97] ${focusRing}`;
-const actionBtn = `cursor-pointer transition-all duration-200 ease-out active:scale-95 ${focusRing}`;
+import { actionBtn, iconBtn } from "./shared";
+
 
 export function ContextPanelShell({
     conversationId = "c1",

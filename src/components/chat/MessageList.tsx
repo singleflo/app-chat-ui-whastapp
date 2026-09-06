@@ -6,10 +6,8 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { cn } from "@/lib/utils";
 import { ChatEntryRenderer } from "@/components/bubbles/MessageRenderer";
 import { useMessages } from "@/data/chat-data";
+import { iconBtn } from "./shared";
 
-const focusRing =
-    "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-(--ring) focus-visible:ring-offset-2 focus-visible:ring-offset-(--bg-panel)";
-const iconBtn = `cursor-pointer transition-all duration-200 ease-out active:scale-[0.97] ${focusRing}`;
 
 interface MessageListProps {
     readonly conversationId: string;
