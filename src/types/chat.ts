@@ -336,6 +336,10 @@ export interface Conversation {
     assignedAt?: string;
     unassigned?: boolean;
     assignmentFailed?: boolean;
+    /** Assignation surface — WhatsApp instance this conversation belongs to. */
+    instanceId?: string;
+    /** Assignation surface — acquisition channel shown on unassigned cards. */
+    channel?: "ads" | "whatsapp" | "api";
     state: ConversationState;
     closedAt?: string;
     isBotActive?: boolean;
@@ -372,6 +376,14 @@ export interface Agent {
     emoji: "🤖";
     color: string;
     status: "running" | "paused" | "stopped";
+}
+
+/** WhatsApp Business instance (phone line) usable for the assignation filter. */
+export interface Instance {
+    id: string;
+    name: string;
+    state: "open" | "closed";
+    allowedUserIds?: string[];
 }
 
 export interface ActivityEvent {
@@ -463,6 +475,7 @@ export interface DemoDataset {
     };
     users: User[];
     agents: (Agent & { emoji: string })[];
+    instances: Instance[];
     conversations: Conversation[];
     messages: Record<string, ChatEntry[]>;
     activity: Record<string, ActivityEvent[]>;

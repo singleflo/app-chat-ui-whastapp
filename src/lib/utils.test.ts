@@ -1,5 +1,5 @@
 import { describe, it, expect, beforeEach, afterEach, vi } from "vitest";
-import { fmtTime, fmtRelativeDay } from "./utils";
+import { fmtTime, fmtRelativeDay, waitTimeLabel, windowRemainingMs } from "./utils";
 import i18n from "../i18n";
 
 describe("utils", () => {
@@ -30,5 +30,64 @@ describe("utils", () => {
         
         await i18n.changeLanguage("en");
         expect(fmtTime(time)).toBeTruthy();
+    });
+});
+
+describe("waitTimeLabel", () => {
+    beforeEach(() => {
+        vi.useFakeTimers();
+        vi.setSystemTime(new Date("2026-07-14T12:00:00Z"));
+    });
+
+    afterEach(() => {
+        vi.useRealTimers();
+    });
+
+    it("formats minutes under one hour", () => {
+        expect(waitTimeLabel("2026-07-14T11:30:00Z")).toBe("30m");
+    });
+
+    it("formats hours under one day", () => {
+        expect(waitTimeLabel("2026-07-14T07:00:00Z")).toBe("5h");
+    });
+
+    it("formats days locale-aware (g for it, d for en)", async () => {
+        await i18n.changeLanguage("it");
+        expect(waitTimeLabel("2026-07-11T12:00:00Z")).toBe("3g");
+
+        await i18n.changeLanguage("en");
+        expect(waitTimeLabel("2026-07-11T12:00:00Z")).toBe("3d");
+    });
+
+    it("returns empty string for invalid timestamps", () => {
+        expect(waitTimeLabel("not-a-date")).toBe("");
+    });
+});
+
+describe("windowRemainingMs", () => {
+    beforeEach(() => {
+        vi.useFakeTimers();
+        vi.setSystemTime(new Date("2026-07-14T12:00:00Z"));
+    });
+
+    afterEach(() => {
+        vi.useRealTimers();
+    });
+
+    it("returns positive ms inside the 24h window", () => {
+        // last inbound message 2h ago → 22h remaining
+        expect(windowRemainingMs("2026-07-14T10:00:00Z")).toBe(22 * 3_600_000);
+    });
+
+    it("returns zero when exactly 24h passed", () => {
+        expect(windowRemainingMs("2026-07-13T12:00:00Z")).toBe(0);
+    });
+
+    it("returns negative ms when the window expired", () => {
+        expect(windowRemainingMs("2026-07-12T00:00:00Z")).toBeLessThan(0);
+    });
+
+    it("returns 0 for invalid timestamps (treated as expired)", () => {
+        expect(windowRemainingMs("not-a-date")).toBe(0);
     });
 });

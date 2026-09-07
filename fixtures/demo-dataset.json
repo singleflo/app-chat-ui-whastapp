@@ -51,6 +51,20 @@
             "status": "paused"
         }
     ],
+    "instances": [
+        {
+            "id": "i_acme",
+            "name": "Acme WhatsApp",
+            "state": "open",
+            "allowedUserIds": ["u_laura", "u_marco", "u_sara"]
+        },
+        {
+            "id": "i_acme2",
+            "name": "Acme Seconda Linea",
+            "state": "open",
+            "allowedUserIds": ["u_laura", "u_marco"]
+        }
+    ],
     "labels": [
         { "id": "l_vip", "name": "VIP", "color": "#f9a825" },
         { "id": "l_ne", "name": "Nord-Est", "color": "#1cb1d6" },
@@ -61,6 +75,8 @@
     "conversations": [
         {
             "id": "c1",
+            "instanceId": "i_acme",
+            "channel": "whatsapp",
             "type": "individual",
             "name": "Giulia Romano",
             "phone": "+393401234567",
@@ -91,6 +107,8 @@
         },
         {
             "id": "c2",
+            "instanceId": "i_acme",
+            "channel": "whatsapp",
             "type": "individual",
             "name": "Marco Ferri",
             "phone": "+393339876543",
@@ -109,6 +127,8 @@
         },
         {
             "id": "c3",
+            "instanceId": "i_acme",
+            "channel": "whatsapp",
             "type": "individual",
             "name": "Lead #4821 · Tiziana",
             "phone": "+393291112233",
@@ -126,6 +146,8 @@
         },
         {
             "id": "c4",
+            "instanceId": "i_acme",
+            "channel": "ads",
             "type": "individual",
             "name": "Ufficio Commerciali",
             "phone": "+39027654321",
@@ -144,6 +166,8 @@
         },
         {
             "id": "c5",
+            "instanceId": "i_acme2",
+            "channel": "whatsapp",
             "type": "individual",
             "name": "Stefano Bianchi",
             "phone": "+393481234567",
@@ -159,6 +183,8 @@
         },
         {
             "id": "c6",
+            "instanceId": "i_acme2",
+            "channel": "whatsapp",
             "type": "individual",
             "name": "Anna Conti",
             "phone": "+393391234567",
@@ -174,6 +200,8 @@
         },
         {
             "id": "c7",
+            "instanceId": "i_acme2",
+            "channel": "whatsapp",
             "type": "group",
             "name": "Team vendite Nord",
             "phone": "1203630@g.us",
@@ -205,6 +233,8 @@
         },
         {
             "id": "c8",
+            "instanceId": "i_acme2",
+            "channel": "ads",
             "type": "individual",
             "name": "Promo mailing · otp-out test",
             "phone": "+39347555888",
@@ -216,6 +246,7 @@
             "lastMessageDirection": "in",
             "unread": 0,
             "draft": "Ciao Luca, abbiamo una nuova offerta…",
+            "unassigned": true,
             "state": "open"
         }
     ],

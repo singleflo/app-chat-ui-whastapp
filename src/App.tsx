@@ -11,6 +11,7 @@ import {
     Settings,
     Languages,
     Star,
+    Users,
 } from "lucide-react";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
@@ -26,6 +27,7 @@ import { CallsShowcase } from "./routes/CallsShowcase";
 import { SearchScreen } from "./routes/SearchScreen";
 import { NewChatScreen } from "./routes/NewChatScreen";
 import { StarredScreen } from "./routes/StarredScreen";
+import { AssignationScreen } from "./routes/AssignationScreen";
 import { SettingsScreen } from "./routes/SettingsScreen";
 import { RtlScreen } from "./routes/RtlScreen";
 import { cn } from "./lib/utils";
@@ -47,6 +49,7 @@ const SCREENS = [
     { to: "/search", label: "nav.search", icon: Search },
     { to: "/new-chat", label: "nav.newChat", icon: MessageSquare },
     { to: "/starred", label: "nav.starred", icon: Star },
+    { to: "/assignation", label: "nav.assignation", icon: Users },
     { to: "/settings", label: "nav.settings", icon: Settings },
     { to: "/rtl", label: "nav.rtl", icon: Languages },
 ] as const;
@@ -146,6 +149,7 @@ export function App() {
                     <Route path="/search" element={<SearchScreen />} />
                     <Route path="/new-chat" element={<NewChatScreen />} />
                     <Route path="/starred" element={<StarredScreen />} />
+                    <Route path="/assignation" element={<AssignationScreen />} />
                     <Route path="/settings" element={<SettingsScreen />} />
                     <Route path="/rtl" element={<RtlScreen />} />
                 </Routes>

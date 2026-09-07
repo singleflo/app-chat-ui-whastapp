@@ -88,7 +88,16 @@
             "quickPopover": {
                 "title": "Quick Popover · 380×580",
                 "desc": "Mini-chat in a popover with double-badge trigger (green/amber), Assigned/Unassigned tabs, self-contained ChatWindow."
+            },
+            "assignation": {
+                "title": "Assignation · team inbox",
+                "desc": "Kanban of agents and unassigned chats. Drag & drop assignment, assign dialog, card menus, wait times, list view and simulated realtime events."
             }
+        },
+        "design": {
+            "title": "Design languages",
+            "desc": "One click restyles every surface — all components are token-driven. The choice persists.",
+            "active": "Active"
         },
         "footerBefore": "Data from",
         "footerAfter": "(section T). All bundle-local, zero CDN."

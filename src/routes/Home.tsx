@@ -1,16 +1,27 @@
 import { Link } from "react-router-dom";
-import { Monitor, Smartphone, PanelRight, MessageSquare, ArrowRight } from "lucide-react";
+import { Monitor, Smartphone, PanelRight, MessageSquare, Users, ArrowRight, Check } from "lucide-react";
 import { useTranslation } from "react-i18next";
+import { cn, } from "@/lib/utils";
+import { useDesign } from "@/lib/design";
 
 const CARDS = [
     { to: "/desktop", icon: Monitor, id: "desktop", spec: "0 · A · B · C · D · E · F · G · Q · H" },
     { to: "/mobile", icon: Smartphone, id: "mobile", spec: "M1–M7" },
     { to: "/side-panel", icon: PanelRight, id: "sidePanel", spec: "0 (extension side panel)" },
     { to: "/quick-popover", icon: MessageSquare, id: "quickPopover", spec: "Q11 · R1" },
+    { to: "/assignation", icon: Users, id: "assignation", spec: "Team inbox" },
+] as const;
+
+const DESIGNS = [
+    { id: "whatsapp", name: "WhatsApp", canvas: "#eae6df", accent: "#00a884" },
+    { id: "linear", name: "Linear", canvas: "#010102", accent: "#5e6ad2" },
+    { id: "intercom", name: "Intercom", canvas: "#f5f1ec", accent: "#111111" },
+    { id: "slack", name: "Slack", canvas: "#f4ede4", accent: "#4a154b" },
 ] as const;
 
 export function Home() {
     const { t } = useTranslation();
+    const [design, setDesign] = useDesign();
     return (
         <div className="h-full overflow-y-auto bg-(--bg-app) px-4 py-8 transition-colors duration-200 sm:px-8">
             <div className="mx-auto max-w-5xl">
@@ -70,6 +81,57 @@ export function Home() {
                         </Link>
                     ))}
                 </div>
+
+                <section className="animate-slide-up mt-8">
+                    <h2 className="text-lg font-semibold tracking-tight text-(--fg-primary)">
+                        {t("home.design.title")}
+                    </h2>
+                    <p className="mt-1 text-sm text-(--fg-secondary)">
+                        {t("home.design.desc")}
+                    </p>
+                    <div className="mt-3 grid gap-3 sm:grid-cols-4">
+                        {DESIGNS.map((d) => {
+                            const active = design === d.id;
+                            return (
+                                <button
+                                    key={d.id}
+                                    type="button"
+                                    onClick={() => setDesign(d.id)}
+                                    aria-pressed={active}
+                                    className={cn(
+                                        "flex cursor-pointer flex-col gap-2 rounded-xl border bg-(--bg-panel) p-3 text-left transition-[background-color,color,box-shadow,transform,border-color] duration-200 ease-out hover:border-(--accent) hover:shadow-(--shadow-sm) focus-visible:ring-2 focus-visible:ring-(--ring) focus-visible:ring-offset-2 focus-visible:ring-offset-(--bg-app) focus-visible:outline-none active:scale-[0.98]",
+                                        active && "border-(--accent) ring-1 ring-(--ring)",
+                                    )}
+                                >
+                                    <span className="flex items-center gap-1.5">
+                                        <span
+                                            className="h-5 w-5 rounded-full border border-(--border-strong)"
+                                            style={{ backgroundColor: d.canvas }}
+                                            aria-hidden
+                                        />
+                                        <span
+                                            className="-ml-3 h-5 w-5 rounded-full border-2 border-(--bg-panel)"
+                                            style={{ backgroundColor: d.accent }}
+                                            aria-hidden
+                                        />
+                                        <span className="ml-1 text-sm font-medium text-(--fg-primary)">
+                                            {d.name}
+                                        </span>
+                                    </span>
+                                    <span
+                                        className={cn(
+                                            "flex items-center gap-1 text-[10px] font-medium uppercase tracking-wide",
+                                            active ? "text-(--accent)" : "text-(--fg-tertiary)",
+                                        )}
+                                    >
+                                        {active && <Check className="h-3 w-3" aria-hidden />}
+                                        {active ? t("home.design.active") : "\u00A0"}
+                                    </span>
+                                </button>
+                            );
+                        })}
+                    </div>
+                </section>
 
                 <footer className="mt-8 text-xs text-(--fg-tertiary)">
                     {t("home.footerBefore")}{" "}
